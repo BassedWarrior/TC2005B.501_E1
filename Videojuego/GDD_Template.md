@@ -48,13 +48,23 @@
 
 Sum up your game idea in 2 sentences. A kind of elevator pitch. Keep it simple!
 
+Turn-based strategy deck-building tower defence game where the player expends a resource to play as many cards as they want each turn to survive the round. Within each round, there are multiple waves of attack the CPU will take against the player.
+
 ### **Gameplay**
 
 What should the gameplay be like? What is the goal of the game, and what kind of obstacles are in the way? What tactics should the player use to overcome them?
 
+The gameplay is turn based, where the player expends their resources to react to the attack waves prepared by the CPU. At the start of each round, the player is shown the template of enemies that will appear that round. The player has a turn to prepare, in which it can play unit cards on the board or play spells. The CPU then prepares a set of enemies to create the first wave of attack aligning them in the battlefield and it's then the player's turn. The player decides how to block the attack by positioning their units on the board at the battlefield, and can also play spells.
+
+The units on the battlefield get into 1 on 1 combat depending on their positioning, and the surviving cards remain on their battle positions. The player can choose to reposition their units on the board to adjacent battle positions or retreat from the battlefield, still on the board. The CPU doesn't reposition their troops, but insteead prepares more units as reinforcements for the next wave. There can be a maximum of 3 units per side on each position in the battlefield.
+
+The player must make use of their available resources to position their units and use spells to defeat each wave and survive the round. Formations and unit rotations are crucial to maintain all battlefronts.
+
 ### **Mindset**
 
 What kind of mindset do you want to provoke in the player? Do you want them to feel powerful, or weak? Adventurous, or nervous? Hurried, or calm? How do you intend to provoke those emotions?
+
+The player will feel overwhelmed by the attrition the constant waves imply for their limited amount of resources. They should be nervous and this will be achieved by making their units frail and outnumbered by the enemies, which will be a challenging experience for them to solve.
 
 ## _Technical_
 
