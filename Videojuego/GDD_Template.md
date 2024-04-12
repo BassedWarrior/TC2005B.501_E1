@@ -48,7 +48,7 @@
 
 Sum up your game idea in 2 sentences. A kind of elevator pitch. Keep it simple!
 
-Turn-based strategy deck-building tower defence game where the player expends a resource to play as many cards as they want each turn to survive the round. Within each round, there are multiple waves of attack the CPU will take against the player.
+Turn-based strategy deck-building game inspired also in the tower-fedense game mode, where the player expends a resource to play as many cards as they want each turn to survive the round. Within each round, there are multiple waves of attack the CPU will take against the player.
 
 ### **Gameplay**
 
