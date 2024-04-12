@@ -48,7 +48,7 @@
 
 Sum up your game idea in 2 sentences. A kind of elevator pitch. Keep it simple!
 
-Turn-based strategy deck-building game inspired also in the tower-fedense game mode, where the player expends a resource to play as many cards as they want each turn to survive the round. Within each round, there are multiple waves of attack the CPU will take against the player.
+The game is a turn-based strategy deck-building experience, drawing inspiration from the tower defense genre. Players expend resources to play cards each turn, strategically deploying them on a battlefield after passing through a trench, an intermediate space manipulated by the player. As waves of attacks from the CPU assail the player each round, they must use their resources judiciously to survive.
 
 ### **Gameplay**
 
@@ -60,11 +60,14 @@ The units on the battlefield get into 1 on 1 combat depending on their positioni
 
 The player must make use of their available resources to position their units and use spells to defeat each wave and survive the round. Formations and unit rotations are crucial to maintain all battlefronts.
 
+The player's available resource gradually increases as the rounds progress, allowing them to opt for more complex and interesting strategies. With additional resources, the player can deploy more powerful units, cast more devastating spells, or execute more elaborate tactical maneuvers to counter enemy waves. This mechanic provides dynamic progression and strategic challenges in each round, encouraging the player to adapt their tactics as the difficulty ramps up.
+
 ### **Mindset**
 
 What kind of mindset do you want to provoke in the player? Do you want them to feel powerful, or weak? Adventurous, or nervous? Hurried, or calm? How do you intend to provoke those emotions?
 
 The player will feel overwhelmed by the attrition the constant waves imply for their limited amount of resources. They should be nervous and this will be achieved by making their units frail and outnumbered by the enemies, which will be a challenging experience for them to solve.
+We could consider adding different progression elements such as unlocking new cards or abilities to maintain long-term engagement and reward player progress.
 
 ## _Technical_
 
