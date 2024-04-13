@@ -48,7 +48,7 @@
 
 Sum up your game idea in 2 sentences. A kind of elevator pitch. Keep it simple!
 
-The game is a turn-based strategy deck-building experience, drawing inspiration from the tower defense genre. Players expend resources to play cards each turn, strategically deploying them on a battlefield after passing through a trench, an intermediate space manipulated by the player. As waves of attacks from the CPU assail the player each round, they must use their resources judiciously to survive.
+The game is a turn-based strategy deck-building experience, drawing inspiration from strategic elements in gaming. Players expend resources to play cards each turn, strategically deploying them on a battlefield after passing through a trench, an intermediate space manipulated by the player. As waves of attacks from the CPU assail the player each round, they must use their resources judiciously to survive.
 
 ### **Gameplay**
 
