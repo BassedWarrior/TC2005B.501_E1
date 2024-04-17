@@ -25,12 +25,12 @@ The CPU will deploy a infinity numbers of enemies so they can defeated us.
 ### Tower 
 And the master-piece of the game, the tower we need to defend and try to recieve the least amount of damage.
 
-h3>Entity Relationship Diagram</h3>
+<h3>Entity Relationship Diagram</h3>
 <img 
   src="entidadRelacion.jpeg" 
-  title= "Diagrama Entidad Relación TCG"
+  title="Diagrama Entidad Relación TCG"
   alt="Diagrama Entidad Relación"
-  id= "Entidad-Relacion"
-  width= "100"
-  height= "100"
-  >
+  id="Entidad-Relacion"
+  width="100"
+  height="100"
+/>
