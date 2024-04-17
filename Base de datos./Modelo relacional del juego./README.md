@@ -18,3 +18,13 @@ This a posible model.
 ### CPU Waves
 
 ### Tower 
+
+<h3>Entity Relationship Diagram</h3>
+<img 
+  src="entidadRelacion.jpeg" 
+  title= "Diagrama Entidad Relación TCG"
+  alt="Diagrama Entidad Relación"
+  id= "Entidad-Relacion"
+  width= "100"
+  height= "100"
+  >
