@@ -25,6 +25,6 @@ The CPU will deploy a infinity numbers of enemies so they can defeated us.
 ### Tower 
 And the master-piece of the game, the tower we need to defend and try to recieve the least amount of damage.
 
-## Relation between tables.
-
+### Diagrama de Relación de Entidades
+![Diagrama Entidad Relación TCG](entidadRelacion.jpeg)
 
