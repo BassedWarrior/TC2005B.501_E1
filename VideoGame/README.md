@@ -44,23 +44,42 @@
 
 ---
 
+### **Terminology**
+
+- **Khronos:** Resource used by the player to play cards and perform actions during their turn.
+
+- **Quantum-Tunnel:** Intermediate space manipulated by the player, allowing them to strategically deploy units and spells onto the battlefield.
+
+- **Paradox Cards:** Special abilities that players can utilize to influence the battlefield, providing tactical advantages or disrupting enemy strategies.
+
+- **Time-Lines:** Three diferent divisions on the battlefield where the player can position their units to block enemy attacks and engage in combat. Only a maximum of 3 cards per side are allowed on each timeline.
+
+- **Nexus Nodes:** Score made all along the game.
+
+- **Rift-Walkers:**
+
+- **Temporal Echo:**
+
 ### **Summary**
 
 Sum up your game idea in 2 sentences. A kind of elevator pitch. Keep it simple!
 
-The game is a turn-based strategy deck-building experience, drawing inspiration from strategic elements in gaming. Players expend resources to play cards each turn, strategically deploying them on a battlefield after passing through a trench, an intermediate space manipulated by the player. As waves of attacks from the CPU assail the player each round, they must use their resources judiciously to survive.
+The game is a turn-based strategy deck-building experience, drawing inspiration from strategic elements in gaming. Players expend __Khronos__ to play cards each turn, strategically deploying them on __Time-Lines__ after passing through a __Quantum-Tunnel__, an intermediate space manipulated by the player. As waves of attacks from the CPU assail the player each round, they must use their resources judiciously to survive.
 
 ### **Gameplay**
 
 What should the gameplay be like? What is the goal of the game, and what kind of obstacles are in the way? What tactics should the player use to overcome them?
 
-The gameplay is turn based, where the player expends their resources to react to the attack waves prepared by the CPU. At the start of each round, the player is shown the template of enemies that will appear that round. The player has a turn to prepare, in which it can play unit cards on the board or play spells. The CPU then prepares a set of enemies to create the first wave of attack aligning them in the battlefield and it's then the player's turn. The player decides how to block the attack by positioning their units on the board at the battlefield, and can also play spells.
+The gameplay is turn based, where the player expends their resources to react to the attack waves prepared by the CPU. At the start of each round, the player is shown the template of enemies that will appear that round. The player has a turn to prepare, in which it can play unit cards on the board or play __Paradox cards__. The CPU then prepares a set of enemies to create the first wave of attack aligning them in the battlefield and it's then the player's turn. The player decides how to block the attack by positioning their units on the board at the battlefield in one of the three __Time-Lines__ available.
 
-The units on the battlefield get into 1 on 1 combat depending on their positioning, and the surviving cards remain on their battle positions. The player can choose to reposition their units on the board to adjacent battle positions or retreat from the battlefield, still on the board. The CPU doesn't reposition their troops, but insteead prepares more units as reinforcements for the next wave. There can be a maximum of 3 units per side on each position in the battlefield.
+The units on the battlefield engage in 1-on-1 combat based on their positioning, and surviving cards remain on their battle positions. The player can choose to reposition their units on the board to adjacent battle positions or retreat from the battlefield, still on the board. The CPU doesn't reposition their troops, but insteead prepares more units as reinforcements for the next wave. 
+Additionally, units remaining in the __Quantum-Tunnel__ can activate upgraders or passive abilities that benefit the player's progression in terms of statistics or advantageous effects. The combination of cards across the entire battlefield is crucial for varying the outcome of each match and maximizing strategic possibilities.
 
-The player must make use of their available resources to position their units and use spells to defeat each wave and survive the round. Formations and unit rotations are crucial to maintain all battlefronts.
+There can be a maximum of 3 units per side on each __Time-Line__ in the battlefield, it means 9 cards distributed across the three timelines, and 5 more units in the __Quantum-Tunnel__
 
-The player's available resource gradually increases as the rounds progress, allowing them to opt for more complex and interesting strategies. With additional resources, the player can deploy more powerful units, cast more devastating spells, or execute more elaborate tactical maneuvers to counter enemy waves. This mechanic provides dynamic progression and strategic challenges in each round, encouraging the player to adapt their tactics as the difficulty ramps up.
+The player must make use of their available __Khronos__ to position their units and use __Paradox cards__ to defeat each wave and survive the round. Formations and unit rotations are crucial to maintain all __Time-Lines__.
+
+The player's available __Khronos__ gradually increases as the rounds progress, allowing them to opt for more complex and interesting strategies. With additional __Khronos__, the player can deploy more powerful units, cast more devastating spells, or execute more elaborate tactical maneuvers to counter enemy waves. This mechanic provides dynamic progression and strategic challenges in each round, encouraging the player to adapt their tactics as the difficulty ramps up.
 
 ### **Mindset**
 
@@ -75,23 +94,36 @@ We could consider adding different progression elements such as unlocking new ca
 
 ### **Screens**
 
-1. Title Screen
-    1. Options
-2. Level Select
-3. Game
-    1. Inventory
-    2. Assessment / Next Level
-4. End Credits
-
-_(example)_
+1. MainMenu Screen 
+    1. Collection Deck
+    2. Highscore
+    3. Options
+2. Game Screen
+3. End Credits
 
 ### **Controls**
 
 How will the player interact with the game? Will they be able to choose the controls? What kind of in-game events are they going to be able to trigger, and how? (e.g. pressing buttons, opening doors, etc.)
 
+**Mouse Controls:**
+- Left Click: Select cards, activate buttons, or interact with UI elements. To move cards, click and drag them to the desired position on the battlefield.
+- Right Click: View cards in detail, including statistics and special abilities, by right-clicking on them.
+
 ### **Mechanics**
 
 Are there any interesting mechanics? If so, how are you going to accomplish them? Physics, algorithms, etc.
+
+1. **Quantum-Tunnel Manipulation:**
+* Implementation: Utilize algorithms to simulate the Quantum-Tunnel's manipulation mechanics. This involves allowing players to move and position units and spells across different timelines on the battlefield.
+
+2. **Unit Positioning and Combat:**
+* Implementation: Implement algorithms to determine unit positioning and combat outcomes based on unit stats and positioning on the battlefield. This involves calculating attack and defense values, as well as resolving combat interactions between units.
+
+3. **Card Deployment and Spell Casting:**
+* Implementation: Develop a system that allows players to deploy cards onto the battlefield by clicking and dragging them to the desired position. For spell casting, implement a similar system where players can activate Paradox Cards by selecting them from their hand and targeting the desired location or unit on the battlefield.
+
+4. **Resource Management:**
+* Implementation: Create a resource management system that tracks players' Khronos and ensures that they have enough resources to deploy cards and activate spells each turn. This involves implementing algorithms to calculate resource generation and expenditure based on player actions and game state.
 
 ## _Level Design_
 
