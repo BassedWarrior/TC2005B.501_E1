@@ -26,19 +26,36 @@
 
 ## Deck Building
 
-- As a player, I want to have a menu to build my deck.
-- As a player, I want to be able to click on cards from my collection to add 
-    them to my deck.
-- As a player, I want to be able to click on cards from my deck to remove them 
-    from my deck.
-- As a player, I want to be able to filter the cards from my collection to 
-    show only the cards of a certain type.
-- As a player, I want te be able to right-click on cards from my collection or 
-    from my deck to get a detailed view of the card.
+**Deck menu [Mid] (Sprint 2)**
+- *User story* As a player, I want to have a menu to build my deck.
+- *Validation* Given a menu displayed when the round starts then I can build my deck.
+ 
+**Hand selection [Mid] (Sprint 2)**
+- *User story* As a player, I want to be able to click on cards from the deck and add them
+  or remove them from my hand.
+- *Validation* Given the available cards when the round starts then I can choose wich
+  cards I want in my hand.
+
+**Card filter [Low] (Sprint 3)**
+- *User story* As a player, I want to be able to filter the cards from my collection to
+  show only the cards of a certain type.
+- *Validation* Given the cards in my hand when I already finished my selection, then I want
+  to filter them by card type.
+
+**Card details [High] (Sprint 2)**
+- *User story* As a player, I want te be able to right-click on cards from my collection or
+  from my deck to get a detailed view of the card.
+- *Validation* Given in the interested card, when  right-click on the card, then I want to see
+  detail information about the card.
 
 ## Client Statistics
 
-- As a client, I want to be able to see the game analytics to determine the 
-    Most Effective Tactic Available (M.E.T.A.) of the game.
-- As a client, I want to be able to host the game locally using a node.js 
-    server.
+**strategy planning [Mid] (Sprint 5)**
+- *User story* As a client, I want to be able to see the game analytics to determine the
+  Most Effective Tactic Available (M.E.T.A.) of the game.
+- *Validation* Given the
+
+**Node.js server [High] (Sprint 5)**
+- *User story* As a client, I want to be able to host the game locally using a node.js
+  server.
+- *Validation* 
