@@ -33,7 +33,7 @@
 **Hand selection [Mid] (Sprint 2)**
 - *User story* As a player, I want to be able to click on cards from the deck and add them
   or remove them from my hand.
-- *Validation* Given the available cards when the round starts then I can choose wich
+- *Validation* Given the available cards when the round starts then I can choose which
   cards I want in my hand.
 
 **Card filter [Low] (Sprint 3)**
@@ -43,19 +43,19 @@
   to filter them by card type.
 
 **Card details [High] (Sprint 2)**
-- *User story* As a player, I want te be able to right-click on cards from my collection or
+- *User story* As a player, I want to be able to right-click on cards from my collection or
   from my deck to get a detailed view of the card.
 - *Validation* Given in the interested card, when  right-click on the card, then I want to see
   detail information about the card.
 
 ## Client Statistics
 
-**strategy planning [Mid] (Sprint 5)**
+**strategy planning [Mid] (Sprint 6)**
 - *User story* As a client, I want to be able to see the game analytics to determine the
   Most Effective Tactic Available (M.E.T.A.) of the game.
-- *Validation* Given the
+- *Validation* Given the web page, when I click on statistics, then I want to see the use frequency and their win rates of the cards.
 
 **Node.js server [High] (Sprint 5)**
 - *User story* As a client, I want to be able to host the game locally using a node.js
   server.
-- *Validation* 
+- *Validation* Given the complete game, when I open the main page, then I want to be able to play without any inconvenience. 
