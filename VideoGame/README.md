@@ -193,8 +193,6 @@ _(example)_
 3. BaseWave
 4. BaseCardPlace
 
-_(example)_
-
 ### **Derived Classes / Component Compositions**
 
 1. BasePlayer
