@@ -1,4 +1,4 @@
-# **Game Name Here**
+# **Chronical Doom**
 
 ## _Game Design Document_
 
@@ -56,19 +56,11 @@
 
 - **Nexus Nodes:** Score made all along the game.
 
-- **Rift-Walkers:**
-
-- **Temporal Echo:**
-
 ### **Summary**
-
-Sum up your game idea in 2 sentences. A kind of elevator pitch. Keep it simple!
 
 The game is a turn-based strategy deck-building experience, drawing inspiration from strategic elements in gaming. Players expend __Khronos__ to play cards each turn, strategically deploying them on __Time-Lines__ after passing through a __Quantum-Tunnel__, an intermediate space manipulated by the player. As waves of attacks from the CPU assail the player each round, they must use their resources judiciously to survive.
 
 ### **Gameplay**
-
-What should the gameplay be like? What is the goal of the game, and what kind of obstacles are in the way? What tactics should the player use to overcome them?
 
 The gameplay is turn based, where the player expends their resources to react to the attack waves prepared by the CPU. At the start of each round, the player is shown the template of enemies that will appear that round. The player has a turn to prepare, in which it can play unit cards on the board or play __Paradox cards__. The CPU then prepares a set of enemies to create the first wave of attack aligning them in the battlefield and it's then the player's turn. The player decides how to block the attack by positioning their units on the board at the battlefield in one of the three __Time-Lines__ available.
 
@@ -83,8 +75,6 @@ The player's available __Khronos__ gradually increases as the rounds progress, a
 
 ### **Mindset**
 
-What kind of mindset do you want to provoke in the player? Do you want them to feel powerful, or weak? Adventurous, or nervous? Hurried, or calm? How do you intend to provoke those emotions?
-
 The player will feel overwhelmed by the attrition the constant waves imply for their limited amount of resources. They should be nervous and this will be achieved by making their units frail and outnumbered by the enemies, which will be a challenging experience for them to solve.
 We could consider adding different progression elements such as unlocking new cards or abilities to maintain long-term engagement and reward player progress.
 
@@ -94,24 +84,26 @@ We could consider adding different progression elements such as unlocking new ca
 
 ### **Screens**
 
-1. MainMenu Screen 
+1. MainMenu Screen
+    ![Main-Menu Screen](Images/main_menu.png)
     1. Collection Deck
+        ![Deck-editig Screen](Images/deck_editing.png)
+        ![Card-details](Images/card_detail.png)
     2. Highscore
-    3. Options
+    3. Options&Settings
 2. Game Screen
+    1. Wave Change
+    2. During the Wave
+        ![Game-Board Screen](Images/game_board.png)
 3. End Credits
 
 ### **Controls**
-
-How will the player interact with the game? Will they be able to choose the controls? What kind of in-game events are they going to be able to trigger, and how? (e.g. pressing buttons, opening doors, etc.)
 
 **Mouse Controls:**
 - Left Click: Select cards, activate buttons, or interact with UI elements. To move cards, click and drag them to the desired position on the battlefield.
 - Right Click: View cards in detail, including statistics and special abilities, by right-clicking on them.
 
 ### **Mechanics**
-
-Are there any interesting mechanics? If so, how are you going to accomplish them? Physics, algorithms, etc.
 
 1. **Quantum-Tunnel Manipulation:**
 * Implementation: Utilize algorithms to simulate the Quantum-Tunnel's manipulation mechanics. This involves allowing players to move and position units and spells across different timelines on the battlefield.
@@ -125,52 +117,70 @@ Are there any interesting mechanics? If so, how are you going to accomplish them
 4. **Resource Management:**
 * Implementation: Create a resource management system that tracks players' Khronos and ensures that they have enough resources to deploy cards and activate spells each turn. This involves implementing algorithms to calculate resource generation and expenditure based on player actions and game state.
 
+### **List of Assets**
+
+1. **Graphic Assets:**
+    - Character Sprites: All character and enemy sprites will have the same card format, which will consist of custom cards drawn by us with character differentiation.
+    - Frame design: All cards will have a frame to differentiate between enemy cards and our own cards, which will also be drawn by us.
+        - Unit design: contains cost, name, health, attack and description.
+        - Paradox design: contains cost, name and description.
+    - Animations: Animation sequences for movements, attacks, special effects, etc.
+        - Playing card: when cards are played from the player's hand, the way they are integrated into the board.
+        - Card battle: when cards are in combat, the way they clash and affect one another.
+        - Card death: when a unit is killed, how it is removed from the board.
+        - Paradox usage: when a paradox card is used, to signify its effect.
+    - Background Images: Instead of tilesets, we will use background images that might have slight movement animations to enhance the environment.
+    - UI and HUD: User Interface elements, including buttons, health bars, menus, etc.
+        - Khronos meter: graphic to show how much Khronos the player has.
+        - Deck Cards: graphic to show the remaining number of cards in the player's deck.
+        - Player life: graphic to show the player remaining health points
+        - Wave counter: graphic to show what wave number the player is currently in.
+    - Icons and Menus: Specific designs for skill icons, pause menus, and other navigation screens.
+        - End turn button: button for ending player turn.
+        - Main menu: player can choose to customize deck or play with existing deck.
+        - Deck building menu: player can choose cards to add or remove from his deck from his collection.
+        - Highscore: player can see his high score and the deck they got it with.
+2. **Sound Assets**
+    - Sound Effects: Sounds for actions like hits, healing, explosions, item collection, card drawin etc.
+        - Card clash: when cards clash in a time-line.
+        - Wave start: right as the wave is about to begin.
+        - Card death: when a unit card is eliminated.
+        - Khronos refill: when the player gains more khronos.
+        - Unit card played: when a unit card is played from the player's hand.
+        - Paradox card played: when a paradox card is played from the player's hand.
+        - Unit movement: when a unit is redeployed from time-line to time-line and the quantum tunnel.
+    - Background Music: Music tracks for the game and menus.
+        - Menu music: music before the game starts.
+        - Gameplay music: music while the game is going on.
+3. **Script**
+    - Game Scripts: Code that controls game mechanics, such as card movements, combat interactions, and UI logic.
+        - GameController: in charge of game logic and management.
+        - PlayerHand: in charge of player hand management.
+        - UnitCard: in charge of unit card interaction, playing, deployment and death.
+        - TimeLine: in charge of timeline clashes and units.
+        - QuantumTunnel: in charge of quantum tunnel units.
+        - Wave: in charge of wave behavior.
+
 ## _Level Design_
 
 ---
 
-_(Note : These sections can safely be skipped if they&#39;re not relevant, or you&#39;d rather go about it another way. For most games, at least one of them should be useful. But I&#39;ll understand if you don&#39;t want to use them. It&#39;ll only hurt my feelings a little bit.)_
-
 ### **Themes**
 
-1. Forest
+1. *Place Name*
     1. Mood
-        1. Dark, calm, foreboding
+        1. *Mood*
     2. Objects
         1. _Ambient_
-            1. Fireflies
-            2. Beams of moonlight
-            3. Tall grass
+            1. *Ambient*
         2. _Interactive_
-            1. Wolves
-            2. Goblins
-            3. Rocks
-2. Castle
-    1. Mood
-        1. Dangerous, tense, active
-    2. Objects
-        1. _Ambient_
-            1. Rodents
-            2. Torches
-            3. Suits of armor
-        2. _Interactive_
-            1. Guards
-            2. Giant rats
-            3. Chests
+            1. *Interactive*
 
 _(example)_
 
 ### **Game Flow**
 
-1. Player starts in forest
-2. Pond to the left, must move right
-3. To the right is a hill, player jumps to traverse it (&quot;jump&quot; taught)
-4. Player encounters castle - door&#39;s shut and locked
-5. There&#39;s a window within jump height, and a rock on the ground
-6. Player picks up rock and throws at glass (&quot;throw&quot; taught)
-7. … etc.
 
-_(example)_
 
 ## _Development_
 
@@ -178,39 +188,22 @@ _(example)_
 
 ### **Abstract Classes / Components**
 
-1. BasePhysics
-    1. BasePlayer
-    2. BaseEnemy
-    3. BaseObject
-2. BaseObstacle
-3. BaseInteractable
-
-_(example)_
+1. BaseCard
+2. BasePlayer
+3. BaseWave
+4. BaseCardPlace
 
 ### **Derived Classes / Component Compositions**
 
 1. BasePlayer
     1. PlayerMain
-    2. PlayerUnlockable
-2. BaseEnemy
-    1. EnemyWolf
-    2. EnemyGoblin
-    3. EnemyGuard (may drop key)
-    4. EnemyGiantRat
-    5. EnemyPrisoner
-3. BaseObject
-    1. ObjectRock (pick-up-able, throwable)
-    2. ObjectChest (pick-up-able, throwable, spits gold coins with key)
-    3. ObjectGoldCoin (cha-ching!)
-    4. ObjectKey (pick-up-able, throwable)
-4. BaseObstacle
-    1. ObstacleWindow (destroyed with rock)
-    2. ObstacleWall
-    3. ObstacleGate (watches to see if certain buttons are pressed)
-5. BaseInteractable
-    1. InteractableButton
-
-_(example)_
+2. BaseCard
+    1. UnitCard
+    2. ParadoxCard
+3. BaseCardPlace
+    1. CardPlaceHand
+    2. CardPlaceQTunnel
+    3. CardPlaceTimeLine
 
 ## _Graphics_
 
