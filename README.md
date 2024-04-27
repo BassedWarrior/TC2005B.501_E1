@@ -1,4 +1,4 @@
-# TC2005B.501_E1
+# TC2005B.501_E1 - CHRONICLE DOOM
 
 
 ### Eduardo Porto Morales - A01027893
