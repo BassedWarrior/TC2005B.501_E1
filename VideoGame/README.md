@@ -1,4 +1,4 @@
-# **Game Name Here**
+# **Chronical Doom**
 
 ## _Game Design Document_
 
@@ -85,12 +85,16 @@ We could consider adding different progression elements such as unlocking new ca
 ### **Screens**
 
 1. MainMenu Screen
+    ![Main-Menu Screen](Images/main_menu.png)
     1. Collection Deck
+        ![Deck-editig Screen](Images/deck_editing.png)
+        ![Card-details](Images/card_detail.png)
     2. Highscore
     3. Options&Settings
 2. Game Screen
     1. Wave Change
     2. During the Wave
+        ![Game-Board Screen](Images/game_board.png)
 3. End Credits
 
 ### **Controls**
