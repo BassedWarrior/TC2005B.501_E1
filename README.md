@@ -1,5 +1,16 @@
 # TC2005B.501_E1
 
+
+### Eduardo Porto Morales - A01027893
+
+### Fausto Jiménez de la Cuesta Vallejo - A01027983
+
+### Hector Julian Zarate Ramirez - A01027743
+
+---
+
+## Game
+
 Attrition card game, where the player's main goal is to hold back the waves of 
 endless enemies who are bound to destroy the space-time continium, and the 
 player must spend their khronos resource to play unit and paradox cards, and 
@@ -11,9 +22,7 @@ which uses a Standard Query Language (SQL) database to store all relevant game
 information, and through a NodeJS and Express server Application Programming 
 Interface (API), allows the game to interact with the database as needed.
 
-## Game
-
-The game itself is developed using the Unity Game Engine.
+#### The game itself is developed using the Unity Game Engine.
 
 ## Data Base
 
