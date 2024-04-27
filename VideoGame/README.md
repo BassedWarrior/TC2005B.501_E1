@@ -94,11 +94,13 @@ We could consider adding different progression elements such as unlocking new ca
 
 ### **Screens**
 
-1. MainMenu Screen 
+1. MainMenu Screen
     1. Collection Deck
     2. Highscore
-    3. Options
+    3. Options&Settings
 2. Game Screen
+    1. Wave Change
+    2. During the Wave
 3. End Credits
 
 ### **Controls**
@@ -124,6 +126,21 @@ Are there any interesting mechanics? If so, how are you going to accomplish them
 
 4. **Resource Management:**
 * Implementation: Create a resource management system that tracks players' Khronos and ensures that they have enough resources to deploy cards and activate spells each turn. This involves implementing algorithms to calculate resource generation and expenditure based on player actions and game state.
+
+### **List of Assets**
+
+1. **Graphic Assets:**
+* Character Sprites: All character and enemy sprites will have the same card format, which will consist of custom cards drawn by us with character differentiation.
+* Frame design: All cards will have a frame to differentiate between enemy cards and our own cards, which will also be drawn by us.
+* Animations: Animation sequences for movements, attacks, special effects, etc.
+* Background Images: Instead of tilesets, we will use background images that might have slight movement animations to enhance the environment.
+* UI and HUD: User Interface elements, including buttons, health bars, menus, etc.
+* Icons and Menus: Specific designs for skill icons, pause menus, and other navigation screens.
+2. **Sound Assets**
+* Sound Effects: Sounds for actions like hits, healing, explosions, item collection, card drawin etc.
+* Background Music: Music tracks for the game and menus.
+3. **Script**
+* Game Scripts: Code that controls game mechanics, such as card movements, combat interactions, and UI logic.
 
 ## _Level Design_
 
