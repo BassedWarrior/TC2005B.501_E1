@@ -23,7 +23,7 @@ assignees: ''
 
 (*write here*)
 
-## Successful End Conditon
+## Successful End Condition
 
 (*write here*)
 
