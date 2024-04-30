@@ -4,9 +4,11 @@
 
 ---
 
-##### **Copyright notice / author information / boring legal stuff nobody likes**
+##### **Copyright Notice / Author Information / Legal Stuff**Creation Date: [Date]
+- Creation Date: [Apr 10, 2024]
+- Developer(s): *Eduardo Porto, Fausto Jiménez, Hector Julian Zarate.*
+- Institution: *Tecnológico de Monterrey CSF*
 
-##
 ## _Index_
 
 ---
@@ -77,6 +79,11 @@ The player's available __Khronos__ gradually increases as the rounds progress, a
 
 The player will feel overwhelmed by the attrition the constant waves imply for their limited amount of resources. They should be nervous and this will be achieved by making their units frail and outnumbered by the enemies, which will be a challenging experience for them to solve.
 We could consider adding different progression elements such as unlocking new cards or abilities to maintain long-term engagement and reward player progress.
+
+## **More Important Information**
+
+* [GameDesignConcept.pdf](VideoGame/GameDesignConcept.pdf)
+* [Game_MECHANICS.pdf](VideoGame/Game_MECHANICS.pdf)
 
 ## _Technical_
 
@@ -209,13 +216,21 @@ _(example)_
 
 ---
 
-### **Style Attributes**
+### **Visual Style**
+The visual style for our game will be heavily inspired by the great game "Cuphead." Capturing the essence of the golden age of American animation, mirroring the distinctive artistic flair of the 1920s and 1930s, our game's graphics are designed to evoke the styles of Fleischer Studios and early Walt Disney animations, known for their subversive and surreal qualities.
 
-What kinds of colors will you be using? Do you have a limited palette to work with? A post-processed HSV map/image? Consistency is key for immersion.
+"Cuphead" is renowned for its unique hand-drawn animation, reflecting a commitment to the aesthetics of the era. Similarly, our game will utilize a hand-drawn technique to ensure authenticity and visual impact.
 
-What kind of graphic style are you going for? Cartoony? Pixel-y? Cute? How, specifically? Solid, thick outlines with flat hues? Non-black outlines with limited tints/shades? Emphasize smooth curvatures over sharp angles? Describe a set of general rules depicting your style here.
+By taking this artistic style, we sought to create a game that is visually striking in its artistic difference, providing players with a visually appealing and engaging experience.
 
-Well-designed feedback, both good (e.g. leveling up) and bad (e.g. being hit), are great for teaching the player how to play through trial and error, instead of scripting a lengthy tutorial. What kind of visual feedback are you going to use to let the player know they&#39;re interacting with something? That they \*can\* interact with something?
+### **Color Palette**
+Our game will use a limited color palette inspired by the early color film processes, such as Technicolor, which is characteristic of the 1930s animation style. 
+This palette will feature primarily primary and secondary colors with high saturation to evoke the vibrant, expressive tones typical of that era.
+
+### **Interactive Feedback**
+We will want to make an inmersive game so we must take care of details, such as Positive and Negative Feedback.
+About the cues, interactive objects will glow when players interacted with. This will help in guiding the player through the environment and suggesting possible actions.
+In terms of combat and animations, we will add a visual reference that allows the user to know what is happening on the playing field by means of drawings in the same style that do not disturb the screen to create immersion.
 
 ### **Graphics Needed**
 
