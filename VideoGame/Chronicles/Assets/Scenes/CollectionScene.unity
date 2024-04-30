@@ -366,7 +366,7 @@ MonoBehaviour:
   objectToFollow: {fileID: 1909756322}
   principalButton: {fileID: 384039738}
   collectionButton: {fileID: 502132963}
-  marketButton: {fileID: 1962053490}
+  highScoreButton: {fileID: 1962053490}
   transitionDuration: 0.5
 --- !u!1 &297328223
 GameObject:
