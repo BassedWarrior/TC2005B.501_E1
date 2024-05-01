@@ -4,7 +4,7 @@
 
 ---
 
-##### **Copyright Notice / Author Information / Legal Stuff**Creation Date: [Date]
+##### **Copyright Notice / Author Information / Legal Stuff**
 - Creation Date: [Apr 10, 2024]
 - Developer(s): *Eduardo Porto, Fausto Jiménez, Hector Julian Zarate.*
 - Institution: *Tecnológico de Monterrey CSF*
@@ -80,10 +80,12 @@ The player's available __Khronos__ gradually increases as the rounds progress, a
 The player will feel overwhelmed by the attrition the constant waves imply for their limited amount of resources. They should be nervous and this will be achieved by making their units frail and outnumbered by the enemies, which will be a challenging experience for them to solve.
 We could consider adding different progression elements such as unlocking new cards or abilities to maintain long-term engagement and reward player progress.
 
-## **More Important Information**
+## **Games we have based on (Inspiration)**
 
-* [GameDesignConcept.pdf](VideoGame/GameDesignConcept.pdf)
-* [Game_MECHANICS.pdf](VideoGame/Game_MECHANICS.pdf)
+- Plants Vs Zombies
+- Kingdom Rush
+- Legends of Runeterra
+- Marvel Snap
 
 ## _Technical_
 
@@ -217,7 +219,7 @@ _(example)_
 ---
 
 ### **Visual Style**
-The visual style for our game will be heavily inspired by the great game "Cuphead." Capturing the essence of the golden age of American animation, mirroring the distinctive artistic flair of the 1920s and 1930s, our game's graphics are designed to evoke the styles of Fleischer Studios and early Walt Disney animations, known for their subversive and surreal qualities.
+The visual style for our game will be heavily inspired by the game named "Cuphead." Capturing the essence of the golden age of American animation, mirroring the distinctive artistic flair of the 1920s and 1930s, our game's graphics are designed to evoke the styles of Fleischer Studios and early Walt Disney animations, known for their subversive and surreal qualities.
 
 "Cuphead" is renowned for its unique hand-drawn animation, reflecting a commitment to the aesthetics of the era. Similarly, our game will utilize a hand-drawn technique to ensure authenticity and visual impact.
 
