@@ -6,7 +6,7 @@
 
 ##### **Copyright Notice / Author Information / Legal Stuff**
 - Creation Date: [Apr 10, 2024]
-- Developer(s): *Eduardo Porto, Fausto Jiménez, Hector Julian Zarate.*
+- Developer(s): *Eduardo Porto Morales, Fausto Jiménez de la Cuesta Vallejo, Hector Julian Zarate Ramirez.*
 - Institution: *Tecnológico de Monterrey CSF*
 
 ## _Index_
@@ -114,35 +114,44 @@ We could consider adding different progression elements such as unlocking new ca
 
 ### **Mechanics**
 
-#### Turn Order
-
-1. Starting the game, the first thing to happen is that 5 cards are revealed to be select, where the ones you choose stay with you and the others are taken directly from the remaining deck.
-2. The player receives a fixed amount of Khronos, which can be adjusted as the rounds progress or by special effects of the cards.
-3. The template of enemies that will appear this turn is shown, allowing the player to plan their strategy.
-4. The player chooses cards from their hand that they want to play, considering the Khronos cost of each. If the player decides to use a Paradox Card, they can activate it at this time to affect the battlefield or alter game conditions.
-5. The player manipulates the Quantum-Tunnel to position units and spells on the Time-Lines. Here, the initial strategic layout is decided before the battle.
-6. The player places their units on one of the three available Time-Lines, respecting the limit of 3 units per Time-Line.
-7. Each unit on the battlefield faces its corresponding enemy on the timeline. Combats are resolved based on the unit's stats and abilities.
-8. The outcomes of each encounter are calculated, and surviving units remain or are removed from the field based on the results and player's decisions.
-9. The player can choose to relocate their surviving units to adjacent positions within the Time-Lines to prepare for the next attack wave.
-10. The CPU adds new units to the field as reinforcements for the next wave, increasing the difficulty each round.
-11. Units remaining in the field can activate upgrades or passive abilities that provide strategic advantages or improve stats for future turns.
-12. The performance of the turn is evaluated based on defeated units, control of the Time-Lines, and other game objectives.
-13. The game updates resources and prepares the stage for the next turn.
-
-#### Pre-Game
+#### Pre-Game (Main Menu)
 
 1. Upon launching the game, players are welcome by the main menu. This is the central hub from where all game functions can be accesssed.
 2. The main menu includes options such as Start Game, Deck Collection, High Scores, Settings, Exit. Each option is designed to navigate easily to its respective section.
 
-#### Accesing Deck Collection
+#### Accesing Deck Collection Menu
 
 1. From the main menu, players can select the Deck Collection option. This brings them to the deck collection view where they can see all available cards.
 2. In the deck collection view, players are provided with a user-friendly interface displaying all available cards that can be used in the game.
 3. Cards can be filtered and sorted by some criteria such as type, cost, power, and special abilities to help players find the cards they need.
 4. Players can create their deck by selecting cards and adding them to their deck.
-5. Each deck must adhere to certain rules, such as a maximum number of cards or specific requirements for card types.
-6. Players are ready to play!, once satisfied with their deck, players can hit the Play button.
+5. Each deck must adhere to certain rules, such as a maximum number of cards repeated or specific requirements for card types (max deck length is 18 cards).
+6. Players are ready to play!, once satisfied with their complete 18 cards deck, players can hit the Play button in the Main Menu.
+
+#### Game Starts (Main Game)
+
+1. The player is dealt 5 cards, and can must then click on the cards they want to keep.
+2. The cards the player didn't click are shuffled back into the deck.
+3. The player is dealt the same number of cards he reshuffled into the deck so the player has a 5 card hand to start the game.
+
+#### Turn Order (Game Loop)
+
+1. Units remaining in the field can activate upgrades or passive abilities that provide strategic advantages or improve stats for future turns. 
+2. If there are cards in the deck, the player draws a card.
+3. The player receives a fixed amount of Khronos, which can be adjusted as the rounds progress or by special effects of the cards.
+4. The CPU adds new units as reinforcements for the upcoming clash, increasing the difficulty each round.
+5. The template of enemies that will appear this turn is shown and placed, allowing the player to plan their strategy.
+6. If there are surviving units in game, the player can choose to relocate them to adjacent positions within the Time-Lines or the Quantum-Tunnel to prepare for the upcoming clash.
+7. The player chooses cards from their hand that they want to play, considering the Khronos cost of each. If the player decides to use a Paradox Card, they can activate it at this time to affect the battlefield or alter game conditions. (Players also have the strategic option to not play any cards from their hand during their turn).
+8. The player manipulates the Quantum-Tunnel to position units and Paradox Card on the Time-Lines. Here, the initial strategic layout is decided before the battle.
+(If the player currently has no units in play or choose not to make any changes during this phase, this part of the turn is skipped).
+9. The player places his units consistently in the Timelines (hoping that it will be together with the opponents), respecting the limit of 3 units per Timeline while waiting for the defense, in order not to take accumulated damage points from the enemy.
+
+#### Clash Time 
+1. Each unit on the battlefield faces its corresponding enemy on the timeline. Combats are resolved based on the unit's stats and abilities.
+2. The outcomes of each encounter are calculated, and surviving units remain or are removed from the field based on the results and player's decisions.
+3. The performance of the turn is evaluated based on defeated units, control of the Time-Lines, and other game objectives.
+4. The game updates resources and prepares the stage for the next turn.
 
 ### **List of Assets**
 
@@ -234,8 +243,6 @@ We could consider adding different progression elements such as unlocking new ca
 ### **Visual Style**
 The visual style for our game will be heavily inspired by the game named "Cuphead." Capturing the essence of the golden age of American animation, mirroring the distinctive artistic flair of the 1920s and 1930s, our game's graphics are designed to evoke the styles of Fleischer Studios and early Walt Disney animations, known for their subversive and surreal qualities.
 
-"Cuphead" is renowned for its unique hand-drawn animation, reflecting a commitment to the aesthetics of the era. Similarly, our game will utilize a hand-drawn technique to ensure authenticity and visual impact.
-
 By taking this artistic style, we sought to create a game that is visually striking in its artistic difference, providing players with a visually appealing and engaging experience.
 
 ### **Color Palette**
@@ -243,9 +250,9 @@ Our game will use a limited color palette inspired by the early color film proce
 This palette will feature primarily primary and secondary colors with high saturation to evoke the vibrant, expressive tones typical of that era.
 
 ### **Interactive Feedback**
-We will want to make an inmersive game so we must take care of details, such as Positive and Negative Feedback.
-About the cues, interactive objects will glow when players interacted with. This will help in guiding the player through the environment and suggesting possible actions.
-In terms of combat and animations, we will add a visual reference that allows the user to know what is happening on the playing field by means of drawings in the same style that do not disturb the screen to create immersion.
+We will want to make an immersive game, so we must take care of details, such as Positive and Negative Feedback. 
+About the cues, interactive objects will glow when players interact with them. This will help in guiding the player through the environment and suggesting possible actions. 
+In terms of combat and animations, we will add a visual reference that allows the user to know what is happening on the playing field by means of drawings in "Cuphead" inspired style that do not disturb the screen to create immersion.
 
 ### **Graphics Needed**
 
