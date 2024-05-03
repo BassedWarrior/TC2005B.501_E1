@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewCard", menuName= "ScriptableObjects/Cards")]
 public class CardCreator : ScriptableObject
 {
+    public int ID;
     public new string name;
     public string description;
     public Sprite artwork;
@@ -12,7 +13,6 @@ public class CardCreator : ScriptableObject
     public int health;
     public int attack;
 }
-
 /*
 public class UserCard : MonoBehaviour
 {

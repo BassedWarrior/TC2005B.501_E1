@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlotController : MonoBehaviour
 {
-    [SerializeField] private CardManager cardManager;
+    [SerializeField] private MoveManager moveManager;
     [SerializeField] private int maxElements;
     [SerializeField] private float spacing;
     private BoxCollider2D boxCollider;
@@ -24,17 +24,17 @@ public class SlotController : MonoBehaviour
     void Update()
     {
         int currentChildCount = transform.childCount;
-        boxCollider.enabled = cardManager.isDragging;
+        boxCollider.enabled = moveManager.isDragging;
 
         if (currentChildCount != lastChildCount)
         {
             lastChildCount = currentChildCount;
             OrganizarCartas();
         }
-        else if (previousDragState != cardManager.isDragging)
+        else if (previousDragState != moveManager.isDragging)
         {
             OrganizarCartas();
-            previousDragState = cardManager.isDragging;
+            previousDragState = moveManager.isDragging;
         }
     }
 

@@ -6,7 +6,6 @@ using TMPro;
 
 public class CardPropertiesDrag : MonoBehaviour
 {
-    public bool isDrag;
     public Transform originalParent;
     public Transform actualParent;
     public SpriteRenderer spriteRenderer;
@@ -18,9 +17,17 @@ public class CardPropertiesDrag : MonoBehaviour
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI attackText;
     public int cardIndex;
+    public bool isDrag;
 
     public void AssignInfo()
     {
+        if (card == null) Debug.LogError("Card is null");
+        if (nameText == null) Debug.LogError("nameText is null");
+        if (descriptionText == null) Debug.LogError("descriptionText is null");
+        if (artworkImage == null) Debug.LogError("artworkImage is null");
+        if (energyText == null) Debug.LogError("energyText is null");
+        if (healthText == null) Debug.LogError("healthText is null");
+        if (attackText == null) Debug.LogError("attackText is null");
         if (card != null)
         {
             spriteRenderer.sprite= card.artwork;
@@ -32,12 +39,15 @@ public class CardPropertiesDrag : MonoBehaviour
             attackText.text = card.attack.ToString();
         }
     }
+
     private void Start()
     {
         originalParent = GameObject.FindGameObjectWithTag("DragParent").transform;
         isDrag = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        AssignInfo();
-
+        if(card != null)
+        {
+            AssignInfo();
+        }
     }
 }
