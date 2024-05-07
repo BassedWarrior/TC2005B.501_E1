@@ -36,13 +36,3 @@ public class GameManager : MonoBehaviour
         }
     }
 }
-
-/*
-foreach (int index in gameManager.indicesList)
-{
-    GameObject newCard = Instantiate(cardPrefab, cardArea);
-    CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
-    cardProperties.card= gameManager.cards[index];
-    cardProperties.AssignInfo();
-}
-*/

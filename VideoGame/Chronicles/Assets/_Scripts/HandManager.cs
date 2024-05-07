@@ -9,7 +9,6 @@ public class HandManager : MonoBehaviour
     private GameManager gameManager;
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private Transform cardArea;
-
     [SerializeField] private List<GameObject> buttons;
     [SerializeField] private GameObject initialScene;
     private int selectiveCards;

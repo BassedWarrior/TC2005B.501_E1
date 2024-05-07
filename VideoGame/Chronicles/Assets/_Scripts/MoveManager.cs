@@ -11,7 +11,6 @@ public class MoveManager : MonoBehaviour
     private Vector3 mousePosition;
     private CardPropertiesDrag currentCard;
     public bool isDragging;
-
     private void Start()
     {
         mainCamera = Camera.main;
