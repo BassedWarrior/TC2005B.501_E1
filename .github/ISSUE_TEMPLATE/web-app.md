@@ -7,13 +7,11 @@ assignees: ''
 
 ---
 
-## Use case name
-
-(*write here*)
+# [Use Case Name]
 
 ## Related Requirements
 
-(*write here*)
+- #[issue_number]
 
 ## Goal in Context
 
@@ -45,4 +43,7 @@ assignees: ''
 
 ## Main Flow
 
-(*write here*)
+1. (*write here*)
+
+## Use Case Diagram
+![Use Case Diagram](./SoftwareEngineering/Images/use_case_diagram.png)
