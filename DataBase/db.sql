@@ -30,11 +30,6 @@ CREATE TABLE deck (
     FOREIGN KEY (owner) REFERENCES player.username,
 );
 
-CREATE TABLE gameRound (
-    roundID: TINYINT NOT NULL,
-    PRIMARY KEY (roundID),
-);
-
 CREATE TABLE match (
     matchID: INT UNSIGNED NOT NULL,
     username: VARCHAR(30) NOT NULL,
@@ -56,5 +51,20 @@ CREATE TABLE game (
     deckCards: TINYINT UNSIGNED NOT NULL,
     PRIMARY KEY (gameID) AUTOINCREMENT,
     FOREIGN KEY (username) REFERENCES player.username,
-    FOREIGN KEY (gameRound) REFERENCES gameRound.roundID
+    FOREIGN KEY (gameRound) REFERENCES gameRound.roundID,
+);
+
+CREATE TABLE deckCard (
+    deckID: INT UNSIGNED NOT NULL,
+    cardID: TINYINT UNSIGNED NOT NULL,
+    PRIMARY KEY (deckID, cardID),
+    FOREIGN KEY (deckID) REFERENCES deck.deckID,
+    FOREIGN KEY (cardID) REFERENCES card.cardID,
+);
+
+CREATE TABLE gameRound (
+    roundID: TINYINT NOT NULL,
+    cardID: TINYINT NOT NULL,
+    PRIMARY KEY (roundID, cardID),
+    FOREIGN KEY (cardID) REFERENCES card.cardID,
 );
