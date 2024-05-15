@@ -133,9 +133,9 @@ public class CollectionManager : MonoBehaviour
         if (selectedCardCreator != null)
         {
             int index = gameManager.cards.IndexOf(selectedCardCreator);
-            if (index != -1 && !gameManager.indicesList.Contains(index))
+            if (index != -1 && !gameManager.playersDeck.Contains(index))
             {
-                gameManager.indicesList.Add(index);
+                gameManager.playersDeck.Add(index);
                 ActualizarDeck();
             }
         }
@@ -145,9 +145,9 @@ public class CollectionManager : MonoBehaviour
     public void RemoveCard()
     {
         int indexToRemove = gameManager.cards.FindIndex(card => card.name == selectedCard);
-        if (indexToRemove != -1 && gameManager.indicesList.Contains(indexToRemove))
+        if (indexToRemove != -1 && gameManager.playersDeck.Contains(indexToRemove))
         {
-            gameManager.indicesList.Remove(indexToRemove);
+            gameManager.playersDeck.Remove(indexToRemove);
             ActualizarDeck();
         }
         ShowInfo(false);
@@ -163,15 +163,15 @@ public class CollectionManager : MonoBehaviour
         for (int i = 0; i < 18; i++)
         {
             GameObject collectionCard = Instantiate(cardPrefab, deckArea);
-            if (i < gameManager.indicesList.Count && gameManager.indicesList[i] >= 0 && gameManager.indicesList[i] < gameManager.cards.Count && gameManager.cards[gameManager.indicesList[i]] != null)
+            if (i < gameManager.playersDeck.Count && gameManager.playersDeck[i] >= 0 && gameManager.playersDeck[i] < gameManager.cards.Count && gameManager.cards[gameManager.playersDeck[i]] != null)
             {
                 Color color = collectionCard.GetComponent<Image>().color;
                 Color newColor = new Color(color.r, color.g, color.b, 1f);
                 collectionCard.GetComponent<Image>().color = newColor;
                 
                 CardProperties cardProperties = collectionCard.GetComponent<CardProperties>();
-                cardProperties.card= gameManager.cards[gameManager.indicesList[i]];
-                collectionCard.name= gameManager.cards[gameManager.indicesList[i]].name;
+                cardProperties.card= gameManager.cards[gameManager.playersDeck[i]];
+                collectionCard.name= gameManager.cards[gameManager.playersDeck[i]].name;
                 cardProperties.cardIndex= index;
                 index++;
             }
@@ -186,7 +186,7 @@ public class CollectionManager : MonoBehaviour
     {
         if (removeButton != null && addButton != null)
         {
-            if (gameManager.indicesList.Contains(index))
+            if (gameManager.playersDeck.Contains(index))
             {
                 removeButton.SetActive(true);
                 addButton.SetActive(false);

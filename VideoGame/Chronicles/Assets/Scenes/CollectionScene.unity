@@ -1388,9 +1388,9 @@ MonoBehaviour:
     m_Options:
     - m_Text: AnyCard
       m_Image: {fileID: 0}
-    - m_Text: Troops
+    - m_Text: Units
       m_Image: {fileID: 0}
-    - m_Text: Spells
+    - m_Text: Paradox
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1467,7 +1467,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 76aa75ce7135540cd9330245dbea72d3, type: 2}
   - {fileID: 11400000, guid: 74e62b4d9604845ec934de43115c8b6d, type: 2}
   - {fileID: 11400000, guid: e05de59e1df86479a9d354102e7340fb, type: 2}
-  indicesList: 
+  playersDeck: 
+  playersHand: 
 --- !u!4 &689036408
 Transform:
   m_ObjectHideFlags: 0
@@ -3322,7 +3323,6 @@ MonoBehaviour:
   cardInfo: {fileID: 633668378}
   cardPrefab: {fileID: 2198373641538602859, guid: ebd7c05a7a9c2450699d6d3242da8b30, type: 3}
   cardArea: {fileID: 1109464461}
-  deckPrefab: {fileID: 5783350677361890924, guid: 1b45236078bac4acb99c4b3cfe29dd0e, type: 3}
   deckArea: {fileID: 1450805784}
 --- !u!1 &1860096314
 GameObject:
