@@ -17,7 +17,7 @@ CREATE TABLE card (
     category ENUM('unit', 'paradox') NOT NULL,
     health TINYINT UNSIGNED,
     attack TINYINT UNSIGNED,
-    PRIMARY KEY (cardID) AUTOINCREMENT,
+    PRIMARY KEY (cardID)
 );
 
 CREATE TABLE deck (
@@ -31,7 +31,7 @@ CREATE TABLE deck (
 
 CREATE TABLE match (
     matchID INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    username VARCHAR(30) NOT NULL,
+    username VARCHAR(20) NOT NULL,
     deck INT UNSIGNED NOT NULL,
     datePlayed DATE NOT NULL,
     timePlayed TIME NOT NULL,
