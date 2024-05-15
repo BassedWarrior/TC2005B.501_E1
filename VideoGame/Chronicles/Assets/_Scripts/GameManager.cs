@@ -30,20 +30,10 @@ public class GameManager : MonoBehaviour
         while (n > 1)
         {
             n--;
-            int porto = rng.Next(n + 1);
-            int value = playersDeck[porto];
-            playersDeck[porto] = playersDeck[n];
-            playersDeck[n] = value;
+            int range = rng.Next(n + 1);
+            int assess = playersDeck[range];
+            playersDeck[range] = playersDeck[n];
+            playersDeck[n] = assess;
         }
     }
 }
-
-/*
-foreach (int index in gameManager.indicesList)
-{
-    GameObject newCard = Instantiate(cardPrefab, cardArea);
-    CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
-    cardProperties.card= gameManager.cards[index];
-    cardProperties.AssignInfo();
-}
-*/
