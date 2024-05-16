@@ -2,18 +2,20 @@
 
 import express from "express";
 import mysql from "mysql2/promise";
+import dotenv from "dotenv/config"
 
 const app = express();
-const port = 4321;
+const port = process.env.PORT;  // This is taken from the .env file.
 
 app.use(express.json());
 
 async function connectToDB() {
   return await mysql.createConnection({
-    host: "localhost",
-    user: "porto1090",
-    password: "asdf1234",
-    database: "chronical-doom",
+    // This is also taken from the .env file.
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
   });
 }
 
