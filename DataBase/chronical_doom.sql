@@ -27,7 +27,7 @@ CREATE TABLE deck (
     owner VARCHAR(20) NOT NULL,
     PRIMARY KEY (deckID),
     FOREIGN KEY (owner) REFERENCES player(username)
-) ENGINE=MyISAM, CHARSET=ascii;
+) ENGINE=InnoDB, CHARSET=ascii;
 
 -- This stores the outcome of a full match after the player is done playing.
 CREATE TABLE `match` (
@@ -60,7 +60,7 @@ CREATE TABLE game (
     PRIMARY KEY (gameID),
     FOREIGN KEY (username) REFERENCES player(username),
     FOREIGN KEY (gameRound) REFERENCES gameRound(roundID)
-) ENGINE=MyISAM, CHARSET=ascii;
+) ENGINE=InnoDB, CHARSET=ascii;
 
 CREATE TABLE deckCard (
     deckID INT UNSIGNED NOT NULL,
