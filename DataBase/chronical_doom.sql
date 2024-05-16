@@ -7,7 +7,7 @@ CREATE TABLE player (
     creationDate DATE NOT NULL,
     highscore_deck INT UNSIGNED NOT NULL,
     PRIMARY KEY (username)
-);
+) ENGINE=InnoDB, CHARSET=ascii;
 
 CREATE TABLE card (
     cardID TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -18,7 +18,7 @@ CREATE TABLE card (
     health TINYINT UNSIGNED,
     attack TINYINT UNSIGNED,
     PRIMARY KEY (cardID)
-);
+) ENGINE=InnoDB, CHARSET=ascii;
 
 CREATE TABLE deck (
     deckID INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -27,8 +27,9 @@ CREATE TABLE deck (
     owner VARCHAR(20) NOT NULL,
     PRIMARY KEY (deckID),
     FOREIGN KEY (owner) REFERENCES player(username)
-);
+) ENGINE=MyISAM, CHARSET=ascii;
 
+-- This stores the outcome of a full match after the player is done playing.
 CREATE TABLE `match` (
     matchID INT UNSIGNED NOT NULL AUTO_INCREMENT,
     username VARCHAR(20) NOT NULL,
@@ -39,15 +40,16 @@ CREATE TABLE `match` (
     PRIMARY KEY (matchID),
     FOREIGN KEY (username) REFERENCES player(username),
     FOREIGN KEY (deck) REFERENCES deck(deckID)
-);
+) ENGINE=InnoDB, CHARSET=ascii;
 
 CREATE TABLE gameRound (
     roundID TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
     cardID TINYINT UNSIGNED NOT NULL,
     PRIMARY KEY (roundID, cardID),
     FOREIGN KEY (cardID) REFERENCES card(cardID)
-);
+) ENGINE=InnoDB, CHARSET=ascii;
 
+-- This stores the state of the game for each player.
 CREATE TABLE game (
     gameID INT UNSIGNED NOT NULL AUTO_INCREMENT,
     username VARCHAR(20) NOT NULL,
@@ -58,7 +60,7 @@ CREATE TABLE game (
     PRIMARY KEY (gameID),
     FOREIGN KEY (username) REFERENCES player(username),
     FOREIGN KEY (gameRound) REFERENCES gameRound(roundID)
-);
+) ENGINE=MyISAM, CHARSET=ascii;
 
 CREATE TABLE deckCard (
     deckID INT UNSIGNED NOT NULL,
@@ -66,4 +68,4 @@ CREATE TABLE deckCard (
     PRIMARY KEY (deckID, cardID),
     FOREIGN KEY (deckID) REFERENCES deck(deckID),
     FOREIGN KEY (cardID) REFERENCES card(cardID)
-);
+) ENGINE=InnoDB, CHARSET=ascii;
