@@ -21,7 +21,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);    
         }
     }
-
+    public void SortDeck()
+    {
+        playersDeck.Sort();
+    }
     public void ShuffleDeck()
     {
         System.Random rng = new System.Random();

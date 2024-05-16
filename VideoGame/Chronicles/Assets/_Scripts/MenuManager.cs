@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
+
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject cardInfo;
@@ -24,7 +26,7 @@ public class MenuManager : MonoBehaviour
     private bool transitioning = false;
     private float transitionTimer = 0.0f;
     private float targetXPosition;
-
+    public List<GameObject> displayCards = new List<GameObject>();
     private void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
@@ -81,7 +83,9 @@ public class MenuManager : MonoBehaviour
         foreach (CardCreator card in gameManager.cards)
         {
             GameObject newCard = Instantiate(cardPrefab, cardArea);
-            CardProperties cardProperties = newCard.GetComponent<CardProperties>();
+            displayCards.Add(newCard);
+            CardProperties cardProperties = newCard.GetComponentInChildren<CardProperties>();
+            cardProperties.inclusiveType = true;
             cardProperties.card = card;
             newCard.name = card.name;
         }
@@ -101,9 +105,10 @@ public class MenuManager : MonoBehaviour
                 Image cardImage = cardInfo.transform.Find("CardImage").GetComponent<Image>();
                 cardImage.sprite = selectedCard.artwork;
             }
-            if(mood)
+            Debug.Log("tap = " + cardProperties.withMask);
+            if(mood && !cardProperties.withMask)
             {
-                isSelected(selectedCard.ID);
+                CardInstruction(selectedCard.ID, cardProperties.inclusiveType);
             }
             else if(!mood)
             {
@@ -113,34 +118,24 @@ public class MenuManager : MonoBehaviour
         }
         return false;
     }
-    private void isSelected(int index)
+    private void CardInstruction(int index, bool isInclusive)
     {
-        if (gameManager.playersDeck.Contains(index))
+        if (!isInclusive)
         {
-            RemoveCard();
+            if (ListContains(gameManager.playersDeck, index, 1))
+            {
+                gameManager.playersDeck.Remove(index);
+                UpdateDeck();
+            }
         }
         else
         {
-            AddCard();
+            if (!ListContains(gameManager.playersDeck, index, 3))
+            {
+                gameManager.playersDeck.Add(index);
+                UpdateDeck();
+            }
         }
-    }
-    public void AddCard()
-    {
-        if (!gameManager.playersDeck.Contains(selectedCard.ID))
-        {
-            gameManager.playersDeck.Add(selectedCard.ID);
-            UpdateDeck();
-        }
-        ShowInfo(false);
-    }
-    public void RemoveCard()
-    {
-        if (gameManager.playersDeck.Contains(selectedCard.ID))
-        {
-            gameManager.playersDeck.Remove(selectedCard.ID);
-            UpdateDeck();
-        }
-        ShowInfo(false);
     }
     public void UpdateDeck()
     {
@@ -148,13 +143,29 @@ public class MenuManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-
+        foreach(GameObject card in displayCards)
+        {
+            CardProperties cardProperties = card.GetComponentInChildren<CardProperties>();
+            GameObject mask = card.transform.Find("cardSelectedMask").gameObject;
+            if(ListContains(gameManager.playersDeck, cardProperties.card.ID, 3))
+            {
+                cardProperties.withMask = true;
+                mask.SetActive(true);
+            }
+            else
+            {
+                cardProperties.withMask = false;
+                mask.SetActive(false);
+            }
+        }
+        gameManager.SortDeck();
         for (int i = 0; i < 18; i++)
         {
             GameObject collectionCard = Instantiate(cardPrefab, deckArea);
             if (i < gameManager.playersDeck.Count && gameManager.playersDeck[i] >= 0 && gameManager.playersDeck[i] < gameManager.cards.Count && gameManager.cards[gameManager.playersDeck[i]] != null)
             {
-                CardProperties cardProperties = collectionCard.GetComponent<CardProperties>();
+                CardProperties cardProperties = collectionCard.GetComponentInChildren<CardProperties>();
+                cardProperties.inclusiveType = false;
                 cardProperties.card= gameManager.cards[gameManager.playersDeck[i]];
                 collectionCard.name= cardProperties.card.name;
             }
@@ -186,6 +197,11 @@ public class MenuManager : MonoBehaviour
             collectionButton.interactable = (menuPosition != -20);
             highScoreButton.interactable = (menuPosition != 20);
         }
+    }
+    bool ListContains(List<int> integerList, int searchingNumber, int timesToFind)
+    {
+        var query = integerList.Where(x => x == searchingNumber);
+        return query.Count() >= timesToFind;
     }
     public void PlayScene()
     {
