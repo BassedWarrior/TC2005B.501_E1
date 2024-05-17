@@ -1,0 +1,5 @@
+# Installed node module files. Not necessary for remote
+node_modules
+
+# Environment variables file for MySQL connection.
+.env
