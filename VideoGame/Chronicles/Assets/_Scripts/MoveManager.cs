@@ -11,6 +11,9 @@ public class MoveManager : MonoBehaviour
     private Vector3 mousePosition;
     private CardPropertiesDrag currentCard;
     public bool isDragging;
+    [SerializeField] private GameObject cardInfo;
+    private bool openInfo;
+    private CardCreator selectedCard;
     private void Start()
     {
         mainCamera = Camera.main;
@@ -52,5 +55,26 @@ public class MoveManager : MonoBehaviour
             currentCard.transform.localScale = new Vector3(1.43f, 2f, 0);
             currentCard.transform.position = new Vector3(worldPosition.x, worldPosition.y, currentCard.transform.position.z);
         }
+        if(Input.GetMouseButtonDown(1))
+        {
+            hitInfo = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Input.mousePosition));
+            if (hitInfo.collider != null && hitInfo.collider.CompareTag("Card") && !openInfo)
+            {
+                CardPropertiesDrag cardProperties = hitInfo.collider.GetComponent<CardPropertiesDrag>();
+                if (cardProperties != null)
+                {
+                    selectedCard= cardProperties.card;
+                    cardProperties.AssignInfo();
+            
+                    Image cardImage = cardInfo.transform.Find("CardImage").GetComponent<Image>();
+                    cardImage.sprite = selectedCard.artwork;
+                    ShowInfo(true);
+                }
+            }
+        }
+    }
+    public void ShowInfo(bool show)
+    {
+        cardInfo.SetActive(show);
     }
 }
