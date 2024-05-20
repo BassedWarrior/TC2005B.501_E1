@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public List<CardCreator> cards;
     public List<int> playersDeck = new List<int>();
     public List<int> playersHand = new List<int>();
+
     private void Awake()
     {
         if (Instance == null)
@@ -32,10 +33,10 @@ public class GameManager : MonoBehaviour
         while (n > 1)
         {
             n--;
-            int porto = rng.Next(n + 1);
-            int value = playersDeck[porto];
-            playersDeck[porto] = playersDeck[n];
-            playersDeck[n] = value;
+            int range = rng.Next(n + 1);
+            int assess = playersDeck[range];
+            playersDeck[range] = playersDeck[n];
+            playersDeck[n] = assess;
         }
     }
 }

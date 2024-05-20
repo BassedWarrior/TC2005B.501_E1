@@ -4,9 +4,11 @@
 
 ---
 
-##### **Copyright notice / author information / boring legal stuff nobody likes**
+##### **Copyright Notice / Author Information / Legal Stuff**
+- Creation Date: [Apr 10, 2024]
+- Developer(s): *Eduardo Porto Morales, Fausto Jiménez de la Cuesta Vallejo, Hector Julian Zarate Ramirez.*
+- Institution: *Tecnológico de Monterrey CSF*
 
-##
 ## _Index_
 
 ---
@@ -78,6 +80,13 @@ The player's available __Khronos__ gradually increases as the rounds progress, a
 The player will feel overwhelmed by the attrition the constant waves imply for their limited amount of resources. They should be nervous and this will be achieved by making their units frail and outnumbered by the enemies, which will be a challenging experience for them to solve.
 We could consider adding different progression elements such as unlocking new cards or abilities to maintain long-term engagement and reward player progress.
 
+## **Games we have based on (Inspiration)**
+
+- Plants Vs Zombies
+- Kingdom Rush
+- Legends of Runeterra
+- Marvel Snap
+
 ## _Technical_
 
 ---
@@ -105,17 +114,44 @@ We could consider adding different progression elements such as unlocking new ca
 
 ### **Mechanics**
 
-1. **Quantum-Tunnel Manipulation:**
-* Implementation: Utilize algorithms to simulate the Quantum-Tunnel's manipulation mechanics. This involves allowing players to move and position units and spells across different timelines on the battlefield.
+#### Pre-Game (Main Menu)
 
-2. **Unit Positioning and Combat:**
-* Implementation: Implement algorithms to determine unit positioning and combat outcomes based on unit stats and positioning on the battlefield. This involves calculating attack and defense values, as well as resolving combat interactions between units.
+1. Upon launching the game, players are welcome by the main menu. This is the central hub from where all game functions can be accesssed.
+2. The main menu includes options such as Start Game, Deck Collection, High Scores, Settings, Exit. Each option is designed to navigate easily to its respective section.
 
-3. **Card Deployment and Spell Casting:**
-* Implementation: Develop a system that allows players to deploy cards onto the battlefield by clicking and dragging them to the desired position. For spell casting, implement a similar system where players can activate Paradox Cards by selecting them from their hand and targeting the desired location or unit on the battlefield.
+#### Accesing Deck Collection Menu
 
-4. **Resource Management:**
-* Implementation: Create a resource management system that tracks players' Khronos and ensures that they have enough resources to deploy cards and activate spells each turn. This involves implementing algorithms to calculate resource generation and expenditure based on player actions and game state.
+1. From the main menu, players can select the Deck Collection option. This brings them to the deck collection view where they can see all available cards.
+2. In the deck collection view, players are provided with a user-friendly interface displaying all available cards that can be used in the game.
+3. Cards can be filtered and sorted by some criteria such as type, cost, power, and special abilities to help players find the cards they need.
+4. Players can create their deck by selecting cards and adding them to their deck.
+5. Each deck must adhere to certain rules, such as a maximum number of cards repeated or specific requirements for card types (max deck length is 18 cards).
+6. Players are ready to play!, once satisfied with their complete 18 cards deck, players can hit the Play button in the Main Menu.
+
+#### Game Starts (Main Game)
+
+1. The player is dealt 5 cards, and can must then click on the cards they want to keep.
+2. The cards the player didn't click are shuffled back into the deck.
+3. The player is dealt the same number of cards he reshuffled into the deck so the player has a 5 card hand to start the game.
+
+#### Turn Order (Game Loop)
+
+1. Units remaining in the field can activate upgrades or passive abilities that provide strategic advantages or improve stats for future turns. 
+2. If there are cards in the deck, the player draws a card.
+3. The player receives a fixed amount of Khronos, which can be adjusted as the rounds progress or by special effects of the cards.
+4. The CPU adds new units as reinforcements for the upcoming clash, increasing the difficulty each round.
+5. The template of enemies that will appear this turn is shown and placed, allowing the player to plan their strategy.
+6. If there are surviving units in game, the player can choose to relocate them to adjacent positions within the Time-Lines or the Quantum-Tunnel to prepare for the upcoming clash.
+7. The player chooses cards from their hand that they want to play, considering the Khronos cost of each. If the player decides to use a Paradox Card, they can activate it at this time to affect the battlefield or alter game conditions. (Players also have the strategic option to not play any cards from their hand during their turn).
+8. The player manipulates the Quantum-Tunnel to position units and Paradox Card on the Time-Lines. Here, the initial strategic layout is decided before the battle.
+(If the player currently has no units in play or choose not to make any changes during this phase, this part of the turn is skipped).
+9. The player places his units consistently in the Timelines (hoping that it will be together with the opponents), respecting the limit of 3 units per Timeline while waiting for the defense, in order not to take accumulated damage points from the enemy.
+
+#### Clash Time 
+1. Each unit on the battlefield faces its corresponding enemy on the timeline. Combats are resolved based on the unit's stats and abilities.
+2. The outcomes of each encounter are calculated, and surviving units remain or are removed from the field based on the results and player's decisions.
+3. The performance of the turn is evaluated based on defeated units, control of the Time-Lines, and other game objectives.
+4. The game updates resources and prepares the stage for the next turn.
 
 ### **List of Assets**
 
@@ -140,7 +176,10 @@ We could consider adding different progression elements such as unlocking new ca
         - Main menu: player can choose to customize deck or play with existing deck.
         - Deck building menu: player can choose cards to add or remove from his deck from his collection.
         - Highscore: player can see his high score and the deck they got it with.
+
 2. **Sound Assets**
+* The soundtrack and sound effects should take inspiration from 1930s jazz, big band, and ragtime music, mirroring the vintage animation style. This creates a coherent and engaging audio-visual experience that transports players back in time while maintaining a playful tone.
+
     - Sound Effects: Sounds for actions like hits, healing, explosions, item collection, card drawin etc.
         - Card clash: when cards clash in a time-line.
         - Wave start: right as the wave is about to begin.
@@ -152,6 +191,7 @@ We could consider adding different progression elements such as unlocking new ca
     - Background Music: Music tracks for the game and menus.
         - Menu music: music before the game starts.
         - Gameplay music: music while the game is going on.
+
 3. **Script**
     - Game Scripts: Code that controls game mechanics, such as card movements, combat interactions, and UI logic.
         - GameController: in charge of game logic and management.
@@ -165,22 +205,13 @@ We could consider adding different progression elements such as unlocking new ca
 
 ---
 
-### **Themes**
+### **Turn-Wave Gameplay**
 
-1. *Place Name*
-    1. Mood
-        1. *Mood*
-    2. Objects
-        1. _Ambient_
-            1. *Ambient*
-        2. _Interactive_
-            1. *Interactive*
-
-_(example)_
-
-### **Game Flow**
-
-
+* Infinite Loop Structure:
+    * Players engage in continuous cycles or 'waves' of gameplay that persist until the player's defeat. Each wave consists of a series of turns where players make strategic decisions based on their available resources and cards.
+    * The objective of each wave is to outlast or defeat the enemies encountered, with difficulty escalating in each subsequent wave.
+    * Scoring: Points are awarded based on the number of waves completed, the complexity of the moves used, and bonuses for special achievements making a continuous chhallenge, the main drive for player engagement is to surpass their previous best scores, pushing the limits of their strategic capabilities with each attempt.
+    * Global Ranking: Player's scores are automatically uploaded to a global leaderboard, where they can compare their performance against others. This fosters a competitive environment and encourages players to refine their strategies to climb the rankings.
 
 ## _Development_
 
@@ -209,13 +240,19 @@ _(example)_
 
 ---
 
-### **Style Attributes**
+### **Visual Style**
+The visual style for our game will be heavily inspired by the game named "Cuphead." Capturing the essence of the golden age of American animation, mirroring the distinctive artistic flair of the 1920s and 1930s, our game's graphics are designed to evoke the styles of Fleischer Studios and early Walt Disney animations, known for their subversive and surreal qualities.
 
-What kinds of colors will you be using? Do you have a limited palette to work with? A post-processed HSV map/image? Consistency is key for immersion.
+By taking this artistic style, we sought to create a game that is visually striking in its artistic difference, providing players with a visually appealing and engaging experience.
 
-What kind of graphic style are you going for? Cartoony? Pixel-y? Cute? How, specifically? Solid, thick outlines with flat hues? Non-black outlines with limited tints/shades? Emphasize smooth curvatures over sharp angles? Describe a set of general rules depicting your style here.
+### **Color Palette**
+Our game will use a limited color palette inspired by the early color film processes, such as Technicolor, which is characteristic of the 1930s animation style. 
+This palette will feature primarily primary and secondary colors with high saturation to evoke the vibrant, expressive tones typical of that era.
 
-Well-designed feedback, both good (e.g. leveling up) and bad (e.g. being hit), are great for teaching the player how to play through trial and error, instead of scripting a lengthy tutorial. What kind of visual feedback are you going to use to let the player know they&#39;re interacting with something? That they \*can\* interact with something?
+### **Interactive Feedback**
+We will want to make an immersive game, so we must take care of details, such as Positive and Negative Feedback. 
+About the cues, interactive objects will glow when players interact with them. This will help in guiding the player through the environment and suggesting possible actions. 
+In terms of combat and animations, we will add a visual reference that allows the user to know what is happening on the playing field by means of drawings in "Cuphead" inspired style that do not disturb the screen to create immersion.
 
 ### **Graphics Needed**
 
