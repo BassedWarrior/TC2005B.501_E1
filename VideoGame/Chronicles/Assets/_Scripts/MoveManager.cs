@@ -14,6 +14,7 @@ public class MoveManager : MonoBehaviour
     [SerializeField] private GameObject cardInfo;
     private bool openInfo;
     private CardCreator selectedCard;
+    private bool canDrag;
     private void Start()
     {
         mainCamera = Camera.main;
@@ -27,7 +28,7 @@ public class MoveManager : MonoBehaviour
             ShowInfo(false);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && canDrag)
         {
             hitInfo = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Input.mousePosition));
             if (hitInfo.collider != null && hitInfo.collider.CompareTag("Card"))
@@ -83,5 +84,6 @@ public class MoveManager : MonoBehaviour
     public void ShowInfo(bool show)
     {
         cardInfo.SetActive(show);
+        canDrag = !show;
     }
 }
