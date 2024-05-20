@@ -21,6 +21,12 @@ public class MoveManager : MonoBehaviour
 
     private void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ShowInfo(false);
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             hitInfo = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Input.mousePosition));
@@ -33,25 +39,26 @@ public class MoveManager : MonoBehaviour
                 }
                 isDragging = true;
                 currentCard.isDrag = true;
-                currentCard.spriteRenderer.sortingLayerName = "Top";
+                currentCard.spriteRenderer.sortingLayerName = "ForegroundCanvas";
             }
         }
         else if (Input.GetMouseButtonUp(0) && currentCard != null && currentCard.isDrag)
         {
+            
             isDragging = false;
             currentCard.isDrag = false;
             if (currentCard.actualParent != null) 
             {
                 currentCard.transform.SetParent(currentCard.actualParent); 
             }
-            currentCard.spriteRenderer.sortingLayerName = "Default";
+            currentCard.spriteRenderer.sortingLayerName = "GameObjects";
         }
         else if (currentCard != null && currentCard.isDrag)
         {
             mousePosition = Input.mousePosition;
             mousePosition.z = -mainCamera.transform.position.z;
             Vector3 worldPosition = mainCamera.ScreenToWorldPoint(mousePosition);
-            currentCard.spriteRenderer.sortingLayerName = "Top";
+            currentCard.spriteRenderer.sortingLayerName = "ForegroundCanvas";
             currentCard.transform.localScale = new Vector3(1.43f, 2f, 0);
             currentCard.transform.position = new Vector3(worldPosition.x, worldPosition.y, currentCard.transform.position.z);
         }

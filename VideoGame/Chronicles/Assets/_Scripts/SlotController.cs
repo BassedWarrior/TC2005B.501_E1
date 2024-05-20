@@ -64,7 +64,6 @@ public class SlotController : MonoBehaviour
     {
         if (other.CompareTag("Card") && lastChildCount < maxElements)
         {
-            Debug.Log("entro");
             CardPropertiesDrag card = other.GetComponent<CardPropertiesDrag>();
             if (card != null && card.isDrag)
             {
