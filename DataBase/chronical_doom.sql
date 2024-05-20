@@ -39,7 +39,8 @@ CREATE TABLE `match` (
     score SMALLINT UNSIGNED NOT NULL,
     PRIMARY KEY (matchID),
     FOREIGN KEY (username) REFERENCES player(username),
-    FOREIGN KEY (deck) REFERENCES deck(deckID)
+    FOREIGN KEY (deck) REFERENCES deck(deckID),
+    KEY (score)
 ) ENGINE=InnoDB, CHARSET=ascii;
 
 CREATE TABLE gameRound (
@@ -60,6 +61,7 @@ CREATE TABLE game (
     PRIMARY KEY (gameID),
     FOREIGN KEY (username) REFERENCES player(username),
     FOREIGN KEY (gameRound) REFERENCES gameRound(roundID)
+    KEY (score)
 ) ENGINE=InnoDB, CHARSET=ascii;
 
 CREATE TABLE deckCard (
