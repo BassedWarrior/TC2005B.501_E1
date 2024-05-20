@@ -14,7 +14,7 @@ public class MoveManager : MonoBehaviour
     [SerializeField] private GameObject cardInfo;
     private bool openInfo;
     private CardCreator selectedCard;
-    private bool canDrag;
+    private bool canDrag= true;
     private void Start()
     {
         mainCamera = Camera.main;
