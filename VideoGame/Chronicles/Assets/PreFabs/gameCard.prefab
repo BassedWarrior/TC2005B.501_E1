@@ -513,8 +513,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2075598963
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -611,7 +611,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810a90503e871445ba8f43e03cbd1103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDrag: 0
   originalParent: {fileID: 0}
   actualParent: {fileID: 0}
   spriteRenderer: {fileID: 4241455586203520042}
@@ -623,6 +622,7 @@ MonoBehaviour:
   healthText: {fileID: 54667676348290920, guid: 1b45236078bac4acb99c4b3cfe29dd0e, type: 3}
   attackText: {fileID: 5645215966177327957, guid: 1b45236078bac4acb99c4b3cfe29dd0e, type: 3}
   cardIndex: 0
+  isDrag: 0
 --- !u!1 &4224428684730262826
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,16 +13,3 @@ public class CardCreator : ScriptableObject
     public int health;
     public int attack;
 }
-/*
-public class UserCard : MonoBehaviour
-{
-    public CardCreator card;
-
-    private void Start()
-    {
-        Debug.Log($"Int value: {card.intValue}");
-        Debug.Log($"Float value: {card.floatValue}");
-        Debug.Log($"String value: {card.stringValue}");
-    }
-}
-*/

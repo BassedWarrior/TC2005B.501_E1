@@ -475,7 +475,8 @@ MonoBehaviour:
   energyText: {fileID: 3608654776058202746}
   healthText: {fileID: 1725203597440128506}
   attackText: {fileID: 2874387302756031742}
-  cardIndex: 0
+  withMask: 0
+  inclusiveType: 0
 --- !u!1 &6651310218779721420
 GameObject:
   m_ObjectHideFlags: 0

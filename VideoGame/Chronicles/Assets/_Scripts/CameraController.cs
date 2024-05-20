@@ -1,5 +1,8 @@
+//INUTIL COMO JULIAN
+
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
@@ -73,5 +76,9 @@ public class CameraController : MonoBehaviour
             transitionTimer = 0.0f;
             transitioning = true;
         }
+    }
+    public void PlayScene()
+    {
+        SceneManager.LoadScene("GameScene");
     }
 }

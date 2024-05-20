@@ -41,12 +41,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 1109454569
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Top
-    uniqueID: 2726504413
+  - name: BackgroundCanvas
+    uniqueID: 3249059757
+    locked: 0
+  - name: GameObjects
+    uniqueID: 2219368333
+    locked: 0
+  - name: ForegroundCanvas
+    uniqueID: 2549259397
     locked: 0

@@ -11,7 +11,8 @@ public class CardProperties : MonoBehaviour
     public TextMeshProUGUI energyText;
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI attackText;
-    public int cardIndex;
+    public bool withMask = false;
+    public bool inclusiveType;
 
     void Start()
     {

@@ -9,14 +9,16 @@ public class HandManager : MonoBehaviour
     private GameManager gameManager;
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private Transform cardArea;
-
     [SerializeField] private List<GameObject> buttons;
     [SerializeField] private GameObject initialScene;
     private int selectiveCards;
     private List<int> selectedCards = new List<int>();
+    private List<bool> activeButtons = new List<bool>();
+
     void Start()        
     {
         selectiveCards= buttons.Count;
+        Debug.Log("Selective Cards: " + selectiveCards);
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         gameManager.ShuffleDeck();
         Debug.Log("Deck shuffled");
@@ -36,22 +38,25 @@ public class HandManager : MonoBehaviour
                 buttonImage.sprite = card.artwork;
                 int index= i;
                 buttonObj.GetComponent<Button>().onClick.AddListener(() => ToggleSelection(card.ID, index));
+                activeButtons.Add(true);
             }
         }
     }
 
     private void ToggleSelection(int ID, int buttonIndex)
     {
-        if (selectedCards.Contains(ID))
+        if (!activeButtons[buttonIndex])
         {
             selectedCards.Remove(ID);
-            buttons[buttonIndex].GetComponent<Image>().color = Color.white; 
+            buttons[buttonIndex].GetComponent<Image>().color = Color.white;
+            activeButtons[buttonIndex] = true;
         }
         else
         {
             selectedCards.Add(ID);
             buttons[buttonIndex].GetComponent<Image>().color = Color.green; 
             Debug.Log("Selected Cards: " + string.Join(", ", selectedCards));
+            activeButtons[buttonIndex] = false;
         }
     }
 
@@ -79,9 +84,21 @@ public class HandManager : MonoBehaviour
         }
         if( gameManager.playersHand.Count < 5)
         {
-            for(int i=0;  i<(5- gameManager.playersHand.Count); i++)
+            Debug.Log("Cartas Ahora: " + gameManager.playersHand.Count);
+            Debug.Log("Cartas Faltantes: " + (5- gameManager.playersHand.Count));
+            int faltantes= (5-gameManager.playersHand.Count);
+            for(int i=0;  i<faltantes; i++)
             {
                 GameObject newCard = Instantiate(cardPrefab, cardArea);
+                CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
+                if(cardProperties != null)
+                {
+                    int card= gameManager.playersDeck[i];
+                    cardProperties.card= gameManager.cards[card];
+                    cardProperties.AssignInfo();
+                    gameManager.playersHand.Add(card);
+                    gameManager.playersDeck.Remove(card);
+                }
             }
         }
     }
