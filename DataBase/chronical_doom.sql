@@ -60,7 +60,7 @@ CREATE TABLE game (
     deckCards TINYINT UNSIGNED NOT NULL,
     PRIMARY KEY (gameID),
     FOREIGN KEY (username) REFERENCES player(username),
-    FOREIGN KEY (gameRound) REFERENCES gameRound(roundID)
+    FOREIGN KEY (gameRound) REFERENCES gameRound(roundID),
     KEY (score)
 ) ENGINE=InnoDB, CHARSET=ascii;
 
