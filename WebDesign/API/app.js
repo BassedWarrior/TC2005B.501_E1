@@ -31,8 +31,10 @@ app.get("/cards", async (request, response) => {
     const [results, fields] = await connection.execute("select * from card");
 
     console.log(`${results.length} rows returned`);
-    console.log(results);
-    response.status(200).json(results);
+
+    const result = {cards: results};
+    console.log(result);
+    response.status(200).json(result);
   }
   catch (error) {
     response.status(500);
@@ -60,8 +62,9 @@ app.get("/cards/unit", async (request, response) => {
         const [results, fields] = await connection.execute("SELECT * FROM unitCards");
 
         console.log(`${results.length} rows returned`);
-        console.log(results);
-        response.status(200).json(results);
+        const result = {cards: results};
+        console.log(result);
+        response.status(200).json(result);
     }
     catch (error) {
         console.log(error);
@@ -83,8 +86,9 @@ app.get("/cards/paradox", async (request, response) => {
         const [results, fields] = await connection.execute("SELECT * FROM paradoxCards");
 
         console.log(`${results.length} rows returned`);
-        console.log(results);
-        response.status(200).json(results);
+        const result = {cards: results};
+        console.log(result);
+        response.status(200).json(result);
     }
     catch (error) {
         console.log(error);
