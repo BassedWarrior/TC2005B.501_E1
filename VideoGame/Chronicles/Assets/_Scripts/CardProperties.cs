@@ -12,6 +12,10 @@ public class CardProperties : MonoBehaviour
     public bool withMask = false;
     public bool inclusiveType;
 
+    private void Start()
+    {
+        AssignInfo();
+    }
     public void AssignInfo()
     {
         if (card != null)

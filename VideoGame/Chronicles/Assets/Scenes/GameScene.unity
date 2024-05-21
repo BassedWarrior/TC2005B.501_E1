@@ -1041,15 +1041,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 1964758972243524456, guid: fce39acabe63940999622ff84c1791a5, type: 3}
-  selectiveArea: {fileID: 0}
-  selectiveCard: {fileID: 0}
+  selectiveArea: {fileID: 224687862}
+  selectiveCard: {fileID: 422892443690164501, guid: f3d762b884b3a441e9002959f2008695, type: 3}
   cardArea: {fileID: 1392738259}
-  buttons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  buttons: []
   initialScene: {fileID: 283939761}
 --- !u!1 &519420028
 GameObject:
