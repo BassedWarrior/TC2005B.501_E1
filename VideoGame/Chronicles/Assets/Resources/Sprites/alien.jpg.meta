@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 6897861c1b344bb4ca2e6579d8e8adbd
+<<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/alien.jpg.meta
+guid: 5e651de5d234a1d4b93a13876d487460
+=======
+guid: 449e4663c7af645fbb0f8993d0a9c928
+>>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/alien.jpg.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,6 +97,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/alien.jpg.meta
   - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
@@ -106,6 +111,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+=======
+>>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/alien.jpg.meta
   spriteSheet:
     serializedVersion: 2
     sprites: []

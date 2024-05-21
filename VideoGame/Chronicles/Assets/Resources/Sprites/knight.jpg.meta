@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 5e651de5d234a1d4b93a13876d487460
+<<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/knight.jpg.meta
+guid: 6b28b82f0a6f0c347b5f21186237a16a
+=======
+guid: f9561036f6787404f943a5fb60921b0d
+>>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/knight.jpg.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,6 +97,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/knight.jpg.meta
   - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
@@ -106,6 +111,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+=======
+>>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/knight.jpg.meta
   spriteSheet:
     serializedVersion: 2
     sprites: []

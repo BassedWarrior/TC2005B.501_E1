@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 194b3016e28b9d7499e83c60bc146d44
+<<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/futureRobot.jpg.meta
+guid: 73ae3684e64f29640bf2d66bae13ab5a
+=======
+guid: af94fbeb24d56416ba662ad2364fee47
+>>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/futureRobot.jpg.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,6 +97,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/futureRobot.jpg.meta
   - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
@@ -106,6 +111,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+=======
+>>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/futureRobot.jpg.meta
   spriteSheet:
     serializedVersion: 2
     sprites: []

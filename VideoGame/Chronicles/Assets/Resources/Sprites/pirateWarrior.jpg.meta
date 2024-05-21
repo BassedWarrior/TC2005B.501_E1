@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2021afa1ce8be6e419c1116b572faa4b
+guid: a3031cf512748dc41b1b74971cdaf563
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,6 +93,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/pirateWarrior.jpg.meta
   - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
@@ -106,6 +107,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+=======
+>>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/pirateWarrior.jpg.meta
   spriteSheet:
     serializedVersion: 2
     sprites: []

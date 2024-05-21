@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0acb0143830e687448e17744f279ac5e
+guid: a64fb66a9099ea041b703c51634ce74c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,6 +93,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/hunoWarrior.jpg.meta
   - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
@@ -106,6 +107,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+=======
+>>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/hunoWarrior.jpg.meta
   spriteSheet:
     serializedVersion: 2
     sprites: []

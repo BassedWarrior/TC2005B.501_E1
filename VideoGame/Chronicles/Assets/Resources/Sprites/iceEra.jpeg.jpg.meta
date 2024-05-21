@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 14f4509a6a3d943438ee26479223f8b3
+<<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/iceEra.jpeg.jpg.meta
+guid: 194b3016e28b9d7499e83c60bc146d44
+=======
+guid: a118505baab60490dbbdf0f451a57723
+>>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/iceEra.jpeg.jpg.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,6 +97,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/iceEra.jpeg.jpg.meta
   - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
@@ -106,6 +111,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+=======
+>>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/iceEra.jpeg.jpg.meta
   spriteSheet:
     serializedVersion: 2
     sprites: []

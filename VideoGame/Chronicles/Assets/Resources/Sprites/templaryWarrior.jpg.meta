@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d7f3a3a76b19b1f4590154d4106604d8
+guid: 08d098d50fd4f8e45a55ee5d081970ef
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,6 +93,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/templaryWarrior.jpg.meta
   - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
@@ -106,6 +107,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+=======
+>>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/templaryWarrior.jpg.meta
   spriteSheet:
     serializedVersion: 2
     sprites: []

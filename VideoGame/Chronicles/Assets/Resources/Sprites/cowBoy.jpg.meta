@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 6b28b82f0a6f0c347b5f21186237a16a
+<<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/cowBoy.jpg.meta
+guid: 2f90cedddcb7ac04d9ba55d503a4b1d3
+=======
+guid: e6972593033f248adb637f9850eaa218
+>>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/cowBoy.jpg.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,6 +97,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/cowBoy.jpg.meta
   - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
@@ -106,6 +111,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+=======
+>>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/cowBoy.jpg.meta
   spriteSheet:
     serializedVersion: 2
     sprites: []

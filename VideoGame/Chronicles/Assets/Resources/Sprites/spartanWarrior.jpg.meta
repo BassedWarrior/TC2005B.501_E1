@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: eb3754becca1bce4e9c404cca1359f08
+guid: f186794d502a3e0499052664c48b4e38
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,6 +93,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/spartanWarrior.jpg.meta
   - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
@@ -106,6 +107,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+=======
+>>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/spartanWarrior.jpg.meta
   spriteSheet:
     serializedVersion: 2
     sprites: []
