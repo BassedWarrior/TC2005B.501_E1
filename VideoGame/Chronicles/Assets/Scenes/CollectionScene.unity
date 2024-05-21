@@ -6211,6 +6211,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardInfo: {fileID: 633668378}
+  cardImage: {fileID: 578962853}
+  cardName: {fileID: 1014513693}
+  cardDescription: {fileID: 1962306532}
+  cardCost: {fileID: 1331559359}
+  cardAttack: {fileID: 1110688772}
+  cardHealth: {fileID: 2081936883}
   cardPrefab: {fileID: 2198373641538602859, guid: 379d66e636ac7458f98ebac5f442d10a, type: 3}
   dommyCard: {fileID: 2198373641538602859, guid: 778f9d5b6585b4817a1b5ee26e53de03, type: 3}
   cardArea: {fileID: 1109464461}
