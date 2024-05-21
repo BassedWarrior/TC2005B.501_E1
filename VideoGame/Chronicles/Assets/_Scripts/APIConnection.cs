@@ -1,10 +1,3 @@
-/*
-Make requests to an API to get the data for the game
-
-Gilberto Echeverria
-2024-05-14
-*/
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +7,9 @@ public class APIConnection : MonoBehaviour
 {
     [SerializeField] string url;
     [SerializeField] string getEndpoint;
+    [SerializeField] string getCardsEndpoint;
+    [SerializeField] string getUnitCardsEndpoint;
+    [SerializeField] string getParadoxCardsEndpoint;
 
     // TODO: Add game controller
     // controller;
@@ -25,9 +21,19 @@ public class APIConnection : MonoBehaviour
         // controller = ;
     }
 
-    public void GetData()
+    public void GetCards()
     {
-        StartCoroutine(RequestGet(url + getEndpoint));
+        StartCoroutine(RequestGet(url + getCardsEndpoint));
+    }
+
+    public void GetUnitCards()
+    {
+        StartCoroutine(RequestGet(url + getUnitCardsEndpoint));
+    }
+
+    public void GetParadoxCards()
+    {
+        StartCoroutine(RequestGet(url + getParadoxCardsEndpoint));
     }
 
     IEnumerator RequestGet(string url)
