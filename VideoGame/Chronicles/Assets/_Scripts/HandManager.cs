@@ -102,4 +102,18 @@ public class HandManager : MonoBehaviour
             }
         }
     }
+
+    public void DrawCard()
+    {
+        if(gameManager.playersDeck.Count > 0)
+        {
+            int card= gameManager.playersDeck[0];
+            gameManager.playersHand.Add(card);
+            gameManager.playersDeck.Remove(card);
+            GameObject newCard = Instantiate(cardPrefab, cardArea);
+            CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
+            cardProperties.card= gameManager.cards[card];
+            cardProperties.AssignInfo();
+        }
+    }
 }

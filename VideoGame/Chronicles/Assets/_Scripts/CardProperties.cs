@@ -5,8 +5,6 @@ using TMPro;
 public class CardProperties : MonoBehaviour
 {
     public CardCreator card;
-    public TextMeshProUGUI nameText;
-    public TextMeshProUGUI descriptionText;
     public Image artworkImage;
     public TextMeshProUGUI energyText;
     public TextMeshProUGUI healthText;
@@ -22,8 +20,6 @@ public class CardProperties : MonoBehaviour
     {
         if (card != null)
         {
-            nameText.text = card.name;
-            descriptionText.text = card.description;
             artworkImage.sprite = card.artwork;
             energyText.text = card.energyCost.ToString();
             healthText.text = card.health.ToString();

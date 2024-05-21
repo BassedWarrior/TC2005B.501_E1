@@ -40,7 +40,7 @@ public class MoveManager : MonoBehaviour
                 }
                 isDragging = true;
                 currentCard.isDrag = true;
-                currentCard.spriteRenderer.sortingLayerName = "ForegroundCanvas";
+                //currentCard.spriteRenderer.sortingLayerName = "ForegroundCanvas";
             }
         }
         else if (Input.GetMouseButtonUp(0) && currentCard != null && currentCard.isDrag)
@@ -52,15 +52,15 @@ public class MoveManager : MonoBehaviour
             {
                 currentCard.transform.SetParent(currentCard.actualParent); 
             }
-            currentCard.spriteRenderer.sortingLayerName = "GameObjects";
+            //currentCard.spriteRenderer.sortingLayerName = "GameObjects";
         }
         else if (currentCard != null && currentCard.isDrag)
         {
             mousePosition = Input.mousePosition;
             mousePosition.z = -mainCamera.transform.position.z;
             Vector3 worldPosition = mainCamera.ScreenToWorldPoint(mousePosition);
-            currentCard.spriteRenderer.sortingLayerName = "ForegroundCanvas";
-            currentCard.transform.localScale = new Vector3(1.43f, 2f, 0);
+            //currentCard.spriteRenderer.sortingLayerName = "ForegroundCanvas";
+            currentCard.transform.localScale = new Vector3(2.2f, 2.2f, 0);
             currentCard.transform.position = new Vector3(worldPosition.x, worldPosition.y, currentCard.transform.position.z);
         }
         if(Input.GetMouseButtonDown(1))
@@ -75,7 +75,7 @@ public class MoveManager : MonoBehaviour
                     cardProperties.AssignInfo();
             
                     Image cardImage = cardInfo.transform.Find("CardImage").GetComponent<Image>();
-                    cardImage.sprite = selectedCard.artwork;
+                    //cardImage.sprite = selectedCard.artwork;
                     ShowInfo(true);
                 }
             }

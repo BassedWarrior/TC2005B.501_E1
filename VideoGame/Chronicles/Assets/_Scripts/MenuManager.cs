@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject cardInfo;
     [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private GameObject dommyCard;
     [SerializeField] private Transform cardArea;
     [SerializeField] private Transform deckArea;
     [SerializeField] private GameObject settings;
@@ -166,16 +167,20 @@ public class MenuManager : MonoBehaviour
         gameManager.SortDeck();
         for (int i = 0; i < 18; i++)
         {
-            GameObject collectionCard = Instantiate(cardPrefab, deckArea);
+            GameObject collectionCard;
+
             if (i < gameManager.playersDeck.Count && gameManager.playersDeck[i] >= 0 && gameManager.playersDeck[i] < gameManager.cards.Count && gameManager.cards[gameManager.playersDeck[i]] != null)
             {
+                collectionCard = Instantiate(cardPrefab, deckArea);
+
                 CardProperties cardProperties = collectionCard.GetComponentInChildren<CardProperties>();
                 cardProperties.inclusiveType = false;
-                cardProperties.card= gameManager.cards[gameManager.playersDeck[i]];
-                collectionCard.name= cardProperties.card.name;
+                cardProperties.card = gameManager.cards[gameManager.playersDeck[i]];
+                collectionCard.name = cardProperties.card.name;
             }
             else
             {
+                collectionCard = Instantiate(dommyCard, deckArea);
                 collectionCard.name = "EmptyCard";
             }
         }
