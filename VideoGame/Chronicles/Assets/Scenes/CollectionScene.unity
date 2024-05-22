@@ -2569,8 +2569,8 @@ RectTransform:
   m_LocalScale: {x: 0.022225337, y: 0.022225337, z: 0.022225337}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 578962852}
   - {fileID: 1352117042}
+  - {fileID: 578962852}
   m_Father: {fileID: 1405095903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3454,7 +3454,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1837483714}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: ShowSettings
+        m_MethodName: ShowInfo
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

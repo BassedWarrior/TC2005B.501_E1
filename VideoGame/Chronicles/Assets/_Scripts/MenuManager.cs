@@ -90,34 +90,39 @@ public class MenuManager : MonoBehaviour
             newCard.name = card.name;
         }
     }
-    private bool ComprobarTouch(bool mood)
+   private void ComprobarTouch(bool status)
+{
+    hit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Input.mousePosition));
+
+    if (hit.collider == null)
     {
-        hit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Input.mousePosition));
-        if (hit.collider != null && hit.collider.CompareTag("Card") && hit.collider.name != "EmptyCard" && !openInfo)
-        {
-            CardProperties cardProperties = hit.collider.GetComponent<CardProperties>();
-            if (cardProperties != null)
-            {
-                selectedCard= cardProperties.card;
-                cardProperties.AssignInfo();
-                //Debug.Log("tap = " + cardProperties.card.name);
-        
-                Image cardImage = cardInfo.transform.Find("CardImage").GetComponent<Image>();
-                cardImage.sprite = selectedCard.artwork;
-            }
-            Debug.Log("tap = " + cardProperties.withMask);
-            if(mood && !cardProperties.withMask)
-            {
-                CardInstruction(selectedCard.ID, cardProperties.inclusiveType);
-            }
-            else if(!mood)
-            {
-                ShowInfo(true);
-            }
-            return true;
-        }
-        return false;
+        return;
     }
+
+    CardProperties cardProperties = hit.collider.GetComponent<CardProperties>();
+
+    if (cardProperties == null || !hit.collider.CompareTag("Card") || hit.collider.transform.parent == null || hit.collider.transform.parent.name == "EmptyCard" || openInfo)
+    {
+        return; 
+    }
+
+    selectedCard = cardProperties.card;
+    cardProperties.AssignInfo();
+    //Debug.Log("tap = " + cardProperties.card.name);
+
+    Image cardImage = cardInfo.transform.Find("CardImage").GetComponent<Image>();
+    cardImage.sprite = selectedCard.artwork;
+
+    if (status && !cardProperties.withMask)
+    {
+        CardInstruction(selectedCard.ID, cardProperties.inclusiveType);
+    }
+    else if (!status)
+    {
+        ShowInfo(true);
+    }
+}
+
     private void CardInstruction(int index, bool isInclusive)
     {
         if (!isInclusive)
