@@ -1594,7 +1594,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1623559380}
         m_TargetAssemblyTypeName: NewBehaviourScript, Assembly-CSharp
-        m_MethodName: ReadUserName
+        m_MethodName: ReadPassword
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1756,7 +1756,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter Username
+  m_text: Enter password
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6a7534cc238aad047b4d8776467405db, type: 2}
   m_sharedMaterial: {fileID: 8617639924015272754, guid: 6a7534cc238aad047b4d8776467405db, type: 2}
@@ -1939,6 +1939,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: 
+  secret: 
+  UserName: []
+  password: []
 --- !u!1 &1747059935
 GameObject:
   m_ObjectHideFlags: 0
