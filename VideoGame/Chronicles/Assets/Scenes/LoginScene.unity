@@ -1756,11 +1756,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-<<<<<<< HEAD:VideoGame/Chronicles/Assets/Scenes/mainMenu.unity
-  m_text: Enter password
-=======
   m_text: Enter Password
->>>>>>> 6305155 (Complete LoginScene):VideoGame/Chronicles/Assets/Scenes/LoginScene.unity
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6a7534cc238aad047b4d8776467405db, type: 2}
   m_sharedMaterial: {fileID: 8617639924015272754, guid: 6a7534cc238aad047b4d8776467405db, type: 2}
