@@ -423,7 +423,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: IronFist
+  m_text: LukeCage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -823,8 +823,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
-    newSize: {x: 1.28, y: 1.28}
+    oldSize: {x: 22.859999, y: 30.479998}
+    newSize: {x: 22.859999, y: 30.479998}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -923,7 +923,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810a90503e871445ba8f43e03cbd1103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDrag: 0
   originalParent: {fileID: 0}
   actualParent: {fileID: 0}
   spriteRenderer: {fileID: 5880689766575349432}
@@ -935,6 +934,7 @@ MonoBehaviour:
   healthText: {fileID: 54667676348290920}
   attackText: {fileID: 5645215966177327957}
   cardIndex: 0
+  isDrag: 0
 --- !u!1 &5889756334493020106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Pu\xF1o Alucinante"
+  m_text: Magnifico Portento
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1134,7 +1134,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 76a970167b9584cb6842c6089fdb582f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 18f3b3fb1ba764f2d8dfa795abcd6692, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
