@@ -12,6 +12,12 @@ public class MoveManager : MonoBehaviour
     private CardPropertiesDrag currentCard;
     public bool isDragging;
     [SerializeField] private GameObject cardInfo;
+    [SerializeField] private Image cardImage;
+    [SerializeField] private TextMeshProUGUI cardName;
+    [SerializeField] private TextMeshProUGUI cardDescription;
+    [SerializeField] private TextMeshProUGUI cardCost;
+    [SerializeField] private TextMeshProUGUI cardAttack;
+    [SerializeField] private TextMeshProUGUI cardHealth;
     private bool openInfo;
     private CardCreator selectedCard;
     private bool canDrag= true;
@@ -28,7 +34,7 @@ public class MoveManager : MonoBehaviour
             ShowInfo(false);
         }
 
-        if (Input.GetMouseButtonDown(0) && canDrag)
+        if (Input.GetMouseButtonDown(0) && canDrag && !openInfo)
         {
             hitInfo = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Input.mousePosition));
             if (hitInfo.collider != null && hitInfo.collider.CompareTag("Card"))
@@ -43,7 +49,7 @@ public class MoveManager : MonoBehaviour
                 //currentCard.spriteRenderer.sortingLayerName = "ForegroundCanvas";
             }
         }
-        else if (Input.GetMouseButtonUp(0) && currentCard != null && currentCard.isDrag)
+        else if (Input.GetMouseButtonUp(0) && currentCard != null && currentCard.isDrag && !openInfo)
         {
             
             isDragging = false;
@@ -63,7 +69,7 @@ public class MoveManager : MonoBehaviour
             currentCard.transform.localScale = new Vector3(2.2f, 2.2f, 0);
             currentCard.transform.position = new Vector3(worldPosition.x, worldPosition.y, currentCard.transform.position.z);
         }
-        if(Input.GetMouseButtonDown(1))
+        if(Input.GetMouseButtonDown(1) && !openInfo)
         {
             hitInfo = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Input.mousePosition));
             if (hitInfo.collider != null && hitInfo.collider.CompareTag("Card") && !openInfo)
@@ -73,9 +79,7 @@ public class MoveManager : MonoBehaviour
                 {
                     selectedCard= cardProperties.card;
                     cardProperties.AssignInfo();
-            
-                    Image cardImage = cardInfo.transform.Find("CardImage").GetComponent<Image>();
-                    //cardImage.sprite = selectedCard.artwork;
+                    ControlInfo(selectedCard);
                     ShowInfo(true);
                 }
             }
@@ -85,5 +89,18 @@ public class MoveManager : MonoBehaviour
     {
         cardInfo.SetActive(show);
         canDrag = !show;
+    }
+    private void ControlInfo(CardCreator card)
+    {
+        Debug.Log(card.name);
+        if (card != null)
+        {
+            cardImage.sprite = card.artwork;
+            cardName.text = card.name;
+            cardDescription.text = card.description;
+            cardCost.text = card.energyCost.ToString();
+            cardAttack.text = card.attack.ToString();
+            cardHealth.text = card.health.ToString();
+        }
     }
 }
