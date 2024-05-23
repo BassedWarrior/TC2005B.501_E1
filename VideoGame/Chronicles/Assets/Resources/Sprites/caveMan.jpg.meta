@@ -1,9 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 <<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/caveMan.jpg.meta
 guid: 6897861c1b344bb4ca2e6579d8e8adbd
 =======
 guid: d6e01fbea26db4518b212feac351d4cb
 >>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/caveMan.jpg.meta
+=======
+guid: d6e01fbea26db4518b212feac351d4cb
+>>>>>>> c378838a1df2ade5f713778cce9c88ed707a4294
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,6 +101,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< HEAD
 <<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/caveMan.jpg.meta
   - serializedVersion: 3
     buildTarget: WebGL
@@ -113,6 +118,8 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
 =======
 >>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/caveMan.jpg.meta
+=======
+>>>>>>> c378838a1df2ade5f713778cce9c88ed707a4294
   spriteSheet:
     serializedVersion: 2
     sprites: []

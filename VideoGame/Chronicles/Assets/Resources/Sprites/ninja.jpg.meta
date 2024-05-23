@@ -1,9 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 <<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/ninja.jpg.meta
 guid: 14f4509a6a3d943438ee26479223f8b3
 =======
 guid: 4f2863bc6c13641b994b330877a59b43
 >>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/ninja.jpg.meta
+=======
+guid: 4f2863bc6c13641b994b330877a59b43
+>>>>>>> c378838a1df2ade5f713778cce9c88ed707a4294
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,6 +101,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< HEAD
 <<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/ninja.jpg.meta
   - serializedVersion: 3
     buildTarget: WebGL
@@ -113,6 +118,8 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
 =======
 >>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/ninja.jpg.meta
+=======
+>>>>>>> c378838a1df2ade5f713778cce9c88ed707a4294
   spriteSheet:
     serializedVersion: 2
     sprites: []
