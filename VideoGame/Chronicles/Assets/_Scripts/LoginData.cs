@@ -2,38 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class LoginData : MonoBehaviour
 {
     public string input;
     public string secret;
-    public List<string> UserName;
-    public List<string> password;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // Inicializar las listas
-        UserName = new List<string>();
-        password = new List<string>();
-
-        // Imprimir el contenido de las listas al iniciar
-        ImprimirListas();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public List<string> username = new List<string>();
+    public List<string> password = new List<string>();
 
     public void ReadUserName(string name)
     {
         input = name;
-        UserName.Add(input);
+        username.Add(input);
         Debug.Log("Nombre de usuario añadido: " + name);
 
-        // Imprimir la lista de nombres de usuario
-        ImprimirLista(UserName, "UserName");
+        ImprimirLista(username, "UserName");
     }
 
     public void ReadPassword(string secret)
@@ -49,7 +31,7 @@ public class NewBehaviourScript : MonoBehaviour
     // Método para imprimir el contenido de las listas
     public void ImprimirListas()
     {
-        ImprimirLista(UserName, "UserName");
+        ImprimirLista(username, "UserName");
         ImprimirLista(password, "password");
     }
 
