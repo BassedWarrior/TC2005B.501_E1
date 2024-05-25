@@ -14,6 +14,7 @@ public class CardPropertiesDrag : MonoBehaviour
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI attackText;
     public bool isDrag;
+    public bool isOnBoard;
 
     public void AssignInfo()
     {

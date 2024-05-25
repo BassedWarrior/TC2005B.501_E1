@@ -6,11 +6,11 @@ using TMPro;
 
 public class MoveManager : MonoBehaviour
 {
+    private HandManager handManager;
     private RaycastHit2D hitInfo;
     private Camera mainCamera;
     private Vector3 mousePosition;
     private CardPropertiesDrag currentCard;
-    public bool isDragging;
     [SerializeField] private GameObject cardInfo;
     [SerializeField] private Image cardImage;
     [SerializeField] private TextMeshProUGUI cardName;
@@ -18,58 +18,60 @@ public class MoveManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cardCost;
     [SerializeField] private TextMeshProUGUI cardAttack;
     [SerializeField] private TextMeshProUGUI cardHealth;
-    private bool openInfo;
     private CardCreator selectedCard;
-    private bool canDrag= true;
+    private bool canDrag = true;
+    public bool isDragging;
+    private bool openInfo;
+
     private void Start()
     {
         mainCamera = Camera.main;
+        handManager = GameObject.FindGameObjectWithTag("CardManager").GetComponent<HandManager>();
     }
 
     private void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ShowInfo(false);
         }
-
+        
         if (Input.GetMouseButtonDown(0) && canDrag && !openInfo)
         {
             hitInfo = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Input.mousePosition));
             if (hitInfo.collider != null && hitInfo.collider.CompareTag("Card"))
             {
                 currentCard = hitInfo.collider.GetComponent<CardPropertiesDrag>();
-                if (currentCard.actualParent != currentCard.originalParent) 
+                if (currentCard != null && currentCard.card != null && (handManager.khronos >= currentCard.card.energyCost || currentCard.isOnBoard))
                 {
-                    currentCard.actualParent = currentCard.originalParent; 
+                    currentCard.isOnBoard= true;
+                    isDragging = true;
+                    currentCard.isDrag = true;
+                    ChangeSortingLayer(hitInfo.collider.transform, "ForegroundCanvas");
                 }
-                isDragging = true;
-                currentCard.isDrag = true;
-                //currentCard.spriteRenderer.sortingLayerName = "ForegroundCanvas";
             }
         }
         else if (Input.GetMouseButtonUp(0) && currentCard != null && currentCard.isDrag && !openInfo)
         {
-            
             isDragging = false;
+            handManager.EnergyWaste(currentCard.card.energyCost);
             currentCard.isDrag = false;
-            if (currentCard.actualParent != null) 
+            if (currentCard.actualParent != null)
             {
-                currentCard.transform.SetParent(currentCard.actualParent); 
+                currentCard.transform.SetParent(currentCard.actualParent);
             }
-            //currentCard.spriteRenderer.sortingLayerName = "GameObjects";
+            ChangeSortingLayer(hitInfo.collider.transform, "GameObject");
         }
         else if (currentCard != null && currentCard.isDrag)
         {
             mousePosition = Input.mousePosition;
             mousePosition.z = -mainCamera.transform.position.z;
             Vector3 worldPosition = mainCamera.ScreenToWorldPoint(mousePosition);
-            //currentCard.spriteRenderer.sortingLayerName = "ForegroundCanvas";
+            ChangeSortingLayer(hitInfo.collider.transform, "ForegroundCanvas");
             currentCard.transform.localScale = new Vector3(2.2f, 2.2f, 0);
             currentCard.transform.position = new Vector3(worldPosition.x, worldPosition.y, currentCard.transform.position.z);
         }
-        if(Input.GetMouseButtonDown(1) && !openInfo)
+        if (Input.GetMouseButtonDown(1) && !openInfo)
         {
             hitInfo = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Input.mousePosition));
             if (hitInfo.collider != null && hitInfo.collider.CompareTag("Card") && !openInfo)
@@ -77,7 +79,7 @@ public class MoveManager : MonoBehaviour
                 CardPropertiesDrag cardProperties = hitInfo.collider.GetComponent<CardPropertiesDrag>();
                 if (cardProperties != null)
                 {
-                    selectedCard= cardProperties.card;
+                    selectedCard = cardProperties.card;
                     cardProperties.AssignInfo();
                     ControlInfo(selectedCard);
                     ShowInfo(true);
@@ -85,11 +87,13 @@ public class MoveManager : MonoBehaviour
             }
         }
     }
+
     public void ShowInfo(bool show)
     {
         cardInfo.SetActive(show);
         canDrag = !show;
     }
+
     private void ControlInfo(CardCreator card)
     {
         Debug.Log(card.name);
@@ -103,4 +107,14 @@ public class MoveManager : MonoBehaviour
             cardHealth.text = card.health.ToString();
         }
     }
+
+    private void ChangeSortingLayer(Transform cardTransform, string sortingLayer)
+    {
+        Canvas canvas = cardTransform.GetComponentInChildren<Canvas>();
+        if (canvas != null)
+        {
+            canvas.sortingLayerName = sortingLayer;
+        }
+    }
+
 }
