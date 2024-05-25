@@ -21,41 +21,41 @@ Stores the state of the game for each player.
 Maps the relationship between decks and cards.
 
 ## Relationships
-- Player - Deck
+### - Player - Deck (1 to N)
 
 One Player can own multiple Decks.
 
 A Deck is owned by one Player.
 
-- Deck - Card (via DeckCard)
+### - Deck - Card (via DeckCard) (1 to N to 1)
 
 One Deck contains multiple Cards.
 
 One Card can be in multiple Decks.
 
-- Player - Match
+### - Player - Match (1 to N)
 
 One Player can play multiple Matches.
 
 A Match involves one Player.
 
-- Deck - Match
+### - Deck - Match (1 to N)
 
 One Deck can be used in multiple Matches.
 
 A Match uses only one Deck.
 
-- Card - GameRound
+### - Card - GameRound (1 to N)
 
 One Card can appear in multiple GameRounds.
 
-- Player - Game
+### - Player - Game (1 to N)
 
 One Player can have multiple Games.
 
 A Game is associated with one Player.
 
-- GameRound - Game
+### - GameRound - Game (1 to N)
 
 One GameRound can be part of multiple Games.
 

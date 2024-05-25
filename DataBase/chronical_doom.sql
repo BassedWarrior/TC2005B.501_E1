@@ -67,7 +67,7 @@ CREATE TABLE game (
     username VARCHAR(20) NOT NULL,
     score SMALLINT UNSIGNED NOT NULL,
     gameRound TINYINT UNSIGNED NOT NULL,
-    khronos TINYINT UNSIGNED NOT NULL,
+    kronos TINYINT UNSIGNED NOT NULL,
     deckCards TINYINT UNSIGNED NOT NULL,
     PRIMARY KEY (gameID),
     FOREIGN KEY (username) REFERENCES player(username),
