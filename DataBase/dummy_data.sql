@@ -97,10 +97,6 @@ INSERT INTO deck (name, creationDate, owner) VALUES
 ('Deck2', '2021-10-02', 'user24');
 
 
-
-
-select * from deck;
-
 -- Insert data into match table
 INSERT INTO `match` (username, deck, datePlayed, timePlayed, score) VALUES
 ('user1', 1, '2023-01-01', '12:00:00', 100),
