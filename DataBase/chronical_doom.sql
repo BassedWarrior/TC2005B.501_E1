@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS chronical_doom;
 USE chronical_doom;
 
-CREATE TABLE player (
+CREATE TABLE IF NOT EXISTS player (
     username VARCHAR(20) NOT NULL,
     password VARCHAR(20) NOT NULL,
     creationDate DATE NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE player (
     PRIMARY KEY (username)
 ) ENGINE=InnoDB, CHARSET=ascii;
 
-CREATE TABLE card (
+CREATE TABLE IF NOT EXISTS card (
     cardID TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
     cost TINYINT UNSIGNED NOT NULL,
     name VARCHAR(30) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE card (
     PRIMARY KEY (cardID)
 ) ENGINE=InnoDB, CHARSET=ascii;
 
-CREATE TABLE deck (
+CREATE TABLE IF NOT EXISTS deck (
     deckID INT UNSIGNED NOT NULL AUTO_INCREMENT,
     name VARCHAR(30) NOT NULL,
     creationDate DATE NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE deck (
 ) ENGINE=InnoDB, CHARSET=ascii;
 
 -- This stores the outcome of a full match after the player is done playing.
-CREATE TABLE `match` (
+CREATE TABLE IF NOT EXISTS `match` (
     matchID INT UNSIGNED NOT NULL AUTO_INCREMENT,
     username VARCHAR(20) NOT NULL,
     deck INT UNSIGNED NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE `match` (
     KEY (score)
 ) ENGINE=InnoDB, CHARSET=ascii;
 
-CREATE TABLE gameRound (
+CREATE TABLE IF NOT EXISTS gameRound (
     roundID TINYINT UNSIGNED NOT NULL,
     cardID TINYINT UNSIGNED NOT NULL,
     PRIMARY KEY (roundID, cardID),
@@ -62,7 +62,7 @@ CREATE TABLE gameRound (
 ) ENGINE=InnoDB, CHARSET=ascii;
 
 -- This stores the state of the game for each player.
-CREATE TABLE game (
+CREATE TABLE IF NOT EXISTS game (
     gameID INT UNSIGNED NOT NULL AUTO_INCREMENT,
     username VARCHAR(20) NOT NULL,
     score SMALLINT UNSIGNED NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE game (
     KEY (score)
 ) ENGINE=InnoDB, CHARSET=ascii;
 
-CREATE TABLE deckCard (
+CREATE TABLE IF NOT EXISTS deckCard (
     deckID INT UNSIGNED NOT NULL,
     cardID TINYINT UNSIGNED NOT NULL,
     PRIMARY KEY (deckID, cardID),
