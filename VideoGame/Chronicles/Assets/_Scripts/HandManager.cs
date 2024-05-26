@@ -60,7 +60,6 @@ public class HandManager : MonoBehaviour
         {
             selectedCards.Add(ID);
             buttons[buttonIndex].GetComponent<Image>().color = Color.green; 
-            Debug.Log("Selected Cards: " + string.Join(", ", selectedCards));
             activeButtons[buttonIndex] = false;
         }
     }
@@ -89,8 +88,6 @@ public class HandManager : MonoBehaviour
         }
         if( gameManager.playersHand.Count < 5)
         {
-            Debug.Log("Cartas Ahora: " + gameManager.playersHand.Count);
-            Debug.Log("Cartas Faltantes: " + (5- gameManager.playersHand.Count));
             int faltantes= (5-gameManager.playersHand.Count);
             for(int i=0;  i<faltantes; i++)
             {
@@ -107,6 +104,8 @@ public class HandManager : MonoBehaviour
             }
         }
         cardsRemaining.text = gameManager.playersDeck.Count.ToString();
+        MoveManager moveManager = GameObject.FindGameObjectWithTag("CardManager").GetComponent<MoveManager>();
+        moveManager.cardPlaced =true;
     }
 
     public void DrawCard()

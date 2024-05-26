@@ -21,6 +21,8 @@ public class MoveManager : MonoBehaviour
     private CardCreator selectedCard;
     private bool canDrag = true;
     public bool isDragging;
+    public bool isOnBoard;
+    public  bool cardPlaced;
     private bool openInfo;
 
     private void Start()
@@ -35,32 +37,31 @@ public class MoveManager : MonoBehaviour
         {
             ShowInfo(false);
         }
-        
+
         if (Input.GetMouseButtonDown(0) && canDrag && !openInfo)
         {
             hitInfo = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Input.mousePosition));
             if (hitInfo.collider != null && hitInfo.collider.CompareTag("Card"))
             {
                 currentCard = hitInfo.collider.GetComponent<CardPropertiesDrag>();
-                if (currentCard != null && currentCard.card != null && (handManager.khronos >= currentCard.card.energyCost || currentCard.isOnBoard))
+                if (currentCard != null && currentCard.card != null)
                 {
-                    currentCard.isOnBoard= true;
-                    isDragging = true;
-                    currentCard.isDrag = true;
-                    ChangeSortingLayer(hitInfo.collider.transform, "ForegroundCanvas");
+                    if(currentCard.isOnBoard ||  (handManager.khronos >= currentCard.card.energyCost && !currentCard.isOnBoard))
+                    {
+                        isDragging = true;
+                        currentCard.isDrag = isDragging;
+                        isOnBoard= currentCard.isOnBoard;
+                        ChangeSortingLayer(hitInfo.collider.transform, "ForegroundCanvas");
+                    }
                 }
             }
         }
         else if (Input.GetMouseButtonUp(0) && currentCard != null && currentCard.isDrag && !openInfo)
         {
             isDragging = false;
-            handManager.EnergyWaste(currentCard.card.energyCost);
-            currentCard.isDrag = false;
-            if (currentCard.actualParent != null)
-            {
-                currentCard.transform.SetParent(currentCard.actualParent);
-            }
-            ChangeSortingLayer(hitInfo.collider.transform, "GameObject");
+            currentCard.isDrag = isDragging;
+            ChangeSortingLayer(hitInfo.collider.transform, "GameObjects");
+            CardMovement(currentCard);
         }
         else if (currentCard != null && currentCard.isDrag)
         {
@@ -71,6 +72,7 @@ public class MoveManager : MonoBehaviour
             currentCard.transform.localScale = new Vector3(2.2f, 2.2f, 0);
             currentCard.transform.position = new Vector3(worldPosition.x, worldPosition.y, currentCard.transform.position.z);
         }
+
         if (Input.GetMouseButtonDown(1) && !openInfo)
         {
             hitInfo = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Input.mousePosition));
@@ -117,4 +119,28 @@ public class MoveManager : MonoBehaviour
         }
     }
 
+    private void CardMovement(CardPropertiesDrag card)
+    {
+        card.transform.SetParent(card.actualParent);
+        if (card.actualParent == card.originalParent)
+        {
+            Debug.Log("Original parent");
+            card.transform.position = card.originalParent.position;
+            cardPlaced = true;
+            isOnBoard= false;
+        }
+        else
+        {
+            Debug.Log("New parent");
+            card.originalParent = card.actualParent;
+            if (!card.isOnBoard)
+            {
+                card.isOnBoard= true;
+                handManager.EnergyWaste(currentCard.card.energyCost);
+            }
+            currentCard.transform.SetParent(currentCard.actualParent);
+            cardPlaced = true;
+            isOnBoard= false;
+        }
+    }
 }
