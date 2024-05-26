@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 126231139}
   - component: {fileID: 126231140}
+  - component: {fileID: 126231141}
   m_Layer: 0
   m_Name: LoginManager
   m_TagString: Untagged
@@ -167,6 +168,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1edbcb5a255f2948be2ef56ddc4d3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &126231141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126231137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb99d5e3c7f25241a50feae8992eb56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usernameInput: {fileID: 1281926856}
+  passwordInput: {fileID: 1432257505}
+  loginButton: {fileID: 1910746489}
 --- !u!1 &329709121
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +213,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 756689946}
   - {fileID: 1910746488}
   - {fileID: 1274427357}
   - {fileID: 1281926855}
@@ -485,52 +500,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &756689944
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 756689946}
-  - component: {fileID: 756689947}
-  m_Layer: 0
-  m_Name: UIhandler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &756689946
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 756689944}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -102.2043, y: 137.28464, z: -0.5627516}
-  m_LocalScale: {x: 2.142857, y: 2.142857, z: 2.142857}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 329709122}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &756689947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 756689944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6952a03ed4fb3fd48b05190d82db4f6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  usernameTMP: {fileID: 1281926856}
-  passwordTMP: {fileID: 1432257505}
 --- !u!1 &825655437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,7 +1285,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: NewBehaviourScript, Assembly-CSharp
+        m_MethodName: ReadUserName
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -1866,7 +1847,6 @@ GameObject:
   - component: {fileID: 1623559379}
   - component: {fileID: 1623559378}
   - component: {fileID: 1623559377}
-  - component: {fileID: 1623559380}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1948,18 +1928,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1623559380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623559376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fd96c5de804eac4ab734e3c5c16a690, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1747059935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2239,18 +2207,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: CollectionScene
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuJson, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1910746490
@@ -2672,5 +2628,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 1623559379}
   - {fileID: 755066765}
-  - {fileID: 126231139}
   - {fileID: 2041578190}
+  - {fileID: 126231139}
