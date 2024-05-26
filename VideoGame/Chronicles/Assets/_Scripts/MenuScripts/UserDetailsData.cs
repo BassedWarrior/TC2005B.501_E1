@@ -20,9 +20,11 @@ public class LoginData
 
 public class UserDetailsData : MonoBehaviour
 {
-    public TMP_InputField usernameInput;
-    public TMP_InputField passwordInput;
-    public Button loginButton;
+    [SerializeField] private TMP_InputField usernameInput;
+    [SerializeField] private TMP_InputField passwordInput;
+    [SerializeField] private Button loginButton;
+    [SerializeField] private string url = "localhost:3000/login";
+    [SerializeField] private GameObject errorMessage;
 
     private void Start()
     {
@@ -42,8 +44,8 @@ public class UserDetailsData : MonoBehaviour
         LoginData loginData = new LoginData(username, password);
         string jsonData = JsonUtility.ToJson(loginData);
         Debug.Log("Mandando JsonData: " + jsonData);
-
-        using (UnityWebRequest www = new UnityWebRequest("https://tu-api-endpoint.com/login", "POST"))
+        
+        using (UnityWebRequest www = new UnityWebRequest(url, "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
@@ -54,7 +56,8 @@ public class UserDetailsData : MonoBehaviour
 
             if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
             {
-                Debug.LogError("Error: " + www.error);
+                Debug.Log("Error: " + www.error);
+                errorMessage.SetActive(true);
             }
             else
             {
