@@ -4,11 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject cardInfo;
+    [SerializeField] private Image cardImage;
+    [SerializeField] private TextMeshProUGUI cardName;
+    [SerializeField] private TextMeshProUGUI cardDescription;
+    [SerializeField] private TextMeshProUGUI cardCost;
+    [SerializeField] private TextMeshProUGUI cardAttack;
+    [SerializeField] private TextMeshProUGUI cardHealth;
     [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private GameObject dommyCard;
     [SerializeField] private Transform cardArea;
     [SerializeField] private Transform deckArea;
     [SerializeField] private GameObject settings;
@@ -20,7 +28,7 @@ public class MenuManager : MonoBehaviour
     private Camera mainCamera;
     private RaycastHit2D hit;
     private bool openInfo;
-    private CardCreator selectedCard;
+    private CardCreator selectedCard = null;
     private float transitionDuration= 0.5f;
     private float initialCameraX;
     private bool transitioning = false;
@@ -107,11 +115,7 @@ public class MenuManager : MonoBehaviour
     }
 
     selectedCard = cardProperties.card;
-    cardProperties.AssignInfo();
-    //Debug.Log("tap = " + cardProperties.card.name);
-
-    Image cardImage = cardInfo.transform.Find("CardImage").GetComponent<Image>();
-    cardImage.sprite = selectedCard.artwork;
+    ControlInfo(selectedCard);
 
     if (status && !cardProperties.withMask)
     {
@@ -166,16 +170,20 @@ public class MenuManager : MonoBehaviour
         gameManager.SortDeck();
         for (int i = 0; i < 18; i++)
         {
-            GameObject collectionCard = Instantiate(cardPrefab, deckArea);
+            GameObject collectionCard;
+
             if (i < gameManager.playersDeck.Count && gameManager.playersDeck[i] >= 0 && gameManager.playersDeck[i] < gameManager.cards.Count && gameManager.cards[gameManager.playersDeck[i]] != null)
             {
+                collectionCard = Instantiate(cardPrefab, deckArea);
+
                 CardProperties cardProperties = collectionCard.GetComponentInChildren<CardProperties>();
                 cardProperties.inclusiveType = false;
-                cardProperties.card= gameManager.cards[gameManager.playersDeck[i]];
-                collectionCard.name= cardProperties.card.name;
+                cardProperties.card = gameManager.cards[gameManager.playersDeck[i]];
+                collectionCard.name = cardProperties.card.name;
             }
             else
             {
+                collectionCard = Instantiate(dommyCard, deckArea);
                 collectionCard.name = "EmptyCard";
             }
         }
@@ -207,6 +215,19 @@ public class MenuManager : MonoBehaviour
     {
         var query = integerList.Where(x => x == searchingNumber);
         return query.Count() >= timesToFind;
+    }
+    private void ControlInfo(CardCreator card)
+    {
+        Debug.Log(card.name);
+        if (card != null)
+        {
+            cardImage.sprite = card.artwork;
+            cardName.text = card.name;
+            cardDescription.text = card.description;
+            cardCost.text = card.energyCost.ToString();
+            cardAttack.text = card.attack.ToString();
+            cardHealth.text = card.health.ToString();
+        }
     }
     public void PlayScene()
     {

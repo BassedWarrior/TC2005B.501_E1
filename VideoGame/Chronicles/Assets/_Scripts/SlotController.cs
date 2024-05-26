@@ -49,11 +49,11 @@ public class SlotController : MonoBehaviour
             Transform cardTransform = deckTransform.GetChild(i);
             if (!isDeck)
             {
-                cardTransform.localScale = new Vector3(1f, 1.43f, 0);
+                cardTransform.localScale = new Vector3(1.8f, 1.8f, 0);
             }
             else
             {
-                cardTransform.localScale = new Vector3(1.43f, 2f, 0);
+                cardTransform.localScale = new Vector3(2.2f, 2.2f, 0);
             }
             Vector3 cardPosition = startPosition - Vector3.left * i * spacing;
             cardTransform.position = cardPosition;

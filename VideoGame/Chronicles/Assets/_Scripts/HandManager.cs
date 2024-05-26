@@ -8,20 +8,19 @@ public class HandManager : MonoBehaviour
 {
     private GameManager gameManager;
     [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private Transform selectiveArea;
+    [SerializeField] private GameObject selectiveCard;
     [SerializeField] private Transform cardArea;
     [SerializeField] private List<GameObject> buttons;
     [SerializeField] private GameObject initialScene;
-    private int selectiveCards;
+    private int selectiveCards = 5;
     private List<int> selectedCards = new List<int>();
     private List<bool> activeButtons = new List<bool>();
 
     void Start()        
     {
-        selectiveCards= buttons.Count;
-        Debug.Log("Selective Cards: " + selectiveCards);
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         gameManager.ShuffleDeck();
-        Debug.Log("Deck shuffled");
         ShowInitialHand();
     }
 
@@ -33,9 +32,10 @@ public class HandManager : MonoBehaviour
             if (i < gameManager.playersDeck.Count)
             {
                 CardCreator card = gameManager.cards[gameManager.playersDeck[i]];
-                GameObject buttonObj = buttons[i];
-                Image buttonImage = buttonObj.GetComponent<Image>();
-                buttonImage.sprite = card.artwork;
+                GameObject buttonObj= Instantiate(selectiveCard, selectiveArea);
+                buttonObj.GetComponent<SelectiveCards>().card= card;
+                buttonObj.GetComponent<SelectiveCards>().AssignInfo();
+                buttons.Add(buttonObj);
                 int index= i;
                 buttonObj.GetComponent<Button>().onClick.AddListener(() => ToggleSelection(card.ID, index));
                 activeButtons.Add(true);
@@ -100,6 +100,20 @@ public class HandManager : MonoBehaviour
                     gameManager.playersDeck.Remove(card);
                 }
             }
+        }
+    }
+
+    public void DrawCard()
+    {
+        if(gameManager.playersDeck.Count > 0)
+        {
+            int card= gameManager.playersDeck[0];
+            gameManager.playersHand.Add(card);
+            gameManager.playersDeck.Remove(card);
+            GameObject newCard = Instantiate(cardPrefab, cardArea);
+            CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
+            cardProperties.card= gameManager.cards[card];
+            cardProperties.AssignInfo();
         }
     }
 }

@@ -16,6 +16,6 @@ MonoBehaviour:
   name: IronFist
   description: "Pu\xF1o Alucinante"
   artwork: {fileID: 21300000, guid: 76a970167b9584cb6842c6089fdb582f, type: 3}
-  energyCost: 0
-  health: 0
-  attack: 0
+  energyCost: 1
+  health: 1
+  attack: 1

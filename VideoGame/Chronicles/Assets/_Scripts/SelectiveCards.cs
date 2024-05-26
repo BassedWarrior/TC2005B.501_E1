@@ -1,21 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CardProperties : MonoBehaviour
+public class SelectiveCards : MonoBehaviour
 {
     public CardCreator card;
-    public Image artworkImage;
-    public TextMeshProUGUI energyText;
-    public TextMeshProUGUI healthText;
-    public TextMeshProUGUI attackText;
-    public bool withMask = false;
-    public bool inclusiveType;
+    [SerializeField] private Image artworkImage;
+    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private TextMeshProUGUI energyText;
+    [SerializeField] private TextMeshProUGUI attackText;
 
-    private void Start()
-    {
-        AssignInfo();
-    }
     public void AssignInfo()
     {
         if (card != null)
