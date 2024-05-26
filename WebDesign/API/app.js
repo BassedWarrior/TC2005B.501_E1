@@ -6,8 +6,8 @@ import dotenv from "dotenv/config"
 
 const app = express();
 const port = process.env.PORT;  // This is taken from the .env file.
-
 app.use(express.json());
+
 
 async function connectToDB() {
   return await mysql.createConnection({
@@ -46,6 +46,18 @@ app.get("/api/cards", async (request, response) => {
     }
   }
 });
+
+
+app.get('/EnemyWaves', (req, res) =>{
+
+  let sql = 'SELECT * FROM EnemyWave';
+  db.query(sql, (err, result) =>{
+    if (err){
+      res.status(500).send(err);return;}
+    res.json(result);});});
+
+
+
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}/`);
