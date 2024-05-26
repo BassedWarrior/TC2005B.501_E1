@@ -11,31 +11,46 @@ public class SlotController : MonoBehaviour
     private BoxCollider2D boxCollider;
     private int lastChildCount;
     private bool previousDragState;
-    public bool isDeck;
-    public bool isQuantumTunnel;
+    [SerializeField] private bool isEnemy;
+    [SerializeField] private bool isDeck;
+    [SerializeField] private bool isQuantumTunnel;
     private List<CardPropertiesDrag> currentCards;
 
     private void Start()
     {
         lastChildCount = transform.childCount;
         currentCards = new List<CardPropertiesDrag>();
-        OrganizeCards();
         boxCollider = GetComponent<BoxCollider2D>();
         boxCollider.enabled = false;
         previousDragState = false;
         UpdateCardList();
+        OrganizeCards();
     }
 
     void Update()
     {
         int currentChildCount = transform.childCount;
-        if (currentChildCount != lastChildCount && !isDeck)
+        if (currentChildCount != lastChildCount)
         {
-            UpdateCardList();
+            if(!isDeck)
+            {
+                UpdateCardList();
+            }
+            OrganizeCards();
             lastChildCount = currentChildCount;
         }
 
-        if (moveManager.isDragging)
+        if (moveManager.cardPlaced)
+        {
+            OrganizeCards();
+        }
+        else if (previousDragState != moveManager.isDragging)
+        {
+            OrganizeCards();
+            previousDragState = moveManager.isDragging;
+        }
+
+        if (moveManager.isDragging && !isEnemy)
         {
             if (!moveManager.isOnBoard)
             {
@@ -63,17 +78,6 @@ public class SlotController : MonoBehaviour
         else
         {
             boxCollider.enabled = false;
-        }
-
-        if (moveManager.cardPlaced || currentChildCount != lastChildCount)
-        {
-            lastChildCount = currentChildCount;
-            OrganizeCards();
-        }
-        else if (previousDragState != moveManager.isDragging)
-        {
-            OrganizeCards();
-            previousDragState = moveManager.isDragging;
         }
     }
 
@@ -111,7 +115,7 @@ public class SlotController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Card") && lastChildCount < maxElements)
+        if (!isEnemy && other.CompareTag("Card") && lastChildCount < maxElements)
         {
             CardPropertiesDrag card = other.GetComponent<CardPropertiesDrag>();
             if (card != null && card.isDrag)
@@ -123,7 +127,7 @@ public class SlotController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Card"))
+        if (!isEnemy && other.CompareTag("Card"))
         {
             CardPropertiesDrag card = other.GetComponent<CardPropertiesDrag>();
             if (card != null && card.actualParent != card.originalParent) 

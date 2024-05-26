@@ -9,6 +9,7 @@ TagManager:
   - CardInfo
   - CardManager
   - Deck
+  - Enemy
   layers:
   - Default
   - TransparentFX
