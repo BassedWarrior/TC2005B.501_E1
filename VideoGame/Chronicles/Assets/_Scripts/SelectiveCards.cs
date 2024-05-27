@@ -6,8 +6,8 @@ using TMPro;
 
 public class SelectiveCards : MonoBehaviour
 {
-    public CardCreator card;
-    [SerializeField] private Image artworkImage;
+    public CardData card;
+    public Image artworkImage;
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI energyText;
     [SerializeField] private TextMeshProUGUI attackText;
@@ -16,8 +16,12 @@ public class SelectiveCards : MonoBehaviour
     {
         if (card != null)
         {
-            artworkImage.sprite = card.artwork;
-            energyText.text = card.energyCost.ToString();
+            Sprite loadedSprite = Resources.Load<Sprite>("Sprite/Artwork" + card.cardID.ToString());
+            if (loadedSprite != null)
+            {
+                artworkImage.sprite = loadedSprite;
+            }
+            energyText.text = card.cost.ToString();
             healthText.text = card.health.ToString();
             attackText.text = card.attack.ToString();
         }
