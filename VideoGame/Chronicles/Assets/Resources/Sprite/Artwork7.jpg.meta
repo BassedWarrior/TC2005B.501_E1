@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2021afa1ce8be6e419c1116b572faa4b
+guid: 6bbcceb76c46d4d20b0313429f6d4ac5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,25 +93,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-<<<<<<< HEAD
-<<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/aztecaWarrior.jpg.meta
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-=======
->>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/aztecaWarrior.jpg.meta
-=======
->>>>>>> c378838a1df2ade5f713778cce9c88ed707a4294
   spriteSheet:
     serializedVersion: 2
     sprites: []

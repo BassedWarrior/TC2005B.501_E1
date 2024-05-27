@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0acb0143830e687448e17744f279ac5e
+guid: 8caf0cd54be604c72a43e7ab3976d2fe
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,25 +93,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-<<<<<<< HEAD
-<<<<<<< HEAD:VideoGame/Chronicles/Assets/Resources/ImagesSprites/calizParadox.jpg.meta
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-=======
->>>>>>> 2fb4d4d (Creating Scriptable_Objects with Card_Data):VideoGame/Chronicles/Assets/Resources/Sprites/calizParadox.jpg.meta
-=======
->>>>>>> c378838a1df2ade5f713778cce9c88ed707a4294
   spriteSheet:
     serializedVersion: 2
     sprites: []
