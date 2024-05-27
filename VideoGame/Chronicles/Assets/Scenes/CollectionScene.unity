@@ -2907,10 +2907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f5c6f741b6242968a1886d3e4914ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cards:
-  - {fileID: 11400000, guid: 76aa75ce7135540cd9330245dbea72d3, type: 2}
-  - {fileID: 11400000, guid: 74e62b4d9604845ec934de43115c8b6d, type: 2}
-  - {fileID: 11400000, guid: e05de59e1df86479a9d354102e7340fb, type: 2}
+  cards: []
   playersDeck: 
   playersHand: 
 --- !u!4 &689036408

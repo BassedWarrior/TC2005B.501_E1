@@ -294,8 +294,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0.1571, y: 2.0377}
+  m_SizeDelta: {x: 67.0134, y: 92.7662}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5131338263947468940
 CanvasRenderer:
@@ -718,7 +718,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b23cc48ffa5846a08d31a7d13c881d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 0}
+  card:
+    cardID: 0
+    name: 
+    description: 
+    attack: 0
+    health: 0
+    cost: 0
   artworkImage: {fileID: 256254492777645396}
   energyText: {fileID: 4122625871880380859}
   healthText: {fileID: 5447570440201006411}
