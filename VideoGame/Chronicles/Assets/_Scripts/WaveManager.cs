@@ -14,37 +14,34 @@ public class WaveManager : MonoBehaviour
 {
     private GameManager gameManager;
     [SerializeField] private HandManager handManager;
+    [SerializeField] private ClashTime clashTime;
     private int waveNumber;
     [SerializeField] private GameObject wavePanel;
     [SerializeField] private TextMeshProUGUI waveText;
-    //enemy wave
     private List<CardCreator> enemyWave;
     [SerializeField] private List<EnemyWave> enemyWaves;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private Transform enemyArea;
 
-    public void StartWave()
+    public void NextWave()
     {
+        clashTime.RelocateEnemies();
         SetWave(waveNumber);
         waveNumber++;
-        waveText.text = "Turn Wave " + waveNumber;
-        wavePanel.SetActive(true);
-        StartCoroutine(HideWavePanel());
-        if (waveNumber > 1)
-        {
-            handManager.DrawCard();
-        }
+        handManager.DrawCard();
         handManager.AddKhronos();
+        StartCoroutine(HideWavePanel());
     }
     private IEnumerator HideWavePanel()
     {
+        waveText.text = "Turn Wave " + (waveNumber-1);
+        wavePanel.SetActive(true);
         yield return new WaitForSeconds(1f);
         wavePanel.SetActive(false);
     }
 
-    public void SetWave(int waveIndex)
+    private void SetWave(int waveIndex)
     {
-        Debug.Log("Wave " + waveIndex);
         enemyWave = enemyWaves[waveIndex].enemies;
         foreach (CardCreator card in enemyWave)
         {
@@ -54,5 +51,15 @@ public class WaveManager : MonoBehaviour
             cardProperties.card= card;
             cardProperties.AssignInfo();
         }
+    }
+    public void FirstWave()
+    {
+        SetWave(waveNumber);
+        clashTime.RelocateEnemies();
+        waveNumber++;
+        SetWave(waveNumber);
+        waveNumber++;
+        StartCoroutine(HideWavePanel());
+        handManager.AddKhronos();
     }
 }

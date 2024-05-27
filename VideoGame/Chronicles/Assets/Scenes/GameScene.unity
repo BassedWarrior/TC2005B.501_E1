@@ -354,7 +354,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 392229389}
         m_TargetAssemblyTypeName: WaveManager, Assembly-CSharp
-        m_MethodName: StartWave
+        m_MethodName: FirstWave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1999,6 +1999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handManager: {fileID: 392229387}
+  clashTime: {fileID: 392229388}
   wavePanel: {fileID: 608653438}
   waveText: {fileID: 930230183}
   enemyWaves:
@@ -2400,7 +2401,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 392229388}
         m_TargetAssemblyTypeName: ClashTime, Assembly-CSharp
-        m_MethodName: RelocateEnemies
+        m_MethodName: CheckClash
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6095,7 +6096,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 392229389}
         m_TargetAssemblyTypeName: WaveManager, Assembly-CSharp
-        m_MethodName: StartWave
+        m_MethodName: NextWave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

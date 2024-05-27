@@ -101,7 +101,7 @@ public class ClashTime : MonoBehaviour
         }
     }
 
-    private void CheckClash()
+    public void CheckClash()
     {
         if (timelineA.Count > 0 && enemylineA.Count > 0)
         {
