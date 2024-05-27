@@ -31,13 +31,13 @@ public class HandManager : MonoBehaviour
         {
             if (i < gameManager.playersDeck.Count)
             {
-                CardCreator card = gameManager.cards[gameManager.playersDeck[i]];
+                CardData card = gameManager.cards[gameManager.playersDeck[i]];
                 GameObject buttonObj= Instantiate(selectiveCard, selectiveArea);
                 buttonObj.GetComponent<SelectiveCards>().card= card;
                 buttonObj.GetComponent<SelectiveCards>().AssignInfo();
                 buttons.Add(buttonObj);
                 int index= i;
-                buttonObj.GetComponent<Button>().onClick.AddListener(() => ToggleSelection(card.ID, index));
+                buttonObj.GetComponent<Button>().onClick.AddListener(() => ToggleSelection(card.cardID, index));
                 activeButtons.Add(true);
             }
         }
@@ -48,13 +48,13 @@ public class HandManager : MonoBehaviour
         if (!activeButtons[buttonIndex])
         {
             selectedCards.Remove(ID);
-            buttons[buttonIndex].GetComponent<Image>().color = Color.white;
+            buttons[buttonIndex].GetComponent<SelectiveCards>().artworkImage.color = Color.white;
             activeButtons[buttonIndex] = true;
         }
         else
         {
             selectedCards.Add(ID);
-            buttons[buttonIndex].GetComponent<Image>().color = Color.green; 
+            buttons[buttonIndex].GetComponent<SelectiveCards>().artworkImage.color = Color.green; 
             Debug.Log("Selected Cards: " + string.Join(", ", selectedCards));
             activeButtons[buttonIndex] = false;
         }
