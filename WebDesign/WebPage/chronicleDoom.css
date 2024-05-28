@@ -1,5 +1,78 @@
 *{font-family: Verdana, Geneva, Tahoma, sans-serif;}
 
+:root{
+    --primary: #1e90ff;
+    --background:#1e90ff;
+    --navbar-height:#1e90ff;
+}
+ .menu__wrapper{
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    z-index: 2;
+ }
+
+ .menu__bar{
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 0 16px;
+    gap: 32px;
+    background-color: #855180;
+    height: 60px;
+    opacity: 0.9;
+ }
+
+ .navigation
+ {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    align-items: center;
+    gap:24px;
+    padding: 0px;
+    background-color: bisque;
+
+ }
+
+ .navigation>li{
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    font-size: 1.25rem;
+ }
+
+ .navigation>li>a{
+    color: aliceblue;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-weight: 500;
+    background-size: 200% 100%;
+    background-position: -100%;
+    display: inline-block;
+    padding: 3px 0;
+    position: relative;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.2s ease-in-out;
+
+ }
+
+.statistic 
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around; /* Espaciar uniformemente los elementos dentro del contenedor */
+    width: 100%; 
+    color: #855180;
+    background-color: rgb(176, 176, 227);/* Asegurar que el contenedor ocupe toda la anchura disponible */
+}
+
+
 #gameContainer 
 {
     border: solid 1px rgb(154, 0, 0);
@@ -11,32 +84,4 @@
     justify-content: flex-start;
 }
 
-.title 
-{
-    text-align: center;
-}
 
-#gameImage 
-{
-    margin-top: 10px; /* Espaciado superior para la imagen */
-    max-width: 100%; /* Imagen responsiva: ajustar al 100% del ancho del contenedor */
-    height: auto; /* Mantener la proporción de la imagen */
-}
-
-#statisticsContainer 
-{
-    border: solid 1px rgb(0, 0, 0);
-    margin: 10px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column; /* Cambiado a columna para evitar que se aplasten los divs */
-    align-items: center; /* Centrar horizontalmente los elementos dentro del contenedor */
-}
-
-.StatisticsFormat 
-{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around; /* Espaciar uniformemente los elementos dentro del contenedor */
-    width: 100%; /* Asegurar que el contenedor ocupe toda la anchura disponible */
-}
