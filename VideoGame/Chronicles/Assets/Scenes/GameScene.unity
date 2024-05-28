@@ -2005,18 +2005,74 @@ MonoBehaviour:
   enemyWaves:
   - waveName: FirstWave
     enemies:
-    - {fileID: 11400000, guid: e05de59e1df86479a9d354102e7340fb, type: 2}
-    - {fileID: 11400000, guid: 74e62b4d9604845ec934de43115c8b6d, type: 2}
+    - cardID: 1
+      name: 
+      description: 
+      attack: 0
+      health: 0
+      cost: 0
+    - cardID: 3
+      name: 
+      description: 
+      attack: 0
+      health: 0
+      cost: 0
   - waveName: SecondWave
     enemies:
-    - {fileID: 11400000, guid: 76aa75ce7135540cd9330245dbea72d3, type: 2}
-    - {fileID: 11400000, guid: 74e62b4d9604845ec934de43115c8b6d, type: 2}
+    - cardID: 5
+      name: 
+      description: 
+      attack: 0
+      health: 0
+      cost: 0
+    - cardID: 8
+      name: 
+      description: 
+      attack: 0
+      health: 0
+      cost: 0
   - waveName: ThirdWave
     enemies:
-    - {fileID: 11400000, guid: 76aa75ce7135540cd9330245dbea72d3, type: 2}
+    - cardID: 9
+      name: 
+      description: 
+      attack: 0
+      health: 0
+      cost: 0
+    - cardID: 1
+      name: 
+      description: 
+      attack: 0
+      health: 0
+      cost: 0
   - waveName: ForthWave
     enemies:
-    - {fileID: 11400000, guid: 76aa75ce7135540cd9330245dbea72d3, type: 2}
+    - cardID: 14
+      name: 
+      description: 
+      attack: 0
+      health: 0
+      cost: 0
+    - cardID: 4
+      name: 
+      description: 
+      attack: 0
+      health: 0
+      cost: 0
+  - waveName: FifthWave
+    enemies:
+    - cardID: 2
+      name: 
+      description: 
+      attack: 0
+      health: 0
+      cost: 0
+    - cardID: 11
+      name: 
+      description: 
+      attack: 0
+      health: 0
+      cost: 0
   enemyPrefab: {fileID: 1964758972243524456, guid: fce39acabe63940999622ff84c1791a5, type: 3}
   enemyArea: {fileID: 300977265}
 --- !u!1 &519420028
@@ -6173,11 +6229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f5c6f741b6242968a1886d3e4914ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cards:
-  - {fileID: 11400000, guid: 76aa75ce7135540cd9330245dbea72d3, type: 2}
-  - {fileID: 11400000, guid: 74e62b4d9604845ec934de43115c8b6d, type: 2}
-  - {fileID: 11400000, guid: e05de59e1df86479a9d354102e7340fb, type: 2}
-  playersDeck: 000000000000000000000000010000000100000001000000020000000200000002000000
+  cards: []
+  playersDeck: 
   playersHand: 
 --- !u!4 &2135987805
 Transform:

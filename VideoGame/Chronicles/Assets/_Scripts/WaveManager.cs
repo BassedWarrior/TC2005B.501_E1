@@ -7,7 +7,7 @@ using TMPro;
 public class EnemyWave
 {
     public string waveName;
-    public List<CardCreator> enemies;
+    public List<CardData> enemies;
 }
 
 public class WaveManager : MonoBehaviour
@@ -18,7 +18,7 @@ public class WaveManager : MonoBehaviour
     private int waveNumber;
     [SerializeField] private GameObject wavePanel;
     [SerializeField] private TextMeshProUGUI waveText;
-    private List<CardCreator> enemyWave;
+    private List<CardData> enemyWave;
     [SerializeField] private List<EnemyWave> enemyWaves;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private Transform enemyArea;
@@ -43,7 +43,7 @@ public class WaveManager : MonoBehaviour
     private void SetWave(int waveIndex)
     {
         enemyWave = enemyWaves[waveIndex].enemies;
-        foreach (CardCreator card in enemyWave)
+        foreach (CardData card in enemyWave)
         {
             GameObject newCard= Instantiate(enemyPrefab, enemyArea);
             newCard.tag= "Enemy";
