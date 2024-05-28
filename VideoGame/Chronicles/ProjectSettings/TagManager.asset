@@ -7,6 +7,9 @@ TagManager:
   - DragParent
   - Card
   - CardInfo
+  - CardManager
+  - Deck
+  - Enemy
   layers:
   - Default
   - TransparentFX
