@@ -18,13 +18,12 @@ public class MoveManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cardCost;
     [SerializeField] private TextMeshProUGUI cardAttack;
     [SerializeField] private TextMeshProUGUI cardHealth;
-    private CardCreator selectedCard;
+    private CardData selectedCard;
     private bool canDrag = true;
     public bool isDragging;
     public bool isOnBoard;
     public  bool cardPlaced;
     private bool openInfo;
-
     private void Start()
     {
         mainCamera = Camera.main;
@@ -46,7 +45,7 @@ public class MoveManager : MonoBehaviour
                 currentCard = hitInfo.collider.GetComponent<CardPropertiesDrag>();
                 if (currentCard != null && currentCard.card != null)
                 {
-                    if(currentCard.isOnBoard ||  (handManager.khronos >= currentCard.card.energyCost && !currentCard.isOnBoard))
+                    if(currentCard.isOnBoard ||  (handManager.khronos >= currentCard.card.cost && !currentCard.isOnBoard))
                     {
                         isDragging = true;
                         currentCard.isDrag = isDragging;
@@ -95,16 +94,19 @@ public class MoveManager : MonoBehaviour
         cardInfo.SetActive(show);
         canDrag = !show;
     }
-
-    private void ControlInfo(CardCreator card)
+    private void ControlInfo(CardData card)
     {
         Debug.Log(card.name);
         if (card != null)
         {
-            cardImage.sprite = card.artwork;
+            Sprite loadedSprite = Resources.Load<Sprite>("Sprite/Artwork" + card.cardID.ToString());
+            if (loadedSprite != null)
+            {
+                cardImage.sprite = loadedSprite;
+            }
             cardName.text = card.name;
             cardDescription.text = card.description;
-            cardCost.text = card.energyCost.ToString();
+            cardCost.text = card.cost.ToString();
             cardAttack.text = card.attack.ToString();
             cardHealth.text = card.health.ToString();
         }
@@ -136,7 +138,7 @@ public class MoveManager : MonoBehaviour
             if (!card.isOnBoard)
             {
                 card.isOnBoard= true;
-                handManager.EnergyWaste(currentCard.card.energyCost);
+                handManager.EnergyWaste(currentCard.card.cost);
             }
             currentCard.transform.SetParent(currentCard.actualParent);
             cardPlaced = true;

@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 126231139}
   - component: {fileID: 126231140}
+  - component: {fileID: 126231141}
   m_Layer: 0
   m_Name: LoginManager
   m_TagString: Untagged
@@ -168,7 +169,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   welcomeMessage: {fileID: 275571389}
-  deckMessage: {fileID: 0}
+  deckMessage: {fileID: 1951789772}
+--- !u!114 &126231141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126231137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb99d5e3c7f25241a50feae8992eb56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usernameInput: {fileID: 1281926856}
+  passwordInput: {fileID: 1432257505}
+  loginButton: {fileID: 1910746489}
+  url: localhost:3000/login
+  errorMessage: {fileID: 1951789772}
 --- !u!1 &179867509
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,7 +706,6 @@ RectTransform:
   m_Children:
   - {fileID: 2070911414}
   - {fileID: 329709122}
-  - {fileID: 2041578190}
   - {fileID: 1951789773}
   - {fileID: 275571390}
   m_Father: {fileID: 0}
@@ -1333,10 +1350,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 126231140}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: GoTo
-        m_Mode: 5
+        m_MethodName: ChangeToMenuScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1546,7 +1563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1791,8 +1808,8 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -2138,6 +2155,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1730775532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1730775534}
+  - component: {fileID: 1730775533}
+  m_Layer: 0
+  m_Name: APIConnection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1730775533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730775532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02327d990de7e413abab7a9ea922d60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  url: http://localhost:3000
+  getEndpoint: /
+  getCardsEndpoint: /cards
+  getUnitCardsEndpoint: /cards/unit
+  getParadoxCardsEndpoint: /cards/paradox
+--- !u!4 &1730775534
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730775532}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1747059935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2406,19 +2472,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1910746490}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 126231140}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: ChangeToMenuScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: CollectionScene
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1910746490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2457,6 +2511,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910746487}
   m_CullTransparentMesh: 1
+--- !u!1 &1945240713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1945240715}
+  - component: {fileID: 1945240714}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1945240714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945240713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f5c6f741b6242968a1886d3e4914ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cards: []
+  playersDeck: 
+  playersHand: 
+--- !u!4 &1945240715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945240713}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1951789772
 GameObject:
   m_ObjectHideFlags: 0
@@ -2595,11 +2696,11 @@ Transform:
   m_GameObject: {fileID: 2041578187}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -960, y: -539.84735, z: 0}
-  m_LocalScale: {x: 2.442748, y: 2.442748, z: 2.442748}
+  m_LocalPosition: {x: 0, y: 0.07122803, z: 0}
+  m_LocalScale: {x: 1.1399491, y: 1.1399491, z: 1.1399491}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 755066765}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2070911413
 GameObject:
@@ -2838,4 +2939,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1623559379}
   - {fileID: 755066765}
+  - {fileID: 2041578190}
   - {fileID: 126231139}
+  - {fileID: 1730775534}
+  - {fileID: 1945240715}
