@@ -28,7 +28,7 @@ public class MenuManager : MonoBehaviour
     private Camera mainCamera;
     private RaycastHit2D hit;
     private bool openInfo;
-    private CardCreator selectedCard = null;
+    private CardData selectedCard = null;
     private float transitionDuration= 0.5f;
     private float initialCameraX;
     private bool transitioning = false;
@@ -88,13 +88,13 @@ public class MenuManager : MonoBehaviour
     }
     private void InitializeCards()
     {
-        foreach (CardCreator card in gameManager.cards)
+        foreach (CardData card in gameManager.cards)
         {
             GameObject newCard = Instantiate(cardPrefab, cardArea);
             displayCards.Add(newCard);
             CardProperties cardProperties = newCard.GetComponentInChildren<CardProperties>();
             cardProperties.inclusiveType = true;
-            cardProperties.card = card;
+            cardProperties.SetCardData(card);
             newCard.name = card.name;
         }
     }
@@ -119,7 +119,7 @@ public class MenuManager : MonoBehaviour
 
     if (status && !cardProperties.withMask)
     {
-        CardInstruction(selectedCard.ID, cardProperties.inclusiveType);
+        CardInstruction(selectedCard.cardID-1, cardProperties.inclusiveType);
     }
     else if (!status)
     {
@@ -141,8 +141,11 @@ public class MenuManager : MonoBehaviour
         {
             if (!ListContains(gameManager.playersDeck, index, 3))
             {
-                gameManager.playersDeck.Add(index);
-                UpdateDeck();
+                if(gameManager.playersDeck.Count < 18)
+                {
+                    gameManager.playersDeck.Add(index);
+                    UpdateDeck();
+                }
             }
         }
     }
@@ -156,15 +159,23 @@ public class MenuManager : MonoBehaviour
         {
             CardProperties cardProperties = card.GetComponentInChildren<CardProperties>();
             GameObject mask = card.transform.Find("cardSelectedMask").gameObject;
-            if(ListContains(gameManager.playersDeck, cardProperties.card.ID, 3))
+            if(gameManager.playersDeck.Count >= 18)
             {
                 cardProperties.withMask = true;
                 mask.SetActive(true);
             }
-            else
+            else 
             {
-                cardProperties.withMask = false;
-                mask.SetActive(false);
+                if(ListContains(gameManager.playersDeck, cardProperties.card.cardID-1, 3))
+                {
+                    cardProperties.withMask = true;
+                    mask.SetActive(true);
+                }
+                else
+                {
+                    cardProperties.withMask = false;
+                    mask.SetActive(false);
+                }
             }
         }
         gameManager.SortDeck();
@@ -178,7 +189,7 @@ public class MenuManager : MonoBehaviour
 
                 CardProperties cardProperties = collectionCard.GetComponentInChildren<CardProperties>();
                 cardProperties.inclusiveType = false;
-                cardProperties.card = gameManager.cards[gameManager.playersDeck[i]];
+                cardProperties.SetCardData(gameManager.cards[gameManager.playersDeck[i]]);
                 collectionCard.name = cardProperties.card.name;
             }
             else
@@ -216,15 +227,18 @@ public class MenuManager : MonoBehaviour
         var query = integerList.Where(x => x == searchingNumber);
         return query.Count() >= timesToFind;
     }
-    private void ControlInfo(CardCreator card)
+    private void ControlInfo(CardData card)
     {
-        Debug.Log(card.name);
         if (card != null)
         {
-            cardImage.sprite = card.artwork;
+            Sprite loadedSprite = Resources.Load<Sprite>("Sprite/Artwork" + card.cardID.ToString());
+            if (loadedSprite != null)
+            {
+                cardImage.sprite = loadedSprite;
+            }
             cardName.text = card.name;
             cardDescription.text = card.description;
-            cardCost.text = card.energyCost.ToString();
+            cardCost.text = card.cost.ToString();
             cardAttack.text = card.attack.ToString();
             cardHealth.text = card.health.ToString();
         }

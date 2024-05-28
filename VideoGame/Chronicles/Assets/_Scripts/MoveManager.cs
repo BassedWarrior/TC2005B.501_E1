@@ -6,11 +6,11 @@ using TMPro;
 
 public class MoveManager : MonoBehaviour
 {
+    private HandManager handManager;
     private RaycastHit2D hitInfo;
     private Camera mainCamera;
     private Vector3 mousePosition;
     private CardPropertiesDrag currentCard;
-    public bool isDragging;
     [SerializeField] private GameObject cardInfo;
     [SerializeField] private Image cardImage;
     [SerializeField] private TextMeshProUGUI cardName;
@@ -18,17 +18,20 @@ public class MoveManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cardCost;
     [SerializeField] private TextMeshProUGUI cardAttack;
     [SerializeField] private TextMeshProUGUI cardHealth;
+    private CardData selectedCard;
+    private bool canDrag = true;
+    public bool isDragging;
+    public bool isOnBoard;
+    public  bool cardPlaced;
     private bool openInfo;
-    private CardCreator selectedCard;
-    private bool canDrag= true;
     private void Start()
     {
         mainCamera = Camera.main;
+        handManager = GameObject.FindGameObjectWithTag("CardManager").GetComponent<HandManager>();
     }
 
     private void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ShowInfo(false);
@@ -40,36 +43,36 @@ public class MoveManager : MonoBehaviour
             if (hitInfo.collider != null && hitInfo.collider.CompareTag("Card"))
             {
                 currentCard = hitInfo.collider.GetComponent<CardPropertiesDrag>();
-                if (currentCard.actualParent != currentCard.originalParent) 
+                if (currentCard != null && currentCard.card != null)
                 {
-                    currentCard.actualParent = currentCard.originalParent; 
+                    if(currentCard.isOnBoard ||  (handManager.khronos >= currentCard.card.cost && !currentCard.isOnBoard))
+                    {
+                        isDragging = true;
+                        currentCard.isDrag = isDragging;
+                        isOnBoard= currentCard.isOnBoard;
+                        ChangeSortingLayer(hitInfo.collider.transform, "ForegroundCanvas");
+                    }
                 }
-                isDragging = true;
-                currentCard.isDrag = true;
-                //currentCard.spriteRenderer.sortingLayerName = "ForegroundCanvas";
             }
         }
         else if (Input.GetMouseButtonUp(0) && currentCard != null && currentCard.isDrag && !openInfo)
         {
-            
             isDragging = false;
-            currentCard.isDrag = false;
-            if (currentCard.actualParent != null) 
-            {
-                currentCard.transform.SetParent(currentCard.actualParent); 
-            }
-            //currentCard.spriteRenderer.sortingLayerName = "GameObjects";
+            currentCard.isDrag = isDragging;
+            ChangeSortingLayer(hitInfo.collider.transform, "GameObjects");
+            CardMovement(currentCard);
         }
         else if (currentCard != null && currentCard.isDrag)
         {
             mousePosition = Input.mousePosition;
             mousePosition.z = -mainCamera.transform.position.z;
             Vector3 worldPosition = mainCamera.ScreenToWorldPoint(mousePosition);
-            //currentCard.spriteRenderer.sortingLayerName = "ForegroundCanvas";
+            ChangeSortingLayer(hitInfo.collider.transform, "ForegroundCanvas");
             currentCard.transform.localScale = new Vector3(2.2f, 2.2f, 0);
             currentCard.transform.position = new Vector3(worldPosition.x, worldPosition.y, currentCard.transform.position.z);
         }
-        if(Input.GetMouseButtonDown(1) && !openInfo)
+
+        if (Input.GetMouseButtonDown(1) && !openInfo)
         {
             hitInfo = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Input.mousePosition));
             if (hitInfo.collider != null && hitInfo.collider.CompareTag("Card") && !openInfo)
@@ -77,7 +80,7 @@ public class MoveManager : MonoBehaviour
                 CardPropertiesDrag cardProperties = hitInfo.collider.GetComponent<CardPropertiesDrag>();
                 if (cardProperties != null)
                 {
-                    selectedCard= cardProperties.card;
+                    selectedCard = cardProperties.card;
                     cardProperties.AssignInfo();
                     ControlInfo(selectedCard);
                     ShowInfo(true);
@@ -85,22 +88,61 @@ public class MoveManager : MonoBehaviour
             }
         }
     }
+
     public void ShowInfo(bool show)
     {
         cardInfo.SetActive(show);
         canDrag = !show;
     }
-    private void ControlInfo(CardCreator card)
+    private void ControlInfo(CardData card)
     {
         Debug.Log(card.name);
         if (card != null)
         {
-            cardImage.sprite = card.artwork;
+            Sprite loadedSprite = Resources.Load<Sprite>("Sprite/Artwork" + card.cardID.ToString());
+            if (loadedSprite != null)
+            {
+                cardImage.sprite = loadedSprite;
+            }
             cardName.text = card.name;
             cardDescription.text = card.description;
-            cardCost.text = card.energyCost.ToString();
+            cardCost.text = card.cost.ToString();
             cardAttack.text = card.attack.ToString();
             cardHealth.text = card.health.ToString();
+        }
+    }
+
+    private void ChangeSortingLayer(Transform cardTransform, string sortingLayer)
+    {
+        Canvas canvas = cardTransform.GetComponentInChildren<Canvas>();
+        if (canvas != null)
+        {
+            canvas.sortingLayerName = sortingLayer;
+        }
+    }
+
+    private void CardMovement(CardPropertiesDrag card)
+    {
+        card.transform.SetParent(card.actualParent);
+        if (card.actualParent == card.originalParent)
+        {
+            Debug.Log("Original parent");
+            card.transform.position = card.originalParent.position;
+            cardPlaced = true;
+            isOnBoard= false;
+        }
+        else
+        {
+            Debug.Log("New parent");
+            card.originalParent = card.actualParent;
+            if (!card.isOnBoard)
+            {
+                card.isOnBoard= true;
+                handManager.EnergyWaste(currentCard.card.cost);
+            }
+            currentCard.transform.SetParent(currentCard.actualParent);
+            cardPlaced = true;
+            isOnBoard= false;
         }
     }
 }
