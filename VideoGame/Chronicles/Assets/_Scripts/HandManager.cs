@@ -126,7 +126,7 @@ public class HandManager : MonoBehaviour
 
     public void AddKhronos()
     {
-        khronos++;
+        khronos += 2;
         khronosQuantity.text = khronos.ToString();
     }
 
