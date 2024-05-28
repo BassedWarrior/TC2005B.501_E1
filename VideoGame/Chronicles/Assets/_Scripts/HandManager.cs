@@ -8,18 +8,23 @@ public class HandManager : MonoBehaviour
 {
     private GameManager gameManager;
     [SerializeField] private GameObject cardPrefab;
-    [SerializeField] private Transform selectiveArea;
-    [SerializeField] private GameObject selectiveCard;
     [SerializeField] private Transform cardArea;
-    [SerializeField] private List<GameObject> buttons;
+    [SerializeField] private GameObject selectiveCard;
+    [SerializeField] private Transform selectiveArea;
     [SerializeField] private GameObject initialScene;
-    private int selectiveCards = 5;
+    private List<GameObject> buttons = new List<GameObject>();
     private List<int> selectedCards = new List<int>();
     private List<bool> activeButtons = new List<bool>();
+    [SerializeField] private TextMeshProUGUI cardsRemaining;
+    [SerializeField] private TextMeshProUGUI khronosQuantity;
+    private int selectiveCards = 5;
+    public int khronos;
 
     void Start()        
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        cardsRemaining.text = gameManager.playersDeck.Count.ToString();
+        khronosQuantity.text = khronos.ToString();
         gameManager.ShuffleDeck();
         ShowInitialHand();
     }
@@ -84,8 +89,6 @@ public class HandManager : MonoBehaviour
         }
         if( gameManager.playersHand.Count < 5)
         {
-            Debug.Log("Cartas Ahora: " + gameManager.playersHand.Count);
-            Debug.Log("Cartas Faltantes: " + (5- gameManager.playersHand.Count));
             int faltantes= (5-gameManager.playersHand.Count);
             for(int i=0;  i<faltantes; i++)
             {
@@ -101,6 +104,9 @@ public class HandManager : MonoBehaviour
                 }
             }
         }
+        cardsRemaining.text = gameManager.playersDeck.Count.ToString();
+        MoveManager moveManager = GameObject.FindGameObjectWithTag("CardManager").GetComponent<MoveManager>();
+        moveManager.cardPlaced =true;
     }
 
     public void DrawCard()
@@ -114,6 +120,22 @@ public class HandManager : MonoBehaviour
             CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
             cardProperties.card= gameManager.cards[card];
             cardProperties.AssignInfo();
+            cardsRemaining.text = gameManager.playersDeck.Count.ToString();
+        }
+    }
+
+    public void AddKhronos()
+    {
+        khronos++;
+        khronosQuantity.text = khronos.ToString();
+    }
+
+    public void EnergyWaste(int cost)
+    {
+        if(khronos >= cost)
+        {
+            khronos -= cost;
+            khronosQuantity.text = khronos.ToString();
         }
     }
 }

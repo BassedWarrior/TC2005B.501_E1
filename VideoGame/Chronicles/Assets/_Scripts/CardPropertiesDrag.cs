@@ -14,6 +14,7 @@ public class CardPropertiesDrag : MonoBehaviour
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI attackText;
     public bool isDrag;
+    public bool isOnBoard;
 
     public void AssignInfo()
     {
@@ -32,7 +33,8 @@ public class CardPropertiesDrag : MonoBehaviour
 
     private void Start()
     {
-        originalParent = GameObject.FindGameObjectWithTag("DragParent").transform;
+        originalParent = GameObject.FindGameObjectWithTag("Deck").transform;
+        actualParent = originalParent;
         isDrag = false;
         if(card != null)
         {
