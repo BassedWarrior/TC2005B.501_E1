@@ -45,7 +45,7 @@ public class MoveManager : MonoBehaviour
                 currentCard = hitInfo.collider.GetComponent<CardPropertiesDrag>();
                 if (currentCard != null && currentCard.card != null)
                 {
-                    if(currentCard.isOnBoard ||  (handManager.khronos >= currentCard.card.energyCost && !currentCard.isOnBoard))
+                    if(currentCard.isOnBoard ||  (handManager.khronos >= currentCard.card.cost && !currentCard.isOnBoard))
                     {
                         isDragging = true;
                         currentCard.isDrag = isDragging;
@@ -138,7 +138,7 @@ public class MoveManager : MonoBehaviour
             if (!card.isOnBoard)
             {
                 card.isOnBoard= true;
-                handManager.EnergyWaste(currentCard.card.energyCost);
+                handManager.EnergyWaste(currentCard.card.cost);
             }
             currentCard.transform.SetParent(currentCard.actualParent);
             cardPlaced = true;
