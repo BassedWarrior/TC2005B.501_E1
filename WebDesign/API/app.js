@@ -101,3 +101,64 @@ app.get("/cards/paradox", async (request, response) => {
         }
     }
 });
+
+app.post("/users/signup", async (request, response) => {
+  let connection = null;
+
+  try {
+      connection = await connectToDB();
+      const { username, password } = request.body;
+
+      if (!username || !password) {
+          return response.status(400).json({ error: 'Username and password are required' });
+      }
+
+      await connection.query("CALL SignUpUser(?, ?)", [username, password]);
+
+      response.status(201).json({ message: 'User created' });
+  } catch (error) {
+      console.log(error);
+      // Manejar errores específicos del procedimiento almacenado
+      if (error.code === 'ER_SIGNAL_EXCEPTION') {
+          response.status(409).json({ error: 'Username already exists' });
+      } else {
+          response.status(500).json({ error: 'Internal Server Error' });
+      }
+  } finally {
+      if (connection !== null) {
+          await connection.end();
+          console.log("Connection closed successfully");
+      }
+  }
+});
+
+app.post("/users/signin", async (request, response) => {
+  let connection = null;
+
+  try {
+      connection = await connectToDB();
+      const { username, password } = request.body;
+
+      if (!username || !password) {
+          return response.status(400).json({ error: 'Username and password are required' });
+      }
+
+      // Llamar al procedimiento almacenado de Sign In
+      await connection.query("CALL SignInUser(?, ?)", [username, password]);
+
+      response.status(200).json({ message: 'Sign in successful' });
+  } catch (error) {
+      console.log(error);
+      // Manejar errores específicos del procedimiento almacenado
+      if (error.code === 'ER_SIGNAL_EXCEPTION') {
+          response.status(401).json({ error: 'Invalid username or password' });
+      } else {
+          response.status(500).json({ error: 'Internal Server Error' });
+      }
+  } finally {
+      if (connection !== null) {
+          await connection.end();
+          console.log("Connection closed successfully");
+      }
+  }
+});
