@@ -190,7 +190,8 @@ MonoBehaviour:
   signInEndpoint: /users/signin
   signUpEndpoint: /users/signup
   errorMessage: {fileID: 1951789772}
-  errorMessageText: {fileID: 0}
+  errorMessageText: {fileID: 1785972980}
+  sceneChanger: {fileID: 126231140}
 --- !u!1 &179867509
 GameObject:
   m_ObjectHideFlags: 0
