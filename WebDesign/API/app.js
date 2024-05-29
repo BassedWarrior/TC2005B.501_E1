@@ -22,7 +22,13 @@ async function connectToDB() {
 app.get("/", async (req, res)=>{
   res.status(200).send("ADAD")
 });
-  
+
+
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}/`);
+});
+
+
 app.get("/cards", async (request, response) => {
   let connection = null;
 
@@ -49,21 +55,6 @@ app.get("/cards", async (request, response) => {
   }
 });
 
-
-app.get('/EnemyWaves', (req, res) =>{
-
-  let sql = 'SELECT * FROM EnemyWave';
-  db.query(sql, (err, result) =>{
-    if (err){
-      res.status(500).send(err);return;}
-    res.json(result);});});
-
-
-
-
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}/`);
-});
 
 
 app.get("/cards/unit", async (request, response) => {
@@ -113,3 +104,27 @@ app.get("/cards/paradox", async (request, response) => {
         }
     }
 });
+
+
+app.get("/enemy/wave/:wave_id", async (request, response) => {
+  let connection = null;
+
+  try {
+      connection = await connectToDB();
+  
+
+      response.status(200).json(result);
+  }
+
+  catch (error) {
+      console.log(error);
+      response.status(500).json(error);
+  }
+  finally {
+      if (connection !== null) {
+          connection.end();
+          console.log("Connection closed succesfully");
+      }
+  }
+});
+
