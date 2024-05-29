@@ -1,4 +1,4 @@
-# **Chronical Doom**
+# **Chronicle Doom**
 
 ## _Game Design Document_
 
