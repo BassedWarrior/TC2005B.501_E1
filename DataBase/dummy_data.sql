@@ -1,3 +1,5 @@
+USE chronicle_doom;
+
 -- Insert data into match table
 INSERT INTO player (username, password, creationDate, highscore_deck) VALUES
 ('user1', 'password1', '2023-01-01', 10),

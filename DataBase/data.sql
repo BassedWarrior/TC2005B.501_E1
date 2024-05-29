@@ -1,4 +1,4 @@
-USE chronical_doom;
+USE chronicle_doom;
 
 INSERT INTO card (cost, name, description, category, attack, health)
 VALUES
