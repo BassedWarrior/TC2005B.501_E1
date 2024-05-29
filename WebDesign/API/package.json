@@ -1,7 +1,7 @@
 {
-  "name": "chronicles_cards",
+  "name": "chronicle_doom",
   "version": "1.0.0",
-  "description": "API que contecta con la DB de nuestro juego Chronicles",
+  "description": "API que contecta con la DB de nuestro juego Chronicle Doom",
   "main": "app.js",
   "type": "module",
   "scripts": {
