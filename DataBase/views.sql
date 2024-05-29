@@ -1,4 +1,4 @@
-USE chronical_doom;
+USE chronicle_doom;
 
 CREATE VIEW unitCards 
 AS SELECT * FROM card
