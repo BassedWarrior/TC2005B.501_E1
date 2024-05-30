@@ -111,11 +111,11 @@ app.get("/enemy/wave/:waveID", async (request, response) => {
 
   try {
     connection = await connectToDB();
-    const [results, fields] = await connection.execute("SELECT * FROM EnemyWave WHERE roundID LIKE ?", [waveID]);
-    console.log(`${results.length} rows returned`);
-    const result = {cards: results};
-    console.log(result);
-    response.status(200).json(result);
+    const [results] = await connection.execute("SELECT cardID FROM enemyWave WHERE roundID = ?", [waveID]);
+    //console.log(`${results.length} rows returned`);
+    //const result = {cards: results};
+    console.log(results);
+    //response.status(200).json(result);
   }
   catch (error) {
     console.log(error);
@@ -132,3 +132,9 @@ app.get("/enemy/wave/:waveID", async (request, response) => {
 app.listen(3000, () => {
   console.log('Server running on port 3000');
 });
+
+
+/* 
+string url = 
+webRequest
+yield return*/
