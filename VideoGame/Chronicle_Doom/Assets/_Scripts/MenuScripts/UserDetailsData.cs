@@ -22,13 +22,19 @@ public class UserDetailsData : MonoBehaviour
 {
     [SerializeField] private TMP_InputField usernameInput;
     [SerializeField] private TMP_InputField passwordInput;
-    [SerializeField] private Button loginButton;
-    [SerializeField] private string url = "localhost:3000/login";
+    [SerializeField] private Button signInButton;
+    [SerializeField] private Button signUpButton;
+    [SerializeField] private string url;
+    [SerializeField] private string signInEndpoint;
+    [SerializeField] private string signUpEndpoint;
     [SerializeField] private GameObject errorMessage;
+    [SerializeField] private TextMeshProUGUI errorMessageText;
+    [SerializeField] private SceneChanger sceneChanger;
 
     private void Start()
     {
-        loginButton.onClick.AddListener(OnLoginButtonClicked);
+        signInButton.onClick.AddListener(OnLoginButtonClicked);
+        signUpButton.onClick.AddListener(OnSignUpButtonClicked);
     }
 
     private void OnLoginButtonClicked()
@@ -36,14 +42,23 @@ public class UserDetailsData : MonoBehaviour
         string username = usernameInput.text;
         string password = passwordInput.text;
 
-        StartCoroutine(SendLoginRequest(username, password));
+        StartCoroutine(SendRequest(username, password, url + signInEndpoint));
     }
 
-    private IEnumerator SendLoginRequest(string username, string password)
+    private void OnSignUpButtonClicked()
+    {
+        string username = usernameInput.text;
+        string password = passwordInput.text;
+
+        Debug.Log("Username: " + username + " Password: " + password);
+        Debug.Log("URL: " + url + signUpEndpoint);
+        StartCoroutine(SendRequest(username, password, url + signUpEndpoint));
+    }
+
+    private IEnumerator SendRequest(string username, string password, string url)
     {
         LoginData loginData = new LoginData(username, password);
         string jsonData = JsonUtility.ToJson(loginData);
-        Debug.Log("Mandando JsonData: " + jsonData);
         
         using (UnityWebRequest www = new UnityWebRequest(url, "POST"))
         {
@@ -56,13 +71,20 @@ public class UserDetailsData : MonoBehaviour
 
             if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
             {
-                Debug.Log("Error: " + www.error);
-                errorMessage.SetActive(true);
+                StartCoroutine(ShowErrorMessage(www.downloadHandler.text));
             }
             else
             {
                 Debug.Log("Respuesta del servidor: " + www.downloadHandler.text);
+                sceneChanger.ChangeToMenuScene();
             }
         }
+    }
+    private IEnumerator ShowErrorMessage(string message)
+    {
+        errorMessageText.text = message;
+        errorMessage.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        errorMessage.SetActive(false);
     }
 }
