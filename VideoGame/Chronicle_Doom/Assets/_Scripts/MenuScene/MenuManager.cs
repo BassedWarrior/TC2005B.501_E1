@@ -243,8 +243,4 @@ public class MenuManager : MonoBehaviour
             cardHealth.text = card.health.ToString();
         }
     }
-    public void PlayScene()
-    {
-        SceneManager.LoadScene("GameScene");
-    }
 }

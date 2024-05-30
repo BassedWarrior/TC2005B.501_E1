@@ -44,7 +44,7 @@ public class APIConnection : MonoBehaviour
                 Debug.Log("Request failed: " + www.error);
             } else {
                 string result = www.downloadHandler.text;
-                Debug.Log("The response was: " + result);
+                //Debug.Log("The response was: " + result);
                 CardData[] cardDataArray = JsonUtility.FromJson<CardDataArrayWrapper>(result).cards;
                 gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
                 foreach(CardData cardData in cardDataArray) {
