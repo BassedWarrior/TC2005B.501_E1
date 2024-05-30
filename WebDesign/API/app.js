@@ -62,7 +62,7 @@ app.get("/cards/unit", async (request, response) => {
 
     try {
         connection = await connectToDB();
-        const [results, fields] = await connection.execute("SELECT * FROM unitCards");
+        const [results, fields] = await connection.execute("unitCards");
 
         console.log(`${results.length} rows returned`);
         const result = {cards: results};
@@ -105,26 +105,30 @@ app.get("/cards/paradox", async (request, response) => {
     }
 });
 
-
-app.get("/enemy/wave/:wave_id", async (request, response) => {
+app.get("/enemy/wave/:waveID", async (request, response) => {
   let connection = null;
+  const waveID = request.params.waveID;
 
   try {
-      connection = await connectToDB();
-  
-
-      response.status(200).json(result);
+    connection = await connectToDB();
+    const [results, fields] = await connection.execute("SELECT * FROM EnemyWave WHERE roundID LIKE ?", [waveID]);
+    console.log(`${results.length} rows returned`);
+    const result = {cards: results};
+    console.log(result);
+    response.status(200).json(result);
   }
-
   catch (error) {
-      console.log(error);
-      response.status(500).json(error);
+    console.log(error);
+    response.status(500).json({ error: error.message });
   }
   finally {
-      if (connection !== null) {
-          connection.end();
-          console.log("Connection closed succesfully");
-      }
+    if (connection !== null) {
+      await connection.end();
+      console.log("Connection closed successfully");
+    }
   }
 });
 
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
+});
