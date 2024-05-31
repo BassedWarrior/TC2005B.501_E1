@@ -132,7 +132,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 126231139}
-  - component: {fileID: 126231140}
   - component: {fileID: 126231141}
   m_Layer: 0
   m_Name: LoginManager
@@ -156,20 +155,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &126231140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 126231137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1edbcb5a255f2948be2ef56ddc4d3e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  welcomeMessage: {fileID: 275571389}
-  deckMessage: {fileID: 1951789772}
 --- !u!114 &126231141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,7 +176,6 @@ MonoBehaviour:
   signUpEndpoint: /users/signup
   errorMessage: {fileID: 1951789772}
   errorMessageText: {fileID: 1785972980}
-  sceneChanger: {fileID: 126231140}
 --- !u!1 &179867509
 GameObject:
   m_ObjectHideFlags: 0
@@ -2148,55 +2132,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1730775532
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1730775534}
-  - component: {fileID: 1730775533}
-  m_Layer: 0
-  m_Name: APIConnection
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1730775533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1730775532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02327d990de7e413abab7a9ea922d60d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url: http://localhost:3000
-  getEndpoint: /
-  getCardsEndpoint: /cards
-  getUnitCardsEndpoint: /cards/unit
-  getParadoxCardsEndpoint: /cards/paradox
---- !u!4 &1730775534
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1730775532}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1747059935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2514,6 +2449,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1945240715}
   - component: {fileID: 1945240714}
+  - component: {fileID: 1945240716}
+  - component: {fileID: 1945240717}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -2551,6 +2488,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1945240716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945240713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02327d990de7e413abab7a9ea922d60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  url: http://localhost:3000
+  getEndpoint: /
+  getCardsEndpoint: /cards
+  getUnitCardsEndpoint: /cards/unit
+  getParadoxCardsEndpoint: /cards/paradox
+  getUsersDeck: /userdeck
+  updateUsersDeck: /updatedeck
+--- !u!114 &1945240717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945240713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1edbcb5a255f2948be2ef56ddc4d3e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  welcomeMessage: {fileID: 275571389}
+  deckMessage: {fileID: 1951789772}
 --- !u!1 &1951789772
 GameObject:
   m_ObjectHideFlags: 0
@@ -2934,5 +2904,4 @@ SceneRoots:
   - {fileID: 755066765}
   - {fileID: 2041578190}
   - {fileID: 126231139}
-  - {fileID: 1730775534}
   - {fileID: 1945240715}

@@ -20,6 +20,7 @@ public class LoginData
 
 public class UserDetailsData : MonoBehaviour
 {
+    private GameManager gameManager;
     [SerializeField] private TMP_InputField usernameInput;
     [SerializeField] private TMP_InputField passwordInput;
     [SerializeField] private Button signInButton;
@@ -29,10 +30,10 @@ public class UserDetailsData : MonoBehaviour
     [SerializeField] private string signUpEndpoint;
     [SerializeField] private GameObject errorMessage;
     [SerializeField] private TextMeshProUGUI errorMessageText;
-    [SerializeField] private SceneChanger sceneChanger;
 
     private void Start()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         signInButton.onClick.AddListener(OnLoginButtonClicked);
         signUpButton.onClick.AddListener(OnSignUpButtonClicked);
     }
@@ -76,7 +77,10 @@ public class UserDetailsData : MonoBehaviour
             else
             {
                 Debug.Log("Respuesta del servidor: " + www.downloadHandler.text);
-                sceneChanger.ChangeToMenuScene();
+                PlayerPrefs.SetString("username", username);
+                gameManager.GetComponent<APIConnection>().GetUsersDeck();
+                gameManager.GetComponent<SceneChanger>().ChangeToMenuScene();
+                
             }
         }
     }

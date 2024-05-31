@@ -19,6 +19,10 @@ async function connectToDB() {
   });
 }
 
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}/`);
+});
+
 app.get("/", async (req, res)=>{
   res.status(200).send("ADAD")
 });
@@ -48,11 +52,6 @@ app.get("/cards", async (request, response) => {
     }
   }
 });
-
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}/`);
-});
-
 
 app.get("/cards/unit", async (request, response) => {
     let connection = null;
@@ -143,7 +142,7 @@ app.post("/users/signin", async (request, response) => {
           return response.status(400).json({ error: 'Username and password are required' });
       }
 
-      // Llamar al procedimiento almacenado de Sign In
+      // Llamar al procedimiento almacenado de Sign In en DB Chronicle_doom
       await connection.query("CALL SignInUser(?, ?)", [username, password]);
 
       response.status(200).json({ message: 'Sign in successful' });
@@ -155,6 +154,109 @@ app.post("/users/signin", async (request, response) => {
       } else {
           response.status(500).json({ error: 'Internal Server Error' });
       }
+  } finally {
+      if (connection !== null) {
+          await connection.end();
+          console.log("Connection closed successfully");
+      }
+  }
+});
+
+app.post("/updatedeck", async (request, response) => {
+  let connection = null;
+
+  try {
+      connection = await connectToDB();
+      const { username, deck_name, card_JSON } = request.body;
+      let cardNumber = 0;
+        if (!card_JSON || !Array.isArray(card_JSON) || card_JSON.length === 0) {
+        return response.status(400).json({ error: 'Card JSON is missing or empty' });
+        }
+    
+      for (let i = 0; i < card_JSON.length; i++) {
+          cardNumber += card_JSON[i].card_times;
+      }
+      if (!username || !deck_name || !card_JSON || cardNumber !== 18) {
+          console.log(cardNumber);
+          return response.status(400).json({ error: 'Exactly 18 cards are required to update a deck'});
+      }
+      
+      await connection.execute("CALL DeleteDeck(?)", [username]);
+        console.log(card_JSON);
+        console.log(card_JSON.length);
+      for (let i = 0; i < card_JSON.length; i++) {
+            console.log(card_JSON[i].cardID);
+            console.log(card_JSON[i].card_times);
+          if (card_JSON[i].cardID) {
+            // Llamar al procedimiento almacenado de Update Deck en DB Chronicle_doom
+            await connection.query("CALL UpdateDeck(?, ?, ?, ?)", [username, deck_name, card_JSON[i].cardID, card_JSON[i].card_times]);
+          }
+        }
+
+      response.status(200).json({ message: 'Deck updated' });
+  } catch (error) {
+      console.log(error);
+      if (error.code === 'ER_SIGNAL_EXCEPTION') {
+          response.status(400).json({ error: error.sqlMessage });
+      } else {
+          response.status(500).json({ error: 'Internal Server Error' });
+      }
+  } finally {
+      if (connection !== null) {
+          await connection.end();
+          console.log("Connection closed successfully");
+      }
+  }
+});
+
+app.get("/userdeck/:username", async (request, response) => {
+  let connection = null;
+
+  try {
+      connection = await connectToDB();
+      const { username } = request.params;
+
+      if (!username) {
+          return response.status(400).json({ error: 'Username is required' });
+      }
+
+      const [results, fields] = await connection.execute(`
+      SELECT 
+        dc.cardID, dc.card_times 
+      FROM 
+        deckCard dc 
+        JOIN deck d ON dc.deckID = d.deckID 
+        JOIN player p ON d.owner = p.username 
+        WHERE p.username = ?`, [username]);
+
+      response.status(200).json(results);
+  } catch (error) {
+      console.log(error);
+      response.status(500).json(error);
+  } finally {
+      if (connection !== null) {
+          await connection.end();
+          console.log("Connection closed successfully");
+      }
+  }
+});
+
+app.get("/tophighscores", async (request, response) => {
+  let connection = null;
+
+  try {
+      connection = await connectToDB();
+
+      const [results, fields] = await connection.execute(`
+      SELECT 
+        username, score
+      FROM game 
+      ORDER BY score DESC LIMIT 10`);
+
+      response.status(200).json(results);
+  } catch (error) {
+      console.log(error);
+      response.status(500).json(error);
   } finally {
       if (connection !== null) {
           await connection.end();

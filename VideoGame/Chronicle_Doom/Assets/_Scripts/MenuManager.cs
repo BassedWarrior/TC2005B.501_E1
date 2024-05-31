@@ -24,6 +24,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button principalButton;
     [SerializeField] private Button collectionButton;
     [SerializeField] private Button highScoreButton;
+    [SerializeField] private Button updateDeckButton;
     private GameManager gameManager;
     private Camera mainCamera;
     private RaycastHit2D hit;
@@ -38,6 +39,7 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        updateDeckButton.onClick.AddListener(() => gameManager.GetComponents<APIConnection>()[0].UpdateUsersDeck());
         mainCamera = Camera.main;
         initialCameraX = mainCamera.transform.position.x;
         principalButton.interactable = false;
