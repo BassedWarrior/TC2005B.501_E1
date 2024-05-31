@@ -113,15 +113,69 @@ public class ClashTime : MonoBehaviour
     {
         if (enemylineA.Count > 0)
         {
+            Debug.Log("Clashing Line A");
             Clash(timelineA, enemylineA);
         }
         if (enemylineB.Count > 0)
         {
+            Debug.Log("Clashing Line B");
             Clash(timelineB, enemylineB);
         }
         if (enemylineC.Count > 0)
         {
+            Debug.Log("Clashing Line C");
             Clash(timelineC, enemylineC);
+        }
+    }
+
+    private void DealLineDamage(List<CardPropertiesDrag> line, int totalDamage)
+    {
+        if (!(totalDamage > 0))
+        {
+            Debug.Log($"Skipping dealing {totalDamage} damage");
+            return;
+        }
+
+        Debug.Log($"Dealing {totalDamage} damage to {line.Count} cards.");
+
+        // Calculate damage dealt to each player card
+        int damagePerCard = (int) Mathf.Floor(
+                (float) totalDamage / line.Count);
+        if (damagePerCard == 0)
+        {
+            Debug.Log("Dealing 1 damage to each card until "
+                      + $"totalDamage ({totalDamage}) runs out");
+            for (int i = 0; i < totalDamage; i++)
+            {
+                line[i].card.health -= 1;
+            }
+            return;
+        }
+
+        Debug.Log($"Raw damage per card: {(float) totalDamage / line.Count}");
+        Debug.Log("Ceil damage per card: "
+                  + $"{Mathf.Ceil((float) totalDamage / line.Count)}");
+        Debug.Log("Floor damage per card: "
+                  + $"{Mathf.Floor((float) totalDamage / line.Count)}");
+        // Deal extra damage to first card in case the damage per
+        // doesn't round nicely
+        int extraDamage = (int) Mathf.Ceil(
+                (float) totalDamage / line.Count) - damagePerCard;
+        Debug.Log($"Dealing extra {extraDamage} damage to "
+                  + "first card.");
+        line[0].card.health -= extraDamage;
+
+        Debug.Log($"Dealing {damagePerCard} damage to "
+                  + "each card.");
+        // Deal damage to each card, ensuring health is never negative
+        foreach (CardPropertiesDrag card in line)
+        {
+            Debug.Log($"Card health before damage: {card.card.health}");
+            Debug.Log($"Card health minus damage: "
+                      + $"{card.card.health - damagePerCard}");
+            card.card.health = Mathf.Max(
+                    0, card.card.health - damagePerCard);
+            Debug.Log($"Card health after damage: {card.card.health}");
         }
     }
 
@@ -139,8 +193,10 @@ public class ClashTime : MonoBehaviour
         // Deal damage to player if there are none.
         if (playerLine.Count == 0)
         {
-            Debug.Log("No player cards in line. Damaging player directly...");
-            gameManager.playerHealth -= enemyAttack;
+            Debug.Log("No player cards in line. Damaging player directly for "
+                      + $"{enemyAttack} damage");
+            gameManager.playerHealth = Mathf.Max(
+                    0, gameManager.playerHealth - enemyAttack);
             return;
         }
 
@@ -169,42 +225,30 @@ public class ClashTime : MonoBehaviour
         // and dealt more damage than their units can defend
         if (playerLine.Count < enemyLine.Count && playerDefence < enemyAttack)
         {
+            Debug.Log("Player is outnumbered and overwhelmed."
+                      + "Damaging player directly for "
+                      + $"{enemyAttack - playerDefence} damage");
             // Deal excess damage to the player directly
-            gameManager.playerHealth -= enemyAttack - playerDefence;
+            gameManager.playerHealth = Mathf.Max(
+                    0,
+                    gameManager.playerHealth - (enemyAttack - playerDefence));
         }
         // The enemy is outnumbered in that line
         // and dealt more damage than its cards can defend
         else if (playerLine.Count > enemyLine.Count && playerAttack > enemyDefence)
         {
+            Debug.Log("Enemy is outnumbered and overwhelmed."
+                      + "Reducing enemy damage by "
+                      + $"{playerAttack - enemyDefence} damage");
             // Reduce damage dealt by enemies
-            enemyAttack -= playerAttack - playerDefence;
+            enemyAttack = Mathf.Max(
+                    0, enemyAttack - (playerAttack - enemyDefence));
         }
 
-        // Calculate damage dealt to each player card
-        int playerDamagePerCard = (int) Mathf.Floor(enemyAttack / playerLine.Count);
-        // Deal extra damage to first card in case the damage per doesn't
-        // round nicely
-        playerLine[0].card.health -= (int) Mathf.Ceil(
-                enemyAttack / playerLine.Count) - playerDamagePerCard;
-        // Deal damage to each card, ensuring health is never negative
-        foreach (CardPropertiesDrag card in playerLine)
-        {
-            card.card.health = Mathf.Max(
-                    0, card.card.health - playerDamagePerCard);
-        }
-
-        // Calculate damage dealt to each enemy card
-        int enemyDamagePerCard = (int) Mathf.Floor(playerAttack / enemyLine.Count);
-        // Deal extra damage to first card in case the damage per doesn't
-        // round nicely
-        enemyLine[0].card.health -= (int) Mathf.Ceil(
-                playerAttack / enemyLine.Count) - enemyDamagePerCard;
-        // Deal damage to each card, ensuring health is never negative
-        foreach (CardPropertiesDrag card in enemyLine)
-        {
-            card.card.health = Mathf.Max(
-                    0, card.card.health - enemyDamagePerCard);
-        }
+        Debug.Log($"Dealing {enemyAttack} damage to player line");
+        DealLineDamage(playerLine, enemyAttack);
+        Debug.Log($"Dealing {playerAttack} damage to enemy line");
+        DealLineDamage(enemyLine, playerAttack);
 
         foreach (CardPropertiesDrag card in playerLine)
         {
