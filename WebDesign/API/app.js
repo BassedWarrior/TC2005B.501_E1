@@ -3,15 +3,15 @@
 import express from "express";
 import mysql from "mysql2/promise";
 import dotenv from "dotenv/config"
+import path from "path";
 
 const app = express();
-const port = process.env.PORT;  // This is taken from the .env file.
+const port = process.env.PORT;  
 app.use(express.json());
-
 
 async function connectToDB() {
   return await mysql.createConnection({
-    // This is also taken from the .env file.
+
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
@@ -29,12 +29,13 @@ app.listen(port, () => {
 });
 
 
+
 app.get("/cards", async (request, response) => {
   let connection = null;
 
   try {
     connection = await connectToDB();
-    const [results, fields] = await connection.execute("select * from card");
+    const [results, fields] = await connection.execute("SELECT * FROM card");
 
     console.log(`${results.length} rows returned`);
 
@@ -54,7 +55,6 @@ app.get("/cards", async (request, response) => {
     }
   }
 });
-
 
 
 app.get("/cards/unit", async (request, response) => {
@@ -113,22 +113,16 @@ app.get("/enemy/wave/:waveID", async (request, response) => {
     connection = await connectToDB();
     const [results, fields] = await connection.execute("SELECT * FROM EnemyWave WHERE roundID LIKE ?", [waveID]);
     console.log(`${results.length} rows returned`);
-    const result = {cards: results};
+    const result = { cards: results };
     console.log(result);
     response.status(200).json(result);
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
     response.status(500).json({ error: error.message });
-  }
-  finally {
+  } finally {
     if (connection !== null) {
       await connection.end();
       console.log("Connection closed successfully");
     }
   }
-});
-
-app.listen(3000, () => {
-  console.log('Server running on port 3000');
 });
