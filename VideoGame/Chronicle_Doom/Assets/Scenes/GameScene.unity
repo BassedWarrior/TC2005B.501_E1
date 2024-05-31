@@ -1938,8 +1938,8 @@ MonoBehaviour:
   cardName: {fileID: 603412732}
   cardDescription: {fileID: 153226181}
   cardCost: {fileID: 377064727}
-  cardAttack: {fileID: 261939212}
-  cardHealth: {fileID: 372590989}
+  cardAttack: {fileID: 372590989}
+  cardHealth: {fileID: 261939212}
   isDragging: 0
   isOnBoard: 0
   cardPlaced: 0
