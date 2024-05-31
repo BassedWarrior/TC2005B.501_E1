@@ -16,6 +16,11 @@ public class ClashTime : MonoBehaviour
     [SerializeField] private Transform enemyAreaC;
     [SerializeField] private GameManager gameManager;
 
+    public void Start()
+    {
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+    }
+
     public void UpdateLists(List<CardPropertiesDrag> previousCards,
                             List<CardPropertiesDrag> currentCards,
                             string listName)
