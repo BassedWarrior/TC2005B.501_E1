@@ -89,7 +89,8 @@ public class SlotController : MonoBehaviour
         foreach (Transform child in transform)
         {
             CardPropertiesDrag card = child.GetComponent<CardPropertiesDrag>();
-            if (card != null)
+            // Add cards only if they exist and have positive health.
+            if (card != null && card.card.health > 0)
             {
                 currentCards.Add(card);
             }

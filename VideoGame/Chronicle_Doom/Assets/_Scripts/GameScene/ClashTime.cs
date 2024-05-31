@@ -14,8 +14,11 @@ public class ClashTime : MonoBehaviour
     [SerializeField] private Transform enemyAreaA;
     [SerializeField] private Transform enemyAreaB;
     [SerializeField] private Transform enemyAreaC;
+    [SerializeField] private GameManager gameManager;
 
-    public void UpdateLists(List<CardPropertiesDrag> previousCards, List<CardPropertiesDrag> currentCards, string listName)
+    public void UpdateLists(List<CardPropertiesDrag> previousCards,
+                            List<CardPropertiesDrag> currentCards,
+                            string listName)
     {
         List<CardPropertiesDrag> targetList = GetListByName(listName);
 
@@ -103,46 +106,109 @@ public class ClashTime : MonoBehaviour
 
     public void CheckClash()
     {
-        if (timelineA.Count > 0 && enemylineA.Count > 0)
+        if (enemylineA.Count > 0)
         {
             Clash(timelineA, enemylineA);
         }
-        if (timelineB.Count > 0 && enemylineB.Count > 0)
+        if (enemylineB.Count > 0)
         {
             Clash(timelineB, enemylineB);
         }
-        if (timelineC.Count > 0 && enemylineC.Count > 0)
+        if (enemylineC.Count > 0)
         {
             Clash(timelineC, enemylineC);
         }
     }
 
-    private void Clash(List<CardPropertiesDrag> playerLine, List<CardPropertiesDrag> enemyLine)
+    private void Clash(List<CardPropertiesDrag> playerLine,
+                       List<CardPropertiesDrag> enemyLine)
     {
-        int playerAttack = 0;
+        // Calculate total enemy attack
         int enemyAttack = 0;
-
-        foreach (CardPropertiesDrag card in playerLine)
-        {
-            playerAttack += card.card.attack;
-        }
-
         foreach (CardPropertiesDrag card in enemyLine)
         {
             enemyAttack += card.card.attack;
         }
 
-        if (playerAttack > enemyAttack)
+        // Check if there are player cards.
+        // Deal damage to player if there are none.
+        if (playerLine.Count == 0)
         {
-            Debug.Log("Player wins");
+            Debug.Log("No player cards in line. Damaging player directly...");
+            gameManager.playerHealth -= enemyAttack;
+            return;
         }
-        else if (playerAttack < enemyAttack)
+
+        // Calculate total player attack
+        int playerAttack = 0;
+        foreach (CardPropertiesDrag card in playerLine)
         {
-            Debug.Log("Enemy wins");
+            playerAttack += card.card.attack;
         }
-        else
+
+        // Calculate total player defence
+        int playerDefence = 0;
+        foreach (CardPropertiesDrag card in playerLine)
         {
-            Debug.Log("Draw");
+            playerDefence += card.card.health;
+        }
+
+        // Calculate total enemy defence
+        int enemyDefence = 0;
+        foreach (CardPropertiesDrag card in enemyLine)
+        {
+            enemyDefence += card.card.health;
+        }
+
+        // The player is outnumbered in that line
+        // and dealt more damage than their units can defend
+        if (playerLine.Count < enemyLine.Count && playerDefence < enemyAttack)
+        {
+            // Deal excess damage to the player directly
+            gameManager.playerHealth -= enemyAttack - playerDefence;
+        }
+        // The enemy is outnumbered in that line
+        // and dealt more damage than its cards can defend
+        else if (playerLine.Count > enemyLine.Count && playerAttack > enemyDefence)
+        {
+            // Reduce damage dealt by enemies
+            enemyAttack -= playerAttack - playerDefence;
+        }
+
+        // Calculate damage dealt to each player card
+        int playerDamagePerCard = (int) Mathf.Floor(enemyAttack / playerLine.Count);
+        // Deal extra damage to first card in case the damage per doesn't
+        // round nicely
+        playerLine[0].card.health -= (int) Mathf.Ceil(
+                enemyAttack / playerLine.Count) - playerDamagePerCard;
+        // Deal damage to each card, ensuring health is never negative
+        foreach (CardPropertiesDrag card in playerLine)
+        {
+            card.card.health = Mathf.Max(
+                    0, card.card.health - playerDamagePerCard);
+        }
+
+        // Calculate damage dealt to each enemy card
+        int enemyDamagePerCard = (int) Mathf.Floor(playerAttack / enemyLine.Count);
+        // Deal extra damage to first card in case the damage per doesn't
+        // round nicely
+        enemyLine[0].card.health -= (int) Mathf.Ceil(
+                playerAttack / enemyLine.Count) - enemyDamagePerCard;
+        // Deal damage to each card, ensuring health is never negative
+        foreach (CardPropertiesDrag card in enemyLine)
+        {
+            card.card.health = Mathf.Max(
+                    0, card.card.health - enemyDamagePerCard);
+        }
+
+        foreach (CardPropertiesDrag card in playerLine)
+        {
+            card.AssignInfo();
+        }
+
+        foreach (CardPropertiesDrag card in enemyLine)
+        {
+            card.AssignInfo();
         }
     }
 }
