@@ -30,9 +30,6 @@ public class WaveManager : MonoBehaviour
     public void NextWave()
     {
         clashTime.RelocateEnemies();
-        Debug.Log("Vamos bien 1");
-        
-        Debug.Log("Vamos bien");
         handManager.DrawCard();
         handManager.AddKhronos();
         StartCoroutine(HideWavePanel());
