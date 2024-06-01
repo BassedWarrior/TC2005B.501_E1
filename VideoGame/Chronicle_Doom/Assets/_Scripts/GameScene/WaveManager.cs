@@ -32,6 +32,7 @@ public class WaveManager : MonoBehaviour
     }
     public void NextWave()
     {
+        playersHealthText.text = "Player Health: " + gameManager.playerHealth;
         if (waveNumber > enemyWaves.Count)
         {
             waveText.text = "There is no more waves, you win!";
@@ -44,7 +45,6 @@ public class WaveManager : MonoBehaviour
             wavePanel.SetActive(true);
             return;
         }
-        playersHealthText.text = "Player Health: " + gameManager.playerHealth;
         clashTime.RelocateEnemies();
         SetWave(waveNumber);
         waveNumber++;

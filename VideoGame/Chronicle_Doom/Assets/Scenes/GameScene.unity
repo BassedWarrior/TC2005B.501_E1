@@ -2009,60 +2009,72 @@ MonoBehaviour:
     - cardID: 1
       name: 
       description: 
-      attack: 4
+      attack: 1
       health: 3
       cost: 1
-    - cardID: 3
-      name: 
-      description: 
-      attack: 2
-      health: 1
-      cost: 3
-  - waveName: SecondWave
-    enemies:
-    - cardID: 5
-      name: 
-      description: 
-      attack: 5
-      health: 5
-      cost: 5
-    - cardID: 8
-      name: 
-      description: 
-      attack: 0
-      health: 0
-      cost: 0
-  - waveName: ThirdWave
-    enemies:
-    - cardID: 9
-      name: 
-      description: 
-      attack: 9
-      health: 9
-      cost: 9
-    - cardID: 1
+    - cardID: 2
       name: 
       description: 
       attack: 1
       health: 1
       cost: 1
-  - waveName: ForthWave
+  - waveName: SecondWave
     enemies:
-    - cardID: 14
+    - cardID: 5
       name: 
       description: 
-      attack: 4
-      health: 6
-      cost: 6
+      attack: 2
+      health: 3
+      cost: 1
+    - cardID: 8
+      name: 
+      description: 
+      attack: 3
+      health: 2
+      cost: 1
+    - cardID: 10
+      name: 
+      description: 
+      attack: 2
+      health: 1
+      cost: 1
+  - waveName: ThirdWave
+    enemies:
+    - cardID: 2
+      name: 
+      description: 
+      attack: 2
+      health: 1
+      cost: 1
+    - cardID: 7
+      name: 
+      description: 
+      attack: 3
+      health: 2
+      cost: 1
+    - cardID: 3
+      name: 
+      description: 
+      attack: 1
+      health: 2
+      cost: 1
+  - waveName: ForthWave
+    enemies:
+    - cardID: 12
+      name: 
+      description: 
+      attack: 2
+      health: 3
+      cost: 1
     - cardID: 4
       name: 
       description: 
       attack: 3
       health: 2
-      cost: 4
+      cost: 1
   - waveName: FifthWave
     enemies:
-    - cardID: 2
+    - cardID: 6
       name: 
       description: 
       attack: 2
@@ -2071,9 +2083,79 @@ MonoBehaviour:
     - cardID: 11
       name: 
       description: 
-      attack: 7
+      attack: 1
+      health: 2
+      cost: 1
+  - waveName: SixthWave
+    enemies:
+    - cardID: 8
+      name: 
+      description: 
+      attack: 2
+      health: 1
+      cost: 2
+    - cardID: 18
+      name: 
+      description: 
+      attack: 1
+      health: 2
+      cost: 1
+  - waveName: SeventhWave
+    enemies:
+    - cardID: 20
+      name: 
+      description: 
+      attack: 3
       health: 4
-      cost: 7
+      cost: 2
+    - cardID: 4
+      name: 
+      description: 
+      attack: 1
+      health: 2
+      cost: 1
+  - waveName: EightWave
+    enemies:
+    - cardID: 14
+      name: 
+      description: 
+      attack: 2
+      health: 6
+      cost: 2
+    - cardID: 4
+      name: 
+      description: 
+      attack: 3
+      health: 2
+      cost: 1
+  - waveName: NinethWave
+    enemies:
+    - cardID: 20
+      name: 
+      description: 
+      attack: 3
+      health: 4
+      cost: 2
+    - cardID: 4
+      name: 
+      description: 
+      attack: 1
+      health: 2
+      cost: 1
+  - waveName: LastWave
+    enemies:
+    - cardID: 20
+      name: 
+      description: 
+      attack: 3
+      health: 4
+      cost: 2
+    - cardID: 4
+      name: 
+      description: 
+      attack: 1
+      health: 2
+      cost: 1
   enemyPrefab: {fileID: 1964758972243524456, guid: fce39acabe63940999622ff84c1791a5, type: 3}
   enemyArea: {fileID: 300977265}
   playersHealthText: {fileID: 1314593247}
