@@ -1,41 +1,57 @@
-
 using System.Collections;
-using UnityEngine;
-using UnityEngine.Networking;
-using TMPro;
 using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+using UnityEngine.Networking;
+
+
+
+
+[System.Serializable]
+public class EnemyWave
+{
+    public string waveName;
+    public List<CardData> enemies;
+}
 
 public class WaveManager : MonoBehaviour
 {
+
     [SerializeField] string url = "http://localhost:3000";
     [SerializeField] string getEnemyWaveEndPoint = "/enemy/wave/";
+    private GameManager gameManager;
     [SerializeField] private HandManager handManager;
-    [SerializeField] private TextMeshProUGUI waveText;
-    [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private ClashTime clashTime;
+    private int waveNumber;
     [SerializeField] private GameObject wavePanel;
-    [SerializeField] private Transform cardArea;
-    [SerializeField] private TextMeshProUGUI cardsRemaining;
+    [SerializeField] private TextMeshProUGUI waveText;
+    private List<CardData> enemyWave;
+    [SerializeField] private List<EnemyWave> enemyWaves;
+    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private Transform enemyArea;
     [SerializeField] private Transform enemyAreaA;
     [SerializeField] private Transform enemyAreaB;
     [SerializeField] private Transform enemyAreaC;
-    [SerializeField] private Transform enemySpawner;
-    [SerializeField] private Transform selectiveArea;
 
-    private int waveNumber;
-    private GameManager gameManager;
-    public List<CardData> cards = new List<CardData>();
-
-    void Start()
+    public void NextWave()
     {
-        waveNumber = 1;
-        gameManager = GameManager.Instance; // Asegúrate de que GameManager esté inicializado
-        GetCards();
-        RelocateEnemies();
+        clashTime.RelocateEnemies();
+        SetWave(waveNumber);
         waveNumber++;
-        CreateWave();
+        handManager.DrawCard();
+        handManager.AddKhronos();
+        StartCoroutine(HideWavePanel());
+    }
+    private IEnumerator HideWavePanel()
+    {
+        waveText.text = "Turn Wave " + (waveNumber-1);
+        wavePanel.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        wavePanel.SetActive(false);
     }
 
-    public void GetCards()
+
+public void GetCards()
     {
         StartCoroutine(RequestGet(url + getEnemyWaveEndPoint + waveNumber));
     }
@@ -69,86 +85,27 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    public void NextWave()
+    private void SetWave(int waveIndex)
     {
-        RelocateEnemies();
-        handManager.DrawCard();
-        handManager.AddKhronos();
-        StartCoroutine(HideWavePanel());
-        GetCards();
-    }
-
-    public void RelocateEnemies()
-    {
-        List<Transform> children = new List<Transform>();
-        foreach (Transform child in enemySpawner)
+        enemyWave = enemyWaves[waveIndex].enemies;
+        foreach (CardData card in enemyWave)
         {
-            if (child != enemySpawner)
-            {
-                children.Add(child);
-            }
-        }
-
-        foreach (Transform child in children)
-        {
-            Debug.Log("Relocating enemies");
-            if (child.CompareTag("Enemy"))
-            {
-                CardPropertiesDrag card = child.GetComponent<CardPropertiesDrag>();
-                if (card != null)
-                {
-                    int randomLine = Random.Range(0, 3);
-                    switch (randomLine)
-                    {
-                        case 0:
-                            card.transform.SetParent(enemyAreaA);
-                            break;
-                        case 1:
-                            card.transform.SetParent(enemyAreaB);
-                            break;
-                        case 2:
-                            card.transform.SetParent(enemyAreaC);
-                            break;
-                    }
-                }
-            }
-        }
-    }
-
-    private IEnumerator HideWavePanel()
-    {
-        waveText.text = "Turn Wave " + (waveNumber - 1);
-        wavePanel.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        wavePanel.SetActive(false);
-    }
-
-    private void CreateWave()
-    {
-        foreach (int index in gameManager.enemyWavesCards)
-        {
-            GameObject newCard = Instantiate(cardPrefab, cardArea);
+            GameObject newCard= Instantiate(enemyPrefab, enemyArea);
+            newCard.tag= "Enemy";
             CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
-            cardProperties.card = gameManager.cards[index];
+            cardProperties.card= card;
             cardProperties.AssignInfo();
         }
     }
-
-    void UpdateCards(CardData cardData)
+    public void FirstWave()
     {
-        gameManager.cards.Add(cardData); // Agrega el CardData a la lista de cartas en GameManager
-        gameManager.enemyWavesCards.Add(cardData.cardID); // Agrega el ID de la carta a la lista enemyWavesCards
+        SetWave(waveNumber);
+        clashTime.RelocateEnemies();
+        waveNumber++;
+        SetWave(waveNumber);
+        waveNumber++;
+        StartCoroutine(HideWavePanel());
+        handManager.AddKhronos();
     }
-
-    [System.Serializable]
-    public class CardData
-    {
-        public int cardID;
-    }
-
-    [System.Serializable]
-    public class CardDataArrayWrapper
-    {
-        public CardData[] cards;
-    }
+    
 }

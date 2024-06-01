@@ -2003,13 +2003,13 @@ MonoBehaviour:
   handManager: {fileID: 392229387}
   waveText: {fileID: 930230183}
   cardPrefab: {fileID: 1964758972243524456, guid: fce39acabe63940999622ff84c1791a5, type: 3}
-  wavePanel: {fileID: 608653438}
+  wavePanel: {fileID: 790670475}
   cardArea: {fileID: 1392738259}
   cardsRemaining: {fileID: 0}
-  enemyAreaA: {fileID: 0}
-  enemyAreaB: {fileID: 0}
-  enemyAreaC: {fileID: 0}
-  enemySpawner: {fileID: 0}
+  enemyAreaA: {fileID: 1627351531}
+  enemyAreaB: {fileID: 729808511}
+  enemyAreaC: {fileID: 1367125102}
+  enemySpawner: {fileID: 300977265}
   selectiveArea: {fileID: 224687862}
   cards: []
 --- !u!1 &519420028
@@ -6169,6 +6169,7 @@ MonoBehaviour:
   cards: []
   playersDeck: 
   playersHand: 
+  enemyWavesCards: 
 --- !u!4 &2135987805
 Transform:
   m_ObjectHideFlags: 0
