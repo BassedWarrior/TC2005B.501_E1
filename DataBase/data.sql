@@ -24,3 +24,30 @@ VALUES
     (6, "Millenial Knowledge", "Grant +5|+5 to an allied unit", "paradox", NULL, NULL),
     (7, "Dinosaur Meteor", "Deal 10 damage to all units in all timelines", "paradox", NULL, NULL),
     (8, "Tzar Bomba", "Deal 5 damage to all enemies", "paradox", NULL, NULL);
+
+INSERT INTO enemyWave (roundID, cardID, card_times) 
+VALUES
+    (1, 1, 1),
+    (1, 2, 1),
+    (2, 5, 1),
+    (2, 10, 1),
+    (2, 8, 1),
+    (3, 7, 1),
+    (3, 5, 1),
+    (3, 2, 1),
+    (4, 9, 2),
+    (4, 7, 2),
+    (5, 11, 2),
+    (5, 9, 2),
+    (6, 15, 2),
+    (6, 14, 2),
+    (7, 6, 2),
+    (7, 7, 2),
+    (8, 13, 2),
+    (8, 14, 2),
+    (9, 15, 2),
+    (9, 16, 1),
+    (9, 17, 1),
+    (10, 16, 2),
+    (10, 17, 2),
+    (10, 18, 1);

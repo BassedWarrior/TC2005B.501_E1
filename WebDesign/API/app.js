@@ -32,7 +32,7 @@ app.get("/cards", async (request, response) => {
 
   try {
     connection = await connectToDB();
-    const [results, fields] = await connection.execute("select * from card");
+    const [results, fields] = await connection.execute("SELECT * FROM card");
 
     console.log(`${results.length} rows returned`);
 
@@ -253,6 +253,36 @@ app.get("/tophighscores", async (request, response) => {
         username, score
       FROM game 
       ORDER BY score DESC LIMIT 10`);
+
+      response.status(200).json(results);
+  } catch (error) {
+      console.log(error);
+      response.status(500).json(error);
+  } finally {
+      if (connection !== null) {
+          await connection.end();
+          console.log("Connection closed successfully");
+      }
+  }
+});
+
+app.get("/enemy/wave/:waveID", async (request, response) => {
+  let connection = null;
+
+  try {
+      connection = await connectToDB();
+      const waveID = request.params.waveID;
+
+      if (!waveID) {
+          return response.status(400).json({ error: 'Wave ID is required' });
+      }
+
+      const [results, fields] = await connection.execute(`
+      SELECT 
+        cardID, card_times 
+      FROM 
+        enemyWave 
+      WHERE roundID = ?`, [waveID]);
 
       response.status(200).json(results);
   } catch (error) {
