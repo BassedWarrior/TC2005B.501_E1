@@ -60,7 +60,6 @@ public class HandManager : MonoBehaviour
         {
             selectedCards.Add(ID);
             buttons[buttonIndex].GetComponent<SelectiveCards>().artworkImage.color = Color.green; 
-            Debug.Log("Selected Cards: " + string.Join(", ", selectedCards));
             activeButtons[buttonIndex] = false;
         }
     }

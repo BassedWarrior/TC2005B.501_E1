@@ -96,7 +96,6 @@ public class MoveManager : MonoBehaviour
     }
     private void ControlInfo(CardData card)
     {
-        Debug.Log(card.name);
         if (card != null)
         {
             Sprite loadedSprite = Resources.Load<Sprite>("Sprite/Artwork" + card.cardID.ToString());
@@ -126,14 +125,12 @@ public class MoveManager : MonoBehaviour
         card.transform.SetParent(card.actualParent);
         if (card.actualParent == card.originalParent)
         {
-            Debug.Log("Original parent");
             card.transform.position = card.originalParent.position;
             cardPlaced = true;
             isOnBoard= false;
         }
         else
         {
-            Debug.Log("New parent");
             card.originalParent = card.actualParent;
             if (!card.isOnBoard)
             {
