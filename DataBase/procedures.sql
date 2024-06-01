@@ -74,10 +74,7 @@ BEGIN
     SELECT deckID INTO deck_id
     FROM deck WHERE owner = p_username;
 
-    IF deck_id IS NULL THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'No decks found for the given user.';
-    ELSEIF (SELECT COUNT(*) FROM deck WHERE owner = p_username) > 1 THEN
+    IF (SELECT COUNT(*) FROM deck WHERE owner = p_username) > 1 THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Multiple decks for the same user.';
     END IF;
