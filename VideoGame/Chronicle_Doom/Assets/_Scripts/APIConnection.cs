@@ -105,7 +105,7 @@ public class APIConnection : MonoBehaviour
             }
         }
         //string jsonData = JsonUtility.ToJson(deckCards);
-        string jsonData = ConvertToCompleteJson(PlayerPrefs.GetString("username"), "wikiwiki", deckCards);
+        string jsonData = ConvertToCompleteJson(PlayerPrefs.GetString("username"), PlayerPrefs.GetString("username") + "'s deck", deckCards);
         Debug.Log(jsonData);
         using (UnityWebRequest www = new UnityWebRequest(url, "POST"))
         {

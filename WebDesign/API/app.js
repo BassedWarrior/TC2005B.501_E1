@@ -181,6 +181,7 @@ app.post("/updatedeck", async (request, response) => {
           return response.status(400).json({ error: 'Exactly 18 cards are required to update a deck'});
       }
       
+      // Llamar al procedimiento almacenado de Delete Deck en DB Chronicle_doom solo si hay cartas
       await connection.execute("CALL DeleteDeck(?)", [username]);
         console.log(card_JSON);
         console.log(card_JSON.length);

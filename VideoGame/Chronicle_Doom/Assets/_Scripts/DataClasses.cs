@@ -17,6 +17,13 @@ public class DeckCard
 }
 
 [System.Serializable]
+public class Deck {
+    public string deck_name;
+    public DeckCard[] cards;
+}
+
+
+[System.Serializable]
 public class CardDataArrayWrapper
 {
     public CardData[] cards;
@@ -26,4 +33,10 @@ public class CardDataArrayWrapper
 public class DeckCardArrayWrapper
 {
     public DeckCard[] deckCards;
+}
+
+[System.Serializable]
+public class DeckArrayWrapper
+{
+    public Deck[] Items;
 }

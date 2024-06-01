@@ -25,6 +25,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button collectionButton;
     [SerializeField] private Button highScoreButton;
     [SerializeField] private Button updateDeckButton;
+    [SerializeField] private TextMeshProUGUI deckName;
+    [SerializeField] private GameObject deckErrorPanel;
+    [SerializeField] private TextMeshProUGUI deckError;
     private GameManager gameManager;
     private Camera mainCamera;
     private RaycastHit2D hit;
@@ -39,7 +42,6 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        updateDeckButton.onClick.AddListener(() => gameManager.GetComponents<APIConnection>()[0].UpdateUsersDeck());
         mainCamera = Camera.main;
         initialCameraX = mainCamera.transform.position.x;
         principalButton.interactable = false;
@@ -50,6 +52,8 @@ public class MenuManager : MonoBehaviour
         ShowInfo(false);
         InitializeCards();
         UpdateDeck();
+        deckName.text = PlayerPrefs.GetString("username") + "'s Deck";
+        deckErrorPanel.SetActive(false);
     }
     private void Update()
     {
@@ -86,6 +90,17 @@ public class MenuManager : MonoBehaviour
         {
             objectToFollow.transform.position = new Vector3(mainCamera.transform.position.x, objectToFollow.transform.position.y, objectToFollow.transform.position.z);
             settings.transform.position = new Vector3(mainCamera.transform.position.x, settings.transform.position.y, settings.transform.position.z);
+        }
+        if (gameManager.playersDeck.Count < 18 && updateDeckButton.onClick != null)
+        {
+            updateDeckButton.onClick.RemoveAllListeners();
+            updateDeckButton.onClick.AddListener(() => ShowDeckError("You must have 18 cards in your deck!"));
+        }
+        else if (gameManager.playersDeck.Count >= 18 && updateDeckButton.onClick != null)
+        {
+            updateDeckButton.onClick.RemoveAllListeners();
+            updateDeckButton.onClick.AddListener(() => gameManager.GetComponents<APIConnection>()[0].UpdateUsersDeck());
+            updateDeckButton.onClick.AddListener(() => ShowDeckError("Deck Updated!"));
         }
     }
     private void InitializeCards()
@@ -244,5 +259,16 @@ public class MenuManager : MonoBehaviour
             cardAttack.text = card.attack.ToString();
             cardHealth.text = card.health.ToString();
         }
+    }
+    public void ShowDeckError(string message)
+    {
+        StartCoroutine(ErrorHandler(message));
+    }
+    IEnumerator ErrorHandler(string message)
+    {
+        deckError.text = message;
+        deckErrorPanel.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        deckErrorPanel.SetActive(false);
     }
 }
