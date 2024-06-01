@@ -2001,17 +2001,17 @@ MonoBehaviour:
   url: http://localhost:3000
   getEnemyWaveEndPoint: /enemy/wave/
   handManager: {fileID: 392229387}
-  waveText: {fileID: 930230183}
-  cardPrefab: {fileID: 1964758972243524456, guid: fce39acabe63940999622ff84c1791a5, type: 3}
+  clashTime: {fileID: 0}
   wavePanel: {fileID: 790670475}
-  cardArea: {fileID: 1392738259}
-  cardsRemaining: {fileID: 0}
+  waveText: {fileID: 930230183}
+  enemyPrefab: {fileID: 1964758972243524456, guid: fce39acabe63940999622ff84c1791a5, type: 3}
+  enemyArea: {fileID: 224687862}
   enemyAreaA: {fileID: 1627351531}
   enemyAreaB: {fileID: 729808511}
   enemyAreaC: {fileID: 1367125102}
-  enemySpawner: {fileID: 300977265}
-  selectiveArea: {fileID: 224687862}
-  cards: []
+  cardPrefab: {fileID: 1964758972243524456, guid: fce39acabe63940999622ff84c1791a5, type: 3}
+  cardArea: {fileID: 0}
+  waveNumber: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
