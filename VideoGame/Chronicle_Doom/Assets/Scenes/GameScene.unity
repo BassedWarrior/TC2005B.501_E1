@@ -1998,83 +1998,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a654320b70742bda7a55bd4ee5bb1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  url: http://localhost:3000
+  getEnemyWaveEndPoint: /enemy/wave/
   handManager: {fileID: 392229387}
-  clashTime: {fileID: 392229388}
-  wavePanel: {fileID: 608653438}
   waveText: {fileID: 930230183}
-  enemyWaves:
-  - waveName: FirstWave
-    enemies:
-    - cardID: 1
-      name: 
-      description: 
-      attack: 0
-      health: 0
-      cost: 0
-    - cardID: 3
-      name: 
-      description: 
-      attack: 0
-      health: 0
-      cost: 0
-  - waveName: SecondWave
-    enemies:
-    - cardID: 5
-      name: 
-      description: 
-      attack: 0
-      health: 0
-      cost: 0
-    - cardID: 8
-      name: 
-      description: 
-      attack: 0
-      health: 0
-      cost: 0
-  - waveName: ThirdWave
-    enemies:
-    - cardID: 9
-      name: 
-      description: 
-      attack: 0
-      health: 0
-      cost: 0
-    - cardID: 1
-      name: 
-      description: 
-      attack: 0
-      health: 0
-      cost: 0
-  - waveName: ForthWave
-    enemies:
-    - cardID: 14
-      name: 
-      description: 
-      attack: 0
-      health: 0
-      cost: 0
-    - cardID: 4
-      name: 
-      description: 
-      attack: 0
-      health: 0
-      cost: 0
-  - waveName: FifthWave
-    enemies:
-    - cardID: 2
-      name: 
-      description: 
-      attack: 0
-      health: 0
-      cost: 0
-    - cardID: 11
-      name: 
-      description: 
-      attack: 0
-      health: 0
-      cost: 0
-  enemyPrefab: {fileID: 1964758972243524456, guid: fce39acabe63940999622ff84c1791a5, type: 3}
-  enemyArea: {fileID: 300977265}
+  cardPrefab: {fileID: 1964758972243524456, guid: fce39acabe63940999622ff84c1791a5, type: 3}
+  wavePanel: {fileID: 608653438}
+  cardArea: {fileID: 1392738259}
+  cardsRemaining: {fileID: 0}
+  enemyAreaA: {fileID: 0}
+  enemyAreaB: {fileID: 0}
+  enemyAreaC: {fileID: 0}
+  enemySpawner: {fileID: 0}
+  selectiveArea: {fileID: 224687862}
+  cards: []
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

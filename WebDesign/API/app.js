@@ -111,7 +111,7 @@ app.get("/enemy/wave/:waveID", async (request, response) => {
 
   try {
     connection = await connectToDB();
-    const [results, fields] = await connection.execute("SELECT * FROM EnemyWave WHERE roundID LIKE ?", [waveID]);
+    const [results, fields] = await connection.execute("SELECT enemyWave.cardID FROM EnemyWave WHERE roundID LIKE ?", [waveID]);
     console.log(`${results.length} rows returned`);
     const result = { cards: results };
     console.log(result);

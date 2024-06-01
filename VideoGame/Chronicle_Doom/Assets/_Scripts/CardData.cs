@@ -1,3 +1,4 @@
+
     [System.Serializable]
     public class CardData
     {
@@ -8,3 +9,5 @@
         public int health;
         public int cost;
     }
+
+    
