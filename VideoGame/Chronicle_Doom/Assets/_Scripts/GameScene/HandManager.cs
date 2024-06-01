@@ -84,7 +84,7 @@ public class HandManager : MonoBehaviour
         {
             GameObject newCard = Instantiate(cardPrefab, cardArea);
             CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
-            cardProperties.card= gameManager.cards[index];
+            cardProperties.card= gameManager.cards[index - 1].DeepCopy();
             cardProperties.AssignInfo();
         }
         if( gameManager.playersHand.Count < 5)
@@ -97,7 +97,7 @@ public class HandManager : MonoBehaviour
                 if(cardProperties != null)
                 {
                     int card= gameManager.playersDeck[i];
-                    cardProperties.card= gameManager.cards[card];
+                    cardProperties.card= gameManager.cards[card].DeepCopy();
                     cardProperties.AssignInfo();
                     gameManager.playersHand.Add(card);
                     gameManager.playersDeck.Remove(card);
@@ -118,7 +118,7 @@ public class HandManager : MonoBehaviour
             gameManager.playersDeck.Remove(card);
             GameObject newCard = Instantiate(cardPrefab, cardArea);
             CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
-            cardProperties.card= gameManager.cards[card];
+            cardProperties.card = gameManager.cards[card].DeepCopy();
             cardProperties.AssignInfo();
             cardsRemaining.text = gameManager.playersDeck.Count.ToString();
         }

@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS card (
     name VARCHAR(30) NOT NULL,
     description TINYTEXT NOT NULL,
     category ENUM('unit', 'paradox') NOT NULL,
-    health TINYINT UNSIGNED,
     attack TINYINT UNSIGNED,
+    health TINYINT UNSIGNED,
     PRIMARY KEY (cardID)
 ) ENGINE=InnoDB, CHARSET=ascii;
 

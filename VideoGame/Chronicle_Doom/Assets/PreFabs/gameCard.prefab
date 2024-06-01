@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 2560079172798430323}
   - component: {fileID: 560280832507674555}
   m_Layer: 5
-  m_Name: Attack
+  m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -339,8 +339,8 @@ MonoBehaviour:
     cost: 0
   artworkImage: {fileID: 523176499943815483}
   energyText: {fileID: 3105834109096811438}
-  healthText: {fileID: 1861338397690173264}
-  attackText: {fileID: 560280832507674555}
+  attackText: {fileID: 1861338397690173264}
+  healthText: {fileID: 560280832507674555}
   isDrag: 0
   isOnBoard: 0
 --- !u!1 &2653345231631874046
@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 368646567775188946}
   - component: {fileID: 1861338397690173264}
   m_Layer: 5
-  m_Name: Health
+  m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

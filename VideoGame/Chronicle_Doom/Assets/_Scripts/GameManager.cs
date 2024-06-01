@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public List<CardData> cards;
     public List<int> playersDeck = new List<int>();
     public List<int> playersHand = new List<int>();
+    public int playerHealth = 20;
 
     private void Awake()
     {
@@ -22,10 +23,12 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);    
         }
     }
+
     public void SortDeck()
     {
         playersDeck.Sort();
     }
+
     public void ShuffleDeck()
     {
         System.Random rng = new System.Random();
