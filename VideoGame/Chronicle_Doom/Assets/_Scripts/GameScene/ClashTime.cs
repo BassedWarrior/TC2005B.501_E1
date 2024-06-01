@@ -126,6 +126,8 @@ public class ClashTime : MonoBehaviour
             Debug.Log("Clashing Line C");
             Clash(timelineC, enemylineC);
         }
+        AfterClash();
+        this.GetComponent<WaveManager>().NextWave();
     }
 
     private void DealLineDamage(List<CardPropertiesDrag> line, int totalDamage)
@@ -258,6 +260,53 @@ public class ClashTime : MonoBehaviour
         foreach (CardPropertiesDrag card in enemyLine)
         {
             card.AssignInfo();
+        }
+    }
+
+    private void AfterClash()
+    {
+        //destroy cards with health <= 0
+        foreach (CardPropertiesDrag card in timelineA)
+        {
+            if (card.card.health <= 0)
+            {
+                Destroy(card.gameObject);
+            }
+        }
+        foreach (CardPropertiesDrag card in timelineB)
+        {
+            if (card.card.health <= 0)
+            {
+                Destroy(card.gameObject);
+            }
+        }
+        foreach (CardPropertiesDrag card in timelineC)
+        {
+            if (card.card.health <= 0)
+            {
+                Destroy(card.gameObject);
+            }
+        }
+        foreach (CardPropertiesDrag card in enemylineA)
+        {
+            if (card.card.health <= 0)
+            {
+                Destroy(card.gameObject);
+            }
+        }
+        foreach (CardPropertiesDrag card in enemylineB)
+        {
+            if (card.card.health <= 0)
+            {
+                Destroy(card.gameObject);
+            }
+        }
+        foreach (CardPropertiesDrag card in enemylineC)
+        {
+            if (card.card.health <= 0)
+            {
+                Destroy(card.gameObject);
+            }
         }
     }
 }
