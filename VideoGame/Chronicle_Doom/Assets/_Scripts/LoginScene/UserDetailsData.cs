@@ -52,7 +52,6 @@ public class UserDetailsData : MonoBehaviour
         string password = passwordInput.text;
 
         Debug.Log("Username: " + username + " Password: " + password);
-        Debug.Log("URL: " + url + signUpEndpoint);
         StartCoroutine(SendRequest(username, password, url + signUpEndpoint));
     }
 
