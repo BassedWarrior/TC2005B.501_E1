@@ -22,9 +22,29 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private List<EnemyWave> enemyWaves;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private Transform enemyArea;
+    [SerializeField] private TextMeshProUGUI playersHealthText;
 
+    private void Start()
+    {
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        waveNumber = 0;
+        playersHealthText.text = "Player Health: " + gameManager.playerHealth;
+    }
     public void NextWave()
     {
+        playersHealthText.text = "Player Health: " + gameManager.playerHealth;
+        if (waveNumber > enemyWaves.Count)
+        {
+            waveText.text = "There is no more waves, you win!";
+            wavePanel.SetActive(true);
+            return;
+        }
+        if (gameManager.playerHealth <= 0)
+        {
+            waveText.text = "You Lose, GAMEOVER!";
+            wavePanel.SetActive(true);
+            return;
+        }
         clashTime.RelocateEnemies();
         SetWave(waveNumber);
         waveNumber++;
