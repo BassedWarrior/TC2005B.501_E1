@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClashTime : MonoBehaviour
 {
@@ -15,10 +16,14 @@ public class ClashTime : MonoBehaviour
     [SerializeField] private Transform enemyAreaB;
     [SerializeField] private Transform enemyAreaC;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private GameObject floatingTextPrefab;
+    [SerializeField] private Canvas mainCanvas;
+    [SerializeField] private Button endTurnButton;
 
     public void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        endTurnButton.onClick.AddListener(CheckClash);
     }
 
     public void UpdateLists(List<CardPropertiesDrag> previousCards,
@@ -29,7 +34,6 @@ public class ClashTime : MonoBehaviour
 
         if (targetList == null)
         {
-            Debug.Log("List not found");
             return;
         }
         foreach (CardPropertiesDrag card in previousCards)
@@ -83,9 +87,9 @@ public class ClashTime : MonoBehaviour
             }
         }
 
+        Debug.Log($"Relocating {children.Count} enemies");
         foreach (Transform child in children)
         {
-            Debug.Log("Relocating enemies");
             if (child.CompareTag("Enemy"))
             {
                 CardPropertiesDrag card = child.GetComponent<CardPropertiesDrag>();
@@ -111,6 +115,7 @@ public class ClashTime : MonoBehaviour
 
     public void CheckClash()
     {
+        endTurnButton.interactable = false;
         if (enemylineA.Count > 0)
         {
             Debug.Log("Clashing Line A");
@@ -126,8 +131,7 @@ public class ClashTime : MonoBehaviour
             Debug.Log("Clashing Line C");
             Clash(timelineC, enemylineC);
         }
-        AfterClash();
-        this.GetComponent<WaveManager>().NextWave();
+        WaitForPlayerTurn();
     }
 
     private void DealLineDamage(List<CardPropertiesDrag> line, int totalDamage)
@@ -178,6 +182,7 @@ public class ClashTime : MonoBehaviour
             card.card.health = Mathf.Max(
                     0, card.card.health - damagePerCard);
             Debug.Log($"Card health after damage: {card.card.health}");
+            ShowFloatingText(card.transform.position, damagePerCard, true);
         }
     }
 
@@ -265,48 +270,47 @@ public class ClashTime : MonoBehaviour
 
     private void AfterClash()
     {
-        //destroy cards with health <= 0
-        foreach (CardPropertiesDrag card in timelineA)
+        DestroyCardsWithZeroHealth(timelineA);
+        DestroyCardsWithZeroHealth(timelineB);
+        DestroyCardsWithZeroHealth(timelineC);
+        DestroyCardsWithZeroHealth(enemylineA);
+        DestroyCardsWithZeroHealth(enemylineB);
+        DestroyCardsWithZeroHealth(enemylineC);
+    }
+
+    private void DestroyCardsWithZeroHealth(List<CardPropertiesDrag> cardList)
+    {
+        foreach (CardPropertiesDrag card in cardList)
         {
             if (card.card.health <= 0)
             {
                 Destroy(card.gameObject);
             }
         }
-        foreach (CardPropertiesDrag card in timelineB)
+    }
+
+
+    private void ShowFloatingText(Vector3 worldPosition, int text, bool isDamage)
+    {
+        GameObject floatingTextInstance = Instantiate(floatingTextPrefab, mainCanvas.transform);
+        CreateFloatingText floatingText = floatingTextInstance.GetComponent<CreateFloatingText>();
+
+        if (floatingText != null)
         {
-            if (card.card.health <= 0)
-            {
-                Destroy(card.gameObject);
-            }
+            floatingText.Initialize(text, worldPosition, isDamage);
         }
-        foreach (CardPropertiesDrag card in timelineC)
-        {
-            if (card.card.health <= 0)
-            {
-                Destroy(card.gameObject);
-            }
-        }
-        foreach (CardPropertiesDrag card in enemylineA)
-        {
-            if (card.card.health <= 0)
-            {
-                Destroy(card.gameObject);
-            }
-        }
-        foreach (CardPropertiesDrag card in enemylineB)
-        {
-            if (card.card.health <= 0)
-            {
-                Destroy(card.gameObject);
-            }
-        }
-        foreach (CardPropertiesDrag card in enemylineC)
-        {
-            if (card.card.health <= 0)
-            {
-                Destroy(card.gameObject);
-            }
-        }
+    }
+
+    private void WaitForPlayerTurn()
+    {
+        StartCoroutine(WaitAndProceed());
+    }
+
+    private IEnumerator<object> WaitAndProceed()
+    {
+        yield return new WaitForSeconds(2.5f);
+        AfterClash();
+        this.GetComponent<WaveManager>().NextWave();
+        endTurnButton.interactable = true;
     }
 }

@@ -109,23 +109,31 @@ public class HandManager : MonoBehaviour
     }
 
     public void DrawCard()
-    {
-        if(gameManager.playersDeck.Count > 0)
+    {   
+        if(cardArea.childCount >= 5)
         {
-            int card= gameManager.playersDeck[0];
-            gameManager.playersHand.Add(card);
-            gameManager.playersDeck.Remove(card);
-            GameObject newCard = Instantiate(cardPrefab, cardArea);
-            CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
-            cardProperties.card = gameManager.cards[card].DeepCopy();
-            cardProperties.AssignInfo();
-            cardsRemaining.text = gameManager.playersDeck.Count.ToString();
+            return;
+        }
+        //dos veces
+        for(int i = 0; i < 2; i++)
+        {
+            if(gameManager.playersDeck.Count > 0)
+            {
+                int card= gameManager.playersDeck[0];
+                gameManager.playersHand.Add(card);
+                gameManager.playersDeck.Remove(card);
+                GameObject newCard = Instantiate(cardPrefab, cardArea);
+                CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
+                cardProperties.card = gameManager.cards[card].DeepCopy();
+                cardProperties.AssignInfo();
+                cardsRemaining.text = gameManager.playersDeck.Count.ToString();
+            }
         }
     }
 
     public void AddKhronos()
     {
-        khronos += 2;
+        khronos += 4;
         khronosQuantity.text = khronos.ToString();
     }
 
