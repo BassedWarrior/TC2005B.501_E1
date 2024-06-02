@@ -2003,159 +2003,7 @@ MonoBehaviour:
   clashTime: {fileID: 392229388}
   wavePanel: {fileID: 608653438}
   waveText: {fileID: 930230183}
-  enemyWaves:
-  - waveName: FirstWave
-    enemies:
-    - cardID: 1
-      name: 
-      description: 
-      attack: 1
-      health: 3
-      cost: 1
-    - cardID: 2
-      name: 
-      description: 
-      attack: 1
-      health: 1
-      cost: 1
-  - waveName: SecondWave
-    enemies:
-    - cardID: 5
-      name: 
-      description: 
-      attack: 2
-      health: 3
-      cost: 1
-    - cardID: 8
-      name: 
-      description: 
-      attack: 3
-      health: 2
-      cost: 1
-    - cardID: 10
-      name: 
-      description: 
-      attack: 2
-      health: 1
-      cost: 1
-  - waveName: ThirdWave
-    enemies:
-    - cardID: 2
-      name: 
-      description: 
-      attack: 2
-      health: 1
-      cost: 1
-    - cardID: 7
-      name: 
-      description: 
-      attack: 3
-      health: 2
-      cost: 1
-    - cardID: 3
-      name: 
-      description: 
-      attack: 1
-      health: 2
-      cost: 1
-  - waveName: ForthWave
-    enemies:
-    - cardID: 12
-      name: 
-      description: 
-      attack: 2
-      health: 3
-      cost: 1
-    - cardID: 4
-      name: 
-      description: 
-      attack: 3
-      health: 2
-      cost: 1
-  - waveName: FifthWave
-    enemies:
-    - cardID: 6
-      name: 
-      description: 
-      attack: 2
-      health: 1
-      cost: 2
-    - cardID: 11
-      name: 
-      description: 
-      attack: 1
-      health: 2
-      cost: 1
-  - waveName: SixthWave
-    enemies:
-    - cardID: 8
-      name: 
-      description: 
-      attack: 2
-      health: 1
-      cost: 2
-    - cardID: 18
-      name: 
-      description: 
-      attack: 1
-      health: 2
-      cost: 1
-  - waveName: SeventhWave
-    enemies:
-    - cardID: 20
-      name: 
-      description: 
-      attack: 3
-      health: 4
-      cost: 2
-    - cardID: 4
-      name: 
-      description: 
-      attack: 1
-      health: 2
-      cost: 1
-  - waveName: EightWave
-    enemies:
-    - cardID: 14
-      name: 
-      description: 
-      attack: 2
-      health: 6
-      cost: 2
-    - cardID: 4
-      name: 
-      description: 
-      attack: 3
-      health: 2
-      cost: 1
-  - waveName: NinethWave
-    enemies:
-    - cardID: 20
-      name: 
-      description: 
-      attack: 3
-      health: 4
-      cost: 2
-    - cardID: 4
-      name: 
-      description: 
-      attack: 1
-      health: 2
-      cost: 1
-  - waveName: LastWave
-    enemies:
-    - cardID: 20
-      name: 
-      description: 
-      attack: 3
-      health: 4
-      cost: 2
-    - cardID: 4
-      name: 
-      description: 
-      attack: 1
-      health: 2
-      cost: 1
+  enemyWave: []
   enemyPrefab: {fileID: 1964758972243524456, guid: fce39acabe63940999622ff84c1791a5, type: 3}
   enemyArea: {fileID: 300977265}
   playersHealthText: {fileID: 1314593247}
@@ -2541,7 +2389,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 392229388}
         m_TargetAssemblyTypeName: ClashTime, Assembly-CSharp
-        m_MethodName: CheckClash
+        m_MethodName: Clash
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6452,6 +6300,7 @@ MonoBehaviour:
   playersDeck: 
   playersHand: 
   playerHealth: 20
+  playerDamage: 0
 --- !u!4 &2135987805
 Transform:
   m_ObjectHideFlags: 0
