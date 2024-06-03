@@ -90,14 +90,16 @@ public class SlotController : MonoBehaviour
         {
             CardPropertiesDrag card = child.GetComponent<CardPropertiesDrag>();
             // Add cards only if they exist and have positive health.
-            if (card != null && card.card.health > 0)
+            if (card != null)
             {
-                currentCards.
-                Add(card);
-            }
-            if (card != null && card.card.health <= 0)
-            {
-                Destroy(card.gameObject);
+                if (card.card.health > 0)
+                {
+                    currentCards.Add(card);
+                }
+                else
+                {
+                    Destroy(card.gameObject);
+                }
             }
         }
 

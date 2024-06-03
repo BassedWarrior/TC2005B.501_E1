@@ -13,6 +13,7 @@ public class CardPropertiesDrag : MonoBehaviour
     public TextMeshProUGUI energyText;
     public TextMeshProUGUI attackText;
     public TextMeshProUGUI healthText;
+    public TextMeshProUGUI damageText;
     public bool isDrag;
     public bool isOnBoard;
 
@@ -28,6 +29,15 @@ public class CardPropertiesDrag : MonoBehaviour
             energyText.text = card.cost.ToString();
             attackText.text = card.attack.ToString();
             healthText.text = card.health.ToString();
+            if (card.damage > 0)
+            {
+                damageText.text = "-" + card.damage.ToString();
+                damageText.enabled = true;
+            }
+            else
+            {
+                damageText.enabled = false;
+            }
         }
     }
 

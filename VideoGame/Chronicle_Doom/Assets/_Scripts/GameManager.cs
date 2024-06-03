@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public List<int> playersDeck = new List<int>();
     public List<int> playersHand = new List<int>();
     public int playerHealth = 20;
+    public int playerDamage = 0;
 
     private void Awake()
     {
@@ -41,5 +42,21 @@ public class GameManager : MonoBehaviour
             playersDeck[range] = playersDeck[n];
             playersDeck[n] = assess;
         }
+    }
+
+    public void ResetPlayerDamage()
+    {
+        this.playerDamage = 0;
+    }
+
+    public void AddPlayerDamage(int damage)
+    {
+        this.playerDamage += damage;
+    }
+
+    public void ApplyPlayerDamage()
+    {
+        this.playerHealth -= this.playerDamage;
+        this.playerDamage = 0;
     }
 }
