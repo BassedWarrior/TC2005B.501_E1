@@ -242,6 +242,30 @@ app.get("/userdeck/:username", async (request, response) => {
   }
 });
 
+app.post("/game/:username", async (request, response) => {
+    let connection = null;
+    try {
+        connection = await connectToDB();
+        const { username } = request.params;
+        const { score, gameRound, kronos, deckCards } = request.body;
+
+        const [results, fields] = await connection.query(
+            "CALL PostGame(?, ?, ?, ?, ?)",
+            [username, score, gameRound, kronos, deckCards]
+        );
+
+        response.status(200).send("Game posted successfully");
+    } catch (error) {
+        console.log(error);
+        response.status(500).json(error);
+    } finally {
+        if (connection !== null) {
+            await connection.end();
+            console.log("Connection closed succesfully");
+        }
+    }
+});
+
 app.get("/tophighscores", async (request, response) => {
   let connection = null;
 
