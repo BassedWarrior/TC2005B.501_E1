@@ -6,20 +6,23 @@ public class CreateFloatingText : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textMesh; 
     private float duration = 2.0f;
 
-    //TRUE= DAMAGE, FALSE= HEAL
-    public void Initialize(int text, Vector3 worldPosition, bool isDamage)
+    // isDamage = TRUE = DAMAGE, FALSE = HEAL
+    // isPreview = TRUE = PREVIEW, FALSE = REAL DAMAGE/HEAL
+
+    public void Initialize(int text, Vector3 worldPosition, bool isDamage, bool isPreview)
     {
-        transform.position = worldPosition;
-        if (isDamage)
+        if (text == 0)
         {
-            textMesh.color = Color.red;
-            textMesh.text = "-"+text.ToString();
+            Destroy(gameObject);
         }
         else
         {
-            textMesh.color = Color.green;
-            textMesh.text = "+"+text.ToString();
+            transform.position = worldPosition;
+            
+            textMesh.color = isPreview ? Color.gray : (isDamage ? Color.red : Color.green);
+            textMesh.text = (isDamage ? "-" : "+") + text.ToString();
+            
+            Destroy(gameObject, duration);
         }
-        Destroy(gameObject, duration);
     }
 }

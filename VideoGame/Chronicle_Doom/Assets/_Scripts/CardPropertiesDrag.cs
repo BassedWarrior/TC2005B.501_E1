@@ -6,14 +6,15 @@ using TMPro;
 
 public class CardPropertiesDrag : MonoBehaviour
 {
+    public CardData card;
+    [SerializeField] private GameObject floatingTextPrefab;
+    [SerializeField] private Canvas mainCanvas;
     public Transform originalParent;
     public Transform actualParent;
-    public CardData card;
     public Image artworkImage;
     public TextMeshProUGUI energyText;
     public TextMeshProUGUI attackText;
     public TextMeshProUGUI healthText;
-    public TextMeshProUGUI damageText;
     public bool isDrag;
     public bool isOnBoard;
 
@@ -29,15 +30,24 @@ public class CardPropertiesDrag : MonoBehaviour
             energyText.text = card.cost.ToString();
             attackText.text = card.attack.ToString();
             healthText.text = card.health.ToString();
-            if (card.damage > 0)
+            if (card.IsAlive() && card != null)
             {
-                damageText.text = "-" + card.damage.ToString();
-                damageText.enabled = true;
+                if (card.damage > 0 && !card.isDamaged)
+                {
+                    ShowFloatingText(transform.position, card.damage, true, true);
+                }
             }
-            else
-            {
-                damageText.enabled = false;
-            }
+        }
+    }
+
+    public void ShowFloatingText(Vector3 worldPosition, int text, bool isDamage, bool isPreview)
+    {
+        GameObject floatingTextInstance = Instantiate(floatingTextPrefab, mainCanvas.transform);
+        CreateFloatingText floatingText = floatingTextInstance.GetComponent<CreateFloatingText>();
+
+        if (floatingText != null)
+        {
+            floatingText.Initialize(text, worldPosition, isDamage, isPreview);
         }
     }
 

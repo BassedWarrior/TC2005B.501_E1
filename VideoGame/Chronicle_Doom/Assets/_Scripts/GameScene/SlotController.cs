@@ -30,6 +30,13 @@ public class SlotController : MonoBehaviour
     void Update()
     {
         int currentChildCount = transform.childCount;
+        if (clashTime.turnFinished)
+        {
+            OrganizeCards();
+            UpdateCardList();
+            clashTime.turnFinished = false;
+        }
+
         if (currentChildCount != lastChildCount)
         {
             if(!isDeck)
@@ -92,7 +99,7 @@ public class SlotController : MonoBehaviour
             // Add cards only if they exist and have positive health.
             if (card != null)
             {
-                if (card.card.health > 0)
+                if (card.card.IsAlive())
                 {
                     currentCards.Add(card);
                 }
@@ -102,8 +109,10 @@ public class SlotController : MonoBehaviour
                 }
             }
         }
-
-        clashTime.UpdateLists(previousCards, currentCards, transform.name);
+        if (currentCards.Count > 0)
+        {
+            clashTime.UpdateLists(previousCards, currentCards, transform.name);
+        }
     }
     private void OrganizeCards()
     {

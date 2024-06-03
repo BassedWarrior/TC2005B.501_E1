@@ -18,6 +18,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private Transform enemyArea;
     [SerializeField] private TextMeshProUGUI playersHealthText;
     [SerializeField] private Image healthBar;
+    [SerializeField] private Button returnMenuButton;
 
     private void Start()
     {
@@ -83,7 +84,6 @@ public class WaveManager : MonoBehaviour
 
     IEnumerator CallWave()
     {
-        Debug.Log("CallWave: " + waveNumber);
         string url = "http://localhost:3000/enemy/wave/" + waveNumber;
         using (UnityWebRequest www = UnityWebRequest.Get(url))
         {
@@ -96,7 +96,7 @@ public class WaveManager : MonoBehaviour
             else
             {
                 string result = www.downloadHandler.text;
-                Debug.Log("The response was: " + result);
+                //Debug.Log("The response was: " + result);
 
                 DeckCard[] deckCards = JsonUtility.FromJson<DeckCardArrayWrapper>("{\"deckCards\":" + result + "}").deckCards;
                 enemyWave.Clear();
@@ -123,6 +123,7 @@ public class WaveManager : MonoBehaviour
     {
         waveText.text = message;
         wavePanel.SetActive(true);
+        returnMenuButton.gameObject.SetActive(true);
     }
 
     private void UpdateHealthBar()

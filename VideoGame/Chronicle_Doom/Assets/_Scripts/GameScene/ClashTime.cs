@@ -16,14 +16,14 @@ public class ClashTime : MonoBehaviour
     [SerializeField] private Transform enemyAreaB;
     [SerializeField] private Transform enemyAreaC;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private GameObject floatingTextPrefab;
     [SerializeField] private Canvas mainCanvas;
     [SerializeField] private Button endTurnButton;
+    public bool turnFinished = false;
 
     public void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        endTurnButton.onClick.AddListener(CheckClash);
+        endTurnButton.onClick.AddListener(Clash);
     }
 
     private List<CardPropertiesDrag> GetListByName(string listName)
@@ -60,7 +60,7 @@ public class ClashTime : MonoBehaviour
             }
         }
 
-        Debug.Log($"Relocating {children.Count} enemies");
+        //Debug.Log($"Relocating {children.Count} enemies");
         foreach (Transform child in children)
         {
             if (child.CompareTag("Enemy"))
@@ -89,7 +89,6 @@ public class ClashTime : MonoBehaviour
     private void CalculateLineDamage(List<CardPropertiesDrag> line,
                                      int totalDamage)
     {
-        endTurnButton.interactable = false;
         // Skip if line is empty
         if (line.Count == 0)
         {
@@ -111,9 +110,12 @@ public class ClashTime : MonoBehaviour
         // Add damage per card to each card
         foreach (CardPropertiesDrag card in line)
         {
-            card.card.ResetDamage();
-            card.card.AddDamage(damagePerCard);
-            card.AssignInfo();
+            if (card.card.IsAlive())
+            {
+                card.card.ResetDamage();
+                card.card.AddDamage(damagePerCard);
+                card.AssignInfo();
+            }
         }
 
         // Add extra damage to first card in case the damage per
@@ -126,6 +128,8 @@ public class ClashTime : MonoBehaviour
     private void CalculateLineClash(List<CardPropertiesDrag> playerLine,
                                     List<CardPropertiesDrag> enemyLine)
     {
+        gameManager.ResetPlayerDamage();
+
         // Calculate total enemy attack
         int enemyAttack = 0;
         foreach (CardPropertiesDrag card in enemyLine)
@@ -189,7 +193,7 @@ public class ClashTime : MonoBehaviour
 
         if (targetList == null)
         {
-            Debug.Log("List not found");
+            //Debug.Log("List not found");
             return;
         }
         foreach (CardPropertiesDrag card in previousCards)
@@ -226,13 +230,23 @@ public class ClashTime : MonoBehaviour
         // Deal damage to each enemy card
         foreach (CardPropertiesDrag card in enemyLine)
         {
-            card.card.ApplyDamage();
+            if (card.card.IsAlive() && card != null)
+            {
+                card.card.isDamaged = true;
+                card.ShowFloatingText(card.transform.position, card.card.damage, true, false);
+                card.card.ApplyDamage();
+            }
         }
 
         // Deal damage to each player card
         foreach (CardPropertiesDrag card in playerLine)
         {
-            card.card.ApplyDamage();
+            if (card.card.IsAlive() && card != null)
+            {
+                card.card.isDamaged = true;
+                card.ShowFloatingText(card.transform.position, card.card.damage, true, false);
+                card.card.ApplyDamage();
+            }
         }
     }
 
@@ -250,22 +264,10 @@ public class ClashTime : MonoBehaviour
     {
         foreach (CardPropertiesDrag card in cardList)
         {
-            if (!card.card.IsAlive())
+            if (card.card.IsAlive() && card != null)
             {
                 Destroy(card.gameObject);
             }
-        }
-    }
-
-
-    private void ShowFloatingText(Vector3 worldPosition, int text, bool isDamage)
-    {
-        GameObject floatingTextInstance = Instantiate(floatingTextPrefab, mainCanvas.transform);
-        CreateFloatingText floatingText = floatingTextInstance.GetComponent<CreateFloatingText>();
-
-        if (floatingText != null)
-        {
-            floatingText.Initialize(text, worldPosition, isDamage);
         }
     }
 
@@ -276,7 +278,7 @@ public class ClashTime : MonoBehaviour
 
     private IEnumerator<object> WaitAndProceed()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(3f);
         AfterClash();
         this.GetComponent<WaveManager>().NextWave();
         endTurnButton.interactable = true;
@@ -284,6 +286,7 @@ public class ClashTime : MonoBehaviour
     
     public void Clash()
     {
+        endTurnButton.interactable = false;
         DealLineDamage(timelineA, enemylineA);
         DealLineDamage(timelineB, enemylineB);
         DealLineDamage(timelineC, enemylineC);
@@ -305,7 +308,7 @@ public class ClashTime : MonoBehaviour
             card.AssignInfo();
         }
 
-        AfterClash();
-        this.GetComponent<WaveManager>().NextWave();
+        turnFinished = true;
+        WaitForPlayerTurn();
     }
 }
