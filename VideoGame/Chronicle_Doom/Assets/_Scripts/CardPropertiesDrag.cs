@@ -11,8 +11,8 @@ public class CardPropertiesDrag : MonoBehaviour
     public CardData card;
     public Image artworkImage;
     public TextMeshProUGUI energyText;
-    public TextMeshProUGUI healthText;
     public TextMeshProUGUI attackText;
+    public TextMeshProUGUI healthText;
     public bool isDrag;
     public bool isOnBoard;
 
@@ -26,8 +26,8 @@ public class CardPropertiesDrag : MonoBehaviour
                 artworkImage.sprite = loadedSprite;
             }
             energyText.text = card.cost.ToString();
-            healthText.text = card.health.ToString();
             attackText.text = card.attack.ToString();
+            healthText.text = card.health.ToString();
         }
     }
 

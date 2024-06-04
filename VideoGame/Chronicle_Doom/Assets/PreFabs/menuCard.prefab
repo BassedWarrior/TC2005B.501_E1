@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 7519433092811615747}
   - component: {fileID: 5447570440201006411}
   m_Layer: 5
-  m_Name: Health
+  m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -465,7 +465,7 @@ GameObject:
   - component: {fileID: 7413052302171859302}
   - component: {fileID: 576385931895165702}
   m_Layer: 5
-  m_Name: Attack
+  m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -727,8 +727,8 @@ MonoBehaviour:
     cost: 0
   artworkImage: {fileID: 256254492777645396}
   energyText: {fileID: 4122625871880380859}
-  healthText: {fileID: 5447570440201006411}
-  attackText: {fileID: 576385931895165702}
+  healthText: {fileID: 576385931895165702}
+  attackText: {fileID: 5447570440201006411}
   withMask: 0
   inclusiveType: 0
 --- !u!1 &7043522526082488419

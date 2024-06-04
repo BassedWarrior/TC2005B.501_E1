@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS card (
     name VARCHAR(30) NOT NULL,
     description TINYTEXT NOT NULL,
     category ENUM('unit', 'paradox') NOT NULL,
-    health TINYINT UNSIGNED,
     attack TINYINT UNSIGNED,
+    health TINYINT UNSIGNED,
     PRIMARY KEY (cardID)
 ) ENGINE=InnoDB, CHARSET=ascii;
 
@@ -78,6 +78,7 @@ CREATE TABLE IF NOT EXISTS game (
 CREATE TABLE IF NOT EXISTS deckCard (
     deckID INT UNSIGNED NOT NULL,
     cardID TINYINT UNSIGNED NOT NULL,
+    card_times TINYINT UNSIGNED NOT NULL,
     PRIMARY KEY (deckID, cardID),
     FOREIGN KEY (deckID) REFERENCES deck(deckID),
     FOREIGN KEY (cardID) REFERENCES card(cardID)
