@@ -11,11 +11,11 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Username already exists';
     ELSE
         -- Insertar el nuevo usuario, asumiendo que la fecha de creación es la fecha actual y highscore_deck es 0
-        INSERT INTO player (username, password, creationDate, highscore_deck) 
+        INSERT INTO player (username, password, creationDate, highscore_deck)
         VALUES (p_username, p_password, CURDATE(), 0);
     END IF;
 END //
-DELIMITER;
+DELIMITER ;
 
 USE chronicle_doom;
 DELIMITER //
@@ -56,7 +56,7 @@ BEGIN
 
     UPDATE deck SET name = p_deckname WHERE deckID = deck_id;
     UPDATE deck SET creationDate = CURDATE() WHERE deckID = deck_id;
-    
+
     INSERT INTO deckCard (deckID, cardID, card_times)
     SELECT deck_id, p_json_cardid, p_card_times;
 END //
@@ -80,5 +80,21 @@ BEGIN
     END IF;
 
     DELETE FROM deckCard WHERE deckID = deck_id;
+END //
+DELIMITER ;
+
+USE chronicle_doom;
+DELIMITER //
+
+CREATE PROCEDURE PostGame(
+    IN p_username VARCHAR(20),
+    IN p_score SMALLINT UNSIGNED,
+    IN p_gameRound TINYINT UNSIGNED,
+    IN p_kronos TINYINT UNSIGNED,
+    IN p_deckCards TINYINT UNSIGNED
+)
+BEGIN
+    INSERT INTO game (username, score, gameRound, kronos, deckCards)
+    VALUES (p_username, p_score, p_gameRound, p_kronos, p_deckCards);
 END //
 DELIMITER ;

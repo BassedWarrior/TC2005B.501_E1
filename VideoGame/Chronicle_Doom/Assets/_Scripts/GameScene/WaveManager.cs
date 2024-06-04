@@ -42,12 +42,14 @@ public class WaveManager : MonoBehaviour
         if (gameManager.playerHealth <= 0)
         {
             DisplayEndMessage("You Lose, GAMEOVER!");
+            gameManager.PostGame();
             return;
         }
 
         if (waveNumber > 10)
         {
             DisplayEndMessage("There is no more waves, you win!");
+            gameManager.PostGame();
             return;
         }
 
@@ -130,5 +132,10 @@ public class WaveManager : MonoBehaviour
     {
         playersHealthText.text = "Player Health: " + gameManager.playerHealth;
         healthBar.fillAmount = (float)gameManager.playerHealth / 20;
+    }
+
+    public int GetWaveNumber()
+    {
+        return waveNumber;
     }
 }

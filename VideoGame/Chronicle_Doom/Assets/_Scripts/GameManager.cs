@@ -5,14 +5,32 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    // API connection for queries and stuff
+    public APIConnection api;
+    // Game scene scripts
+    public WaveManager waveManager;
+    public ClashTime clashTime;
+    public HandManager handManager;
+    public MoveManager moveManager;
+    public GameObject cardManager;
+    // Instance of self
     public static GameManager Instance;
+    // Game Cards
     public List<CardData> cards;
+    // Game information
     public List<int> playersDeck = new List<int>();
     public List<int> playersHand = new List<int>();
     public List<GameObject> textDots = new List<GameObject>();
     public int playerHealth = 20;
     public int playerDamage = 0;
+    public int score = 0;
 
+    public void Start()
+    {
+        api = GetComponent<APIConnection>();
+    }
+
+    // Generate an instance of self that persists throughout scene changes
     private void Awake()
     {
         if (Instance == null)
@@ -34,12 +52,14 @@ public class GameManager : MonoBehaviour
         }
         textDots.Clear();
     }
-
+   
+    // Sort the player deck
     public void SortDeck()
     {
         playersDeck.Sort();
     }
 
+    // Shuffle the player deck
     public void ShuffleDeck()
     {
         System.Random rng = new System.Random();
@@ -53,7 +73,7 @@ public class GameManager : MonoBehaviour
             playersDeck[n] = assess;
         }
     }
-
+    
     public void ResetPlayerDamage()
     {
         this.playerDamage = 0;
@@ -68,5 +88,19 @@ public class GameManager : MonoBehaviour
     {
         this.playerHealth -= this.playerDamage;
         this.playerDamage = 0;
+    }
+    
+    // Post game information to the API to be stored in the database
+    public void PostGame()
+    {
+        cardManager = GameObject.FindGameObjectWithTag("CardManager");
+        waveManager = cardManager.GetComponent<WaveManager>();
+        clashTime = cardManager.GetComponent<ClashTime>();
+        handManager = cardManager.GetComponent<HandManager>();
+        moveManager = cardManager.GetComponent<MoveManager>();
+        api.PostGame(score,
+                     waveManager.GetWaveNumber(),
+                     handManager.GetKronos(),
+                     playersDeck.Count);
     }
 }

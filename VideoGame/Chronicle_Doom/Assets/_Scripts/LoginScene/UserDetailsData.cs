@@ -5,19 +5,6 @@ using System.Collections;
 using System.Text;
 using TMPro;
 
-[System.Serializable]
-public class LoginData
-{
-    public string username;
-    public string password;
-
-    public LoginData(string username, string password)
-    {
-        this.username = username;
-        this.password = password;
-    }
-}
-
 public class UserDetailsData : MonoBehaviour
 {
     private GameManager gameManager;

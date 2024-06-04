@@ -20,7 +20,7 @@ public class HandManager : MonoBehaviour
     private int selectiveCards = 5;
     public int khronos;
 
-    void Start()        
+    void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         cardsRemaining.text = gameManager.playersDeck.Count.ToString();
@@ -144,5 +144,10 @@ public class HandManager : MonoBehaviour
             khronos -= cost;
             khronosQuantity.text = khronos.ToString();
         }
+    }
+
+    public int GetKronos()
+    {
+        return khronos;
     }
 }
