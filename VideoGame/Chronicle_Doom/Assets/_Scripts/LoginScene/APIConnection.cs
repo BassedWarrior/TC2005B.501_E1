@@ -13,6 +13,7 @@ public class APIConnection : MonoBehaviour
     [SerializeField] string getParadoxCardsEndpoint;
     [SerializeField] string getUsersDeck;
     [SerializeField] string updateUsersDeck;
+    [SerializeField] string postGame;
 
     void Start()
     {
@@ -48,7 +49,8 @@ public class APIConnection : MonoBehaviour
     IEnumerator RequestGet(string url)
     {
         // Prepare the request object
-        using(UnityWebRequest www = UnityWebRequest.Get(url)) {
+        using(UnityWebRequest www = UnityWebRequest.Get(url))
+        {
             // Make the request and wait for it to respond
             yield return www.SendWebRequest();
 
@@ -62,6 +64,25 @@ public class APIConnection : MonoBehaviour
                 foreach(CardData cardData in cardDataArray) {
                     UpdateCards(cardData);
                 }
+            }
+        }
+    }
+
+    IEnumerator RequestPost(string url, string json)
+    {
+        // Prepare the request object
+        using(UnityWebRequest www = UnityWebRequest.Post(
+                url, json, "application/json"))
+        {
+            // Make the request and wait for it to respond
+            yield return www.SendWebRequest();
+
+            // Validate the response
+            if(www.result != UnityWebRequest.Result.Success) {
+                Debug.Log("Request failed: " + www.error);
+            } else {
+                string result = www.downloadHandler.text;
+                Debug.Log("The response was: " + result);
             }
         }
     }
@@ -156,5 +177,22 @@ public class APIConnection : MonoBehaviour
         jsonData += "]";
         jsonData += "}";
         return jsonData;
+    }
+
+    public void PostGame(int score, int gameRound, int kronos, int deckCards)
+    {
+        // Post game information to the API
+        // Create JSON string with all game information
+        string jsonData = "{"
+            + $"\"score\": {score},"
+            + $"\"gameRound\": {gameRound},"
+            + $"\"kronos\": {kronos},"
+            + $"\"deckCards\": {deckCards}"
+        + "}";
+
+        // Create a POST request with the JSON data
+        StartCoroutine(RequestPost(
+                url + postGame + "/" + PlayerPrefs.GetString("username"),
+                jsonData));
     }
 }

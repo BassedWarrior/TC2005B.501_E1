@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+
 [System.Serializable]
 public class CardData
 {
@@ -48,4 +51,24 @@ public class DeckCardArrayWrapper
 public class DeckArrayWrapper
 {
     public Deck[] Items;
+}
+
+[System.Serializable]
+public class EnemyWave
+{
+    public string waveName;
+    public List<CardData> enemies;
+}
+
+[System.Serializable]
+public class LoginData
+{
+    public string username;
+    public string password;
+
+    public LoginData(string username, string password)
+    {
+        this.username = username;
+        this.password = password;
+    }
 }

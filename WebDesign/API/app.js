@@ -254,8 +254,10 @@ app.post("/game/:username", async (request, response) => {
             [username, score, gameRound, kronos, deckCards]
         );
 
+        console.log("Game posted successfully");
         response.status(200).send("Game posted successfully");
     } catch (error) {
+        console.log(`Received body: ${request.body}`);
         console.log(error);
         response.status(500).json(error);
     } finally {
