@@ -10,7 +10,6 @@ public class CardData
     public int attack;
     public int health;
     public int damage = 0;
-    public bool isDamaged = false;
 
     public bool IsAlive()
     {

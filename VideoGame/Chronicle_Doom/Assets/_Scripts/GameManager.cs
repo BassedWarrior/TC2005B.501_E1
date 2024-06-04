@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public List<CardData> cards;
     public List<int> playersDeck = new List<int>();
     public List<int> playersHand = new List<int>();
+    public List<GameObject> textDots = new List<GameObject>();
     public int playerHealth = 20;
     public int playerDamage = 0;
 
@@ -23,6 +24,15 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);    
         }
+    }
+
+    public void DeleteDots()
+    {
+        foreach (GameObject dot in textDots)
+        {
+            Destroy(dot);
+        }
+        textDots.Clear();
     }
 
     public void SortDeck()

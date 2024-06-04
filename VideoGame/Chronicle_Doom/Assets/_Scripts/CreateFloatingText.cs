@@ -17,6 +17,7 @@ public class CreateFloatingText : MonoBehaviour
         }
         else
         {
+            GameManager.Instance.textDots.Add(gameObject);
             transform.position = worldPosition;
             
             textMesh.color = isPreview ? Color.gray : (isDamage ? Color.red : Color.green);

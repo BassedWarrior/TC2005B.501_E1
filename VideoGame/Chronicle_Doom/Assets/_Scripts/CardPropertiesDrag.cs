@@ -32,10 +32,7 @@ public class CardPropertiesDrag : MonoBehaviour
             healthText.text = card.health.ToString();
             if (card.IsAlive() && card != null)
             {
-                if (card.damage > 0 && !card.isDamaged)
-                {
-                    ShowFloatingText(transform.position, card.damage, true, true);
-                }
+                ShowFloatingText(transform.position, card.damage, true, true);
             }
         }
     }

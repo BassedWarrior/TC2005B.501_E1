@@ -89,6 +89,7 @@ public class ClashTime : MonoBehaviour
     private void CalculateLineDamage(List<CardPropertiesDrag> line,
                                      int totalDamage)
     {
+
         // Skip if line is empty
         if (line.Count == 0)
         {
@@ -114,7 +115,6 @@ public class ClashTime : MonoBehaviour
             {
                 card.card.ResetDamage();
                 card.card.AddDamage(damagePerCard);
-                card.AssignInfo();
             }
         }
 
@@ -123,6 +123,11 @@ public class ClashTime : MonoBehaviour
         int extraDamage = (int) Mathf.Ceil(
                 (float) totalDamage / line.Count) - damagePerCard;
         line[0].card.AddDamage(extraDamage);
+
+        foreach (CardPropertiesDrag card in line)
+        {
+            card.AssignInfo();
+        }
     }
 
     private void CalculateLineClash(List<CardPropertiesDrag> playerLine,
@@ -185,33 +190,34 @@ public class ClashTime : MonoBehaviour
         CalculateLineDamage(enemyLine, playerAttack);
     }
 
-    public void UpdateLists(List<CardPropertiesDrag> previousCards,
-                            List<CardPropertiesDrag> currentCards,
-                            string listName)
+    public void UpdateLists(List<CardPropertiesDrag> currentCards, string listName)
     {
         List<CardPropertiesDrag> targetList = GetListByName(listName);
+        Debug.Log("Updating list: " + listName);
 
         if (targetList == null)
         {
-            //Debug.Log("List not found");
+            // Debug.Log("List not found");
             return;
         }
-        foreach (CardPropertiesDrag card in previousCards)
-        {
-            if (!currentCards.Contains(card))
-            {
-                targetList.Remove(card);
-            }
-        }
 
+        // Limpiar la lista objetivo para eliminar cualquier carta que ya no esté presente
+        targetList.Clear();
+
+        // Saltar si no hay cartas en la lista actual
+        if (currentCards.Count == 0)
+        {
+            // Debug.Log("No cards in list");
+            return;
+        }
+        // Agregar las cartas actuales a la lista objetivo
         foreach (CardPropertiesDrag card in currentCards)
         {
-            if (!targetList.Contains(card))
-            {
-                targetList.Add(card);
-            }
+            targetList.Add(card);
         }
 
+        GameManager.Instance.DeleteDots();
+        // Realizar cálculos de clash después de actualizar las listas
         CalculateLineClash(timelineA, enemylineA);
         CalculateLineClash(timelineB, enemylineB);
         CalculateLineClash(timelineC, enemylineC);
@@ -232,7 +238,6 @@ public class ClashTime : MonoBehaviour
         {
             if (card.card.IsAlive() && card != null)
             {
-                card.card.isDamaged = true;
                 card.ShowFloatingText(card.transform.position, card.card.damage, true, false);
                 card.card.ApplyDamage();
             }
@@ -243,7 +248,6 @@ public class ClashTime : MonoBehaviour
         {
             if (card.card.IsAlive() && card != null)
             {
-                card.card.isDamaged = true;
                 card.ShowFloatingText(card.transform.position, card.card.damage, true, false);
                 card.card.ApplyDamage();
             }
@@ -262,14 +266,23 @@ public class ClashTime : MonoBehaviour
 
     private void DestroyCardsWithZeroHealth(List<CardPropertiesDrag> cardList)
     {
+        List<CardPropertiesDrag> cardsToRemove = new List<CardPropertiesDrag>();
+
         foreach (CardPropertiesDrag card in cardList)
         {
-            if (card.card.IsAlive() && card != null)
+            if (card != null && !card.card.IsAlive())
             {
                 Destroy(card.gameObject);
+                cardsToRemove.Add(card);
             }
         }
+
+        foreach (CardPropertiesDrag card in cardsToRemove)
+        {
+            cardList.Remove(card);
+        }
     }
+
 
     private void WaitForPlayerTurn()
     {
