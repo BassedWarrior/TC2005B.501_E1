@@ -2470,9 +2470,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f5c6f741b6242968a1886d3e4914ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  api: {fileID: 0}
+  waveManager: {fileID: 0}
+  clashTime: {fileID: 0}
+  handManager: {fileID: 0}
+  moveManager: {fileID: 0}
   cards: []
   playersDeck: 
   playersHand: 
+  playerHealth: 20
+  score: 0
 --- !u!4 &1945240715
 Transform:
   m_ObjectHideFlags: 0
@@ -2507,6 +2514,7 @@ MonoBehaviour:
   getParadoxCardsEndpoint: /cards/paradox
   getUsersDeck: /userdeck
   updateUsersDeck: /updatedeck
+  postGame: /game
 --- !u!114 &1945240717
 MonoBehaviour:
   m_ObjectHideFlags: 0

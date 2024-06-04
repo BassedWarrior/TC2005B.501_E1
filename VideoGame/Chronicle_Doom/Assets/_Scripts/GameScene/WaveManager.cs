@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-[System.Serializable]
-public class EnemyWave
-{
-    public string waveName;
-    public List<CardData> enemies;
-}
-
 public class WaveManager : MonoBehaviour
 {
     private GameManager gameManager;
@@ -37,12 +30,14 @@ public class WaveManager : MonoBehaviour
         {
             waveText.text = "There is no more waves, you win!";
             wavePanel.SetActive(true);
+            gameManager.PostGame();
             return;
         }
         if (gameManager.playerHealth <= 0)
         {
             waveText.text = "You Lose, GAMEOVER!";
             wavePanel.SetActive(true);
+            gameManager.PostGame();
             return;
         }
         clashTime.RelocateEnemies();
@@ -81,5 +76,10 @@ public class WaveManager : MonoBehaviour
         waveNumber++;
         StartCoroutine(HideWavePanel());
         handManager.AddKhronos();
+    }
+
+    public int GetWaveNumber()
+    {
+        return waveNumber;
     }
 }
