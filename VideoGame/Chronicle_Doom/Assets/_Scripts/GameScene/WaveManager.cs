@@ -47,6 +47,7 @@ public class WaveManager : MonoBehaviour
         handManager.AddKhronos();
         StartCoroutine(HideWavePanel());
     }
+
     private IEnumerator HideWavePanel()
     {
         waveText.text = "Turn Wave " + (waveNumber-1);

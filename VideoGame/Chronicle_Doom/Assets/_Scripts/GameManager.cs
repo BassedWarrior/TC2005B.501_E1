@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public List<int> playersHand = new List<int>();
     public int playerHealth = 20;
     public int score = 0;
+    // Highscores
+    public List<GameScore> gameScores;
 
     public void Start()
     {
@@ -75,5 +77,10 @@ public class GameManager : MonoBehaviour
                      waveManager.GetWaveNumber(),
                      handManager.GetKronos(),
                      playersDeck.Count);
+    }
+
+    public List<GameScore> GetTopHighscores()
+    {
+        return gameScores;
     }
 }
