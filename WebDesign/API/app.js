@@ -247,11 +247,11 @@ app.post("/game/:username", async (request, response) => {
     try {
         connection = await connectToDB();
         const { username } = request.params;
-        const { score, gameRound, kronos, deckCards } = request.body;
+        const { score, enemyWave, kronos, deckCards } = request.body;
 
         const [results, fields] = await connection.query(
             "CALL PostGame(?, ?, ?, ?, ?)",
-            [username, score, gameRound, kronos, deckCards]
+            [username, score, enemyWave, kronos, deckCards]
         );
 
         console.log("Game posted successfully");

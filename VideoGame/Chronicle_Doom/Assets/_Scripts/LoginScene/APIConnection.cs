@@ -181,13 +181,13 @@ public class APIConnection : MonoBehaviour
         return jsonData;
     }
 
-    public void PostGame(int score, int gameRound, int kronos, int deckCards)
+    public void PostGame(int score, int enemyWave, int kronos, int deckCards)
     {
         // Post game information to the API
         // Create JSON string with all game information
         string jsonData = "{"
             + $"\"score\": {score},"
-            + $"\"gameRound\": {gameRound},"
+            + $"\"enemyWave\": {enemyWave},"
             + $"\"kronos\": {kronos},"
             + $"\"deckCards\": {deckCards}"
         + "}";
