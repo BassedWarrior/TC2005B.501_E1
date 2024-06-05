@@ -206,7 +206,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2122162068}
+      - m_Target: {fileID: 392229390}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: GoToScene
         m_Mode: 5
@@ -2068,6 +2068,7 @@ GameObject:
   - component: {fileID: 392229387}
   - component: {fileID: 392229388}
   - component: {fileID: 392229389}
+  - component: {fileID: 392229390}
   m_Layer: 0
   m_Name: CardManager
   m_TagString: CardManager
@@ -2183,6 +2184,20 @@ MonoBehaviour:
   returnMenuButton: {fileID: 49419942}
   scoreText: {fileID: 1619932020}
   roundText: {fileID: 648047635}
+--- !u!114 &392229390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392229383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1edbcb5a255f2948be2ef56ddc4d3e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  welcomeMessage: {fileID: 0}
+  deckMessage: {fileID: 0}
 --- !u!1 &465155971
 GameObject:
   m_ObjectHideFlags: 0
