@@ -14,11 +14,13 @@ public class APIConnection : MonoBehaviour
     [SerializeField] string getUsersDeck;
     [SerializeField] string updateUsersDeck;
     [SerializeField] string postGame;
+    [SerializeField] string getTopHighscores;
 
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         GetCards();
+        GetTopHighscores();
     }
 
     public void GetCards()
@@ -194,5 +196,34 @@ public class APIConnection : MonoBehaviour
         StartCoroutine(RequestPost(
                 url + postGame + "/" + PlayerPrefs.GetString("username"),
                 jsonData));
+    }
+
+    IEnumerator RequestGetHighscores(string url)
+    {
+        // Prepare the request object
+        using(UnityWebRequest www = UnityWebRequest.Get(url))
+        {
+            // Make the request and wait for it to respond
+            yield return www.SendWebRequest();
+
+            // Validate the response
+            if(www.result != UnityWebRequest.Result.Success) {
+                Debug.Log("Request failed: " + www.error);
+            } else {
+                string result = www.downloadHandler.text;
+                Debug.Log("The response was: " + result);
+                List<GameScore> gameScores = JsonUtility.FromJson<GameScoreWrapper>("{\"gameScores\":" + result + "}").gameScores;
+                Debug.Log("The parsed scores: " + gameScores);
+                foreach(GameScore gameScore in gameScores) {
+                    gameManager.gameScores.Add(gameScore);
+                }
+            }
+        }
+    }
+
+    public void GetTopHighscores()
+    {
+        // Get top 10 highscores from all user games
+        StartCoroutine(RequestGetHighscores(url + getTopHighscores));
     }
 }

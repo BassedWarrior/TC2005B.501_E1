@@ -2475,11 +2475,13 @@ MonoBehaviour:
   clashTime: {fileID: 0}
   handManager: {fileID: 0}
   moveManager: {fileID: 0}
+  cardManager: {fileID: 0}
   cards: []
   playersDeck: 
   playersHand: 
   playerHealth: 20
   score: 0
+  gameScores: []
 --- !u!4 &1945240715
 Transform:
   m_ObjectHideFlags: 0
@@ -2515,6 +2517,7 @@ MonoBehaviour:
   getUsersDeck: /userdeck
   updateUsersDeck: /updatedeck
   postGame: /game
+  getTopHighscores: /tophighscores
 --- !u!114 &1945240717
 MonoBehaviour:
   m_ObjectHideFlags: 0

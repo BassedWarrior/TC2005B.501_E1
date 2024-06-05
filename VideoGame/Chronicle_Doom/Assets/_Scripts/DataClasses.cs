@@ -101,3 +101,16 @@ public class LoginData
         this.password = password;
     }
 }
+
+[System.Serializable]
+public class GameScore
+{
+    public string username;
+    public int score;
+}
+
+[System.Serializable]
+public class GameScoreWrapper
+{
+    public List<GameScore> gameScores;
+}
