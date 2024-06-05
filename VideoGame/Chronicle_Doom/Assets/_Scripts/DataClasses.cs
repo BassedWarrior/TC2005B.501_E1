@@ -1,12 +1,44 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+
 [System.Serializable]
 public class CardData
 {
     public int cardID;
     public string name;
     public string description;
+    public int cost;
     public int attack;
     public int health;
-    public int cost;
+    public int damage = 0;
+
+    public bool IsAlive()
+    {
+        return this.health > 0;
+    }
+
+    public void ResetDamage()
+    {
+        this.damage = 0;
+    }
+
+    public void AddDamage(int damage)
+    {
+        this.damage += damage;
+    }
+
+    public void ApplyDamage()
+    {
+        if (this.damage == 0)
+        {
+            return;
+        }
+
+        this.health = Mathf.Max(0, this.health - this.damage);
+        this.damage = 0;
+    }
 
     public CardData DeepCopy()
     {
@@ -48,4 +80,37 @@ public class DeckCardArrayWrapper
 public class DeckArrayWrapper
 {
     public Deck[] Items;
+}
+
+[System.Serializable]
+public class EnemyWave
+{
+    public string waveName;
+    public List<CardData> enemies;
+}
+
+[System.Serializable]
+public class LoginData
+{
+    public string username;
+    public string password;
+
+    public LoginData(string username, string password)
+    {
+        this.username = username;
+        this.password = password;
+    }
+}
+
+[System.Serializable]
+public class GameScore
+{
+    public string username;
+    public int score;
+}
+
+[System.Serializable]
+public class GameScoreWrapper
+{
+    public List<GameScore> gameScores;
 }

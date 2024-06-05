@@ -1,14 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
-
-[System.Serializable]
-public class EnemyWave
-{
-    public string waveName;
-    public List<CardData> enemies;
-}
+using UnityEngine.Networking;
 
 public class WaveManager : MonoBehaviour
 {
@@ -18,68 +13,129 @@ public class WaveManager : MonoBehaviour
     private int waveNumber;
     [SerializeField] private GameObject wavePanel;
     [SerializeField] private TextMeshProUGUI waveText;
-    private List<CardData> enemyWave;
-    [SerializeField] private List<EnemyWave> enemyWaves;
+    [SerializeField] private List<CardData> enemyWave;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private Transform enemyArea;
     [SerializeField] private TextMeshProUGUI playersHealthText;
+    [SerializeField] private Image healthBar;
+    [SerializeField] private Button returnMenuButton;
 
     private void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        waveNumber = 0;
-        playersHealthText.text = "Player Health: " + gameManager.playerHealth;
+        waveNumber = 1;
+        UpdateHealthBar();
+        ObtainWave();
     }
+
+    public void FirstWave()
+    {
+        MakeWaveAppear();
+        clashTime.RelocateEnemies();
+        StartNextTurn();
+    }
+
     public void NextWave()
     {
-        playersHealthText.text = "Player Health: " + gameManager.playerHealth;
-        if (waveNumber > enemyWaves.Count)
-        {
-            waveText.text = "There is no more waves, you win!";
-            wavePanel.SetActive(true);
-            return;
-        }
+        UpdateHealthBar();
+
         if (gameManager.playerHealth <= 0)
         {
-            waveText.text = "You Lose, GAMEOVER!";
-            wavePanel.SetActive(true);
+            DisplayEndMessage("You Lose, GAMEOVER!");
+            gameManager.PostGame();
             return;
         }
+
+        if (waveNumber > 10)
+        {
+            DisplayEndMessage("There is no more waves, you win!");
+            gameManager.PostGame();
+            return;
+        }
+
         clashTime.RelocateEnemies();
-        SetWave(waveNumber);
+        StartNextTurn();
+    }
+
+    private void StartNextTurn()
+    {
         waveNumber++;
+        ObtainWave();
+        StartCoroutine(HideWavePanel());
+        MakeWaveAppear();
         handManager.DrawCard();
         handManager.AddKhronos();
-        StartCoroutine(HideWavePanel());
     }
+
+    private void MakeWaveAppear()
+    {
+        foreach (CardData card in enemyWave)
+        {
+            GameObject newCard = Instantiate(enemyPrefab, enemyArea);
+            newCard.tag = "Enemy";
+            CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
+            cardProperties.card = card.DeepCopy();
+            cardProperties.AssignInfo();
+        }
+    }
+
+    public void ObtainWave()
+    {
+        StartCoroutine(CallWave());
+    }
+
+    IEnumerator CallWave()
+    {
+        string url = "http://localhost:3000/enemy/wave/" + waveNumber;
+        using (UnityWebRequest www = UnityWebRequest.Get(url))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log("Request failed: " + www.error);
+            }
+            else
+            {
+                string result = www.downloadHandler.text;
+                //Debug.Log("The response was: " + result);
+
+                DeckCard[] deckCards = JsonUtility.FromJson<DeckCardArrayWrapper>("{\"deckCards\":" + result + "}").deckCards;
+                enemyWave.Clear();
+                foreach (var card in deckCards)
+                {
+                    for (int j = 0; j < card.card_times; j++)
+                    {
+                        enemyWave.Add(gameManager.cards[card.cardID - 1]);
+                    }
+                }
+            }
+        }
+    }
+
     private IEnumerator HideWavePanel()
     {
-        waveText.text = "Turn Wave " + (waveNumber-1);
+        waveText.text = "Turn Wave " + (waveNumber - 1);
         wavePanel.SetActive(true);
         yield return new WaitForSeconds(1f);
         wavePanel.SetActive(false);
     }
 
-    private void SetWave(int waveIndex)
+    private void DisplayEndMessage(string message)
     {
-        enemyWave = enemyWaves[waveIndex].enemies;
-        foreach (CardData card in enemyWave)
-        {
-            GameObject newCard= Instantiate(enemyPrefab, enemyArea);
-            newCard.tag= "Enemy";
-            CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
-            cardProperties.card= card;
-            cardProperties.AssignInfo();
-        }
+        waveText.text = message;
+        wavePanel.SetActive(true);
+        returnMenuButton.gameObject.SetActive(true);
     }
-    public void FirstWave()
+
+    private void UpdateHealthBar()
     {
-        SetWave(waveNumber);
-        clashTime.RelocateEnemies();
-        waveNumber++;
-        SetWave(waveNumber);
-        waveNumber++;
-        StartCoroutine(HideWavePanel());
-        handManager.AddKhronos();
+        playersHealthText.text = "Player Health: " + gameManager.playerHealth;
+        healthBar.fillAmount = (float)gameManager.playerHealth / 20;
+    }
+
+    public int GetWaveNumber()
+    {
+        return waveNumber;
     }
 }

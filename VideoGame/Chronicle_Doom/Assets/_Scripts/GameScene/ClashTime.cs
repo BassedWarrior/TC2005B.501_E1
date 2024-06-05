@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClashTime : MonoBehaviour
 {
@@ -15,38 +16,14 @@ public class ClashTime : MonoBehaviour
     [SerializeField] private Transform enemyAreaB;
     [SerializeField] private Transform enemyAreaC;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private Canvas mainCanvas;
+    [SerializeField] private Button endTurnButton;
+    public bool turnFinished = false;
 
     public void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-    }
-
-    public void UpdateLists(List<CardPropertiesDrag> previousCards,
-                            List<CardPropertiesDrag> currentCards,
-                            string listName)
-    {
-        List<CardPropertiesDrag> targetList = GetListByName(listName);
-
-        if (targetList == null)
-        {
-            Debug.Log("List not found");
-            return;
-        }
-        foreach (CardPropertiesDrag card in previousCards)
-        {
-            if (!currentCards.Contains(card))
-            {
-                targetList.Remove(card);
-            }
-        }
-
-        foreach (CardPropertiesDrag card in currentCards)
-        {
-            if (!targetList.Contains(card))
-            {
-                targetList.Add(card);
-            }
-        }
+        endTurnButton.onClick.AddListener(Clash);
     }
 
     private List<CardPropertiesDrag> GetListByName(string listName)
@@ -83,9 +60,9 @@ public class ClashTime : MonoBehaviour
             }
         }
 
+        //Debug.Log($"Relocating {children.Count} enemies");
         foreach (Transform child in children)
         {
-            Debug.Log("Relocating enemies");
             if (child.CompareTag("Enemy"))
             {
                 CardPropertiesDrag card = child.GetComponent<CardPropertiesDrag>();
@@ -109,81 +86,55 @@ public class ClashTime : MonoBehaviour
         }
     }
 
-    public void CheckClash()
+    private void CalculateLineDamage(List<CardPropertiesDrag> line,
+                                     int totalDamage)
     {
-        if (enemylineA.Count > 0)
-        {
-            Debug.Log("Clashing Line A");
-            Clash(timelineA, enemylineA);
-        }
-        if (enemylineB.Count > 0)
-        {
-            Debug.Log("Clashing Line B");
-            Clash(timelineB, enemylineB);
-        }
-        if (enemylineC.Count > 0)
-        {
-            Debug.Log("Clashing Line C");
-            Clash(timelineC, enemylineC);
-        }
-        AfterClash();
-        this.GetComponent<WaveManager>().NextWave();
-    }
 
-    private void DealLineDamage(List<CardPropertiesDrag> line, int totalDamage)
-    {
-        if (!(totalDamage > 0))
+        // Skip if line is empty
+        if (line.Count == 0)
         {
-            Debug.Log($"Skipping dealing {totalDamage} damage");
             return;
         }
 
-        Debug.Log($"Dealing {totalDamage} damage to {line.Count} cards.");
-
-        // Calculate damage dealt to each player card
+        // Add damage dealt to each player card
         int damagePerCard = (int) Mathf.Floor(
                 (float) totalDamage / line.Count);
         if (damagePerCard == 0)
         {
-            Debug.Log("Dealing 1 damage to each card until "
-                      + $"totalDamage ({totalDamage}) runs out");
             for (int i = 0; i < totalDamage; i++)
             {
-                line[i].card.health -= 1;
+                line[i].card.AddDamage(1);
             }
             return;
         }
 
-        Debug.Log($"Raw damage per card: {(float) totalDamage / line.Count}");
-        Debug.Log("Ceil damage per card: "
-                  + $"{Mathf.Ceil((float) totalDamage / line.Count)}");
-        Debug.Log("Floor damage per card: "
-                  + $"{Mathf.Floor((float) totalDamage / line.Count)}");
-        // Deal extra damage to first card in case the damage per
+        // Add damage per card to each card
+        foreach (CardPropertiesDrag card in line)
+        {
+            if (card.card.IsAlive())
+            {
+                card.card.ResetDamage();
+                card.card.AddDamage(damagePerCard);
+            }
+        }
+
+        // Add extra damage to first card in case the damage per
         // doesn't round nicely
         int extraDamage = (int) Mathf.Ceil(
                 (float) totalDamage / line.Count) - damagePerCard;
-        Debug.Log($"Dealing extra {extraDamage} damage to "
-                  + "first card.");
-        line[0].card.health -= extraDamage;
+        line[0].card.AddDamage(extraDamage);
 
-        Debug.Log($"Dealing {damagePerCard} damage to "
-                  + "each card.");
-        // Deal damage to each card, ensuring health is never negative
         foreach (CardPropertiesDrag card in line)
         {
-            Debug.Log($"Card health before damage: {card.card.health}");
-            Debug.Log($"Card health minus damage: "
-                      + $"{card.card.health - damagePerCard}");
-            card.card.health = Mathf.Max(
-                    0, card.card.health - damagePerCard);
-            Debug.Log($"Card health after damage: {card.card.health}");
+            card.AssignInfo();
         }
     }
 
-    private void Clash(List<CardPropertiesDrag> playerLine,
-                       List<CardPropertiesDrag> enemyLine)
+    private void CalculateLineClash(List<CardPropertiesDrag> playerLine,
+                                    List<CardPropertiesDrag> enemyLine)
     {
+        gameManager.ResetPlayerDamage();
+
         // Calculate total enemy attack
         int enemyAttack = 0;
         foreach (CardPropertiesDrag card in enemyLine)
@@ -195,11 +146,7 @@ public class ClashTime : MonoBehaviour
         // Deal damage to player if there are none.
         if (playerLine.Count == 0)
         {
-            Debug.Log("No player cards in line. Damaging player directly for "
-                      + $"{enemyAttack} damage");
-            gameManager.playerHealth = Mathf.Max(
-                    0, gameManager.playerHealth - enemyAttack);
-            return;
+            gameManager.AddPlayerDamage(enemyAttack);
         }
 
         // Calculate total player attack
@@ -227,86 +174,154 @@ public class ClashTime : MonoBehaviour
         // and dealt more damage than their units can defend
         if (playerLine.Count < enemyLine.Count && playerDefence < enemyAttack)
         {
-            Debug.Log("Player is outnumbered and overwhelmed."
-                      + "Damaging player directly for "
-                      + $"{enemyAttack - playerDefence} damage");
             // Deal excess damage to the player directly
-            gameManager.playerHealth = Mathf.Max(
-                    0,
-                    gameManager.playerHealth - (enemyAttack - playerDefence));
+            gameManager.AddPlayerDamage(enemyAttack - playerDefence);
         }
         // The enemy is outnumbered in that line
         // and dealt more damage than its cards can defend
         else if (playerLine.Count > enemyLine.Count && playerAttack > enemyDefence)
         {
-            Debug.Log("Enemy is outnumbered and overwhelmed."
-                      + "Reducing enemy damage by "
-                      + $"{playerAttack - enemyDefence} damage");
             // Reduce damage dealt by enemies
             enemyAttack = Mathf.Max(
                     0, enemyAttack - (playerAttack - enemyDefence));
         }
 
-        Debug.Log($"Dealing {enemyAttack} damage to player line");
-        DealLineDamage(playerLine, enemyAttack);
-        Debug.Log($"Dealing {playerAttack} damage to enemy line");
-        DealLineDamage(enemyLine, playerAttack);
+        CalculateLineDamage(playerLine, enemyAttack);
+        CalculateLineDamage(enemyLine, playerAttack);
+    }
 
-        foreach (CardPropertiesDrag card in playerLine)
+    public void UpdateLists(List<CardPropertiesDrag> currentCards, string listName)
+    {
+        List<CardPropertiesDrag> targetList = GetListByName(listName);
+        Debug.Log("Updating list: " + listName);
+
+        if (targetList == null)
         {
-            card.AssignInfo();
+            // Debug.Log("List not found");
+            return;
         }
 
+        // Limpiar la lista objetivo para eliminar cualquier carta que ya no esté presente
+        targetList.Clear();
+
+        // Saltar si no hay cartas en la lista actual
+        if (currentCards.Count == 0)
+        {
+            // Debug.Log("No cards in list");
+            return;
+        }
+        // Agregar las cartas actuales a la lista objetivo
+        foreach (CardPropertiesDrag card in currentCards)
+        {
+            targetList.Add(card);
+        }
+
+        GameManager.Instance.DeleteDots();
+        // Realizar cálculos de clash después de actualizar las listas
+        CalculateLineClash(timelineA, enemylineA);
+        CalculateLineClash(timelineB, enemylineB);
+        CalculateLineClash(timelineC, enemylineC);
+    }
+
+    private void DealLineDamage(List<CardPropertiesDrag> playerLine,
+                                List<CardPropertiesDrag> enemyLine)
+    {
+        // Check if there are enemy cards.
+        // Skip if there are none.
+        if (enemyLine.Count == 0)
+        {
+            return;
+        }
+
+        // Deal damage to each enemy card
         foreach (CardPropertiesDrag card in enemyLine)
         {
-            card.AssignInfo();
+            if (card.card.IsAlive() && card != null)
+            {
+                card.ShowFloatingText(card.transform.position, card.card.damage, true, false);
+                card.card.ApplyDamage();
+            }
+        }
+
+        // Deal damage to each player card
+        foreach (CardPropertiesDrag card in playerLine)
+        {
+            if (card.card.IsAlive() && card != null)
+            {
+                card.ShowFloatingText(card.transform.position, card.card.damage, true, false);
+                card.card.ApplyDamage();
+            }
         }
     }
 
     private void AfterClash()
     {
-        //destroy cards with health <= 0
+        DestroyCardsWithZeroHealth(timelineA);
+        DestroyCardsWithZeroHealth(timelineB);
+        DestroyCardsWithZeroHealth(timelineC);
+        DestroyCardsWithZeroHealth(enemylineA);
+        DestroyCardsWithZeroHealth(enemylineB);
+        DestroyCardsWithZeroHealth(enemylineC);
+    }
+
+    private void DestroyCardsWithZeroHealth(List<CardPropertiesDrag> cardList)
+    {
+        List<CardPropertiesDrag> cardsToRemove = new List<CardPropertiesDrag>();
+
+        foreach (CardPropertiesDrag card in cardList)
+        {
+            if (card != null && !card.card.IsAlive())
+            {
+                Destroy(card.gameObject);
+                cardsToRemove.Add(card);
+            }
+        }
+
+        foreach (CardPropertiesDrag card in cardsToRemove)
+        {
+            cardList.Remove(card);
+        }
+    }
+
+
+    private void WaitForPlayerTurn()
+    {
+        StartCoroutine(WaitAndProceed());
+    }
+
+    private IEnumerator<object> WaitAndProceed()
+    {
+        yield return new WaitForSeconds(3f);
+        AfterClash();
+        this.GetComponent<WaveManager>().NextWave();
+        endTurnButton.interactable = true;
+    }
+    
+    public void Clash()
+    {
+        endTurnButton.interactable = false;
+        DealLineDamage(timelineA, enemylineA);
+        DealLineDamage(timelineB, enemylineB);
+        DealLineDamage(timelineC, enemylineC);
+
+        gameManager.ApplyPlayerDamage();
+
         foreach (CardPropertiesDrag card in timelineA)
         {
-            if (card.card.health <= 0)
-            {
-                Destroy(card.gameObject);
-            }
+            card.AssignInfo();
         }
+
         foreach (CardPropertiesDrag card in timelineB)
         {
-            if (card.card.health <= 0)
-            {
-                Destroy(card.gameObject);
-            }
+            card.AssignInfo();
         }
+
         foreach (CardPropertiesDrag card in timelineC)
         {
-            if (card.card.health <= 0)
-            {
-                Destroy(card.gameObject);
-            }
+            card.AssignInfo();
         }
-        foreach (CardPropertiesDrag card in enemylineA)
-        {
-            if (card.card.health <= 0)
-            {
-                Destroy(card.gameObject);
-            }
-        }
-        foreach (CardPropertiesDrag card in enemylineB)
-        {
-            if (card.card.health <= 0)
-            {
-                Destroy(card.gameObject);
-            }
-        }
-        foreach (CardPropertiesDrag card in enemylineC)
-        {
-            if (card.card.health <= 0)
-            {
-                Destroy(card.gameObject);
-            }
-        }
+
+        turnFinished = true;
+        WaitForPlayerTurn();
     }
 }
