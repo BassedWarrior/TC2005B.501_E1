@@ -32,6 +32,13 @@ public class WaveManager : MonoBehaviour
         ObtainWave();
     }
 
+    public void FirstWave()
+    {
+        MakeWaveAppear();
+        clashTime.RelocateEnemies();
+        StartNextTurn();
+    }
+
     public void NextWave()
     {
         UpdateHealthBar();
