@@ -1,0 +1,168 @@
+
+
+*{
+    font-family: "Sedan SC", serif;
+    font-weight: 400;
+    font-style: normal;
+ }
+  
+ html, body
+ {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+ }
+ 
+ 
+ 
+ 
+ .toolBar 
+ {
+    margin: 0;
+    padding: 30px;
+    background-color: #3b3b3b;
+ }
+ 
+ .linksStyle 
+ {
+    display: flex;
+    justify-content: center; 
+    gap: 150px; 
+    
+    
+ }
+ 
+ .linksStyle a 
+ {
+    font-size: 200%;
+    text-decoration: underline; 
+    color: #A8A4B4;
+ }
+ 
+ 
+ 
+ 
+ .GameSpace {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    background-color: #ACACAC;
+    height: 700px;
+ }
+ 
+ .GameSpace img {
+    max-width: 100%; 
+    height: auto; 
+    display: block;
+ }
+ 
+ 
+ 
+ 
+ .DESCRIPTION 
+ {
+    padding: 60px;
+    background-color:#425a70;
+ }
+ 
+ .DESCRIPTION h2
+ {
+    letter-spacing: 10px;
+    display: flex;
+    justify-content: center; 
+    gap: 150px;  
+    font-size: 400%;  
+ }
+ 
+ .DESCRIPTION p
+ {
+    font-size: 150%;
+    text-align: center;
+ }
+ 
+ 
+ 
+ 
+ .RULES 
+ {
+    margin: 0;
+    padding: 60px;
+    background-color:#645a81;
+ }
+ 
+ .RULES h2
+ {
+    letter-spacing: 10px;
+    display: flex;
+    justify-content: center; 
+    gap: 150px;  
+    font-size: 400%;  
+ }
+ 
+ .RULES ul 
+ {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    list-style-position: inside; 
+    font-size: 150%;
+    
+ }
+ 
+ .RULES ul li 
+ {
+    text-align: center;
+    line-gap-override: 10%;
+ }
+ 
+ 
+ 
+ 
+ .container
+ {
+    max-width: 0%;
+    margin: auto;
+ }
+ 
+ .footer
+ {
+    background-color: rgb(99, 31, 70);
+    padding: 20px;
+ 
+ }
+ 
+ .footerRow
+ {
+    display: flex;
+    flex-wrap:nowrap;
+    grid-area: 100%;
+ }
+ 
+ .footerLinks h4
+ {
+    font-size: 20px;
+    color: #ffee00;
+    margin-bottom:25px ;
+    font-weight: 500;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 10px;
+    display: inline-block;
+ }
+ 
+ .footerLinks ul li a
+ {
+    font-size: 18px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    display:  block;
+    margin-bottom: 15px;
+    transition: all .3s ease;
+ }
+ 
+ 
+ .footerLinks ul li a:hover
+ {
+    color: rgb(252, 252, 252);
+    padding-left: 6px;
+ }
