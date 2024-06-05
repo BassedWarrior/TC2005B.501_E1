@@ -1,5 +1,7 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
 
 [System.Serializable]
 public class CardData
@@ -7,9 +9,36 @@ public class CardData
     public int cardID;
     public string name;
     public string description;
+    public int cost;
     public int attack;
     public int health;
-    public int cost;
+    public int damage = 0;
+
+    public bool IsAlive()
+    {
+        return this.health > 0;
+    }
+
+    public void ResetDamage()
+    {
+        this.damage = 0;
+    }
+
+    public void AddDamage(int damage)
+    {
+        this.damage += damage;
+    }
+
+    public void ApplyDamage()
+    {
+        if (this.damage == 0)
+        {
+            return;
+        }
+
+        this.health = Mathf.Max(0, this.health - this.damage);
+        this.damage = 0;
+    }
 
     public CardData DeepCopy()
     {

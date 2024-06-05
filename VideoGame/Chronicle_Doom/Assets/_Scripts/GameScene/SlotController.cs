@@ -30,10 +30,18 @@ public class SlotController : MonoBehaviour
     void Update()
     {
         int currentChildCount = transform.childCount;
+        if (clashTime.turnFinished)
+        {
+            OrganizeCards();
+            UpdateCardList();
+            clashTime.turnFinished = false;
+        }
+
         if (currentChildCount != lastChildCount)
         {
+            Debug.Log("Child count changed in " + transform.name + " slot.");
             if(!isDeck)
-            {
+            {   
                 UpdateCardList();
             }
             OrganizeCards();
@@ -83,26 +91,24 @@ public class SlotController : MonoBehaviour
 
     private void UpdateCardList()
     {
-        List<CardPropertiesDrag> previousCards = new List<CardPropertiesDrag>(currentCards);
+        // Limpiar la lista actual para evitar duplicados
         currentCards.Clear();
         
         foreach (Transform child in transform)
         {
             CardPropertiesDrag card = child.GetComponent<CardPropertiesDrag>();
-            // Add cards only if they exist and have positive health.
-            if (card != null && card.card.health > 0)
+            // Agregar cartas solo si existen y tienen salud positiva.
+            if (card != null && card.card.IsAlive())
             {
-                currentCards.
-                Add(card);
-            }
-            if (card != null && card.card.health <= 0)
-            {
-                Destroy(card.gameObject);
+                // Reiniciar el daño recibido por la carta
+                card.card.ResetDamage();
+                currentCards.Add(card);
             }
         }
-
-        clashTime.UpdateLists(previousCards, currentCards, transform.name);
+        // Actualizar las listas en ClashTime si hay cartas actuales
+        clashTime.UpdateLists(currentCards, transform.name);
     }
+
     private void OrganizeCards()
     {
         Transform deckTransform = transform;

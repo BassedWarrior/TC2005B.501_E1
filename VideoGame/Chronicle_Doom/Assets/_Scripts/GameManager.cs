@@ -20,7 +20,9 @@ public class GameManager : MonoBehaviour
     // Game information
     public List<int> playersDeck = new List<int>();
     public List<int> playersHand = new List<int>();
+    public List<GameObject> textDots = new List<GameObject>();
     public int playerHealth = 20;
+    public int playerDamage = 0;
     public int score = 0;
 
     public void Start()
@@ -42,6 +44,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void DeleteDots()
+    {
+        foreach (GameObject dot in textDots)
+        {
+            Destroy(dot);
+        }
+        textDots.Clear();
+    }
+   
     // Sort the player deck
     public void SortDeck()
     {
@@ -62,7 +73,23 @@ public class GameManager : MonoBehaviour
             playersDeck[n] = assess;
         }
     }
+    
+    public void ResetPlayerDamage()
+    {
+        this.playerDamage = 0;
+    }
 
+    public void AddPlayerDamage(int damage)
+    {
+        this.playerDamage += damage;
+    }
+
+    public void ApplyPlayerDamage()
+    {
+        this.playerHealth -= this.playerDamage;
+        this.playerDamage = 0;
+    }
+    
     // Post game information to the API to be stored in the database
     public void PostGame()
     {
