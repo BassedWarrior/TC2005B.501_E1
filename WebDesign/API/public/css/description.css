@@ -17,6 +17,7 @@
     margin: 0;
     padding: 30px;
     background-color: #0c0c0c;
+    width: 100%;
  }
  
  .linksStyle 
@@ -38,11 +39,14 @@
     color: rgb(192, 166, 253); /* Cambia 'red' por el color que prefieras */
 }
 
+
+
  .gameTitle
  {
     padding: 30px;
     justify-content: center;
     background-color: #0c0031;
+    width: 100%;
  }
 
  .gameTitle h1
@@ -91,7 +95,8 @@
 
 .DESCRIPTION, .Terminology {
     flex: 1; /* Cada uno ocupará la misma cantidad de espacio */
-    padding: 60px;
+    padding: 0px;
+    
     background-color: #425a70;
 }
 
@@ -99,13 +104,14 @@
     letter-spacing: 10px;
     display: flex;
     justify-content: center; 
-    font-size: 400%;  
+    font-size: 400%; 
+    width: 100%;
 }
 
 .container p, .Terminology ul {
     font-size: 200%;
     text-align: center;
-    margin: 10%;
+    margin: 0%;
 }
 
 .Terminology ul {
