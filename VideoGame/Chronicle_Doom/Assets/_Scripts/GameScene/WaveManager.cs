@@ -19,25 +19,24 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playersHealthText;
     [SerializeField] private Image healthBar;
     [SerializeField] private Button returnMenuButton;
+    [SerializeField] public TextMeshProUGUI scoreText;
+    [SerializeField] public TextMeshProUGUI roundText;
 
     private void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         waveNumber = 1;
         UpdateHealthBar();
+        UpdateScoreText();
+        UpdateRoundText();
         ObtainWave();
-    }
-
-    public void FirstWave()
-    {
-        MakeWaveAppear();
-        clashTime.RelocateEnemies();
-        StartNextTurn();
     }
 
     public void NextWave()
     {
         UpdateHealthBar();
+        UpdateScoreText();
+        UpdateRoundText();
 
         if (gameManager.playerHealth <= 0)
         {
@@ -59,6 +58,8 @@ public class WaveManager : MonoBehaviour
 
     private void StartNextTurn()
     {
+        Debug.Log($"Adding {waveNumber * 100} score for round {waveNumber}!");
+        gameManager.AddRoundScore(waveNumber);
         waveNumber++;
         ObtainWave();
         StartCoroutine(HideWavePanel());
@@ -76,6 +77,7 @@ public class WaveManager : MonoBehaviour
             CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
             cardProperties.card = card.DeepCopy();
             cardProperties.AssignInfo();
+            cardProperties.card.CalculateScoreValue();
         }
     }
 
@@ -134,6 +136,16 @@ public class WaveManager : MonoBehaviour
         healthBar.fillAmount = (float)gameManager.playerHealth / 20;
     }
 
+    public void UpdateScoreText()
+    {
+        this.scoreText.text = $"Score: {this.gameManager.score}";
+    }
+    
+    public void UpdateRoundText()
+    {
+        this.roundText.text = $"Round: {this.waveNumber}";
+    }
+    
     public int GetWaveNumber()
     {
         return waveNumber;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,11 +22,13 @@ public class GameManager : MonoBehaviour
     public List<int> playersDeck = new List<int>();
     public List<int> playersHand = new List<int>();
     public List<GameObject> textDots = new List<GameObject>();
+    // Player information
     public int playerHealth = 20;
     public int playerDamage = 0;
-    public int score = 0;
     // Highscores
     public List<GameScore> gameScores;
+    // Score information
+    public int score = 0;
 
     public void Start()
     {
@@ -91,7 +94,17 @@ public class GameManager : MonoBehaviour
         this.playerHealth -= this.playerDamage;
         this.playerDamage = 0;
     }
-    
+
+    public void AddKillScore(int killScore)
+    {
+        this.score += killScore;
+    }
+
+    public void AddRoundScore(int round)
+    {
+        this.score += 100 * round;
+    }
+
     // Post game information to the API to be stored in the database
     public void PostGame()
     {
