@@ -140,7 +140,7 @@ public class WaveManager : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        playersHealthText.text = "Player Health: " + gameManager.playerHealth;
+        playersHealthText.text = "Health: " + gameManager.playerHealth;
         healthBar.fillAmount = (float)gameManager.playerHealth / 20;
     }
 
