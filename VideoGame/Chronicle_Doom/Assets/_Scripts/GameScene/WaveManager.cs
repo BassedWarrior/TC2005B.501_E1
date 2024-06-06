@@ -28,7 +28,7 @@ public class WaveManager : MonoBehaviour
         waveNumber = 1;
         UpdateHealthBar();
         UpdateScoreText();
-        UpdateRoundText();
+        UpdateWaveText();
         ObtainWave();
     }
 
@@ -43,7 +43,7 @@ public class WaveManager : MonoBehaviour
     {
         UpdateHealthBar();
         UpdateScoreText();
-        UpdateRoundText();
+        UpdateWaveText();
 
         if (gameManager.playerHealth <= 0)
         {
@@ -66,13 +66,14 @@ public class WaveManager : MonoBehaviour
     private void StartNextTurn()
     {
         Debug.Log($"Adding {waveNumber * 100} score for round {waveNumber}!");
-        gameManager.AddRoundScore(waveNumber);
+        gameManager.AddWaveScore(waveNumber);
         waveNumber++;
         ObtainWave();
         StartCoroutine(HideWavePanel());
         MakeWaveAppear();
         handManager.DrawCard();
         handManager.AddKhronos();
+        gameManager.AddWaveScore(waveNumber);
     }
 
     private void MakeWaveAppear()
@@ -148,9 +149,9 @@ public class WaveManager : MonoBehaviour
         this.scoreText.text = $"Score: {this.gameManager.score}";
     }
     
-    public void UpdateRoundText()
+    public void UpdateWaveText()
     {
-        this.roundText.text = $"Round: {this.waveNumber}";
+        this.roundText.text = $"Wave: {this.waveNumber}";
     }
     
     public int GetWaveNumber()

@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public List<GameScore> gameScores;
     // Score information
     public int score = 0;
+    [SerializeField] public TextMeshProUGUI scoreText;
 
     public void Start()
     {
@@ -100,11 +101,16 @@ public class GameManager : MonoBehaviour
         this.score += killScore;
     }
 
-    public void AddRoundScore(int round)
+    public void AddWaveScore(int wave)
     {
-        this.score += 100 * round;
+        this.score += 100 * wave;
     }
 
+    public void UpdateScoreText()
+    {
+        this.scoreText.text = $"Score: {this.score}";
+    }
+    
     // Post game information to the API to be stored in the database
     public void PostGame()
     {
