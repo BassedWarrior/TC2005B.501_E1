@@ -17,6 +17,7 @@ public class CardPropertiesDrag : MonoBehaviour
     public TextMeshProUGUI healthText;
     public bool isDrag;
     public bool isOnBoard;
+    public bool isParadoxCard;
 
     public void AssignInfo()
     {
@@ -30,10 +31,6 @@ public class CardPropertiesDrag : MonoBehaviour
             energyText.text = card.cost.ToString();
             attackText.text = card.attack.ToString();
             healthText.text = card.health.ToString();
-            if (card.IsAlive() && card != null)
-            {
-                ShowFloatingText(transform.position, card.damage, true, true);
-            }
         }
     }
 

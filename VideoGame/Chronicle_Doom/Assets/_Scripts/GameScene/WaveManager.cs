@@ -60,6 +60,7 @@ public class WaveManager : MonoBehaviour
     private void StartNextTurn()
     {
         waveNumber++;
+        Debug.Log("Wave " + waveNumber);
         ObtainWave();
         StartCoroutine(HideWavePanel());
         MakeWaveAppear();

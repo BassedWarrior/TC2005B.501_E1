@@ -89,11 +89,16 @@ public class ClashTime : MonoBehaviour
     private void CalculateLineDamage(List<CardPropertiesDrag> line,
                                      int totalDamage)
     {
-
         // Skip if line is empty
         if (line.Count == 0)
         {
             return;
+        }
+
+        // Reset damage dealt to each card
+        foreach (CardPropertiesDrag card in line)
+        {
+            card.card.ResetDamage();
         }
 
         // Add damage dealt to each player card
@@ -108,25 +113,19 @@ public class ClashTime : MonoBehaviour
             return;
         }
 
+        // Add extra damage to first card in case the damage per doesn't round nicely
+        int extraDamage = (int) Mathf.Ceil(
+                (float) totalDamage / line.Count) - damagePerCard;
+        line[0].card.AddDamage(extraDamage);
+
         // Add damage per card to each card
         foreach (CardPropertiesDrag card in line)
         {
             if (card.card.IsAlive())
             {
-                card.card.ResetDamage();
                 card.card.AddDamage(damagePerCard);
+                card.ShowFloatingText(card.transform.position, card.card.damage, true, true);
             }
-        }
-
-        // Add extra damage to first card in case the damage per
-        // doesn't round nicely
-        int extraDamage = (int) Mathf.Ceil(
-                (float) totalDamage / line.Count) - damagePerCard;
-        line[0].card.AddDamage(extraDamage);
-
-        foreach (CardPropertiesDrag card in line)
-        {
-            card.AssignInfo();
         }
     }
 
@@ -193,7 +192,6 @@ public class ClashTime : MonoBehaviour
     public void UpdateLists(List<CardPropertiesDrag> currentCards, string listName)
     {
         List<CardPropertiesDrag> targetList = GetListByName(listName);
-        Debug.Log("Updating list: " + listName);
 
         if (targetList == null)
         {
@@ -272,7 +270,6 @@ public class ClashTime : MonoBehaviour
         {
             if (card != null && !card.card.IsAlive())
             {
-                Destroy(card.gameObject);
                 cardsToRemove.Add(card);
             }
         }
@@ -280,6 +277,7 @@ public class ClashTime : MonoBehaviour
         foreach (CardPropertiesDrag card in cardsToRemove)
         {
             cardList.Remove(card);
+            Destroy(card.gameObject);
         }
     }
 
@@ -299,6 +297,7 @@ public class ClashTime : MonoBehaviour
     
     public void Clash()
     {
+        Debug.Log("Clash is happening!");
         endTurnButton.interactable = false;
         DealLineDamage(timelineA, enemylineA);
         DealLineDamage(timelineB, enemylineB);
@@ -306,22 +305,22 @@ public class ClashTime : MonoBehaviour
 
         gameManager.ApplyPlayerDamage();
 
-        foreach (CardPropertiesDrag card in timelineA)
-        {
-            card.AssignInfo();
-        }
-
-        foreach (CardPropertiesDrag card in timelineB)
-        {
-            card.AssignInfo();
-        }
-
-        foreach (CardPropertiesDrag card in timelineC)
-        {
-            card.AssignInfo();
-        }
+        InfoUpdate(timelineA);
+        InfoUpdate(timelineB);
+        InfoUpdate(timelineC);
+        InfoUpdate(enemylineA);
+        InfoUpdate(enemylineB);
+        InfoUpdate(enemylineC);
 
         turnFinished = true;
         WaitForPlayerTurn();
+    }
+
+    public void InfoUpdate(List<CardPropertiesDrag> timeline)
+    {
+        foreach (CardPropertiesDrag card in timeline)
+        {
+            card.AssignInfo();
+        }
     }
 }

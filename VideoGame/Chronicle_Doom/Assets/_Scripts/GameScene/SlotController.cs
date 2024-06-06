@@ -39,7 +39,6 @@ public class SlotController : MonoBehaviour
 
         if (currentChildCount != lastChildCount)
         {
-            Debug.Log("Child count changed in " + transform.name + " slot.");
             if(!isDeck)
             {   
                 UpdateCardList();

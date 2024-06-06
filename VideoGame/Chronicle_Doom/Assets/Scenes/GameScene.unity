@@ -2694,19 +2694,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 588175426}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 392229388}
-        m_TargetAssemblyTypeName: ClashTime, Assembly-CSharp
-        m_MethodName: Clash
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &588175426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6852,6 +6840,8 @@ MonoBehaviour:
   getParadoxCardsEndpoint: /cards/paradox
   getUsersDeck: /userdeck
   updateUsersDeck: /updatedeck
+  postGame: 
+  getTopHighscores: 
 --- !u!114 &2122162070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6864,11 +6854,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f5c6f741b6242968a1886d3e4914ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  api: {fileID: 0}
+  waveManager: {fileID: 0}
+  clashTime: {fileID: 0}
+  handManager: {fileID: 0}
+  moveManager: {fileID: 0}
+  cardManager: {fileID: 0}
   cards: []
   playersDeck: 
   playersHand: 
+  textDots: []
   playerHealth: 20
   playerDamage: 0
+  score: 0
+  gameScores: []
 --- !u!4 &2122162071
 Transform:
   m_ObjectHideFlags: 0
