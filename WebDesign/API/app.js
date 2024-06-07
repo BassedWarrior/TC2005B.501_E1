@@ -121,7 +121,7 @@ app.post("/users/signup", async (request, response) => {
       if (error.code === 'ER_SIGNAL_EXCEPTION') {
           response.status(409).send('Error: Username already exists');
       } else {
-          response.status(500).json({ error: 'Internal Server Error' });
+          response.status(500).json('Error: Internal Server Error');
       }
   } finally {
       if (connection !== null) {
@@ -152,7 +152,7 @@ app.post("/users/signin", async (request, response) => {
       if (error.code === 'ER_SIGNAL_EXCEPTION') {
           response.status(401).send('Error: Invalid username or password');
       } else {
-          response.status(500).json({ error: 'Internal Server Error' });
+          response.status(500).send('Error: Internal Server Error');
       }
   } finally {
       if (connection !== null) {
