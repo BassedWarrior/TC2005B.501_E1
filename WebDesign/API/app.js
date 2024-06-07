@@ -109,7 +109,7 @@ app.post("/users/signup", async (request, response) => {
       const { username, password } = request.body;
 
       if (!username || !password) {
-          return response.status(400).json('Error: Username and password are required');
+          return response.status(400).send('Error: Username and password are required');
       }
 
       await connection.query("CALL SignUpUser(?, ?)", [username, password]);
