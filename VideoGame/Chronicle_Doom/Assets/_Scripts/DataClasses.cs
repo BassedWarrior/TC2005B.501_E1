@@ -13,6 +13,7 @@ public class CardData
     public int attack;
     public int health;
     public int damage = 0;
+    public int scoreValue = 0;
 
     public bool IsAlive()
     {
@@ -45,8 +46,19 @@ public class CardData
         CardData other = (CardData) this.MemberwiseClone();
         other.attack = this.attack;
         other.health = this.health;
+        other.scoreValue = this.scoreValue;
 
         return other;
+    }
+
+    public void CalculateScoreValue()
+    {
+        this.scoreValue = 20 * this.attack + 10 * this.health;
+    }
+
+    public int GetScoreValue()
+    {
+        return this.scoreValue;
     }
 }
 
