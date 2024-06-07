@@ -1,67 +1,52 @@
-*{
+/* Estilos generales para la página web */
+html, body {
     font-family: "Sedan SC", serif;
-    font-weight: 400;
-    font-style: normal;
+    margin: 0;
+    padding: 0;
+    background-color: white;
  }
-  
- html, body
- {
+
+/* Estilos para el barra principal fija de comandos */
+.toolBar {
+    background-color: gray;
+    padding: 1rem;
+    text-align: center;
+    position: fixed;
     width: 100%;
-    height: 100%;
-    margin: 0%;
- }
- 
- .toolBar 
- {
-    padding-top:50px;
-    padding-bottom:50px ;
-    margin: 0%;
-    background-color: #0c0c0c;
-    width: 100%;
- }
-
- .toolBar nav
- {
-    display: flex;
-    gap: 130px;
-    justify-content: center; 
- }
- 
- .toolBar 
- {
-    display: flex;
-    justify-content: center; 
- }
- 
- .toolBar a
- {
-    font-size: 200%;
-    color: #41288d;
-    text-decoration: none;
- }
-
- .toolBar a:hover
- {
-    color: #d8cbff;
- }
- 
-
-
- #descriptionID 
- {
-    color: rgb(192, 166, 253); /* Cambia 'red' por el color que prefieras */
+    z-index: 1000;
 }
 
+.toolBar nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.toolBar nav a:hover {
+    text-decoration: underline;
+    color: black;
+}
+
+/* Estilo para el pie de página con info extra */
+footer {
+    background-color: gray;
+    color: white;
+    text-align: center;
+    padding: 10rem 0;
+    width: 100%;
+}
+
+/* FALTA POR EDITAR */
 
 
  .gameTitle
  {
-    padding-top:50px;
-    padding-bottom:50px ;
+    padding: 200px 0px;
     justify-content: center;
     background-color: #0c0031;
     width: 100%;
-    background-image:url('../images/descripton.jpg');
+    background-image:url('../images/description.jpg');
     background-position: center;
  }
 
