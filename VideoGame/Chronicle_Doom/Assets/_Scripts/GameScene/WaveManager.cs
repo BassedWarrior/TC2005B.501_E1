@@ -19,12 +19,16 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playersHealthText;
     [SerializeField] private Image healthBar;
     [SerializeField] private Button returnMenuButton;
+    [SerializeField] public TextMeshProUGUI scoreText;
+    [SerializeField] public TextMeshProUGUI roundText;
 
     private void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         waveNumber = 1;
         UpdateHealthBar();
+        UpdateScoreText();
+        UpdateWaveText();
         ObtainWave();
     }
 
@@ -38,6 +42,8 @@ public class WaveManager : MonoBehaviour
     public void NextWave()
     {
         UpdateHealthBar();
+        UpdateScoreText();
+        UpdateWaveText();
 
         if (gameManager.playerHealth <= 0)
         {
@@ -59,12 +65,15 @@ public class WaveManager : MonoBehaviour
 
     private void StartNextTurn()
     {
+        Debug.Log($"Adding {waveNumber * 100} score for round {waveNumber}!");
+        gameManager.AddWaveScore(waveNumber);
         waveNumber++;
         ObtainWave();
         StartCoroutine(HideWavePanel());
         MakeWaveAppear();
         handManager.DrawCard();
         handManager.AddKhronos();
+        gameManager.AddWaveScore(waveNumber);
     }
 
     private void MakeWaveAppear()
@@ -76,6 +85,7 @@ public class WaveManager : MonoBehaviour
             CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
             cardProperties.card = card.DeepCopy();
             cardProperties.AssignInfo();
+            cardProperties.card.CalculateScoreValue();
         }
     }
 
@@ -130,10 +140,20 @@ public class WaveManager : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        playersHealthText.text = "Player Health: " + gameManager.playerHealth;
+        playersHealthText.text = "Health: " + gameManager.playerHealth;
         healthBar.fillAmount = (float)gameManager.playerHealth / 20;
     }
 
+    public void UpdateScoreText()
+    {
+        this.scoreText.text = $"Score: {this.gameManager.score}";
+    }
+    
+    public void UpdateWaveText()
+    {
+        this.roundText.text = $"Wave: {this.waveNumber}";
+    }
+    
     public int GetWaveNumber()
     {
         return waveNumber;

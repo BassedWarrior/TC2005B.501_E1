@@ -109,7 +109,7 @@ app.post("/users/signup", async (request, response) => {
       const { username, password } = request.body;
 
       if (!username || !password) {
-          return response.status(400).json({ error: 'Username and password are required' });
+          return response.status(400).send('Error: Username and password are required');
       }
 
       await connection.query("CALL SignUpUser(?, ?)", [username, password]);
@@ -119,9 +119,9 @@ app.post("/users/signup", async (request, response) => {
       console.log(error);
       // Manejar errores específicos del procedimiento almacenado
       if (error.code === 'ER_SIGNAL_EXCEPTION') {
-          response.status(409).json({ error: 'Username already exists' });
+          response.status(409).send('Error: Username already exists');
       } else {
-          response.status(500).json({ error: 'Internal Server Error' });
+          response.status(500).json('Error: Internal Server Error');
       }
   } finally {
       if (connection !== null) {
@@ -139,7 +139,7 @@ app.post("/users/signin", async (request, response) => {
       const { username, password } = request.body;
 
       if (!username || !password) {
-          return response.status(400).json({ error: 'Username and password are required' });
+          return response.status(400).send('Error: Username and password are required');
       }
 
       // Llamar al procedimiento almacenado de Sign In en DB Chronicle_doom
@@ -150,9 +150,9 @@ app.post("/users/signin", async (request, response) => {
       console.log(error);
       // Manejar errores específicos del procedimiento almacenado
       if (error.code === 'ER_SIGNAL_EXCEPTION') {
-          response.status(401).json({ error: 'Invalid username or password' });
+          response.status(401).send('Error: Invalid username or password');
       } else {
-          response.status(500).json({ error: 'Internal Server Error' });
+          response.status(500).send('Error: Internal Server Error');
       }
   } finally {
       if (connection !== null) {
