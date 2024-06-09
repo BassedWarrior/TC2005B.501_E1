@@ -22,7 +22,7 @@
 
  .toolBar nav
  {
-    display: flex;
+    display: flex;  
     gap: 130px;
     justify-content: center; 
  }
@@ -47,10 +47,11 @@
  
 
 
- #descriptionID 
+#descriptionID 
  {
-    color: rgb(192, 166, 253); /* Cambia 'red' por el color que prefieras */
+    color: rgb(192, 166, 253); 
 }
+
 
 
 
@@ -90,6 +91,8 @@
 {
     justify-content: center;
     display: flex;
+    font-size: 250%;
+    color:rgb(219, 219, 219);
 }
 
 .rowContainer div
@@ -103,83 +106,105 @@
     font-size: 150%;
     justify-content: center;
     display: flex;
-    text-align: center;
-    
+    text-align: center;    
 }
 
-
-.DESCRIPTION, .Terminology {
-    flex: 1; /* Cada uno ocupará la misma cantidad de espacio */
-    padding: 0px;
-    margin: 0px;
-    background-color: #425a70;
-}
-
-.container h2 {
-    letter-spacing: 10px;
-    display: flex;
-    justify-content: center; 
-    font-size: 400%; 
-    width: 100%;
-}
-
-.container p, .Terminology ul {
-    font-size: 200%;
-    text-align: center;
-    margin: 0%;
-}
-
-.Terminology ul {
-    padding: 0;
-
-}
-
-.Terminology li {
-    margin-bottom: 10px;
-}
-
-
-
-
-/*
-
-
-
-.container h2
+.Terminology
 {
-    letter-spacing: 10px;
     display: flex;
-    justify-content: center; 
-    gap: 150px;  
-    font-size: 400%;  
+    flex-direction: row;
+    width: 100%;
+    margin: 0%;
+    background-color: #433a4b;
+    color: #d8cbff;
 }
 
-.container p{
-    font-size: 200%;
+.Terminology div
+{
+    justify-content: center;
+    flex: 1;    
+}
+
+.Terminology h2
+{
+    justify-content: center;
+    display: flex;
+    font-size: 250%;
+    color: rgb(219, 219, 219);
+}
+
+
+.Terminology ul 
+{
+    list-style-position: inside; 
+    text-align: center;
+    font-size: 150%;
+    line-height:50px;
+}
+
+
+.footer {
+    background-color:rgb(25, 19, 32);
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer div {
+    flex: 1;
+    padding: 10px;
     text-align: center;
 }
 
-
-
-
-
-
- .Terminology {
-    padding: 60px;
-    background-color: #425a70;
+.footer h4 {
+    margin-bottom: 10px;
+    font-size: 150%;
+    color: #59337c;
 }
 
-.Terminology h2 {
-    letter-spacing: 10px;
-    display: flex;
-    justify-content: center; 
-    gap: 150px;  
-    font-size: 400%;  
-}
-
-.Terminology ul {
-    font-size: 100%;
+.footer ul, .footer nav {
+    list-style: none;
     padding: 0;
 }
 
-*/
+.footer ul li, .footer nav a {
+    margin-bottom: 5px;
+    color: #757575;
+    text-decoration: none;
+    height: 30px;
+}
+
+.footer nav a {
+    display: block;
+    height: 30px;
+}
+
+.footer nav a:hover {
+    text-decoration: underline;}
+
+.footer nav a img.icon 
+{
+    width: 20px; /* Adjust the size as needed */
+    height: auto;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.footer nav a img.icon,
+.footer ul li img.icon {
+    width: 20px; /* Ajusta el tamaño según sea necesario */
+    height: auto;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.footer nav a,
+.footer ul li a {
+    color: #757575;
+    text-decoration: none;
+}
+
+.footer nav a:hover,
+.footer ul li a:hover {
+    text-decoration: underline;
+}

@@ -1,168 +1,210 @@
-
-
 *{
-    font-family: "Sedan SC", serif;
-    font-weight: 400;
-    font-style: normal;
- }
-  
- html, body
- {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
- }
+   font-family: "Sedan SC", serif;
+   font-weight: 400;
+   font-style: normal;
+}
  
- 
- 
- 
- .toolBar 
- {
-    margin: 0;
-    padding: 30px;
-    background-color: #3b3b3b;
- }
- 
- .linksStyle 
- {
-    display: flex;
-    justify-content: center; 
-    gap: 150px; 
-    
-    
- }
- 
- .linksStyle a 
- {
-    font-size: 200%;
-    text-decoration: underline; 
-    color: #A8A4B4;
- }
- 
- 
- 
- 
- .GameSpace {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    background-color: #ACACAC;
-    height: 700px;
- }
- 
- .GameSpace img {
-    max-width: 100%; 
-    height: auto; 
-    display: block;
- }
- 
- 
- 
- 
- .DESCRIPTION 
- {
-    padding: 60px;
-    background-color:#425a70;
- }
- 
- .DESCRIPTION h2
- {
-    letter-spacing: 10px;
-    display: flex;
-    justify-content: center; 
-    gap: 150px;  
-    font-size: 400%;  
- }
- 
- .DESCRIPTION p
- {
-    font-size: 150%;
-    text-align: center;
- }
- 
- 
- 
- 
- .RULES 
- {
-    margin: 0;
-    padding: 60px;
-    background-color:#645a81;
- }
- 
- .RULES h2
- {
-    letter-spacing: 10px;
-    display: flex;
-    justify-content: center; 
-    gap: 150px;  
-    font-size: 400%;  
- }
- 
- .RULES ul 
- {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    list-style-position: inside; 
-    font-size: 150%;
-    
- }
- 
- .RULES ul li 
- {
-    text-align: center;
-    line-gap-override: 10%;
- }
- 
- 
- 
- 
- .container
- {
-    max-width: 0%;
-    margin: auto;
- }
- 
- .footer
- {
-    background-color: rgb(99, 31, 70);
-    padding: 20px;
- 
- }
- 
- .footerRow
- {
-    display: flex;
-    flex-wrap:nowrap;
-    grid-area: 100%;
- }
- 
- .footerLinks h4
- {
-    font-size: 20px;
-    color: #ffee00;
-    margin-bottom:25px ;
-    font-weight: 500;
-    border-bottom: 2px solid #000000;
-    padding-bottom: 10px;
-    display: inline-block;
- }
- 
- .footerLinks ul li a
- {
-    font-size: 18px;
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    display:  block;
-    margin-bottom: 15px;
-    transition: all .3s ease;
- }
- 
- 
- .footerLinks ul li a:hover
- {
-    color: rgb(252, 252, 252);
-    padding-left: 6px;
- }
+html, body
+{
+   width: 100%;
+   height: 100%;
+   margin: 0%;
+}
+
+.toolBar 
+{
+   padding-top:50px;
+   padding-bottom:50px ;
+   margin: 0%;
+   background-color: #0c0c0c;
+   width: 100%;
+}
+
+.toolBar nav
+{
+   display: flex;  
+   gap: 130px;
+   justify-content: center; 
+}
+
+.toolBar 
+{
+   display: flex;
+   justify-content: center; 
+}
+
+.toolBar a
+{
+   font-size: 200%;
+   color: #41288d;
+   text-decoration: none;
+}
+
+.toolBar a:hover
+{
+   color: #d8cbff;
+}
+
+
+
+#gameID 
+{
+   color: rgb(192, 166, 253); 
+}
+
+
+
+
+.gameTitle
+{
+   padding-top:50px;
+   padding-bottom:50px ;
+   justify-content: center;
+   background-color: #0c0031;
+   width: 100%;
+   background-image:url('../images/descripton.jpg');
+   background-position: center;
+}
+
+.gameTitle h1
+{
+   font-size: 400%;
+   justify-content: center;
+   display: flex;
+   color: rgb(219, 219, 219);
+   letter-spacing: 15px;
+}
+
+.rowContainer 
+{
+   display: flex;
+   flex-direction: row;
+   width: 100%;
+   margin: 0%;
+   background-color: #32233a;
+   color: #d8cbff;
+
+}
+
+
+.rowContainer h2
+{
+   justify-content: center;
+   display: flex;
+   font-size: 250%;
+   color:rgb(219, 219, 219);
+}
+
+.rowContainer div
+{
+   flex: 1;
+}
+
+.rowContainer p 
+{
+   padding: 20px;
+   font-size: 150%;
+   justify-content: center;
+   display: flex;
+   text-align: center;    
+}
+
+.Terminology
+{
+   display: flex;
+   flex-direction: row;
+   width: 100%;
+   margin: 0%;
+   background-color: #433a4b;
+   color: #d8cbff;
+}
+
+.Terminology div
+{
+   justify-content: center;
+   flex: 1;    
+}
+
+.Terminology h2
+{
+   justify-content: center;
+   display: flex;
+   font-size: 250%;
+   color: rgb(219, 219, 219);
+}
+
+
+.Terminology ul 
+{
+   list-style-position: inside; 
+   text-align: center;
+   font-size: 150%;
+   line-height:50px;
+}
+
+
+.footer {
+   background-color:rgb(25, 19, 32);
+   padding: 20px 0;
+   display: flex;
+   justify-content: space-around;
+}
+
+.footer div {
+   flex: 1;
+   padding: 10px;
+   text-align: center;
+}
+
+.footer h4 {
+   margin-bottom: 10px;
+   font-size: 150%;
+   color: #59337c;
+}
+
+.footer ul, .footer nav {
+   list-style: none;
+   padding: 0;
+}
+
+.footer ul li, .footer nav a {
+   margin-bottom: 5px;
+   color: #757575;
+   text-decoration: none;
+   height: 30px;
+}
+
+.footer nav a {
+   display: block;
+   height: 30px;
+}
+
+.footer nav a:hover {
+   text-decoration: underline;}
+
+.footer nav a img.icon 
+{
+   width: 20px; /* Adjust the size as needed */
+   height: auto;
+   margin-right: 8px;
+   vertical-align: middle;
+}
+
+.footer nav a img.icon,
+.footer ul li img.icon {
+   width: 20px; /* Ajusta el tamaño según sea necesario */
+   height: auto;
+   margin-right: 8px;
+   vertical-align: middle;
+}
+
+.footer nav a,
+.footer ul li a {
+   color: #757575;
+   text-decoration: none;
+}
+
+.footer nav a:hover,
+.footer ul li a:hover {
+   text-decoration: underline;
+}
