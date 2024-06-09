@@ -15,10 +15,10 @@ public class HighScoreList : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         highscores = gameManager.GetTopHighscores();
-        for (int i = 1; i < highscores.Count; i++)
+        for (int i = 0; i < highscores.Count; i++)
         {
             GameObject score = Instantiate(textMeshPrefab, gameObject.transform);
-            score.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"{i}";
+            score.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"{i + 1}";
             score.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = $"{highscores[i].username}";
             score.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"{highscores[i].score}";
         }
