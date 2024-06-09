@@ -54,9 +54,10 @@ CREATE TABLE IF NOT EXISTS `match` (
     KEY (score)
 ) ENGINE=InnoDB, CHARSET=ascii;
 
-CREATE TABLE IF NOT EXISTS gameRound (
+CREATE TABLE IF NOT EXISTS enemyWave (
     roundID TINYINT UNSIGNED NOT NULL,
     cardID TINYINT UNSIGNED NOT NULL,
+    card_times TINYINT UNSIGNED NOT NULL,
     PRIMARY KEY (roundID, cardID),
     FOREIGN KEY (cardID) REFERENCES card(cardID)
 ) ENGINE=InnoDB, CHARSET=ascii;
@@ -66,12 +67,12 @@ CREATE TABLE IF NOT EXISTS game (
     gameID INT UNSIGNED NOT NULL AUTO_INCREMENT,
     username VARCHAR(20) NOT NULL,
     score SMALLINT UNSIGNED NOT NULL,
-    gameRound TINYINT UNSIGNED NOT NULL,
+    enemyWave TINYINT UNSIGNED NOT NULL,
     kronos TINYINT UNSIGNED NOT NULL,
     deckCards TINYINT UNSIGNED NOT NULL,
     PRIMARY KEY (gameID),
     FOREIGN KEY (username) REFERENCES player(username),
-    FOREIGN KEY (gameRound) REFERENCES gameRound(roundID),
+    FOREIGN KEY (enemyWave) REFERENCES enemyWave(roundID),
     KEY (score)
 ) ENGINE=InnoDB, CHARSET=ascii;
 
@@ -83,13 +84,3 @@ CREATE TABLE IF NOT EXISTS deckCard (
     FOREIGN KEY (deckID) REFERENCES deck(deckID),
     FOREIGN KEY (cardID) REFERENCES card(cardID)
 ) ENGINE=InnoDB, CHARSET=ascii;
-
-
-CREATE TABLE IF NOT EXISTS enemyWave (
-    roundID TINYINT UNSIGNED NOT NULL,
-    cardID TINYINT UNSIGNED NOT NULL,
-    card_times TINYINT UNSIGNED NOT NULL,
-    PRIMARY KEY (roundID, cardID),
-    FOREIGN KEY (cardID) REFERENCES card(cardID)
-) ENGINE=InnoDB, CHARSET=ascii;
-

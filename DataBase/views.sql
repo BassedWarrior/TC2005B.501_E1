@@ -29,8 +29,8 @@ AS SELECT cardID, COUNT(*) AS frequency FROM deckCard
 GROUP BY cardID;
 
 CREATE VIEW gameAverageRoundKronos
-AS SELECT game.gameRound, AVG(game.kronos) FROM game
-GROUP BY game.gameRound;
+AS SELECT game.enemyWave, AVG(game.kronos) FROM game
+GROUP BY game.enemyWave;
 
 CREATE VIEW matchAveragePlayerTimePlayed
 AS SELECT `match`.username, AVG(`match`.timePlayed) FROM `match`

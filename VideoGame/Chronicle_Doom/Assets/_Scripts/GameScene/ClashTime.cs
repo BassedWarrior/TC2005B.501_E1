@@ -270,6 +270,9 @@ public class ClashTime : MonoBehaviour
         {
             if (card != null && !card.card.IsAlive())
             {
+                gameManager.AddKillScore(card.card.GetScoreValue());
+                Debug.Log($"Added {card.card.GetScoreValue()} score for killing card {card.card.cardID}");
+                Destroy(card.gameObject);
                 cardsToRemove.Add(card);
             }
         }

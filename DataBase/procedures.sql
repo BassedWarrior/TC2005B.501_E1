@@ -89,12 +89,12 @@ DELIMITER //
 CREATE PROCEDURE PostGame(
     IN p_username VARCHAR(20),
     IN p_score SMALLINT UNSIGNED,
-    IN p_gameRound TINYINT UNSIGNED,
+    IN p_enemyWave TINYINT UNSIGNED,
     IN p_kronos TINYINT UNSIGNED,
     IN p_deckCards TINYINT UNSIGNED
 )
 BEGIN
-    INSERT INTO game (username, score, gameRound, kronos, deckCards)
-    VALUES (p_username, p_score, p_gameRound, p_kronos, p_deckCards);
+    INSERT INTO game (username, score, enemyWave, kronos, deckCards)
+    VALUES (p_username, p_score, p_enemyWave, p_kronos, p_deckCards);
 END //
 DELIMITER ;
