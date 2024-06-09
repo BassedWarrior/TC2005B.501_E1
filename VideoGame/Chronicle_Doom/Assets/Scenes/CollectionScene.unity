@@ -1783,6 +1783,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 116229043}
     m_Modifications:
+    - target: {fileID: 665389936874954489, guid: 3c2d2ef776d3a441aa7350091eadb102, type: 3}
+      propertyPath: m_fontSize
+      value: 38.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3853033969441035890, guid: 3c2d2ef776d3a441aa7350091eadb102, type: 3}
       propertyPath: m_Name
       value: DeckError
