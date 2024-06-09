@@ -7,25 +7,43 @@ html, body {
  }
 
 /* Estilos para el barra principal fija de comandos */
-.toolBar {
+header {
     background-color: gray;
-    padding: 1rem;
     text-align: center;
     position: fixed;
+    align-items: center;
+    padding: 2rem;
+    padding-left: 0;
     width: 100%;
     z-index: 1000;
+    font-size: 20px;
 }
 
-.toolBar nav a {
+header nav a {
     color: white;
-    margin: 0 15px;
+    margin: 0 25px;
     text-decoration: none;
     font-weight: bold;
 }
 
-.toolBar nav a:hover {
-    text-decoration: underline;
+header a:hover {
     color: black;
+}
+
+header div {
+    flex: 1;
+    display: flex;
+    display: inline;
+    justify-content: flex-end;
+    padding-inline: 200px;
+}
+
+.logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    top: 1px;
 }
 
 /* Estilo para el pie de página con info extra */
@@ -33,138 +51,208 @@ footer {
     background-color: gray;
     color: white;
     text-align: center;
-    padding: 10rem 0;
-    width: 100%;
+    padding: 1rem 0;
+    font-size: 12px;
 }
 
-/* FALTA POR EDITAR */
-
-
- .gameTitle
- {
-    padding: 200px 0px;
-    justify-content: center;
-    background-color: #0c0031;
-    width: 100%;
-    background-image:url('../images/description.jpg');
-    background-position: center;
- }
-
- .gameTitle h1
- {
-    font-size: 400%;
-    justify-content: center;
-    display: flex;
-    color: rgb(219, 219, 219);
-    letter-spacing: 15px;
- }
-
-.rowContainer 
-{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin: 0%;
-    background-color: #32233a;
-    color: #d8cbff;
-
-}
- 
-
-.rowContainer h2
-{
-    justify-content: center;
-    display: flex;
+footer hr {
+    border: none;
+    border-top: 1px solid white;
+    margin: 2rem auto;
+    width: 90%;
 }
 
-.rowContainer div
-{
-    flex: 1;
+footer nav {
+    margin-top: 2rem;
+    text-align: left;
+    padding-left: 4rem;
 }
 
-.rowContainer p 
-{
-    padding: 20px;
-    font-size: 150%;
-    justify-content: center;
-    display: flex;
-    text-align: center;
-    
+footer nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-
-.DESCRIPTION, .Terminology {
-    flex: 1; /* Cada uno ocupará la misma cantidad de espacio */
-    padding: 0px;
-    margin: 0px;
-    background-color: #425a70;
+footer nav a:hover {
+    color: black;
 }
 
-.container h2 {
-    letter-spacing: 10px;
-    display: flex;
-    justify-content: center; 
-    font-size: 400%; 
-    width: 100%;
-}
-
-.container p, .Terminology ul {
-    font-size: 200%;
-    text-align: center;
-    margin: 0%;
-}
-
-.Terminology ul {
+.social-media {
+    display: flex;    
+    justify-content: space-around;
     padding: 0;
-
 }
 
-.Terminology li {
+#follow-us, #download {
+    display: flex;
+    flex-direction: inline;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+}
+
+#follow-us h5, #download h5 {
     margin-bottom: 10px;
 }
 
+#follow-us a, #download a {
+    margin: 5px 0;
+}
 
+#follow-us img:hover, #download img:hover {
+    transform: scale(1.1);
+}
 
+/* Ventana de la jugabilidad del CHRONICAL_DOOM */
 
-/*
+.gameBuild {
+    padding-top: 10rem;
+    padding-bottom: 4rem;
+    width: 100%;
+    background-color: black;
+}
 
+#gameDeploy {
+    padding: 18rem;
+    margin-inline: 8rem;
+    background-color: brown;
+    border: 2px solid white;
+    border-radius: 10px;
+}
 
+/* Estilos para la sección de NEWS */
 
-.container h2
-{
-    letter-spacing: 10px;
+.game-news {
+    padding: 2rem;
+    background-image: url("../images/description.jpg");
+}
+
+.news-header {
     display: flex;
-    justify-content: center; 
-    gap: 150px;  
-    font-size: 400%;  
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    background-color: gray;
+    padding: 0 3rem;
+}
+.news-wrap {
+    display: flex;
+    justify-content: space-evenly;
 }
 
-.container p{
-    font-size: 200%;
-    text-align: center;
+.news-content {
+    padding: 2rem;
+    margin: 1rem;
+    background-color: #32233a;
+    color: white;
+    border-radius: 10px;
 }
 
+/* Estilos para la descripción del juego */
 
-
-
-
-
- .Terminology {
-    padding: 60px;
+.summary {
+    padding: 2rem;
     background-color: #425a70;
+    color: white;
 }
 
-.Terminology h2 {
-    letter-spacing: 10px;
+.summary-text {
+    padding-left: 8rem;
+    width: 50%;
+}
+
+.summary h2 {
+    font-size: 200%;
+    letter-spacing: 5px;
+    font-style: italic;
+    margin-bottom: 0;
+}
+
+.summary h3 {
+    color: yellow;
+}
+
+/* Estilos para la sección de ROADMAP */
+
+.roadmap {
+    padding: 2rem;
+    background-color: #32233a;
+    color: white;
+    position: relative;
+    overflow: hidden; /* Asegura que los elementos dentro no se desborden */
+}
+
+.roadmap-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.roadmap-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.roadmap-header h3 {
+    font-size: 1.5rem;
+    margin: 0.25rem 0;
+}
+
+.roadmap-container {
     display: flex;
-    justify-content: center; 
-    gap: 150px;  
-    font-size: 400%;  
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 2rem;
 }
 
-.Terminology ul {
-    font-size: 100%;
-    padding: 0;
+.roadmap-box {
+    margin: 1.5rem;
+    padding: 0 0.5rem;
+    background-color: #425a70;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
 }
 
+.roadmap-box h4 {
+    margin: 0;
+    padding: 1rem 0;
+    font-size: 1.75rem;
+    background: gray;
+    width: 100%;
+    clip-path: polygon(20% 100%, 80% 100%, 100% 0%, 0% 0%);
+}
+
+.roadmap-box ul {
+    list-style-type: none;
+    padding: 50px 25px;
+    margin: 0;
+}
+
+.roadmap-box li {
+    margin: 0.5rem 0;
+    font-size: 1.25rem;
+}
+
+/*PRUEBAS
+.roadmap {
+    position: relative;
+    top: 0;
+    left: 1.6875rem;
+    width: 17.23625rem;
+    height: 11.666875rem;
+    transform: matrix(0.94, 0, -0.37, 1, 0, 0);
+    background: linear-gradient(180deg, #2e177c 0%, rgba(61, 33, 157, 0.47) 100%);
+    z-index: 0;
+    border: .125rem solid #8044ff;
+    border-radius: .5rem;
+    box-sizing: border-box;
+}
 */
