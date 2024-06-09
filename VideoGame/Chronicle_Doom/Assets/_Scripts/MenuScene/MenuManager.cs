@@ -26,6 +26,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button updateDeckButton;
     [SerializeField] private TextMeshProUGUI deckName;
     [SerializeField] private GameObject deckErrorPanel;
+    [SerializeField] private TextMeshProUGUI collectionName;
     [SerializeField] private TextMeshProUGUI deckError;
     private GameManager gameManager;
     private Camera mainCamera;
@@ -53,6 +54,8 @@ public class MenuManager : MonoBehaviour
         InitializeCards();
         UpdateDeck();
         deckName.text = PlayerPrefs.GetString("username") + "'s Deck";
+        collectionName.text = PlayerPrefs.GetString("username")
+                + "'s Collection";
         deckErrorPanel.SetActive(false);
     }
 
