@@ -1,16 +1,12 @@
-*{
+/* Estilos generales para la página web */
+html, body {
     font-family: "Sedan SC", serif;
-    font-weight: 400;
-    font-style: normal;
+    margin: 0;
+    padding: 0;
+    background-color: white;
  }
-  
- html, body
- {
-    width: 100%;
-    height: 100%;
-    margin: 0%;
- }
- 
+
+/* Estilos para el barra principal fija de comandos */ 
  .toolBar 
  {
     padding-top:50px;
@@ -50,19 +46,41 @@
 #descriptionID 
  {
     color: rgb(192, 166, 253); 
+
 }
 
+.toolBar nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.toolBar nav a:hover {
+    text-decoration: underline;
+    color: black;
+}
+
+/* Estilo para el pie de página con info extra */
+footer {
+    background-color: gray;
+    color: white;
+    text-align: center;
+    padding: 10rem 0;
+    width: 100%;
+}
+
+/* FALTA POR EDITAR */
 
 
 
  .gameTitle
  {
-    padding-top:50px;
-    padding-bottom:50px ;
+    padding: 200px 0px;
     justify-content: center;
     background-color: #0c0031;
     width: 100%;
-    background-image:url('../images/descripton.jpg');
+    background-image:url('../images/description.jpg');
     background-position: center;
  }
 
