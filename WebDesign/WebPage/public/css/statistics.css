@@ -18,6 +18,8 @@
     margin: 0%;
     background-color: #0c0c0c;
     width: 100%;
+    display: flex;
+    justify-content: center; 
  }
  
  .toolBar nav
@@ -27,11 +29,6 @@
     justify-content: center; 
  }
  
- .toolBar 
- {
-    display: flex;
-    justify-content: center; 
- }
  
  .toolBar a
  {
@@ -52,95 +49,7 @@
     color: rgb(192, 166, 253); 
  }
  
- 
- .gameTitle
- {
-    padding-top:50px;
-    padding-bottom:50px ;
-    justify-content: center;
-    background-color: #0c0031;
-    width: 100%;
-    background-image:url('../images/descripton.jpg');
-    background-position: center;
- }
- 
- .gameTitle h1
- {
-    font-size: 400%;
-    justify-content: center;
-    display: flex;
-    color: rgb(219, 219, 219);
-    letter-spacing: 15px;
- }
- 
- .rowContainer 
- {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin: 0%;
-    background-color: #32233a;
-    color: #d8cbff;
- 
- }
- 
- 
- .rowContainer h2
- {
-    justify-content: center;
-    display: flex;
-    font-size: 250%;
-    color:rgb(219, 219, 219);
- }
- 
- .rowContainer div
- {
-    flex: 1;
- }
- 
- .rowContainer p 
- {
-    padding: 20px;
-    font-size: 150%;
-    justify-content: center;
-    display: flex;
-    text-align: center;    
- }
- 
- .Terminology
- {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin: 0%;
-    background-color: #433a4b;
-    color: #d8cbff;
- }
- 
- .Terminology div
- {
-    justify-content: center;
-    flex: 1;    
- }
- 
- .Terminology h2
- {
-    justify-content: center;
-    display: flex;
-    font-size: 250%;
-    color: rgb(219, 219, 219);
- }
- 
- 
- .Terminology ul 
- {
-    list-style-position: inside; 
-    text-align: center;
-    font-size: 150%;
-    line-height:50px;
- }
- 
- 
+  
  .footer {
     background-color:rgb(25, 19, 32);
     padding: 20px 0;
@@ -206,3 +115,8 @@
  .footer ul li a:hover {
     text-decoration: underline;
  }
+
+
+
+
+

@@ -9,7 +9,7 @@
     <!--Referencias a las fuentes que estamos usando en la pagina. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Sedan+SC&display=swap" rel="stylesheet">
-
+    <script type="module" defer src="../js/graphs.js"></script> 
     <link rel="stylesheet" type="text/css" href="../css/statistics.css">
 
 </head>
@@ -27,6 +27,36 @@
             <a id = "statisticsID" href="statistics.html" >STATISTICS</a>
         </nav>
     </div>
+
+
+
+
+
+
+
+
+    <div class="container">
+        <h2>Getting data from an API</h2>
+        <p>To use the data from an API to plot a chart, we first need to make a request to the API and process the results. In this case, we are creating new arrays using the<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map</a>method. If you are familiar with Python list comprehensions, map works very similarly.</p>
+
+        <p>The map() method creates a new array populated with the results of calling a provided function on every element in the calling array. For this example, the function that we are using is only returning a specific column of the results. For example, <code>values.map(e => e['name'])</code> creates an array that only has the column names from the results object.</p>
+
+        <p>Using the arrays that only have the data that we need, we can create a new configuration object that is going to be plotted in the chart. For this example, we are ploting the completion rate of each level in the 'levels' table. Specifically, we need arrays that hold the names, and completion rate for each level. An additional array that contains a random color for each chart element is also created.</p>
+
+        <div class="chartContainer">
+            <canvas id="apiChart1" width="600" height="600"></canvas>
+            <canvas id="apiChart2" width="600" height="600"></canvas>
+            <canvas id="apiChart3" width="600" height="600"></canvas>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
 
 
 
