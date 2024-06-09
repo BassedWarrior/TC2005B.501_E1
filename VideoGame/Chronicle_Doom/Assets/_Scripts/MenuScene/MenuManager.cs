@@ -16,7 +16,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cardAttack;
     [SerializeField] private TextMeshProUGUI cardHealth;
     [SerializeField] private GameObject cardPrefab;
-    [SerializeField] private GameObject dommyCard;
+    [SerializeField] private GameObject dummyCard;
     [SerializeField] private Transform cardArea;
     [SerializeField] private Transform deckArea;
     [SerializeField] private GameObject settings;
@@ -207,7 +207,7 @@ public class MenuManager : MonoBehaviour
             }
             else
             {
-                collectionCard = Instantiate(dommyCard, deckArea);
+                collectionCard = Instantiate(dummyCard, deckArea);
                 collectionCard.name = "EmptyCard";
             }
         }

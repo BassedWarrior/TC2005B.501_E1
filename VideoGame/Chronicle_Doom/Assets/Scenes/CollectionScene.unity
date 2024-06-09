@@ -4146,7 +4146,7 @@ MonoBehaviour:
   cardAttack: {fileID: 3652809497973193034}
   cardHealth: {fileID: 8941069141565986939}
   cardPrefab: {fileID: 2198373641538602859, guid: 379d66e636ac7458f98ebac5f442d10a, type: 3}
-  dommyCard: {fileID: 2198373641538602859, guid: 778f9d5b6585b4817a1b5ee26e53de03, type: 3}
+  dummyCard: {fileID: 2198373641538602859, guid: 778f9d5b6585b4817a1b5ee26e53de03, type: 3}
   cardArea: {fileID: 1109464461}
   deckArea: {fileID: 1450805784}
   settings: {fileID: 1194476400}
