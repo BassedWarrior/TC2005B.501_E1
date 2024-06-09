@@ -1013,6 +1013,8 @@ MonoBehaviour:
     m_GlyphRect:
       m_X: 725
       m_Y: 267
+      m_X: 649
+      m_Y: 275
       m_Width: 42
       m_Height: 65
     m_Scale: 1
@@ -1688,10 +1690,6 @@ MonoBehaviour:
     m_Y: 31
     m_Width: 2
     m_Height: 81
-  - m_X: 67
-    m_Y: 105
-    m_Width: 48
-    m_Height: 7
   - m_X: 182
     m_Y: 85
     m_Width: 13
@@ -1700,10 +1698,6 @@ MonoBehaviour:
     m_Y: 86
     m_Width: 12
     m_Height: 77
-  - m_X: 79
-    m_Y: 105
-    m_Width: 36
-    m_Height: 66
   - m_X: 498
     m_Y: 82
     m_Width: 30
