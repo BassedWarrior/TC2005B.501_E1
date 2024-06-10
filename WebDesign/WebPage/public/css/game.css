@@ -10,7 +10,7 @@
 #game-deploy {
     padding: 18rem;
     margin-inline: 8rem;
-    background-color: brown;
+    background-color: #2F2F2F;
     border: 2px solid white;
     border-radius: 10px;
 }
@@ -19,7 +19,7 @@
 
 .game-news {
     padding: 2rem;
-    background-image: url("../images/bg_tunnel.jpg");
+    background-color: #2F2F1F;
     background-size: cover;
 }
 
@@ -28,7 +28,7 @@
     justify-content: space-between;
     align-items: center;
     color: white;
-    background-color: gray;
+    background-color: #2F2F2F;
     padding: 0 3rem;
 }
 .news-wrap {
@@ -39,7 +39,7 @@
 .news-content {
     padding: 2rem;
     margin: 1rem;
-    background-color: #32233a;
+    background-color: #2F2F2F;
     color: white;
     border-radius: 10px;
 }
@@ -48,7 +48,7 @@
 
 .summary {
     padding: 2rem;
-    background-color: #425a70;
+    background-color: #2F2F2F;
     color: white;
 }
 
@@ -72,7 +72,7 @@
 
 .roadmap {
     padding: 2rem;
-    background-image: url("../images/bg_pagoda.jpg");
+    background-color: #2F2F1F;
     color: white;
     position: relative;
     overflow: hidden;
@@ -104,7 +104,7 @@
 .roadmap-box {
     margin: 1.5rem;
     padding: 0 0.5rem;
-    background-color: #425a70;
+    background-color: #2F2F2F;
     color: white;
     border-radius: 10px;
     display: flex;
@@ -113,13 +113,15 @@
     align-items: center;
     text-align: center;
     position: relative;
+    border: 2px solid white;
+    border-radius: 10px;
 }
 
 .roadmap-box h4 {
     margin: 0;
     padding: 1rem 0;
     font-size: 1.75rem;
-    background: gray;
+    background: black;
     width: 100%;
     clip-path: polygon(20% 100%, 80% 100%, 100% 0%, 0% 0%);
 }

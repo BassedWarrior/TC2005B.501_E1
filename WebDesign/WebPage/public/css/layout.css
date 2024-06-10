@@ -8,7 +8,7 @@ html, body {
 
 /* Estilos para el barra principal fija de comandos */
 header {
-    background-color: gray;
+    background-color: #2F2F2F;
     text-align: center;
     position: fixed;
     align-items: center;
@@ -48,7 +48,7 @@ header div {
 
 /* Estilo para el pie de página con info extra */
 footer {
-    background-color: gray;
+    background-color: #2F2F2F;
     color: white;
     text-align: center;
     padding-top: 2rem;
@@ -112,12 +112,12 @@ footer hr {
 /* FOOTER pero la parte de Contact us*/
 
 .contact-us {
-    background-color: darkgray;
+    background-color: #2F2F2F;
     display: flex;
     align-items: center;
     text-align: center;
     justify-content: space-evenly;
-    color: black;
+    color: white;
 }
 
 .media-access {
@@ -129,7 +129,7 @@ footer hr {
 
 .media-access h4 {
     margin-bottom: 10px;
-    color: black;
+    color: white;
     font-weight: bold;
 }
 
@@ -145,7 +145,7 @@ footer hr {
 }
 
 .media-content a {
-    color: black;
+    color: white;
     text-decoration: none;
 }
 
