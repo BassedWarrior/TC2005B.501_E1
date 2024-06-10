@@ -1,140 +1,136 @@
-*{
-   font-family: "Sedan SC", serif;
-   font-weight: 400;
-   font-style: normal;
-}
- 
-html, body
-{
-   width: 100%;
-   height: 100%;
-   margin: 0%;
+/* Ventana de la jugabilidad del CHRONICAL_DOOM */
+
+#game-build {
+    padding-top: 10rem;
+    padding-bottom: 4rem;
+    width: 100%;
+    background-color: black;
 }
 
-.toolBar 
-{
-   padding-top:50px;
-   padding-bottom:50px ;
-   margin: 0%;
-   background-color: #0c0c0c;
-   width: 100%;
+#game-deploy {
+    padding: 18rem;
+    margin-inline: 8rem;
+    background-color: brown;
+    border: 2px solid white;
+    border-radius: 10px;
 }
 
-.toolBar nav
-{
-   display: flex;  
-   gap: 130px;
-   justify-content: center; 
+/* Estilos para la sección de NEWS */
+
+.game-news {
+    padding: 2rem;
+    background-image: url("../images/bg_tunnel.jpg");
+    background-size: cover;
 }
 
-.toolBar 
-{
-   display: flex;
-   justify-content: center; 
+.news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    background-color: gray;
+    padding: 0 3rem;
+}
+.news-wrap {
+    display: flex;
+    justify-content: space-evenly;
 }
 
-.toolBar a
-{
-   font-size: 200%;
-   color: #41288d;
-   text-decoration: none;
+.news-content {
+    padding: 2rem;
+    margin: 1rem;
+    background-color: #32233a;
+    color: white;
+    border-radius: 10px;
 }
 
-.toolBar a:hover
-{
-   color: #d8cbff;
+/* Estilos para la descripción del juego */
+
+.summary {
+    padding: 2rem;
+    background-color: #425a70;
+    color: white;
 }
 
-
-
-#gameID 
-{
-   color: rgb(192, 166, 253); 
+.summary-text {
+    padding-left: 8rem;
+    width: 50%;
 }
 
-
-
-z
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.footer {
-   background-color:rgb(25, 19, 32);
-   padding: 20px 0;
-   display: flex;
-   justify-content: space-around;
+.summary h2 {
+    font-size: 200%;
+    letter-spacing: 5px;
+    font-style: italic;
+    margin-bottom: 0;
 }
 
-.footer div {
-   flex: 1;
-   padding: 10px;
-   text-align: center;
+.summary h3 {
+    color: yellow;
 }
 
-.footer h4 {
-   margin-bottom: 10px;
-   font-size: 150%;
-   color: #59337c;
+/* Estilos para la sección de ROADMAP */
+
+.roadmap {
+    padding: 2rem;
+    background-image: url("../images/bg_pagoda.jpg");
+    color: white;
+    position: relative;
+    overflow: hidden;
 }
 
-.footer ul, .footer nav {
-   list-style: none;
-   padding: 0;
+.roadmap-header {
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
-.footer ul li, .footer nav a {
-   margin-bottom: 5px;
-   color: #757575;
-   text-decoration: none;
-   height: 30px;
+.roadmap-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
 }
 
-.footer nav a {
-   display: block;
-   height: 30px;
+.roadmap-header h3 {
+    font-size: 1.5rem;
+    margin: 0.25rem 0;
 }
 
-.footer nav a:hover {
-   text-decoration: underline;}
-
-.footer nav a img.icon 
-{
-   width: 20px; /* Adjust the size as needed */
-   height: auto;
-   margin-right: 8px;
-   vertical-align: middle;
+.roadmap-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 2rem;
 }
 
-.footer nav a img.icon,
-.footer ul li img.icon {
-   width: 20px; /* Ajusta el tamaño según sea necesario */
-   height: auto;
-   margin-right: 8px;
-   vertical-align: middle;
+.roadmap-box {
+    margin: 1.5rem;
+    padding: 0 0.5rem;
+    background-color: #425a70;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
 }
 
-.footer nav a,
-.footer ul li a {
-   color: #757575;
-   text-decoration: none;
+.roadmap-box h4 {
+    margin: 0;
+    padding: 1rem 0;
+    font-size: 1.75rem;
+    background: gray;
+    width: 100%;
+    clip-path: polygon(20% 100%, 80% 100%, 100% 0%, 0% 0%);
 }
 
-.footer nav a:hover,
-.footer ul li a:hover {
-   text-decoration: underline;
+.roadmap-box ul {
+    list-style-type: none;
+    padding: 50px 25px;
+    margin: 0;
+}
+
+.roadmap-box li {
+    margin: 0.5rem 0;
+    font-size: 1.25rem;
 }

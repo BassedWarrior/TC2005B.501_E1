@@ -1,0 +1,162 @@
+/* Estilos generales para la página web */
+html, body {
+    font-family: "Sedan SC", serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+/* Estilos para el barra principal fija de comandos */
+header {
+    background-color: gray;
+    text-align: center;
+    position: fixed;
+    align-items: center;
+    padding: 2rem;
+    padding-left: 0;
+    width: 100%;
+    z-index: 1000;
+    font-size: 20px;
+}
+
+header nav a {
+    color: white;
+    margin: 0 25px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header a:hover {
+    color: black;
+}
+
+header div {
+    flex: 1;
+    display: flex;
+    display: inline;
+    justify-content: flex-end;
+    padding-inline: 200px;
+}
+
+.logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    top: 1px;
+}
+
+/* Estilo para el pie de página con info extra */
+footer {
+    background-color: gray;
+    color: white;
+    text-align: center;
+    padding-top: 2rem;
+    font-size: 12px;
+}
+
+footer hr {
+    border: none;
+    border-top: 1px solid white;
+    margin: 2rem auto;
+    width: 90%;
+}
+
+.footer-services nav {
+    margin-top: 2rem;
+    text-align: left;
+    padding-left: 4rem;
+}
+
+.footer-services nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-services nav a:hover {
+    color: black;
+}
+
+.social-media {
+    display: flex;    
+    justify-content: space-around;
+    padding: 0;
+}
+
+#follow-us, #download {
+    display: flex;
+    flex-direction: inline;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+}
+
+#follow-us h5, #download h5 {
+    margin-bottom: 10px;
+}
+
+#follow-us a, #download a {
+    margin: 5px 0;
+}
+
+#follow-us img:hover, #download img:hover {
+    transform: scale(1.1);
+}
+
+#copyright {
+    padding-bottom: 2rem;
+}
+
+/* FOOTER pero la parte de Contact us*/
+
+.contact-us {
+    background-color: darkgray;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-evenly;
+    color: black;
+}
+
+.media-access {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.media-access h4 {
+    margin-bottom: 10px;
+    color: black;
+    font-weight: bold;
+}
+
+.media-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+}
+
+.media-content img.icon {
+    margin-right: 10px;
+}
+
+.media-content a {
+    color: black;
+    text-decoration: none;
+}
+
+.media-content a:hover {
+    text-decoration: underline;
+    color: blue;
+}
+
+.icon {
+    width: 20px;
+    height: auto;
+    margin-right: 8px;
+    vertical-align: middle;
+}

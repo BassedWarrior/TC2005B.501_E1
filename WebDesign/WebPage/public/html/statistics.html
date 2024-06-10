@@ -9,89 +9,127 @@
     <!--Referencias a las fuentes que estamos usando en la pagina. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Sedan+SC&display=swap" rel="stylesheet">
-    <script type="module" defer src="../js/graphs.js"></script> 
-    <link rel="stylesheet" type="text/css" href="../css/statistics.css">
 
+    <script type="module" defer src="/../js/graphs.js"></script> 
+    <!--Referencia al archivo css que estamos usando en la pagina. -->
+    <link rel="stylesheet" type="text/css" href="/css/statistics.css">
+    <link rel="stylesheet" type="text/css" href="/css/layout.css">
 </head>
 
 
+
 <body>  
-
-    
-     
     <!--Espacio de la cabecera con los links de la pagina web.-->
-    <div class = "toolBar">
+    <header>
         <nav>
-            <a id = "descriptionID" href="description.html" >DESCRIPTION</a>
-            <a id = "gameID" href="game.html" >GAME</a>
-            <a id = "statisticsID" href="statistics.html" >STATISTICS</a>
+            <div>
+                <a href="/mainPage">GAME</a>
+                <a href="/mechanics">MECHANICS</a>
+            </div>
+            <div>
+                <a style="color: yellow;"">STATISTICS</a>
+                <a href="https://github.com/BassedWarrior/TC2005B.501_E1.git">GITHUB</a>
+            </div>
         </nav>
-    </div>
+        <img src="../images/gameLogo.png" alt="Chronicle_Doom" class="logo" width="250">
+    </header>
 
 
 
 
-
-
-
-
-    <div class="container">
-        <h2>Getting data from an API</h2>
-        <p>To use the data from an API to plot a chart, we first need to make a request to the API and process the results. In this case, we are creating new arrays using the<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map</a>method. If you are familiar with Python list comprehensions, map works very similarly.</p>
-
-        <p>The map() method creates a new array populated with the results of calling a provided function on every element in the calling array. For this example, the function that we are using is only returning a specific column of the results. For example, <code>values.map(e => e['name'])</code> creates an array that only has the column names from the results object.</p>
-
-        <p>Using the arrays that only have the data that we need, we can create a new configuration object that is going to be plotted in the chart. For this example, we are ploting the completion rate of each level in the 'levels' table. Specifically, we need arrays that hold the names, and completion rate for each level. An additional array that contains a random color for each chart element is also created.</p>
-
-        <div class="chartContainer">
+    <div class="content">
             <canvas id="apiChart1" width="600" height="600"></canvas>
             <canvas id="apiChart2" width="600" height="600"></canvas>
             <canvas id="apiChart3" width="600" height="600"></canvas>
-        </div>
     </div>
 
 
 
+    <footer>
+        <div class="social-media">
+            <div id="follow-us">
+                <h5>Follow us on</h5>
+                <a href="https://google.com">
+                    <img src="../images/icons/youtube.png" alt="Youtube" width="50px">
+                </a>
+                <a href="https://google.com">
+                    <img src="../images/icons/github-black.png" alt="Github" width="50px">
+                </a>
+                <a href="https://google.com">
+                    <img src="../images/icons/tiktok.png" alt="Tiktok" width="50px">
+                </a>
+            </div>
+            <div id="download">
+                <h5>Download our game from</h5>
+                <a href="https://google.com">
+                    <img src="../images/icons/appstore.png"
+                    alt="AppStore" height="90px">
+                </a>
+                <a href="https://google.com">
+                    <img src="../images/icons/googleplay.png"
+                    alt="GooglePlay" height="100px">
+                </a>
 
-
-
-
-
-
-
-
-    <div class="footer">
-        <div class="footer">
-            <div>
-                <h4>Contact Us</h4>
-                    <ul>
-                        <li><img src="../images/mail.png" alt="Mail" class="icon"> Eduardo Porto: <a href="mailto:A01027893@tec.mx">a01027893@tec.mx</a></li>
-                        <li><img src="../images/mail.png" alt="Mail" class="icon"> Fausto Jimenez: <a href="mailto:A01027983@tec.mx">a01027983@tec.mx</a></li>
-                        <li><img src="../images/mail.png" alt="Mail" class="icon"> Julian Ramirez: <a href="mailto:A01027743@tec.mx">a01027743@tec.mx</a></li>
-                    </ul>
             </div>
         </div>
-        
-    
-        <div>
-            <h4>social media</h4>
+        <div class="footer-services">
             <nav>
-                <a href="https://www.instagram.com/e_porto_"> <img src="../images/instagram.png" alt="instagram" class="icon">@e_porto_</a>
-                <a href="https://www.instagram.com/favstojimenez"><img src="../images/instagram.png" alt="instagram" class="icon">@favstojimenez</a>
-                <a href="https://www.instagram.com/julian.zrmrz"><img src="../images/instagram.png" alt="instagram" class="icon">@julian.zrmrz</a>
+                <a href="https://google.com">Terms of Service</a>
+                <a href="https://google.com">Privacy Policy</a>
+                <a href="https://google.com">Parents Guide</a>
+                <a href="https://google.com">Safe and Fair Play Policy</a>
+                <a href="https://google.com">Other Legal Docs</a>
+                <a href="https://google.com">For Media</a>
+                <a href="https://google.com">Our Domains</a>
+                <a href="https://google.com">Manage Cookies</a>
             </nav>
         </div>
-    
-        <div>
-            <h4>git hub</h4>
-            <nav>
-                <a href="https://github.com/Porto1090"><img src="../images/github.png" alt="instagram" class="icon">Eduardo Porto</a>
-                <a href="https://github.com/BassedWarrior"><img src="../images/github.png" alt="instagram" class="icon">Fausto Jimenez</a>
-                <a href="https://github.com/HJZR2004"><img src="../images/github.png" alt="instagram" class="icon">Julian Ramirez</a>
-            </nav>
+        <hr>
+        <p class="copyright">&copy; 2024 Mia PaginaWeb. Todos los derechos reservados.</p>
+        <div class="contact-us">
+            <div class="media-access">
+                <h4>Social Media</h4>
+                <nav>
+                    <div class="media-content">
+                        <a href="https://www.instagram.com/e_porto_"> <img src="../images/icons/instagram.png" alt="instagram" class="icon">@e_porto_</a>
+                    </div>
+                    <div class="media-content">
+                        <a href="https://www.instagram.com/favstojimenez"><img src="../images/icons/instagram.png" alt="instagram" class="icon">@favstojimenez</a>
+                    </div>
+                    <div class="media-content">
+                        <a href="https://www.instagram.com/julian.zrmrz"><img src="../images/icons/instagram.png" alt="instagram" class="icon">@julian.zrmrz</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="media-access">
+                <h4>Contact Us</h4>
+                <nav>
+                    <div class="media-content">
+                        <img src="../images/icons/mail.png" alt="Mail" class="icon"> Eduardo Porto:<a href="mailto:A01027893@tec.mx">a01027893@tec.mx</a>
+                    </div>
+                    <div class="media-content">
+                        <img src="../images/icons/mail.png" alt="Mail" class="icon"> Fausto Jimenez:<a href="mailto:A01027983@tec.mx">a01027983@tec.mx</a>
+                    </div>
+                    <div class="media-content">
+                        <img src="../images/icons/mail.png" alt="Mail" class="icon"> Julian Ramirez: <a href="mailto:A01027743@tec.mx">a01027743@tec.mx</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="media-access">
+                <h4>GitHub</h4>
+                <nav>
+                    <div class="media-content">
+                        <a href="https://github.com/Porto1090"><img src="../images/icons/github.png" alt="github" class="icon">Eduardo Porto</a>
+                    </div>
+                    <div class="media-content">
+                        <a href="https://github.com/BassedWarrior"><img src="../images/icons/github.png" alt="github" class="icon">Fausto Jimenez</a>
+                    </div>
+                    <div class="media-content">
+                        <a href="https://github.com/HJZR2004"><img src="../images/icons/github.png" alt="github" class="icon">Julian Ramirez</a>
+                    </div>
+                </nav>
+            </div>
         </div>
-    </div>
-
-</div>    
+    </footer>
 </body>
 
