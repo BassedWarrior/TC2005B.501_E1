@@ -62,54 +62,9 @@ footer hr {
     width: 90%;
 }
 
-.footer-services nav {
-    margin-top: 2rem;
-    text-align: left;
-    padding-left: 4rem;
-}
-
-.footer-services nav a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.footer-services nav a:hover {
-    color: black;
-}
-
-.social-media {
-    display: flex;    
-    justify-content: space-around;
-    padding: 0;
-}
-
-#follow-us, #download {
-    display: flex;
-    flex-direction: inline;
-    align-items: center;
-    gap: 10px;
-    font-size: 20px;
-}
-
-#follow-us h5, #download h5 {
-    margin-bottom: 10px;
-}
-
-#follow-us a, #download a {
-    margin: 5px 0;
-}
-
-#follow-us img:hover, #download img:hover {
-    transform: scale(1.1);
-}
-
 #copyright {
     padding-bottom: 2rem;
 }
-
-/* FOOTER pero la parte de Contact us*/
 
 .contact-us {
     background-color: #2F2F2F;

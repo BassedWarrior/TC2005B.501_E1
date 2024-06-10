@@ -35,16 +35,12 @@ app.get('/mainpage', (request, response)=>{
 
 app.get('/statistics', (request, response)=>{
     fs.readFile('public/html/statistics.html',  'utf8',(err, html)=>{
-        if(err) response.status(500).send('There was an error: ' + err)
-        console.log('Loading page...')
         response.send(html)
     })
 })
 
 app.get('/mechanics', (request, response)=>{
     fs.readFile('public/html/mechanics.html',  'utf8',(err, html)=>{
-        if(err) response.status(500).send('There was an error: ' + err)
-        console.log('Loading page...')
         response.send(html)
     })
 })
