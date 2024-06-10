@@ -17,11 +17,11 @@ VALUES
     (8, "Soldiers", "Generate an Tzar Bomba Card", "unit", 7, 5),
     (9, "Alien", "Generate an Abduction Card", "unit", 7, 9),
     (10, "Terminator", "Deal damage to all copies of the same enemy accross all timelines", "unit", 10, 10),
-    (3, "Jolly Roger", "Deal 2 damage to an enemy to heal 2 to a unit.", "paradox", NULL, NULL),
-    (4, "Blood Chalis", "Deal 3 damage to a unit to grant +3|+0 to a unit", "paradox", NULL, NULL),
-    (6, "Black Plague", "Grant -3|+0 to all enemies", "paradox", NULL, NULL),
-    (6, "Abduction", "Place an enemy unit in your hand. This unit can now be played as normal", "paradox", NULL, NULL),
-    (6, "Millenial Knowledge", "Grant +5|+5 to an allied unit", "paradox", NULL, NULL),
+    (3, "Jolly Roger", "Deals 2 damage to center enemyline AND heals 2 points to center allyline", "paradox", NULL, NULL),
+    (4, "Blood Chalis", "Deals 3 damage to right allyline AND grants +3 attack to left allyline", "paradox", NULL, NULL),
+    (6, "Black Plague", "Grants -3 attack to all enemies", "paradox", NULL, NULL),
+    (6, "Abduction", "Heals 5 health and grants -5 attack to all enemies", "paradox", NULL, NULL),
+    (6, "Millenial Knowledge", "Heals 5 health in left allyline AND grants -3 attack to center allyline", "paradox", NULL, NULL),
     (7, "Dinosaur Meteor", "Deal 10 damage to all units in all timelines", "paradox", NULL, NULL),
     (8, "Tzar Bomba", "Deal 5 damage to all enemies", "paradox", NULL, NULL);
 

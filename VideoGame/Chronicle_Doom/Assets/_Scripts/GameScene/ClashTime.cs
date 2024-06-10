@@ -15,6 +15,7 @@ public class ClashTime : MonoBehaviour
     [SerializeField] private Transform enemyAreaA;
     [SerializeField] private Transform enemyAreaB;
     [SerializeField] private Transform enemyAreaC;
+    [SerializeField] private Transform paradoxCollector;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private Canvas mainCanvas;
     [SerializeField] private Button endTurnButton;
@@ -26,28 +27,21 @@ public class ClashTime : MonoBehaviour
         endTurnButton.onClick.AddListener(Clash);
     }
 
-    private List<CardPropertiesDrag> GetListByName(string listName)
+    private List<CardPropertiesDrag> GetListByName(string name)
     {
-        switch (listName)
+        switch (name)
         {
-            case "TimeLineA":
-                return timelineA;
-            case "TimeLineB":
-                return timelineB;
-            case "TimeLineC":
-                return timelineC;
-            case "QuantumTunnel":
-                return quantumTunnel;
-            case "EnemyLineA":
-                return enemylineA;
-            case "EnemyLineB":
-                return enemylineB;
-            case "EnemyLineC":
-                return enemylineC;
+            case "TimeLineA": return timelineA;
+            case "TimeLineB": return timelineB;
+            case "TimeLineC": return timelineC;
+            case "EnemyLineA": return enemylineA;
+            case "EnemyLineB": return enemylineB;
+            case "EnemyLineC": return enemylineC;
             default:
                 return null;
         }
     }
+
 
     public void RelocateEnemies()
     {
@@ -302,6 +296,25 @@ public class ClashTime : MonoBehaviour
     {
         Debug.Log("Clash is happening!");
         endTurnButton.interactable = false;
+
+        foreach (Transform child in paradoxCollector)
+        {
+            if (child.CompareTag("Card"))
+            {
+                CardPropertiesDrag card = child.GetComponent<CardPropertiesDrag>();
+                if (card != null)
+                {
+                    foreach (CardAbility ability in card.cardAbilities)
+                    {
+                        Debug.Log($"Evoke ability {ability} from card {card.card.name}");
+                        EvokeAbilities(ability);
+                    }
+                }
+            }
+        }
+
+
+
         DealLineDamage(timelineA, enemylineA);
         DealLineDamage(timelineB, enemylineB);
         DealLineDamage(timelineC, enemylineC);
@@ -315,8 +328,19 @@ public class ClashTime : MonoBehaviour
         InfoUpdate(enemylineB);
         InfoUpdate(enemylineC);
 
-        turnFinished = true;
+        DestroyUsedCards(paradoxCollector);
         WaitForPlayerTurn();
+    }
+
+    private void DestroyUsedCards(Transform cardCollector)
+    {
+        foreach (Transform child in cardCollector)
+        {
+            if (child.CompareTag("Card"))
+            {
+                Destroy(child.gameObject);
+            }
+        }
     }
 
     public void InfoUpdate(List<CardPropertiesDrag> timeline)
@@ -324,6 +348,39 @@ public class ClashTime : MonoBehaviour
         foreach (CardPropertiesDrag card in timeline)
         {
             card.AssignInfo();
+        }
+    }
+
+    public void EvokeAbilities(CardAbility ability)
+    {
+        foreach (string target in ability.targets)
+        {
+            List<CardPropertiesDrag> targetList = GetListByName(target);
+            if (targetList != null)
+            {
+                foreach (CardPropertiesDrag card in targetList)
+                {
+                    if (ability.damage != 0)
+                    {
+                        Debug.Log($"Dealing {ability.damage} damage to {card.card.name} in row {target}");
+                        card.card.AddDamage(ability.damage);
+                    }
+                    if (ability.heal != 0)
+                    {
+                        Debug.Log($"Healing {ability.heal} health to {card.card.name} in row {target}");
+                        card.card.Heal(ability.heal);
+                    }
+                    if (ability.attack != 0)
+                    {
+                        Debug.Log($"Adding {ability.attack} attack to {card.card.name} in row {target}");
+                        card.card.AddAttack(ability.attack);
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"No target list found for {target}");
+            }
         }
     }
 }

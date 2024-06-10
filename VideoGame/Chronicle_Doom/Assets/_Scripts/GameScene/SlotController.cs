@@ -13,6 +13,7 @@ public class SlotController : MonoBehaviour
     private bool previousDragState;
     [SerializeField] private bool isEnemy;
     [SerializeField] private bool isDeck;
+    [SerializeField] private bool isParadoxCollector;
     [SerializeField] private bool isQuantumTunnel;
     private List<CardPropertiesDrag> currentCards;
 
@@ -57,34 +58,48 @@ public class SlotController : MonoBehaviour
             previousDragState = moveManager.isDragging;
         }
 
-        if (moveManager.isDragging && !isEnemy)
+        if (moveManager.isParadoxCard)
         {
-            if (!moveManager.isOnBoard)
+            if (isParadoxCollector)
             {
-                if(isQuantumTunnel)
-                {
-                    boxCollider.enabled = true;
-                }
-                else
-                {
-                    boxCollider.enabled = false;
-                }
+                boxCollider.enabled = true;
             }
             else
             {
-                if (isDeck)
-                {
-                    boxCollider.enabled = false;
-                }
-                else
-                {
-                    boxCollider.enabled = true;
-                }
+                boxCollider.enabled = false;
             }
         }
         else
         {
-            boxCollider.enabled = false;
+            if (moveManager.isDragging && !isEnemy)
+            {
+                if (!moveManager.isOnBoard)
+                {
+                    if(isQuantumTunnel)
+                    {
+                        boxCollider.enabled = true;
+                    }
+                    else
+                    {
+                        boxCollider.enabled = false;
+                    }
+                }
+                else
+                {
+                    if (isDeck)
+                    {
+                        boxCollider.enabled = false;
+                    }
+                    else
+                    {
+                        boxCollider.enabled = true;
+                    }
+                }
+            }
+            else
+            {
+                boxCollider.enabled = false;
+            }
         }
     }
 

@@ -22,6 +22,7 @@ public class MoveManager : MonoBehaviour
     private bool canDrag = true;
     public bool isDragging;
     public bool isOnBoard;
+    public bool isParadoxCard;
     public  bool cardPlaced;
     private bool openInfo;
     private void Start()
@@ -50,6 +51,7 @@ public class MoveManager : MonoBehaviour
                         isDragging = true;
                         currentCard.isDrag = isDragging;
                         isOnBoard= currentCard.isOnBoard;
+                        isParadoxCard = currentCard.isParadox;
                         ChangeSortingLayer(hitInfo.collider.transform, "ForegroundCanvas");
                     }
                 }
