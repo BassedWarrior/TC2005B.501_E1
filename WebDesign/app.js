@@ -10,8 +10,7 @@ const app = express();
 const port = process.env.PORT;  // This is taken from the .env file.
 
 app.use(express.json());
-app.use(express.static('../WebPage/public'));
-
+app.use(express.static('public'));
 
 async function connectToDB() {
   return await mysql.createConnection({
@@ -28,16 +27,14 @@ app.listen(port, () => {
 });
 
 
-app.get('/mainPage', (request, response)=>{
-    fs.readFile('../WebPage/public/html/game.html',  'utf8',(err, html)=>{
-        if(err) response.status(500).send('There was an error: ' + err)
-        console.log('Loading page...')
+app.get('/mainpage', (request, response)=>{
+    fs.readFile('public/html/game.html',  'utf8',(err, html)=>{
         response.send(html)
     })
 })
 
 app.get('/statistics', (request, response)=>{
-    fs.readFile('../WebPage/public/html/statistics.html',  'utf8',(err, html)=>{
+    fs.readFile('public/html/statistics.html',  'utf8',(err, html)=>{
         if(err) response.status(500).send('There was an error: ' + err)
         console.log('Loading page...')
         response.send(html)
@@ -45,7 +42,7 @@ app.get('/statistics', (request, response)=>{
 })
 
 app.get('/mechanics', (request, response)=>{
-    fs.readFile('../WebPage/public/html/mechanics.html',  'utf8',(err, html)=>{
+    fs.readFile('public/html/mechanics.html',  'utf8',(err, html)=>{
         if(err) response.status(500).send('There was an error: ' + err)
         console.log('Loading page...')
         response.send(html)
