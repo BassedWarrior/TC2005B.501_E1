@@ -7,7 +7,6 @@ using UnityEngine.Networking;
 
 public class WaveManager : MonoBehaviour
 {
-    private GameManager gameManager;
     [SerializeField] private HandManager handManager;
     [SerializeField] private ClashTime clashTime;
     private int waveNumber;
@@ -24,7 +23,6 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         waveNumber = 1;
         UpdateHealthBar();
         UpdateScoreText();
@@ -45,17 +43,17 @@ public class WaveManager : MonoBehaviour
         UpdateScoreText();
         UpdateWaveText();
 
-        if (gameManager.playerHealth <= 0)
+        if (GameManager.Instance.playerHealth <= 0)
         {
             DisplayEndMessage("You Lose, GAMEOVER!");
-            gameManager.PostGame();
+            GameManager.Instance.PostGame();
             return;
         }
 
         if (waveNumber > 10)
         {
             DisplayEndMessage("There is no more waves, you win!");
-            gameManager.PostGame();
+            GameManager.Instance.PostGame();
             return;
         }
 
@@ -65,16 +63,16 @@ public class WaveManager : MonoBehaviour
 
     private void StartNextTurn()
     {
-        Debug.Log($"Adding {waveNumber * 100} score for round {waveNumber}!");
-        gameManager.AddWaveScore(waveNumber);
+        //Debug.Log($"Adding {waveNumber * 100} score for round {waveNumber}!");
+        GameManager.Instance.AddWaveScore(waveNumber);
         waveNumber++;
-        Debug.Log("Wave " + waveNumber);
         ObtainWave();
         StartCoroutine(HideWavePanel());
         MakeWaveAppear();
         handManager.DrawCard();
         handManager.AddKhronos();
-        gameManager.AddWaveScore(waveNumber);
+        GameManager.Instance.AddWaveScore(waveNumber);
+        GameManager.Instance.turnFinished = true;
     }
 
     private void MakeWaveAppear()
@@ -88,6 +86,7 @@ public class WaveManager : MonoBehaviour
             cardProperties.AssignInfo();
             cardProperties.card.CalculateScoreValue();
         }
+
     }
 
     public void ObtainWave()
@@ -117,7 +116,7 @@ public class WaveManager : MonoBehaviour
                 {
                     for (int j = 0; j < card.card_times; j++)
                     {
-                        enemyWave.Add(gameManager.cards[card.cardID - 1]);
+                        enemyWave.Add(GameManager.Instance.cards[card.cardID - 1]);
                     }
                 }
             }
@@ -141,13 +140,13 @@ public class WaveManager : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        playersHealthText.text = "Health: " + gameManager.playerHealth;
-        healthBar.fillAmount = (float)gameManager.playerHealth / 20;
+        playersHealthText.text = "Health: " + GameManager.Instance.playerHealth;
+        healthBar.fillAmount = (float)GameManager.Instance.playerHealth / 20;
     }
 
     public void UpdateScoreText()
     {
-        this.scoreText.text = $"Score: {this.gameManager.score}";
+        this.scoreText.text = $"Score: {GameManager.Instance.score}";
     }
     
     public void UpdateWaveText()

@@ -11,29 +11,23 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
-    [SerializeField] private GameObject welcomeMessage;
-    [SerializeField] private GameObject deckMessage;
-
     public void ChangeToMenuScene()
     {
-        welcomeMessage.SetActive(true);
         StartCoroutine(ExecuteAfterTime(2f, () => {
             GoToScene("CollectionScene");
         }));
     }
 
-    public void LetsPlay()
+    public void ChangeToLoginScene()
     {
-        GameManager gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        if (gameManager.playersDeck.Count == 18)
-        {
+        GoToScene("LoginScene");
+    }
+
+    public void ChangeToGameScene()
+    {
+        StartCoroutine(ExecuteAfterTime(0f, () => {
             GoToScene("GameScene");
-        }
-        else
-        {
-            deckMessage.SetActive(true);
-            StartCoroutine(ExecuteAfterTime(2f, () => deckMessage.SetActive(false)));
-        }
+        }));
     }
 
     private IEnumerator ExecuteAfterTime(float seconds, System.Action afterWaitAction)

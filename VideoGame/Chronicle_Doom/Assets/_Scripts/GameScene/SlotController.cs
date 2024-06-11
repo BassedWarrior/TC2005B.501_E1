@@ -31,95 +31,64 @@ public class SlotController : MonoBehaviour
     void Update()
     {
         int currentChildCount = transform.childCount;
-        if (clashTime.turnFinished)
+        
+        if (GameManager.Instance.turnFinished)
         {
-            OrganizeCards();
-            UpdateCardList();
-            clashTime.turnFinished = false;
+            StartCoroutine(TurnFinished());
         }
-
-        if (currentChildCount != lastChildCount)
+        else if (currentChildCount != lastChildCount || moveManager.cardPlaced || previousDragState != moveManager.isDragging)
         {
-            if(!isDeck)
-            {   
-                UpdateCardList();
+            if (currentChildCount != lastChildCount)
+            {
+                if (!isDeck)
+                {
+                    UpdateCardList();
+                }
+                lastChildCount = currentChildCount;
             }
             OrganizeCards();
-            lastChildCount = currentChildCount;
-        }
-
-        if (moveManager.cardPlaced)
-        {
-            OrganizeCards();
-        }
-        else if (previousDragState != moveManager.isDragging)
-        {
-            OrganizeCards();
-            previousDragState = moveManager.isDragging;
+            if (previousDragState != moveManager.isDragging)
+            {
+                previousDragState = moveManager.isDragging;
+            }
+            moveManager.cardPlaced = false;
         }
 
         if (moveManager.isParadoxCard)
         {
-            if (isParadoxCollector)
+            boxCollider.enabled = isParadoxCollector;
+        }
+        else if (moveManager.isDragging && !isEnemy)
+        {
+            if (!moveManager.isOnBoard)
             {
-                boxCollider.enabled = true;
+                boxCollider.enabled = isQuantumTunnel;
             }
             else
             {
-                boxCollider.enabled = false;
+                boxCollider.enabled = !isDeck;
             }
         }
         else
         {
-            if (moveManager.isDragging && !isEnemy)
-            {
-                if (!moveManager.isOnBoard)
-                {
-                    if(isQuantumTunnel)
-                    {
-                        boxCollider.enabled = true;
-                    }
-                    else
-                    {
-                        boxCollider.enabled = false;
-                    }
-                }
-                else
-                {
-                    if (isDeck)
-                    {
-                        boxCollider.enabled = false;
-                    }
-                    else
-                    {
-                        boxCollider.enabled = true;
-                    }
-                }
-            }
-            else
-            {
-                boxCollider.enabled = false;
-            }
+            boxCollider.enabled = false;
         }
     }
 
     private void UpdateCardList()
     {
-        // Limpiar la lista actual para evitar duplicados
         currentCards.Clear();
         
         foreach (Transform child in transform)
         {
             CardPropertiesDrag card = child.GetComponent<CardPropertiesDrag>();
-            // Agregar cartas solo si existen y tienen salud positiva.
             if (card != null && card.card.IsAlive())
             {
-                // Reiniciar el daño recibido por la carta
                 card.card.ResetDamage();
                 currentCards.Add(card);
             }
         }
-        // Actualizar las listas en ClashTime si hay cartas actuales
+
         clashTime.UpdateLists(currentCards, transform.name);
     }
 
@@ -136,7 +105,6 @@ public class SlotController : MonoBehaviour
             Vector3 cardPosition = startPosition - Vector3.left * i * spacing;
             cardTransform.position = cardPosition;
         }
-        moveManager.cardPlaced = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -161,5 +129,13 @@ public class SlotController : MonoBehaviour
                 card.actualParent = card.originalParent;
             }
         }
+    }
+
+    private IEnumerator TurnFinished()
+    {
+        OrganizeCards();
+        UpdateCardList();
+        yield return new WaitForSeconds(1f);
+        GameManager.Instance.turnFinished = false;
     }
 }

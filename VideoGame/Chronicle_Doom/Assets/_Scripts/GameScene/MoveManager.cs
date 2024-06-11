@@ -60,6 +60,7 @@ public class MoveManager : MonoBehaviour
         else if (Input.GetMouseButtonUp(0) && currentCard != null && currentCard.isDrag && !openInfo)
         {
             isDragging = false;
+            isParadoxCard = false;
             currentCard.isDrag = isDragging;
             ChangeSortingLayer(hitInfo.collider.transform, "GameObjects");
             CardMovement(currentCard);
@@ -124,6 +125,7 @@ public class MoveManager : MonoBehaviour
 
     private void CardMovement(CardPropertiesDrag card)
     {
+        GameManager.Instance.DeleteDots();
         card.transform.SetParent(card.actualParent);
         if (card.actualParent == card.originalParent)
         {
