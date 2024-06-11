@@ -5,7 +5,6 @@ import mysql from "mysql2/promise";
 import dotenv from "dotenv/config"
 import fs from "fs";
 
-
 const app = express();
 const port = process.env.PORT;  // This is taken from the .env file.
 
@@ -28,19 +27,19 @@ app.listen(port, () => {
 
 
 app.get('/mainpage', (request, response)=>{
-    fs.readFile('public/html/game.html',  'utf8',(err, html)=>{
+    fs.readFile('public/html/game.html','utf8',(err, html)=>{
         response.send(html)
     })
 })
 
 app.get('/statistics', (request, response)=>{
-    fs.readFile('public/html/statistics.html',  'utf8',(err, html)=>{
+    fs.readFile('public/html/statistics.html','utf8',(err, html)=>{
         response.send(html)
     })
 })
 
 app.get('/mechanics', (request, response)=>{
-    fs.readFile('public/html/mechanics.html',  'utf8',(err, html)=>{
+    fs.readFile('public/html/mechanics.html','utf8',(err, html)=>{
         response.send(html)
     })
 })
