@@ -12,6 +12,7 @@ public class MoveManager : MonoBehaviour
     private Vector3 mousePosition;
     private CardPropertiesDrag currentCard;
     [SerializeField] private GameObject cardInfo;
+    [SerializeField] private GameObject waveChanger;
     [SerializeField] private Image cardImage;
     [SerializeField] private TextMeshProUGUI cardName;
     [SerializeField] private TextMeshProUGUI cardDescription;
@@ -20,6 +21,7 @@ public class MoveManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cardHealth;
     private CardData selectedCard;
     private bool canDrag = true;
+    private bool canClick = true;
     public bool isDragging;
     public bool isOnBoard;
     public  bool cardPlaced;
@@ -35,6 +37,10 @@ public class MoveManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ShowInfo(false);
+        }
+
+        if (!canClick) {
+            return;
         }
 
         if (Input.GetMouseButtonDown(0) && canDrag && !openInfo)
@@ -94,6 +100,12 @@ public class MoveManager : MonoBehaviour
         cardInfo.SetActive(show);
         canDrag = !show;
     }
+
+    public void DisableClick(bool disable)
+    {
+        canClick = !disable;
+    }
+
     private void ControlInfo(CardData card)
     {
         if (card != null)

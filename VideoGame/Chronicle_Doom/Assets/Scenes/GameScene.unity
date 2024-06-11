@@ -1383,6 +1383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardInfo: {fileID: 388765389}
+  waveChanger: {fileID: 608653438}
   cardImage: {fileID: 7148712686670107007}
   cardName: {fileID: 603412732}
   cardDescription: {fileID: 153226181}
@@ -1452,6 +1453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handManager: {fileID: 392229387}
+  moveManager: {fileID: 392229386}
   clashTime: {fileID: 392229388}
   wavePanel: {fileID: 608653438}
   waveText: {fileID: 930230183}

@@ -9,6 +9,7 @@ public class WaveManager : MonoBehaviour
 {
     private GameManager gameManager;
     [SerializeField] private HandManager handManager;
+    [SerializeField] private MoveManager moveManager;
     [SerializeField] private ClashTime clashTime;
     private int waveNumber;
     [SerializeField] private GameObject wavePanel;
@@ -48,6 +49,7 @@ public class WaveManager : MonoBehaviour
         if (gameManager.playerHealth <= 0)
         {
             DisplayEndMessage("You Lose, GAMEOVER!");
+            moveManager.DisableClick(true);
             gameManager.PostGame();
             return;
         }
@@ -55,6 +57,7 @@ public class WaveManager : MonoBehaviour
         if (waveNumber > 10)
         {
             DisplayEndMessage("There is no more waves, you win!");
+            moveManager.DisableClick(true);
             gameManager.PostGame();
             return;
         }
