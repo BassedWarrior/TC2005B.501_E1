@@ -370,12 +370,12 @@ app.get('/statistics/timePLayed', async (request, response)=>{
 })
 
 
-app.get("/statistics/top5Cards", async (request, response) => {
+app.get("/statistics/topScores", async (request, response) => {
     let connection = null;
 
     try {
         connection = await connectToDB();
-        const [results, fields] = await connection.execute("SELECT * FROM top5Cards");
+        const [results, fields] = await connection.execute("SELECT * FROM top_5_scores");
 
         console.log(`${results.length} rows returned`);
         const result = {cards: results};
