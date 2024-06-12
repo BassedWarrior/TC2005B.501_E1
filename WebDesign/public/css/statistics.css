@@ -1,9 +1,18 @@
-.content {
-   background-color: black;
-   padding: 15rem;
+
+.chartContainer
+{
+   background-color: white;
+   border: 0;
+   display: flex;
+   justify-content: space-around; 
+   align-items: center;
 }
 
-.content canvas {
-   background-color: white;
-   padding: 15rem;
+.chartContainer canvas 
+{
+   margin-top: 10%;
+   margin-bottom: 5%;
+   max-width: 600px; 
+   max-height: 600px;
 }
+

@@ -1,4 +1,3 @@
-
 function randomColor(alpha = 1.0) {
     const r_c = () => Math.round(Math.random() * 255);
     return `rgba(${r_c()}, ${r_c()}, ${r_c()}, ${alpha})`;
@@ -6,47 +5,96 @@ function randomColor(alpha = 1.0) {
 
 Chart.defaults.font.size = 16;
 
-try {
-    const levels_response = await fetch(`http://localhost:3000/statistics/topScores`, { method: 'GET' });
+async function fetchDataAndPlot() {
+    try {
+        // Fetch top scores
+        const topScoresResponse = await fetch(`http://localhost:3000/statistics/topScores`, { method: 'GET' });
+        if (topScoresResponse.ok) {
+            let topScoresResults = await topScoresResponse.json();
+            console.log('Top scores:', topScoresResults);
 
-    if (levels_response.ok) {
-        console.log('Response is ok. Converting to JSON.');
+            const topScoresData = topScoresResults.cards;
+            const topScoresUsernames = topScoresData.map(e => e['username']);
+            const topScoresValues = topScoresData.map(e => e['score']);
+            const topScoresColors = topScoresData.map(() => randomColor(0.2));
 
-        let results = await levels_response.json();
+            const ctx_topScores = document.getElementById('apiChart1').getContext('2d');
+            new Chart(ctx_topScores, {
+                type: 'bar',
+                data: {
+                    labels: topScoresUsernames,
+                    datasets: [{
+                        label: 'Top Scores',
+                        backgroundColor: topScoresColors,
+                        borderWidth: 2,
+                        data: topScoresValues
+                    }]
+                }
+            });
+        }
 
-        console.log(results);
-        console.log('Data converted correctly. Plotting chart.');
+        // Fetch lowest damage players
+        const lowestDamageResponse = await fetch(`http://localhost:3000/statistics/lowestDamagePlayers`, { method: 'GET' });
+        if (lowestDamageResponse.ok) {
+            let lowestDamageResults = await lowestDamageResponse.json();
+            console.log('Lowest damage players:', lowestDamageResults);
 
-        // Accede a los datos correctos
-        const data = results.cards;
+            const lowestDamageData = lowestDamageResults.cards;
+            const lowestDamageUsernames = lowestDamageData.map(e => e['username']);
+            const lowestDamageValues = lowestDamageData.map(e => e['damageTaken']);
+            const lowestDamageColors = lowestDamageData.map(() => randomColor(0.2));
 
-        // Aquí separamos los datos en diferentes arrays usando el método map del array de datos.
-        const usernames = data.map(e => e['username']);
-        const scores = data.map(e => e['score']);
-        const randomColors = data.map(() => randomColor(0.2)); // Genera un color random para cada entrada
+            const ctx_lowestDamage = document.getElementById('apiChart2').getContext('2d');
+            new Chart(ctx_lowestDamage, {
+                type: 'bar',
+                data: {
+                    labels: lowestDamageUsernames,
+                    datasets: [{
+                        label: 'Damage Taken',
+                        backgroundColor: lowestDamageColors,
+                        borderWidth: 2,
+                        data: lowestDamageValues
+                    }]
+                }
+            });
+        }
 
-        // Configuración del gráfico
-        const ctx_levels1 = document.getElementById('apiChart1').getContext('2d');
-        const levelChart1 = new Chart(ctx_levels1, {
-            type: 'bar', // Cambié el tipo de gráfico a 'bar' para visualizar mejor las puntuaciones
-            data: {
-                labels: usernames, // Usaremos los nombres de usuario como etiquetas en el gráfico
-                datasets: [{
-                    label: 'Top Scores',
-                    backgroundColor: randomColors, // Usa el array de colores random
-                    borderWidth: 1,
-                    data: scores // Usaremos las puntuaciones como datos en el gráfico
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+        const TimePlayedResponse = await fetch(`http://localhost:3000/statistics/TimePlayed`, { method: 'GET' });
+        if (TimePlayedResponse.ok) {
+
+            let averageTimePlayedResults = await TimePlayedResponse.json();
+            console.log('Average time played per player:', averageTimePlayedResults);
+            const averageTimePlayedData = averageTimePlayedResults.cards;
+
+            const averageTimePlayedUsernames = averageTimePlayedData.map(e => e['username']);
+            const averageTimePlayedValues = averageTimePlayedData.map(e => e['average_time_played']);
+            const averageTimePlayedColors = averageTimePlayedData.map(() => randomColor(0.2));
+
+            const ctx_averageTimePlayed = document.getElementById('apiChart3').getContext('2d');
+            new Chart(ctx_averageTimePlayed, {
+                type: 'bar',
+                data: {
+                    labels: averageTimePlayedUsernames,
+                    datasets: [{
+                        label: 'Average Time Played',
+                        backgroundColor: averageTimePlayedColors,
+                        borderWidth: 2,
+                        data: averageTimePlayedValues
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
+
+    } catch (error) {
+        console.error('Error fetching data:', error);
     }
-} catch (error) {
-    console.error('Error fetching data:', error);
 }
+
+fetchDataAndPlot();
