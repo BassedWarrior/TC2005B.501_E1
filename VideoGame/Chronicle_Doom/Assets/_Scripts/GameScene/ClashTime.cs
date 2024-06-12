@@ -15,50 +15,48 @@ public class ClashTime : MonoBehaviour
     [SerializeField] private Transform enemyAreaA;
     [SerializeField] private Transform enemyAreaB;
     [SerializeField] private Transform enemyAreaC;
+    [SerializeField] private Transform paradoxCollector;
     [SerializeField] private Canvas mainCanvas;
     [SerializeField] private Button endTurnButton;
-    public bool turnFinished = false;
 
     public void Start()
     {
-        endTurnButton.onClick.AddListener(Clash);
+        endTurnButton.onClick.AddListener(() => StartCoroutine(Clash()));
     }
 
-    private List<CardPropertiesDrag> GetListByName(string listName)
+    private List<CardPropertiesDrag> GetListByName(string name)
     {
-        switch (listName)
+        switch (name)
         {
-            case "TimeLineA":
-                return timelineA;
-            case "TimeLineB":
-                return timelineB;
-            case "TimeLineC":
-                return timelineC;
-            case "QuantumTunnel":
-                return quantumTunnel;
-            case "EnemyLineA":
-                return enemylineA;
-            case "EnemyLineB":
-                return enemylineB;
-            case "EnemyLineC":
-                return enemylineC;
+            case "TimeLineA": return timelineA;
+            case "TimeLineB": return timelineB;
+            case "TimeLineC": return timelineC;
+            case "EnemyLineA": return enemylineA;
+            case "EnemyLineB": return enemylineB;
+            case "EnemyLineC": return enemylineC;
             default:
                 return null;
         }
     }
 
-    public void RelocateEnemies()
+   public void RelocateEnemies()
     {
         List<Transform> children = new List<Transform>();
         foreach (Transform child in enemySpawner)
         {
-            if (child != enemySpawner) 
+            if (child != enemySpawner)
             {
                 children.Add(child);
             }
         }
 
-        //Debug.Log($"Relocating {children.Count} enemies");
+        // Initialize enemy count for each line
+        int enemiesInA = enemyAreaA.childCount;
+        int enemiesInB = enemyAreaB.childCount;
+        int enemiesInC = enemyAreaC.childCount;
+
+        System.Random random = new System.Random();
+
         foreach (Transform child in children)
         {
             if (child.CompareTag("Enemy"))
@@ -66,18 +64,48 @@ public class ClashTime : MonoBehaviour
                 CardPropertiesDrag card = child.GetComponent<CardPropertiesDrag>();
                 if (card != null)
                 {
-                    int randomLine = Random.Range(0, 3);
-                    switch (randomLine)
+                    bool assigned = false;
+                    List<int> lines = new List<int> { 0, 1, 2 };
+                    
+                    while (lines.Count > 0 && !assigned)
                     {
-                        case 0:
-                            card.transform.SetParent(enemyAreaA);
-                            break;
-                        case 1:
-                            card.transform.SetParent(enemyAreaB);
-                            break;
-                        case 2:
-                            card.transform.SetParent(enemyAreaC);
-                            break;
+                        int index = random.Next(lines.Count);
+                        int randomLine = lines[index];
+                        lines.RemoveAt(index);
+
+                        switch (randomLine)
+                        {
+                            case 0:
+                                if (enemiesInA < 4)
+                                {
+                                    card.transform.SetParent(enemyAreaA);
+                                    enemiesInA++;
+                                    assigned = true;
+                                }
+                                break;
+                            case 1:
+                                if (enemiesInB < 4)
+                                {
+                                    card.transform.SetParent(enemyAreaB);
+                                    enemiesInB++;
+                                    assigned = true;
+                                }
+                                break;
+                            case 2:
+                                if (enemiesInC < 4)
+                                {
+                                    card.transform.SetParent(enemyAreaC);
+                                    enemiesInC++;
+                                    assigned = true;
+                                }
+                                break;
+                        }
+                    }
+
+                    // Destroy the card if it couldn't be assigned to a line, maybe you would die too xd
+                    if (!assigned)
+                    {
+                        Destroy(card.gameObject);
                     }
                 }
             }
@@ -87,12 +115,14 @@ public class ClashTime : MonoBehaviour
     private void CalculateLineDamage(List<CardPropertiesDrag> line,
                                      int totalDamage)
     {
-
         // Skip if line is empty
         if (line.Count == 0)
         {
             return;
         }
+
+        // Reset damage dealt to each card
+        ResetDamage(line);
 
         // Add damage dealt to each player card
         int damagePerCard = (int) Mathf.Floor(
@@ -106,25 +136,19 @@ public class ClashTime : MonoBehaviour
             return;
         }
 
+        // Add extra damage to first card in case the damage per doesn't round nicely
+        int extraDamage = (int) Mathf.Ceil(
+                (float) totalDamage / line.Count) - damagePerCard;
+        line[0].card.AddDamage(extraDamage);
+
         // Add damage per card to each card
         foreach (CardPropertiesDrag card in line)
         {
             if (card.card.IsAlive())
             {
-                card.card.ResetDamage();
                 card.card.AddDamage(damagePerCard);
+                card.ShowFloatingText(card.transform.position, card.card.damage, true, true);
             }
-        }
-
-        // Add extra damage to first card in case the damage per
-        // doesn't round nicely
-        int extraDamage = (int) Mathf.Ceil(
-                (float) totalDamage / line.Count) - damagePerCard;
-        line[0].card.AddDamage(extraDamage);
-
-        foreach (CardPropertiesDrag card in line)
-        {
-            card.AssignInfo();
         }
     }
 
@@ -191,7 +215,6 @@ public class ClashTime : MonoBehaviour
     public void UpdateLists(List<CardPropertiesDrag> currentCards, string listName)
     {
         List<CardPropertiesDrag> targetList = GetListByName(listName);
-        Debug.Log("Updating list: " + listName);
 
         if (targetList == null)
         {
@@ -280,48 +303,130 @@ public class ClashTime : MonoBehaviour
         foreach (CardPropertiesDrag card in cardsToRemove)
         {
             cardList.Remove(card);
+            Destroy(card.gameObject);
         }
     }
-
-
-    private void WaitForPlayerTurn()
-    {
-        StartCoroutine(WaitAndProceed());
-    }
-
-    private IEnumerator<object> WaitAndProceed()
-    {
-        yield return new WaitForSeconds(3f);
-        AfterClash();
-        this.GetComponent<WaveManager>().NextWave();
-        endTurnButton.interactable = true;
-    }
     
-    public void Clash()
+    private IEnumerator<object> Clash()
     {
         endTurnButton.interactable = false;
+
+        if (paradoxCollector.childCount > 0)
+        {
+            ResetDamage(timelineA);
+            ResetDamage(timelineB);
+            ResetDamage(timelineC);
+            ResetDamage(enemylineA);
+            ResetDamage(enemylineB);
+            ResetDamage(enemylineC);
+            foreach (Transform child in paradoxCollector)
+            {   
+                if (child != null && child.CompareTag("Card"))
+                {
+                    CardPropertiesDrag card = child.GetComponent<CardPropertiesDrag>();
+                    if (card != null)
+                    {
+                        foreach (CardAbility ability in card.cardAbilities)
+                        {
+                            EvokeAbilities(ability);
+                        }
+                    }
+                }
+            }
+
+            DealLineDamage(timelineA, enemylineA);
+            DealLineDamage(timelineB, enemylineB);
+            DealLineDamage(timelineC, enemylineC);
+            InfoUpdateAll();
+            yield return new WaitForSeconds(3f);
+            AfterClash();
+            CalculateLineClash(timelineA, enemylineA);
+            CalculateLineClash(timelineB, enemylineB);
+            CalculateLineClash(timelineC, enemylineC);
+        }
+
         DealLineDamage(timelineA, enemylineA);
         DealLineDamage(timelineB, enemylineB);
         DealLineDamage(timelineC, enemylineC);
 
         GameManager.Instance.ApplyPlayerDamage();
 
-        foreach (CardPropertiesDrag card in timelineA)
+        InfoUpdateAll();
+
+        DestroyUsedCards(paradoxCollector);
+        yield return new WaitForSeconds(3f);
+        AfterClash();
+        this.GetComponent<WaveManager>().NextWave();
+        endTurnButton.interactable = true;
+    }
+
+    private void InfoUpdateAll()
+    {
+        InfoUpdate(timelineA);
+        InfoUpdate(timelineB);
+        InfoUpdate(timelineC);
+        InfoUpdate(enemylineA);
+        InfoUpdate(enemylineB);
+        InfoUpdate(enemylineC);
+    }
+
+    private void DestroyUsedCards(Transform cardCollector)
+    {
+        foreach (Transform child in cardCollector)
+        {
+            if (child.CompareTag("Card"))
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
+
+    public void InfoUpdate(List<CardPropertiesDrag> timeline)
+    {
+        foreach (CardPropertiesDrag card in timeline)
         {
             card.AssignInfo();
         }
+    }
 
-        foreach (CardPropertiesDrag card in timelineB)
+    public void EvokeAbilities(CardAbility ability)
+    {
+        foreach (string target in ability.targets)
         {
-            card.AssignInfo();
+            List<CardPropertiesDrag> targetList = GetListByName(target);
+            if (targetList != null)
+            {
+                foreach (CardPropertiesDrag card in targetList)
+                {
+                    if (ability.damage != 0)
+                    {
+                        Debug.Log($"Dealing {ability.damage} damage to {card.card.name} in row {target}");
+                        card.card.AddDamage(ability.damage);
+                    }
+                    if (ability.heal != 0)
+                    {
+                        Debug.Log($"Healing {ability.heal} health to {card.card.name} in row {target}");
+                        card.card.Heal(ability.heal);
+                    }
+                    if (ability.attack != 0)
+                    {
+                        Debug.Log($"Adding {ability.attack} attack to {card.card.name} in row {target}");
+                        card.card.AddAttack(ability.attack);
+                    }
+                }
+            }
+            else
+            {
+                //Debug.LogWarning($"No target list found for {target}");
+            }
         }
+    }
 
-        foreach (CardPropertiesDrag card in timelineC)
+    private void ResetDamage(List<CardPropertiesDrag> line)
+    {
+        foreach (CardPropertiesDrag card in line)
         {
-            card.AssignInfo();
+            card.card.ResetDamage();
         }
-
-        turnFinished = true;
-        WaitForPlayerTurn();
     }
 }

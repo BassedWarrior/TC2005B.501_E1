@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     // Score information
     public int score = 0;
     [SerializeField] public TextMeshProUGUI scoreText;
+    public bool turnFinished = false;
 
     public void Start()
     {
@@ -123,10 +124,26 @@ public class GameManager : MonoBehaviour
                      waveManager.GetWaveNumber(),
                      handManager.GetKronos(),
                      playersDeck.Count);
+        ResetGame();
     }
 
     public List<GameScore> GetTopHighscores()
     {
         return gameScores;
+    }
+
+    private void ResetGame()
+    {
+        this.score = 0;
+        this.playerHealth = 20;
+        this.playerDamage = 0;
+        this.turnFinished = false;
+        this.playersDeck.Clear();
+        this.playersHand.Clear();
+        this.textDots.Clear();
+        this.gameScores.Clear();
+        api.GetTopHighscores();
+        api.GetCards();
+        api.GetUsersDeck();
     }
 }

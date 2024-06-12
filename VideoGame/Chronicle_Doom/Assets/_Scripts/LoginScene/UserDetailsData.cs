@@ -56,19 +56,20 @@ public class UserDetailsData : MonoBehaviour
 
             if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
             {
-                StartCoroutine(ShowErrorMessage(www.downloadHandler.text));
+                StartCoroutine(ShowMessage(www.downloadHandler.text));
             }
             else
             {
                 Debug.Log("Respuesta del servidor: " + www.downloadHandler.text);
                 PlayerPrefs.SetString("username", username);
+                StartCoroutine(ShowMessage("Welcome. Login successful!"));
                 GameManager.Instance.GetComponent<APIConnection>().GetUsersDeck();
                 GameManager.Instance.GetComponent<SceneChanger>().ChangeToMenuScene();
                 
             }
         }
     }
-    private IEnumerator ShowErrorMessage(string message)
+    private IEnumerator ShowMessage(string message)
     {
         errorMessageText.text = message;
         errorMessage.SetActive(true);

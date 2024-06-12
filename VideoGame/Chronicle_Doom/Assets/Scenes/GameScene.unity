@@ -1082,6 +1082,7 @@ MonoBehaviour:
   spacing: 1.5
   isEnemy: 0
   isDeck: 0
+  isParadoxCollector: 0
   isQuantumTunnel: 1
 --- !u!50 &266867061
 Rigidbody2D:
@@ -1299,6 +1300,7 @@ MonoBehaviour:
   spacing: 1.3
   isEnemy: 1
   isDeck: 0
+  isParadoxCollector: 0
   isQuantumTunnel: 0
 --- !u!61 &300977267
 BoxCollider2D:
@@ -1834,6 +1836,7 @@ MonoBehaviour:
   spacing: 1.5
   isEnemy: 0
   isDeck: 0
+  isParadoxCollector: 0
   isQuantumTunnel: 0
 --- !u!50 &388872687
 Rigidbody2D:
@@ -1979,6 +1982,7 @@ MonoBehaviour:
   cardHealth: {fileID: 261939212}
   isDragging: 0
   isOnBoard: 0
+  isParadoxCard: 0
   cardPlaced: 0
 --- !u!114 &392229387
 MonoBehaviour:
@@ -2023,6 +2027,7 @@ MonoBehaviour:
   enemyAreaA: {fileID: 1627351531}
   enemyAreaB: {fileID: 729808511}
   enemyAreaC: {fileID: 1367125102}
+  paradoxCollector: {fileID: 1501535199}
   gameManager: {fileID: 0}
   mainCanvas: {fileID: 335696503}
   endTurnButton: {fileID: 588175425}
@@ -3112,6 +3117,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 679925665}
   m_CullTransparentMesh: 1
+--- !u!1 &691088839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 691088840}
+  m_Layer: 6
+  m_Name: Paradoxes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &691088840
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691088839}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1501535199}
+  m_Father: {fileID: 1119494807}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &729808510
 GameObject:
   m_ObjectHideFlags: 0
@@ -3164,6 +3201,7 @@ MonoBehaviour:
   spacing: 1.5
   isEnemy: 1
   isDeck: 0
+  isParadoxCollector: 0
   isQuantumTunnel: 0
 --- !u!50 &729808513
 Rigidbody2D:
@@ -4616,6 +4654,7 @@ Transform:
   m_Children:
   - {fileID: 557196430}
   - {fileID: 536551077}
+  - {fileID: 691088840}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1280810166
@@ -4743,6 +4782,7 @@ MonoBehaviour:
   spacing: 1.5
   isEnemy: 0
   isDeck: 0
+  isParadoxCollector: 0
   isQuantumTunnel: 0
 --- !u!50 &1309398019
 Rigidbody2D:
@@ -5017,6 +5057,7 @@ MonoBehaviour:
   spacing: 1.5
   isEnemy: 1
   isDeck: 0
+  isParadoxCollector: 0
   isQuantumTunnel: 0
 --- !u!50 &1367125104
 Rigidbody2D:
@@ -5216,6 +5257,7 @@ MonoBehaviour:
   spacing: 1.65
   isEnemy: 0
   isDeck: 1
+  isParadoxCollector: 0
   isQuantumTunnel: 0
 --- !u!61 &1392738261
 BoxCollider2D:
@@ -5314,6 +5356,7 @@ MonoBehaviour:
   spacing: 1.5
   isEnemy: 0
   isDeck: 0
+  isParadoxCollector: 0
   isQuantumTunnel: 0
 --- !u!50 &1431650617
 Rigidbody2D:
@@ -5523,6 +5566,132 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1484361485}
   m_CullTransparentMesh: 1
+--- !u!1 &1501535198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1501535199}
+  - component: {fileID: 1501535202}
+  - component: {fileID: 1501535201}
+  - component: {fileID: 1501535200}
+  m_Layer: 6
+  m_Name: ParadoxLine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1501535199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501535198}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 691088840}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1501535200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501535198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f29348939ca4543648056e532224bf78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveManager: {fileID: 392229386}
+  clashTime: {fileID: 392229388}
+  maxElements: 3
+  spacing: 1.5
+  isEnemy: 0
+  isDeck: 0
+  isParadoxCollector: 1
+  isQuantumTunnel: 0
+--- !u!50 &1501535201
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501535198}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &1501535202
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501535198}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 20, y: 5}
+  m_EdgeRadius: 0
 --- !u!1 &1574852908
 GameObject:
   m_ObjectHideFlags: 0
@@ -6068,6 +6237,7 @@ MonoBehaviour:
   spacing: 1.5
   isEnemy: 1
   isDeck: 0
+  isParadoxCollector: 0
   isQuantumTunnel: 0
 --- !u!50 &1627351533
 Rigidbody2D:

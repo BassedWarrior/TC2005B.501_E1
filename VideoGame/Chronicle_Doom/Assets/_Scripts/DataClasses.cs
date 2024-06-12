@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class CardData
 {
     public int cardID;
+    public string category;
     public string name;
     public string description;
     public int cost;
@@ -39,6 +40,16 @@ public class CardData
 
         this.health = Mathf.Max(0, this.health - this.damage);
         this.damage = 0;
+    }
+
+    public void Heal(int heal)
+    {
+        this.health += heal;
+    }
+
+    public void AddAttack(int attack)
+    {
+        this.attack += attack;
     }
 
     public CardData DeepCopy()

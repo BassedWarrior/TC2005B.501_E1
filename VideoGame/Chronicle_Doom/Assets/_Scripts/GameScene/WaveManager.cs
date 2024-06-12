@@ -63,7 +63,7 @@ public class WaveManager : MonoBehaviour
 
     private void StartNextTurn()
     {
-        Debug.Log($"Adding {waveNumber * 100} score for round {waveNumber}!");
+        //Debug.Log($"Adding {waveNumber * 100} score for round {waveNumber}!");
         GameManager.Instance.AddWaveScore(waveNumber);
         waveNumber++;
         ObtainWave();
@@ -72,6 +72,7 @@ public class WaveManager : MonoBehaviour
         handManager.DrawCard();
         handManager.AddKhronos();
         GameManager.Instance.AddWaveScore(waveNumber);
+        GameManager.Instance.turnFinished = true;
     }
 
     private void MakeWaveAppear()
@@ -85,6 +86,7 @@ public class WaveManager : MonoBehaviour
             cardProperties.AssignInfo();
             cardProperties.card.CalculateScoreValue();
         }
+
     }
 
     public void ObtainWave()
