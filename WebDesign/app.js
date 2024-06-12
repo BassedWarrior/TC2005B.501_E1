@@ -3,11 +3,13 @@
 import express from "express";
 import mysql from "mysql2/promise";
 import dotenv from "dotenv/config"
+import fs from "fs";
 
 const app = express();
 const port = process.env.PORT;  // This is taken from the .env file.
 
 app.use(express.json());
+app.use(express.static('public'));
 
 async function connectToDB() {
   return await mysql.createConnection({
@@ -23,10 +25,26 @@ app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}/`);
 });
 
-app.get("/", async (req, res)=>{
-  res.status(200).send("ADAD")
-});
-  
+
+app.get('/mainpage', (request, response)=>{
+    fs.readFile('public/html/game.html','utf8',(err, html)=>{
+        response.send(html)
+    })
+})
+
+app.get('/statistics', (request, response)=>{
+    fs.readFile('public/html/statistics.html','utf8',(err, html)=>{
+        response.send(html)
+    })
+})
+
+app.get('/mechanics', (request, response)=>{
+    fs.readFile('public/html/mechanics.html','utf8',(err, html)=>{
+        response.send(html)
+    })
+})
+
+
 app.get("/cards", async (request, response) => {
   let connection = null;
 
@@ -320,4 +338,58 @@ app.get("/enemy/wave/:waveID", async (request, response) => {
           console.log("Connection closed successfully");
       }
   }
+});
+
+app.get('/statistics/timePLayed', async (request, response)=>{
+    let connection = null
+
+    try{
+
+        connection = await connectToDB()
+
+        const [results, fields] = await connection.query('SELECT * FROM matchAveragePlayerTimePlayed LIMIT 5')
+    
+        console.log("Sending data correctly.")
+        response.status(200)
+        response.json(results)
+    }
+    catch(error)
+    {
+        response.status(500)
+        response.json(error)
+        console.log(error)
+    }
+    finally
+    {
+        if(connection!==null) 
+        {
+            connection.end()
+            console.log("Connection closed succesfully!")
+        }
+    }
+})
+
+
+app.get("/statistics/topScores", async (request, response) => {
+    let connection = null;
+
+    try {
+        connection = await connectToDB();
+        const [results, fields] = await connection.execute("SELECT * FROM top_5_scores");
+
+        console.log(`${results.length} rows returned`);
+        const result = {cards: results};
+        console.log(result);
+        response.status(200).json(result);
+    }
+    catch (error) {
+        console.log(error);
+        response.status(500).json(error);
+    }
+    finally {
+        if (connection !== null) {
+            connection.end();
+            console.log("Connection closed succesfully");
+        }
+    }
 });

@@ -44,3 +44,11 @@ CREATE VIEW deckCardAverageCost
 AS SELECT deckCard.deckID, AVG(card.cost) FROM deckCard
 INNER JOIN card ON deckCard.cardID = card.cardID
 GROUP BY deckCard.deckID;
+
+CREATE VIEW top_5_scores AS
+SELECT username, score
+FROM `match`
+ORDER BY score DESC
+LIMIT 5;
+
+
