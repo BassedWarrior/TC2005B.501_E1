@@ -66,7 +66,7 @@ public class SlotController : MonoBehaviour
             }
             else
             {
-                boxCollider.enabled = !isDeck;
+                boxCollider.enabled = !isDeck && !isParadoxCollector;
             }
         }
         else
