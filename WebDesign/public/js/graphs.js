@@ -50,7 +50,7 @@ async function fetchDataAndPlot() {
                 data: {
                     labels: lowestDamageUsernames,
                     datasets: [{
-                        label: 'Damage Taken',
+                        label: 'Less Damage Taken',
                         backgroundColor: lowestDamageColors,
                         borderWidth: 2,
                         data: lowestDamageValues
@@ -92,6 +92,59 @@ async function fetchDataAndPlot() {
             });
         }
 
+
+
+        const cardCountByCategoryResponse = await fetch(`http://localhost:3000/statistics/card_count_by_category`, { method: 'GET' });
+        if (cardCountByCategoryResponse.ok) {
+            let cardCountByCategoryResults = await cardCountByCategoryResponse.json();
+            console.log('Card count by category:', cardCountByCategoryResults);
+
+            const cardCountByCategoryData = cardCountByCategoryResults.cards;
+            const categoryLabels = cardCountByCategoryData.map(e => e['category']);
+            const cardCounts = cardCountByCategoryData.map(e => e['count']);
+            const categoryColors = cardCountByCategoryData.map(() => randomColor(0.2));
+
+            const ctx_cardCountByCategory = document.getElementById('apiChart4').getContext('2d');
+            new Chart(ctx_cardCountByCategory, {
+                type: 'pie',
+                data: {
+                    labels: categoryLabels,
+                    datasets: [{
+                        label: 'Card Count by Category',
+                        backgroundColor: categoryColors,
+                        borderWidth: 2,
+                        data: cardCounts
+                    }]
+                }
+            });
+        }
+        const averageDamageResponse = await fetch(`http://localhost:3000/statistics/average_damage`, { method: 'GET' });
+if (averageDamageResponse.ok) {
+    let averageDamageResults = await averageDamageResponse.json();
+    console.log('Average damage:', averageDamageResults);
+
+    // Acceder al objeto cards en la respuesta
+    const averageDamageData = averageDamageResults.cards[0];
+
+    // Obtener los valores de averageDamageDealt y averageDamageTaken
+    const averageDamageLabels = ['Damage Dealt', 'Damage Taken'];
+    const averageDamageValues = [averageDamageData.averageDamageDealt, averageDamageData.averageDamageTaken];
+    const averageDamageColors = [randomColor(0.2), randomColor(0.2)];
+
+    const ctx_averageDamage = document.getElementById('apiChart5').getContext('2d');
+    new Chart(ctx_averageDamage, {
+        type: 'pie',
+        data: {
+            labels: averageDamageLabels,
+            datasets: [{
+                label: 'Average Damage',
+                backgroundColor: averageDamageColors,
+                borderWidth: 2,
+                data: averageDamageValues
+            }]
+        }
+    });
+}
     } catch (error) {
         console.error('Error fetching data:', error);
     }
