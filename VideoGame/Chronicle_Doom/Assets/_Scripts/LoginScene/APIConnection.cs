@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 
 public class APIConnection : MonoBehaviour
 {
-    private GameManager gameManager;
     [SerializeField] string url;
     [SerializeField] string getEndpoint;
     [SerializeField] string getCardsEndpoint;
@@ -18,7 +17,6 @@ public class APIConnection : MonoBehaviour
 
     void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         GetCards();
         GetTopHighscores();
     }
@@ -101,12 +99,12 @@ public class APIConnection : MonoBehaviour
                 Debug.Log("The response was: " + result);
                 
                 DeckCard[] deckCards = JsonUtility.FromJson<DeckCardArrayWrapper>("{\"deckCards\":" + result + "}").deckCards;
-                gameManager.playersDeck.Clear();
+                GameManager.Instance.playersDeck.Clear();
                 foreach (var card in deckCards)
                 {
                     for (int j = 0; j < card.card_times; j++)
                     {
-                        gameManager.playersDeck.Add(card.cardID-1);
+                        GameManager.Instance.playersDeck.Add(card.cardID-1);
                     }
                 }
             }
@@ -116,7 +114,7 @@ public class APIConnection : MonoBehaviour
     IEnumerator ChangesInDeck(string url)
     {
         List <DeckCard> deckCards = new List<DeckCard>();
-        foreach (var card in gameManager.playersDeck)
+        foreach (var card in GameManager.Instance.playersDeck)
         {
             if (deckCards.Exists(x => x.cardID == card))
             {
@@ -152,7 +150,7 @@ public class APIConnection : MonoBehaviour
 
     void UpdateCards(CardData cardData)
     {
-        gameManager.cards.Add(cardData);
+        GameManager.Instance.cards.Add(cardData);
     }
 
     public string ConvertToCompleteJson(string username, string deckName, List<DeckCard> deckCards)
@@ -215,7 +213,7 @@ public class APIConnection : MonoBehaviour
                 List<GameScore> gameScores = JsonUtility.FromJson<GameScoreWrapper>("{\"gameScores\":" + result + "}").gameScores;
                 Debug.Log("The parsed scores: " + gameScores);
                 foreach(GameScore gameScore in gameScores) {
-                    gameManager.gameScores.Add(gameScore);
+                    GameManager.Instance.gameScores.Add(gameScore);
                 }
             }
         }
