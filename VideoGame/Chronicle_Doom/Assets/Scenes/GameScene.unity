@@ -698,6 +698,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8949c80ba70894ed48a5e426625cf133, type: 3}
+--- !u!224 &197605509 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5595815962687975910, guid: 8949c80ba70894ed48a5e426625cf133, type: 3}
+  m_PrefabInstance: {fileID: 197605508}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &221097130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,6 +1328,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8949c80ba70894ed48a5e426625cf133, type: 3}
+--- !u!224 &340119791 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5595815962687975910, guid: 8949c80ba70894ed48a5e426625cf133, type: 3}
+  m_PrefabInstance: {fileID: 340119790}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &388765389 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 577635527268541423, guid: 7b62b9b7cf0aa4b3390cb2928125ff9f, type: 3}
@@ -1432,9 +1442,9 @@ MonoBehaviour:
   enemylineC: []
   quantumTunnel: []
   enemySpawner: {fileID: 300977265}
-  enemyAreaA: {fileID: 0}
-  enemyAreaB: {fileID: 0}
-  enemyAreaC: {fileID: 0}
+  enemyAreaA: {fileID: 1962299162413004171}
+  enemyAreaB: {fileID: 340119791}
+  enemyAreaC: {fileID: 197605509}
   gameManager: {fileID: 0}
   mainCanvas: {fileID: 335696503}
   endTurnButton: {fileID: 588175425}
@@ -4793,6 +4803,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8949c80ba70894ed48a5e426625cf133, type: 3}
+--- !u!224 &1962299162413004171 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5595815962687975910, guid: 8949c80ba70894ed48a5e426625cf133, type: 3}
+  m_PrefabInstance: {fileID: 1962299162413004170}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2292423039796072746
 GameObject:
   m_ObjectHideFlags: 0
