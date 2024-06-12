@@ -17,12 +17,22 @@ public class UserDetailsData : MonoBehaviour
     [SerializeField] private string signUpEndpoint;
     [SerializeField] private GameObject errorMessage;
     [SerializeField] private TextMeshProUGUI errorMessageText;
+    [SerializeField] private Button exitButton;
+    [SerializeField] private Button configButton;
+    [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private Button exitSettingsButton;
+    [SerializeField] private Button exitSettingsButtonBack;
 
     private void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         signInButton.onClick.AddListener(OnLoginButtonClicked);
         signUpButton.onClick.AddListener(OnSignUpButtonClicked);
+        exitButton.onClick.AddListener(OnExitButtonClicked);
+        OnConfigButtonClicked(false);
+        configButton.onClick.AddListener(() => OnConfigButtonClicked(true));
+        exitSettingsButton.onClick.AddListener(() => OnConfigButtonClicked(false));
+        exitSettingsButtonBack.onClick.AddListener(() => OnConfigButtonClicked(false));
     }
 
     private void OnLoginButtonClicked()
@@ -76,5 +86,16 @@ public class UserDetailsData : MonoBehaviour
         errorMessage.SetActive(true);
         yield return new WaitForSeconds(2f);
         errorMessage.SetActive(false);
+    }
+
+    private void OnExitButtonClicked()
+    {
+        Application.Quit();
+        Debug.Log("JUEGO CERRAO");
+    }
+
+    private void OnConfigButtonClicked(bool activate)
+    {
+        settingsMenu.SetActive(activate);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
 
@@ -30,10 +31,18 @@ public class GameManager : MonoBehaviour
     // Score information
     public int score = 0;
     [SerializeField] public TextMeshProUGUI scoreText;
+    // AUDIO MANAGER
+    public AudioMixer audioMixer;
+    public string masterVolumeParameter;
+    public string musicVolumeParameter;
+    public string sfxVolumeParameter;
 
     public void Start()
     {
         api = GetComponent<APIConnection>();
+        SetMasterVolume(PlayerPrefs.GetFloat("MasterVolume", 0.5f));
+        SetMusicVolume(PlayerPrefs.GetFloat("MusicVolume", 0.5f));
+        SetSFXVolume(PlayerPrefs.GetFloat("SFXVolume", 0.5f));
     }
 
     // Generate an instance of self that persists throughout scene changes
@@ -128,5 +137,31 @@ public class GameManager : MonoBehaviour
     public List<GameScore> GetTopHighscores()
     {
         return gameScores;
+    }
+
+    // AUDIO MANAGER FUNCTIONS
+    public void SetMasterVolume(float volume)
+    {
+        audioMixer.SetFloat(masterVolumeParameter, Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("MasterVolume", volume);
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        audioMixer.SetFloat(musicVolumeParameter, Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("MusicVolume", volume);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        audioMixer.SetFloat(sfxVolumeParameter, Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("SFXVolume", volume);
+    }
+
+    public float GetVolume(string parameter)
+    {
+        float value;
+        audioMixer.GetFloat(parameter, out value);
+        return Mathf.Pow(10, value / 20);
     }
 }
