@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 public class ClashTime : MonoBehaviour
 {
-    public List<CardPropertiesDrag> timelineA = new List<CardPropertiesDrag>();
-    public List<CardPropertiesDrag> timelineB = new List<CardPropertiesDrag>();
-    public List<CardPropertiesDrag> timelineC = new List<CardPropertiesDrag>();
-    public List<CardPropertiesDrag> enemylineA = new List<CardPropertiesDrag>();
-    public List<CardPropertiesDrag> enemylineB = new List<CardPropertiesDrag>();
-    public List<CardPropertiesDrag> enemylineC = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> playerLineA = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> playerLineB = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> playerLineC = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> enemyLineA = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> enemyLineB = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> enemyLineC = new List<CardPropertiesDrag>();
     public List<CardPropertiesDrag> quantumTunnel = new List<CardPropertiesDrag>();
     [SerializeField] private Transform enemySpawner;
     [SerializeField] private Transform enemyAreaA;
@@ -28,12 +28,20 @@ public class ClashTime : MonoBehaviour
     {
         switch (name)
         {
-            case "TimeLineA": return timelineA;
-            case "TimeLineB": return timelineB;
-            case "TimeLineC": return timelineC;
-            case "EnemyLineA": return enemylineA;
-            case "EnemyLineB": return enemylineB;
-            case "EnemyLineC": return enemylineC;
+            case "PlayerLineA":
+                return playerLineA;
+            case "PlayerLineB":
+                return playerLineB;
+            case "PlayerLineC":
+                return playerLineC;
+            case "QuantumTunnel":
+                return quantumTunnel;
+            case "EnemyLineA":
+                return enemyLineA;
+            case "EnemyLineB":
+                return enemyLineB;
+            case "EnemyLineC":
+                return enemyLineC;
             default:
                 return null;
         }
@@ -239,9 +247,9 @@ public class ClashTime : MonoBehaviour
 
         GameManager.Instance.DeleteDots();
         // Realizar cálculos de clash después de actualizar las listas
-        CalculateLineClash(timelineA, enemylineA);
-        CalculateLineClash(timelineB, enemylineB);
-        CalculateLineClash(timelineC, enemylineC);
+        CalculateLineClash(playerLineA, enemyLineA);
+        CalculateLineClash(playerLineB, enemyLineB);
+        CalculateLineClash(playerLineC, enemyLineC);
     }
 
     private void DealLineDamage(List<CardPropertiesDrag> playerLine,
@@ -277,12 +285,12 @@ public class ClashTime : MonoBehaviour
 
     private void AfterClash()
     {
-        DestroyCardsWithZeroHealth(timelineA);
-        DestroyCardsWithZeroHealth(timelineB);
-        DestroyCardsWithZeroHealth(timelineC);
-        DestroyCardsWithZeroHealth(enemylineA);
-        DestroyCardsWithZeroHealth(enemylineB);
-        DestroyCardsWithZeroHealth(enemylineC);
+        DestroyCardsWithZeroHealth(playerLineA);
+        DestroyCardsWithZeroHealth(playerLineB);
+        DestroyCardsWithZeroHealth(playerLineC);
+        DestroyCardsWithZeroHealth(enemyLineA);
+        DestroyCardsWithZeroHealth(enemyLineB);
+        DestroyCardsWithZeroHealth(enemyLineC);
     }
 
     private void DestroyCardsWithZeroHealth(List<CardPropertiesDrag> cardList)
@@ -313,12 +321,12 @@ public class ClashTime : MonoBehaviour
 
         if (paradoxCollector.childCount > 0)
         {
-            ResetDamage(timelineA);
-            ResetDamage(timelineB);
-            ResetDamage(timelineC);
-            ResetDamage(enemylineA);
-            ResetDamage(enemylineB);
-            ResetDamage(enemylineC);
+            ResetDamage(playerLineA);
+            ResetDamage(playerLineB);
+            ResetDamage(playerLineC);
+            ResetDamage(enemyLineA);
+            ResetDamage(enemyLineB);
+            ResetDamage(enemyLineC);
             foreach (Transform child in paradoxCollector)
             {   
                 if (child != null && child.CompareTag("Card"))
@@ -334,20 +342,20 @@ public class ClashTime : MonoBehaviour
                 }
             }
 
-            DealLineDamage(timelineA, enemylineA);
-            DealLineDamage(timelineB, enemylineB);
-            DealLineDamage(timelineC, enemylineC);
+            DealLineDamage(playerLineA, enemyLineA);
+            DealLineDamage(playerLineB, enemyLineB);
+            DealLineDamage(playerLineC, enemyLineC);
             InfoUpdateAll();
             yield return new WaitForSeconds(3f);
             AfterClash();
-            CalculateLineClash(timelineA, enemylineA);
-            CalculateLineClash(timelineB, enemylineB);
-            CalculateLineClash(timelineC, enemylineC);
+            CalculateLineClash(playerLineA, enemyLineA);
+            CalculateLineClash(playerLineB, enemyLineB);
+            CalculateLineClash(playerLineC, enemyLineC);
         }
 
-        DealLineDamage(timelineA, enemylineA);
-        DealLineDamage(timelineB, enemylineB);
-        DealLineDamage(timelineC, enemylineC);
+        DealLineDamage(playerLineA, enemyLineA);
+        DealLineDamage(playerLineB, enemyLineB);
+        DealLineDamage(playerLineC, enemyLineC);
 
         GameManager.Instance.ApplyPlayerDamage();
 
@@ -362,12 +370,12 @@ public class ClashTime : MonoBehaviour
 
     private void InfoUpdateAll()
     {
-        InfoUpdate(timelineA);
-        InfoUpdate(timelineB);
-        InfoUpdate(timelineC);
-        InfoUpdate(enemylineA);
-        InfoUpdate(enemylineB);
-        InfoUpdate(enemylineC);
+        InfoUpdate(playerLineA);
+        InfoUpdate(playerLineB);
+        InfoUpdate(playerLineC);
+        InfoUpdate(enemyLineA);
+        InfoUpdate(enemyLineB);
+        InfoUpdate(enemyLineC);
     }
 
     private void DestroyUsedCards(Transform cardCollector)
@@ -381,9 +389,9 @@ public class ClashTime : MonoBehaviour
         }
     }
 
-    public void InfoUpdate(List<CardPropertiesDrag> timeline)
+    public void InfoUpdate(List<CardPropertiesDrag> timeLine)
     {
-        foreach (CardPropertiesDrag card in timeline)
+        foreach (CardPropertiesDrag card in timeLine)
         {
             card.AssignInfo();
         }
