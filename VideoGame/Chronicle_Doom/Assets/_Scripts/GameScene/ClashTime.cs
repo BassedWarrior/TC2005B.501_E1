@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 public class ClashTime : MonoBehaviour
 {
-    public List<CardPropertiesDrag> timelineA = new List<CardPropertiesDrag>();
-    public List<CardPropertiesDrag> timelineB = new List<CardPropertiesDrag>();
-    public List<CardPropertiesDrag> timelineC = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> playerLineA = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> playerLineB = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> playerLineC = new List<CardPropertiesDrag>();
     public List<CardPropertiesDrag> enemylineA = new List<CardPropertiesDrag>();
     public List<CardPropertiesDrag> enemylineB = new List<CardPropertiesDrag>();
     public List<CardPropertiesDrag> enemylineC = new List<CardPropertiesDrag>();
@@ -30,12 +30,12 @@ public class ClashTime : MonoBehaviour
     {
         switch (listName)
         {
-            case "TimeLineA":
-                return timelineA;
-            case "TimeLineB":
-                return timelineB;
-            case "TimeLineC":
-                return timelineC;
+            case "PlayerLineA":
+                return playerLineA;
+            case "PlayerLineB":
+                return playerLineB;
+            case "PlayerLineC":
+                return playerLineC;
             case "QuantumTunnel":
                 return quantumTunnel;
             case "EnemyLineA":
@@ -89,7 +89,6 @@ public class ClashTime : MonoBehaviour
     private void CalculateLineDamage(List<CardPropertiesDrag> line,
                                      int totalDamage)
     {
-
         // Skip if line is empty
         if (line.Count == 0)
         {
@@ -218,9 +217,9 @@ public class ClashTime : MonoBehaviour
 
         GameManager.Instance.DeleteDots();
         // Realizar cálculos de clash después de actualizar las listas
-        CalculateLineClash(timelineA, enemylineA);
-        CalculateLineClash(timelineB, enemylineB);
-        CalculateLineClash(timelineC, enemylineC);
+        CalculateLineClash(playerLineA, enemylineA);
+        CalculateLineClash(playerLineB, enemylineB);
+        CalculateLineClash(playerLineC, enemylineC);
     }
 
     private void DealLineDamage(List<CardPropertiesDrag> playerLine,
@@ -256,9 +255,9 @@ public class ClashTime : MonoBehaviour
 
     private void AfterClash()
     {
-        DestroyCardsWithZeroHealth(timelineA);
-        DestroyCardsWithZeroHealth(timelineB);
-        DestroyCardsWithZeroHealth(timelineC);
+        DestroyCardsWithZeroHealth(playerLineA);
+        DestroyCardsWithZeroHealth(playerLineB);
+        DestroyCardsWithZeroHealth(playerLineC);
         DestroyCardsWithZeroHealth(enemylineA);
         DestroyCardsWithZeroHealth(enemylineB);
         DestroyCardsWithZeroHealth(enemylineC);
@@ -302,23 +301,23 @@ public class ClashTime : MonoBehaviour
     public void Clash()
     {
         endTurnButton.interactable = false;
-        DealLineDamage(timelineA, enemylineA);
-        DealLineDamage(timelineB, enemylineB);
-        DealLineDamage(timelineC, enemylineC);
+        DealLineDamage(playerLineA, enemylineA);
+        DealLineDamage(playerLineB, enemylineB);
+        DealLineDamage(playerLineC, enemylineC);
 
         gameManager.ApplyPlayerDamage();
 
-        foreach (CardPropertiesDrag card in timelineA)
+        foreach (CardPropertiesDrag card in playerLineA)
         {
             card.AssignInfo();
         }
 
-        foreach (CardPropertiesDrag card in timelineB)
+        foreach (CardPropertiesDrag card in playerLineB)
         {
             card.AssignInfo();
         }
 
-        foreach (CardPropertiesDrag card in timelineC)
+        foreach (CardPropertiesDrag card in playerLineC)
         {
             card.AssignInfo();
         }

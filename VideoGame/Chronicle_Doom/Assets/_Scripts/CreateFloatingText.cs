@@ -23,7 +23,7 @@ public class CreateFloatingText : MonoBehaviour
             textMesh.color = isPreview ? Color.gray : (isDamage ? Color.red : Color.green);
             textMesh.text = (isDamage ? "-" : "+") + text.ToString();
             
-            Destroy(gameObject, duration);
+            // Destroy(gameObject, duration);
         }
     }
 }
