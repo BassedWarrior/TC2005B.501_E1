@@ -1,0 +1,69 @@
+/* Ventana de la jugabilidad del CHRONICAL_DOOM */
+
+#game-build {
+    padding-top: 10rem;
+    padding-bottom: 4rem;
+    width: 100%;
+    background-color: black;
+}
+
+#game-deploy {
+    padding: 18rem;
+    margin-inline: 8rem;
+    background-color: #2F2F2F;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+/* Estilos para la sección de NEWS */
+
+.game-news {
+    padding: 2rem;
+    background-color: #2F2F1F;
+    background-size: cover;
+}
+
+.news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    background-color: #2F2F2F;
+    padding: 0 3rem;
+}
+.news-wrap {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.news-content {
+    padding: 2rem;
+    margin: 1rem;
+    background-color: #2F2F2F;
+    color: white;
+    border-radius: 10px;
+}
+
+/* Estilos para la descripción del juego */
+
+.summary {
+    padding: 2rem;
+    background-color: #2F2F2F;
+    color: white;
+}
+
+.summary-text {
+    padding-left: 8rem;
+    width: 50%;
+}
+
+.summary h2 {
+    font-size: 200%;
+    letter-spacing: 5px;
+    font-style: italic;
+    margin-bottom: 0;
+}
+
+.summary h3 {
+    color: yellow;
+}

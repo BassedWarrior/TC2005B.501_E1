@@ -16,17 +16,17 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cardAttack;
     [SerializeField] private TextMeshProUGUI cardHealth;
     [SerializeField] private GameObject cardPrefab;
-    [SerializeField] private GameObject dommyCard;
+    [SerializeField] private GameObject dummyCard;
     [SerializeField] private Transform cardArea;
     [SerializeField] private Transform deckArea;
     [SerializeField] private GameObject settings;
-    [SerializeField] private GameObject objectToFollow;
     [SerializeField] private Button principalButton;
     [SerializeField] private Button collectionButton;
     [SerializeField] private Button highScoreButton;
     [SerializeField] private Button updateDeckButton;
     [SerializeField] private TextMeshProUGUI deckName;
     [SerializeField] private GameObject deckErrorPanel;
+    [SerializeField] private TextMeshProUGUI collectionName;
     [SerializeField] private TextMeshProUGUI deckError;
     private Camera mainCamera;
     private RaycastHit2D hit;
@@ -54,11 +54,14 @@ public class MenuManager : MonoBehaviour
         InitializeCards();
         UpdateDeck();
         deckName.text = PlayerPrefs.GetString("username") + "'s Deck";
+        collectionName.text = PlayerPrefs.GetString("username")
+                + "'s Collection";
         deckErrorPanel.SetActive(false);
         deckMessage.SetActive(false);
         playButton.onClick.AddListener(() => LetsPlay());
         exitButton.onClick.AddListener(() => GameManager.Instance.GetComponent<SceneChanger>().ChangeToLoginScene());
     }
+
     private void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
@@ -89,11 +92,6 @@ public class MenuManager : MonoBehaviour
                 initialCameraX= targetXPosition;
                 transitioning = false;
             }
-        }
-        if (objectToFollow != null && settings != null)
-        {
-            objectToFollow.transform.position = new Vector3(mainCamera.transform.position.x, objectToFollow.transform.position.y, objectToFollow.transform.position.z);
-            settings.transform.position = new Vector3(mainCamera.transform.position.x, settings.transform.position.y, settings.transform.position.z);
         }
         if (GameManager.Instance.playersDeck.Count < 18 && updateDeckButton.onClick != null)
         {
@@ -215,21 +213,24 @@ public class MenuManager : MonoBehaviour
             }
             else
             {
-                collectionCard = Instantiate(dommyCard, deckArea);
+                collectionCard = Instantiate(dummyCard, deckArea);
                 collectionCard.name = "EmptyCard";
             }
         }
     }
+
     public void ShowSettings(bool show)
     {
         settings.SetActive(show);
         openInfo= show;
     }
+
     public void ShowInfo(bool show)
     {
         cardInfo.SetActive(show);
         openInfo= show;
     }
+
     public void MoveToMenu(int menuPosition)
     {
         if (!transitioning)
@@ -243,11 +244,13 @@ public class MenuManager : MonoBehaviour
             highScoreButton.interactable = (menuPosition != 20);
         }
     }
+
     bool ListContains(List<int> integerList, int searchingNumber, int timesToFind)
     {
         var query = integerList.Where(x => x == searchingNumber);
         return query.Count() >= timesToFind;
     }
+
     private void ControlInfo(CardData card)
     {
         if (card != null)
@@ -264,11 +267,13 @@ public class MenuManager : MonoBehaviour
             cardHealth.text = card.health.ToString();
         }
     }
+
     public void ShowDeckError(string message)
     {
         StartCoroutine(ErrorHandler(message));
     }
-    IEnumerator ErrorHandler(string message)
+
+    private IEnumerator ErrorHandler(string message)
     {
         deckError.text = message;
         deckErrorPanel.SetActive(true);
