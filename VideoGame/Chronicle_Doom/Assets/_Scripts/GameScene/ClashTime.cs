@@ -7,9 +7,9 @@ public class ClashTime : MonoBehaviour
     public List<CardPropertiesDrag> playerLineA = new List<CardPropertiesDrag>();
     public List<CardPropertiesDrag> playerLineB = new List<CardPropertiesDrag>();
     public List<CardPropertiesDrag> playerLineC = new List<CardPropertiesDrag>();
-    public List<CardPropertiesDrag> enemylineA = new List<CardPropertiesDrag>();
-    public List<CardPropertiesDrag> enemylineB = new List<CardPropertiesDrag>();
-    public List<CardPropertiesDrag> enemylineC = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> enemyLineA = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> enemyLineB = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> enemyLineC = new List<CardPropertiesDrag>();
     public List<CardPropertiesDrag> quantumTunnel = new List<CardPropertiesDrag>();
     [SerializeField] private Transform enemySpawner;
     [SerializeField] private Transform enemyAreaA;
@@ -37,11 +37,11 @@ public class ClashTime : MonoBehaviour
             case "QuantumTunnel":
                 return quantumTunnel;
             case "EnemyLineA":
-                return enemylineA;
+                return enemyLineA;
             case "EnemyLineB":
-                return enemylineB;
+                return enemyLineB;
             case "EnemyLineC":
-                return enemylineC;
+                return enemyLineC;
             default:
                 return null;
         }
@@ -215,9 +215,9 @@ public class ClashTime : MonoBehaviour
 
         GameManager.Instance.DeleteDots();
         // Realizar cálculos de clash después de actualizar las listas
-        CalculateLineClash(playerLineA, enemylineA);
-        CalculateLineClash(playerLineB, enemylineB);
-        CalculateLineClash(playerLineC, enemylineC);
+        CalculateLineClash(playerLineA, enemyLineA);
+        CalculateLineClash(playerLineB, enemyLineB);
+        CalculateLineClash(playerLineC, enemyLineC);
     }
 
     private void DealLineDamage(List<CardPropertiesDrag> playerLine,
@@ -256,9 +256,9 @@ public class ClashTime : MonoBehaviour
         DestroyCardsWithZeroHealth(playerLineA);
         DestroyCardsWithZeroHealth(playerLineB);
         DestroyCardsWithZeroHealth(playerLineC);
-        DestroyCardsWithZeroHealth(enemylineA);
-        DestroyCardsWithZeroHealth(enemylineB);
-        DestroyCardsWithZeroHealth(enemylineC);
+        DestroyCardsWithZeroHealth(enemyLineA);
+        DestroyCardsWithZeroHealth(enemyLineB);
+        DestroyCardsWithZeroHealth(enemyLineC);
     }
 
     private void DestroyCardsWithZeroHealth(List<CardPropertiesDrag> cardList)
@@ -299,9 +299,9 @@ public class ClashTime : MonoBehaviour
     public void Clash()
     {
         endTurnButton.interactable = false;
-        DealLineDamage(playerLineA, enemylineA);
-        DealLineDamage(playerLineB, enemylineB);
-        DealLineDamage(playerLineC, enemylineC);
+        DealLineDamage(playerLineA, enemyLineA);
+        DealLineDamage(playerLineB, enemyLineB);
+        DealLineDamage(playerLineC, enemyLineC);
 
         GameManager.Instance.ApplyPlayerDamage();
 
