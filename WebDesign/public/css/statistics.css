@@ -1,0 +1,9 @@
+.content {
+   background-color: black;
+   padding: 15rem;
+}
+
+.content canvas {
+   background-color: white;
+   padding: 15rem;
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronicle_Doom Statistics</title>
+
+    <!--Referencias a las fuentes que estamos usando en la pagina. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Sedan+SC&display=swap" rel="stylesheet">
+
+    <!--modulo para poder graficar desde la API-->
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.umd.js" integrity="sha512-vCUbejtS+HcWYtDHRF2T5B0BKwVG/CLeuew5uT2AiX4SJ2Wff52+kfgONvtdATqkqQMC9Ye5K+Td0OTaz+P7cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="module" defer src="/../js/graphs.js"></script> 
+    <!--Referencia al archivo css que estamos usando en la pagina. -->
+    <link rel="stylesheet" type="text/css" href="/css/statistics.css">
+    <link rel="stylesheet" type="text/css" href="/css/layout.css">
+</head>
+
+
+
+<body>  
+    <!--Espacio de la cabecera con los links de la pagina web.-->
+    <header>
+        <nav>
+            <div>
+                <a href="/mainPage">GAME</a>
+                <a href="/mechanics">MECHANICS</a>
+            </div>
+            <div>
+                <a style="color: darkslategray;"">STATISTICS</a>
+                <a href="https://github.com/BassedWarrior/TC2005B.501_E1.git">GITHUB</a>
+            </div>
+        </nav>
+        <img src="../images/gameLogo.png" alt="Chronicle_Doom" class="logo" width="250">
+    </header>
+
+
+
+
+    <div class="content">
+            <canvas id="apiChart1" width="600" height="600"></canvas>
+            <canvas id="apiChart2" width="600" height="600"></canvas>
+            <canvas id="apiChart3" width="600" height="600"></canvas>
+    </div>
+
+
+
+    <footer>
+        <hr>
+        <p class="copyright">&copy; 2024 Mia PaginaWeb. Todos los derechos reservados.</p>
+        <div class="contact-us">
+            <div class="media-access">
+                <h4>Social Media</h4>
+                <nav>
+                    <div class="media-content">
+                        <a href="https://www.instagram.com/e_porto_"> <img src="../images/icons/instagram.png" alt="instagram" class="icon">@e_porto_</a>
+                    </div>
+                    <div class="media-content">
+                        <a href="https://www.instagram.com/favstojimenez"><img src="../images/icons/instagram.png" alt="instagram" class="icon">@favstojimenez</a>
+                    </div>
+                    <div class="media-content">
+                        <a href="https://www.instagram.com/julian.zrmrz"><img src="../images/icons/instagram.png" alt="instagram" class="icon">@julian.zrmrz</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="media-access">
+                <h4>Contact Us</h4>
+                <nav>
+                    <div class="media-content">
+                        <img src="../images/icons/mail.png" alt="Mail" class="icon"> Eduardo Porto:<a href="mailto:A01027893@tec.mx">a01027893@tec.mx</a>
+                    </div>
+                    <div class="media-content">
+                        <img src="../images/icons/mail.png" alt="Mail" class="icon"> Fausto Jimenez:<a href="mailto:A01027983@tec.mx">a01027983@tec.mx</a>
+                    </div>
+                    <div class="media-content">
+                        <img src="../images/icons/mail.png" alt="Mail" class="icon"> Julian Ramirez: <a href="mailto:A01027743@tec.mx">a01027743@tec.mx</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="media-access">
+                <h4>GitHub</h4>
+                <nav>
+                    <div class="media-content">
+                        <a href="https://github.com/Porto1090"><img src="../images/icons/github.png" alt="github" class="icon">Eduardo Porto</a>
+                    </div>
+                    <div class="media-content">
+                        <a href="https://github.com/BassedWarrior"><img src="../images/icons/github.png" alt="github" class="icon">Fausto Jimenez</a>
+                    </div>
+                    <div class="media-content">
+                        <a href="https://github.com/HJZR2004"><img src="../images/icons/github.png" alt="github" class="icon">Julian Ramirez</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
