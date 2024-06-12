@@ -15,14 +15,12 @@ public class ClashTime : MonoBehaviour
     [SerializeField] private Transform enemyAreaA;
     [SerializeField] private Transform enemyAreaB;
     [SerializeField] private Transform enemyAreaC;
-    [SerializeField] private GameManager gameManager;
     [SerializeField] private Canvas mainCanvas;
     [SerializeField] private Button endTurnButton;
     public bool turnFinished = false;
 
     public void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         endTurnButton.onClick.AddListener(Clash);
     }
 
@@ -133,7 +131,7 @@ public class ClashTime : MonoBehaviour
     private void CalculateLineClash(List<CardPropertiesDrag> playerLine,
                                     List<CardPropertiesDrag> enemyLine)
     {
-        gameManager.ResetPlayerDamage();
+        GameManager.Instance.ResetPlayerDamage();
 
         // Calculate total enemy attack
         int enemyAttack = 0;
@@ -146,7 +144,7 @@ public class ClashTime : MonoBehaviour
         // Deal damage to player if there are none.
         if (playerLine.Count == 0)
         {
-            gameManager.AddPlayerDamage(enemyAttack);
+            GameManager.Instance.AddPlayerDamage(enemyAttack);
         }
 
         // Calculate total player attack
@@ -175,7 +173,7 @@ public class ClashTime : MonoBehaviour
         if (playerLine.Count < enemyLine.Count && playerDefence < enemyAttack)
         {
             // Deal excess damage to the player directly
-            gameManager.AddPlayerDamage(enemyAttack - playerDefence);
+            GameManager.Instance.AddPlayerDamage(enemyAttack - playerDefence);
         }
         // The enemy is outnumbered in that line
         // and dealt more damage than its cards can defend
@@ -272,7 +270,7 @@ public class ClashTime : MonoBehaviour
         {
             if (card != null && !card.card.IsAlive())
             {
-                gameManager.AddKillScore(card.card.GetScoreValue());
+                GameManager.Instance.AddKillScore(card.card.GetScoreValue());
                 Debug.Log($"Added {card.card.GetScoreValue()} score for killing card {card.card.cardID}");
                 Destroy(card.gameObject);
                 cardsToRemove.Add(card);
@@ -306,7 +304,7 @@ public class ClashTime : MonoBehaviour
         DealLineDamage(timelineB, enemylineB);
         DealLineDamage(timelineC, enemylineC);
 
-        gameManager.ApplyPlayerDamage();
+        GameManager.Instance.ApplyPlayerDamage();
 
         foreach (CardPropertiesDrag card in timelineA)
         {

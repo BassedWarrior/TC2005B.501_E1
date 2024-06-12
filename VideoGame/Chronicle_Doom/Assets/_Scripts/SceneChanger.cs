@@ -24,8 +24,7 @@ public class SceneChanger : MonoBehaviour
 
     public void LetsPlay()
     {
-        GameManager gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        if (gameManager.playersDeck.Count == 18)
+        if (GameManager.Instance.playersDeck.Count == 18)
         {
             GoToScene("GameScene");
         }

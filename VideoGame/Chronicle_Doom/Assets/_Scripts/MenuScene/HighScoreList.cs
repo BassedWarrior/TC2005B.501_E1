@@ -6,15 +6,13 @@ using TMPro;
 
 public class HighScoreList : MonoBehaviour
 {
-    [SerializeField] public GameManager gameManager;
     [SerializeField] public List<GameScore> highscores;
     [SerializeField] public GameObject textMeshPrefab;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameManager.Instance;
-        highscores = gameManager.GetTopHighscores();
+        highscores = GameManager.Instance.GetTopHighscores();
         for (int i = 0; i < highscores.Count; i++)
         {
             GameObject score = Instantiate(textMeshPrefab, gameObject.transform);
