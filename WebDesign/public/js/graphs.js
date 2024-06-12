@@ -1,4 +1,4 @@
-function randomColor(alpha = 1.0) {
+function randomColor(alpha = 0.8) {
     const r_c = () => Math.round(Math.random() * 255);
     return `rgba(${r_c()}, ${r_c()}, ${r_c()}, ${alpha})`;
 }
@@ -16,7 +16,7 @@ async function fetchDataAndPlot() {
             const topScoresData = topScoresResults.cards;
             const topScoresUsernames = topScoresData.map(e => e['username']);
             const topScoresValues = topScoresData.map(e => e['score']);
-            const topScoresColors = topScoresData.map(() => randomColor(0.2));
+            const topScoresColors = topScoresData.map(() => randomColor());
 
             const ctx_topScores = document.getElementById('apiChart1').getContext('2d');
             new Chart(ctx_topScores, {
@@ -42,7 +42,7 @@ async function fetchDataAndPlot() {
             const lowestDamageData = lowestDamageResults.cards;
             const lowestDamageUsernames = lowestDamageData.map(e => e['username']);
             const lowestDamageValues = lowestDamageData.map(e => e['damageTaken']);
-            const lowestDamageColors = lowestDamageData.map(() => randomColor(0.2));
+            const lowestDamageColors = lowestDamageData.map(() => randomColor());
 
             const ctx_lowestDamage = document.getElementById('apiChart2').getContext('2d');
             new Chart(ctx_lowestDamage, {
@@ -68,7 +68,7 @@ async function fetchDataAndPlot() {
 
             const averageTimePlayedUsernames = averageTimePlayedData.map(e => e['username']);
             const averageTimePlayedValues = averageTimePlayedData.map(e => e['average_time_played']);
-            const averageTimePlayedColors = averageTimePlayedData.map(() => randomColor(0.2));
+            const averageTimePlayedColors = averageTimePlayedData.map(() => randomColor());
 
             const ctx_averageTimePlayed = document.getElementById('apiChart3').getContext('2d');
             new Chart(ctx_averageTimePlayed, {
@@ -102,7 +102,7 @@ async function fetchDataAndPlot() {
             const cardCountByCategoryData = cardCountByCategoryResults.cards;
             const categoryLabels = cardCountByCategoryData.map(e => e['category']);
             const cardCounts = cardCountByCategoryData.map(e => e['count']);
-            const categoryColors = cardCountByCategoryData.map(() => randomColor(0.2));
+            const categoryColors = cardCountByCategoryData.map(() => randomColor());
 
             const ctx_cardCountByCategory = document.getElementById('apiChart4').getContext('2d');
             new Chart(ctx_cardCountByCategory, {
@@ -129,7 +129,7 @@ if (averageDamageResponse.ok) {
     // Obtener los valores de averageDamageDealt y averageDamageTaken
     const averageDamageLabels = ['Damage Dealt', 'Damage Taken'];
     const averageDamageValues = [averageDamageData.averageDamageDealt, averageDamageData.averageDamageTaken];
-    const averageDamageColors = [randomColor(0.2), randomColor(0.2)];
+    const averageDamageColors = [randomColor(), randomColor()];
 
     const ctx_averageDamage = document.getElementById('apiChart5').getContext('2d');
     new Chart(ctx_averageDamage, {
@@ -145,6 +145,40 @@ if (averageDamageResponse.ok) {
         }
     });
 }
+
+const playerRegistrationByYearResponse = await fetch(`http://localhost:3000/statistics/player_registration_by_year`, { method: 'GET' });
+        if (playerRegistrationByYearResponse.ok) {
+            let playerRegistrationByYearResults = await playerRegistrationByYearResponse.json();
+            console.log('Player registration by year:', playerRegistrationByYearResults);
+
+            const playerRegistrationByYearData = playerRegistrationByYearResults.cards;
+            const player = playerRegistrationByYearData.map(e => e['player_count']);
+            const playerCounts = playerRegistrationByYearData.map(e => e['player_count']);
+            const lineColors = randomColor();
+
+            const ctx_playerRegistrationByYear = document.getElementById('apiChart6').getContext('2d');
+            new Chart(ctx_playerRegistrationByYear, {
+                type: 'line',
+                data: {
+                    labels: player,
+                    datasets: [{
+                        label: 'Player Registration by Year',
+                        backgroundColor: lineColors,
+                        borderWidth: 2,
+                        pointRadius: 10,
+                        data: playerCounts
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
     } catch (error) {
         console.error('Error fetching data:', error);
     }

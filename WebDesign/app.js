@@ -463,3 +463,27 @@ app.get("/statistics/average_damage", async (request, response) => {
         }
     }
 });
+
+app.get("/statistics/player_registration_by_year", async (request, response) => {
+    let connection = null;
+
+    try {
+        connection = await connectToDB();
+        const [results, fields] = await connection.execute("SELECT * FROM player_registration_by_year");
+
+        console.log(`${results.length} rows returned`);
+        const result = {cards: results};
+        console.log(result);
+        response.status(200).json(result);
+    }
+    catch (error) {
+        console.log(error);
+        response.status(500).json(error);
+    }
+    finally {
+        if (connection !== null) {
+            connection.end();
+            console.log("Connection closed succesfully");
+        }
+    }
+});

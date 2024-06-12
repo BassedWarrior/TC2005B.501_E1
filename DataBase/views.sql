@@ -37,3 +37,14 @@ SELECT
     AVG(damageDealt) AS averageDamageDealt,
     AVG(damageTaken) AS averageDamageTaken
 FROM `match`;
+
+CREATE VIEW player_registration_by_year AS
+SELECT 
+    YEAR(creationDate) AS registration_year,
+    COUNT(*) AS player_count
+FROM 
+    player
+GROUP BY 
+    registration_year;
+
+
