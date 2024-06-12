@@ -1,29 +1,29 @@
 using UnityEngine;
 using TMPro;
 
-public class CreateFloatingText : MonoBehaviour
+public class DamageText : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textMesh; 
-    private float duration = 2.0f;
 
     // isDamage = TRUE = DAMAGE, FALSE = HEAL
     // isPreview = TRUE = PREVIEW, FALSE = REAL DAMAGE/HEAL
 
-    public void Initialize(int text, Vector3 worldPosition, bool isDamage, bool isPreview)
+    public void Initialize(int text, bool isDamage, bool isPreview)
     {
+        Debug.Log($"Initializing damageText with value {text}");
         if (text == 0)
         {
-            Destroy(gameObject);
+            Debug.Log($"Deactivated gameObject because value {text} == 0");
+            gameObject.SetActive(false);
         }
         else
         {
-            GameManager.Instance.textDots.Add(gameObject);
-            transform.position = worldPosition;
+            gameObject.SetActive(true);
             
             textMesh.color = isPreview ? Color.gray : (isDamage ? Color.red : Color.green);
             textMesh.text = (isDamage ? "-" : "+") + text.ToString();
-            
-            // Destroy(gameObject, duration);
+            Debug.Log($"Activated gameObject because value {text} != 0\n"
+                      + $"New text: {textMesh.text}");
         }
     }
 }

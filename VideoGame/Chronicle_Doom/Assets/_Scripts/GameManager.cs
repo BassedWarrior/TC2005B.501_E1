@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     // Game information
     public List<int> playersDeck = new List<int>();
     public List<int> playersHand = new List<int>();
-    public List<GameObject> textDots = new List<GameObject>();
     // Player information
     public int playerHealth = 20;
     public int playerDamage = 0;
@@ -50,15 +49,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DeleteDots()
-    {
-        foreach (GameObject dot in textDots)
-        {
-            Destroy(dot);
-        }
-        textDots.Clear();
-    }
-   
     // Sort the player deck
     public void SortDeck()
     {

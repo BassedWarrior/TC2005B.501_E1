@@ -213,7 +213,6 @@ public class ClashTime : MonoBehaviour
             targetList.Add(card);
         }
 
-        GameManager.Instance.DeleteDots();
         // Realizar cálculos de clash después de actualizar las listas
         CalculateLineClash(playerLineA, enemyLineA);
         CalculateLineClash(playerLineB, enemyLineB);
@@ -235,7 +234,7 @@ public class ClashTime : MonoBehaviour
         {
             if (card.card.IsAlive() && card != null)
             {
-                card.ShowFloatingText(card.transform.position, card.card.damage, true, false);
+                card.ShowDamageText(card.card.damage, true, false);
                 card.card.ApplyDamage();
             }
         }
@@ -245,7 +244,7 @@ public class ClashTime : MonoBehaviour
         {
             if (card.card.IsAlive() && card != null)
             {
-                card.ShowFloatingText(card.transform.position, card.card.damage, true, false);
+                card.ShowDamageText(card.card.damage, true, false);
                 card.card.ApplyDamage();
             }
         }

@@ -7,7 +7,7 @@ using TMPro;
 public class CardPropertiesDrag : MonoBehaviour
 {
     public CardData card;
-    [SerializeField] private GameObject floatingTextPrefab;
+    [SerializeField] private DamageText damageText;
     [SerializeField] private Canvas mainCanvas;
     public Transform originalParent;
     public Transform actualParent;
@@ -32,19 +32,16 @@ public class CardPropertiesDrag : MonoBehaviour
             healthText.text = card.health.ToString();
             if (card.IsAlive() && card != null)
             {
-                ShowFloatingText(transform.position, card.damage, true, true);
+                ShowDamageText(card.damage, true, true);
             }
         }
     }
 
-    public void ShowFloatingText(Vector3 worldPosition, int text, bool isDamage, bool isPreview)
+    public void ShowDamageText(int text, bool isDamage, bool isPreview)
     {
-        GameObject floatingTextInstance = Instantiate(floatingTextPrefab, mainCanvas.transform);
-        CreateFloatingText floatingText = floatingTextInstance.GetComponent<CreateFloatingText>();
-
-        if (floatingText != null)
+        if (damageText != null)
         {
-            floatingText.Initialize(text, worldPosition, isDamage, isPreview);
+            damageText.Initialize(text, isDamage, isPreview);
         }
     }
 
