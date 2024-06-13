@@ -16,6 +16,7 @@ public class SceneChanger : MonoBehaviour
         StartCoroutine(ExecuteAfterTime(2f, () => {
             GoToScene("CollectionScene");
         }));
+        GameManager.Instance.ResetGame();
     }
 
     public void ChangeToLoginScene()
@@ -37,7 +38,13 @@ public class SceneChanger : MonoBehaviour
     }
 
     public void GoToScene(string sceneName)
-    {
+    {   
+        if (sceneName == "Exit")
+        {
+            Application.Quit();
+            Debug.Log("JUEGO CERRAO");
+            return;
+        }
         SceneManager.LoadScene(sceneName);
     }
 }

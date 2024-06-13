@@ -18,9 +18,11 @@ public class ClashTime : MonoBehaviour
     [SerializeField] private Transform paradoxCollector;
     [SerializeField] private Canvas mainCanvas;
     [SerializeField] private Button endTurnButton;
+    public AudioSource audioSource;
 
     public void Start()
     {
+        audioSource = this.GetComponent<AudioSource>();
         endTurnButton.onClick.AddListener(() => StartCoroutine(Clash()));
     }
 
@@ -321,6 +323,7 @@ public class ClashTime : MonoBehaviour
 
     private IEnumerator<object> Clash()
     {
+        audioSource.PlayOneShot(GameManager.Instance.cardSound6);
         endTurnButton.interactable = false;
 
         if (paradoxCollector.childCount > 0)

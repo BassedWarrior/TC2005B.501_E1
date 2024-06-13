@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
 
@@ -29,11 +30,31 @@ public class GameManager : MonoBehaviour
     // Score information
     public int score = 0;
     [SerializeField] public TextMeshProUGUI scoreText;
+    // AUDIO MANAGER
+    public AudioMixer audioMixer;
+    public string musicVolumeParameter;
+    public string sfxVolumeParameter;
+    [SerializeField] private float maxDecibels;
+    [SerializeField] private float minDecibels;
+    //EFECTO DE SONIDO
+    [SerializeField] public AudioClip cardSound1;
+    [SerializeField] public AudioClip cardSound2;
+    [SerializeField] public AudioClip cardSound3;
+    [SerializeField] public AudioClip cardSound4;
+    [SerializeField] public AudioClip cardSound5;
+    [SerializeField] public AudioClip cardSound6;
     public bool turnFinished = false;
 
     public void Start()
     {
         api = GetComponent<APIConnection>();
+        //OBTENER LOS ULTIMOS VALORES DE VOLUMEN DE MUSICA Y SFX
+        //SetMusicVolume(PlayerPrefs.GetFloat("MusicVolume", 0.0f));
+        //SetSFXVolume(PlayerPrefs.GetFloat("SFXVolume", 0.0f));
+        
+        //REINICIAR EL VOLUMEN DE MUSICA Y SFX AL INICIAR PARTIDA
+        PlayerPrefs.SetFloat("MusicVolume", maxDecibels);
+        PlayerPrefs.SetFloat("SFXVolume", maxDecibels);
     }
 
     // Generate an instance of self that persists throughout scene changes
@@ -122,7 +143,41 @@ public class GameManager : MonoBehaviour
         return gameScores;
     }
 
-    private void ResetGame()
+    // AUDIO MANAGER FUNCTIONS
+    public void SetMusicVolume(float normalizedVolume)
+    {
+        float decibelVolume = ConvertToDecibels(normalizedVolume);
+        audioMixer.SetFloat(musicVolumeParameter, decibelVolume);
+        PlayerPrefs.SetFloat("MusicVolume", normalizedVolume);
+    }
+
+    public void SetSFXVolume(float normalizedVolume)
+    {
+        float decibelVolume = ConvertToDecibels(normalizedVolume);
+        audioMixer.SetFloat(sfxVolumeParameter, decibelVolume);
+        PlayerPrefs.SetFloat("SFXVolume", normalizedVolume);
+    }
+
+    public float GetVolume(string parameter)
+    {
+        float decibelValue;
+        audioMixer.GetFloat(parameter, out decibelValue);
+        return ConvertToNormalized(decibelValue);
+    }
+
+    private float ConvertToDecibels(float normalizedValue)
+    {
+        return minDecibels + (maxDecibels - minDecibels) * normalizedValue;
+    }
+
+    private float ConvertToNormalized(float decibelValue)
+    {
+        return (decibelValue - minDecibels) / (maxDecibels - minDecibels);
+    }
+
+    //FORMULA PARA CALCULAR EL VOLUMEN DE SONIDO
+    // VOLUME = Mathf.Log10(volume) * 20
+    public void ResetGame()
     {
         this.score = 0;
         this.playerHealth = 20;
