@@ -183,6 +183,7 @@ public class GameManager : MonoBehaviour
         this.playerHealth = 20;
         this.playerDamage = 0;
         this.turnFinished = false;
+        this.cards.Clear();
         this.playersDeck.Clear();
         this.playersHand.Clear();
         this.gameScores.Clear();
