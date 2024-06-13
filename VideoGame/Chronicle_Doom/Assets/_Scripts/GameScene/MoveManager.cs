@@ -27,10 +27,12 @@ public class MoveManager : MonoBehaviour
     public bool isParadoxCard;
     public  bool cardPlaced;
     private bool openInfo;
+    private AudioSource audioSource;
     private void Start()
     {
         mainCamera = Camera.main;
         handManager = GameObject.FindGameObjectWithTag("CardManager").GetComponent<HandManager>();
+        audioSource = this.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -54,6 +56,8 @@ public class MoveManager : MonoBehaviour
                 {
                     if(currentCard.isOnBoard ||  (handManager.khronos >= currentCard.card.cost && !currentCard.isOnBoard))
                     {
+                        //EFECTO DE SONIDO
+                        audioSource.PlayOneShot(GameManager.Instance.cardSound2);
                         isDragging = true;
                         currentCard.isDrag = isDragging;
                         isOnBoard= currentCard.isOnBoard;

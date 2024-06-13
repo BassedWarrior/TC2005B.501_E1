@@ -18,9 +18,11 @@ public class HandManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI khronosQuantity;
     private int selectiveCards = 5;
     public int khronos;
+    public AudioSource audioSource;
 
     void Start()
     {
+        audioSource = this.GetComponent<AudioSource>();
         cardsRemaining.text = GameManager.Instance.playersDeck.Count.ToString();
         khronosQuantity.text = khronos.ToString();
         GameManager.Instance.ShuffleDeck();
@@ -127,6 +129,7 @@ public class HandManager : MonoBehaviour
                 cardsRemaining.text = GameManager.Instance.playersDeck.Count.ToString();
             }
         }
+        audioSource.PlayOneShot(GameManager.Instance.cardSound5);
     }
 
     public void AddKhronos()
