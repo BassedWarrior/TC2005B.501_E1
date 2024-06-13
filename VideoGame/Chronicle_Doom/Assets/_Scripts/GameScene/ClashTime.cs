@@ -58,7 +58,6 @@ public class ClashTime : MonoBehaviour
             }
         }
 
-        //Debug.Log($"Relocating {children.Count} enemies");
         foreach (Transform child in children)
         {
             if (child.CompareTag("Enemy"))
@@ -194,11 +193,9 @@ public class ClashTime : MonoBehaviour
     public void UpdateLists(List<CardPropertiesDrag> currentCards, string listName)
     {
         List<CardPropertiesDrag> targetList = GetListByName(listName);
-        Debug.Log("Updating list: " + listName);
 
         if (targetList == null)
         {
-            // Debug.Log("List not found");
             return;
         }
 

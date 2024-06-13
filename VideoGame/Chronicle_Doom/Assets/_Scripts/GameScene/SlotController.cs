@@ -39,7 +39,6 @@ public class SlotController : MonoBehaviour
 
         if (currentChildCount != lastChildCount)
         {
-            Debug.Log("Child count changed in " + transform.name + " slot.");
             if(!isDeck)
             {   
                 UpdateCardList();
@@ -127,13 +126,11 @@ public class SlotController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"{gameObject.name} started colliding with a card!");
         if (!isEnemy && other.CompareTag("Card") && lastChildCount < maxElements)
         {
             CardPropertiesDrag card = other.GetComponent<CardPropertiesDrag>();
             if (card != null && card.isDrag)
             {
-                Debug.Log($"{gameObject.name} will be the new card's parent!");
                 card.actualParent = transform;
             }
         }
@@ -141,13 +138,11 @@ public class SlotController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log($"{gameObject.name} stopped colliding with a card!");
         if (!isEnemy && other.CompareTag("Card"))
         {
             CardPropertiesDrag card = other.GetComponent<CardPropertiesDrag>();
             if (card != null && card.actualParent != card.originalParent) 
             {
-                Debug.Log($"The card will keep its original parent");
                 card.actualParent = card.originalParent;
             }
         }
