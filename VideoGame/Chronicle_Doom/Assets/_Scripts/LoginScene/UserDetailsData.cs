@@ -7,7 +7,6 @@ using TMPro;
 
 public class UserDetailsData : MonoBehaviour
 {
-    private GameManager gameManager;
     [SerializeField] private TMP_InputField usernameInput;
     [SerializeField] private TMP_InputField passwordInput;
     [SerializeField] private Button signInButton;
@@ -20,7 +19,6 @@ public class UserDetailsData : MonoBehaviour
 
     private void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         signInButton.onClick.AddListener(OnLoginButtonClicked);
         signUpButton.onClick.AddListener(OnSignUpButtonClicked);
     }
@@ -58,19 +56,20 @@ public class UserDetailsData : MonoBehaviour
 
             if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
             {
-                StartCoroutine(ShowErrorMessage(www.downloadHandler.text));
+                StartCoroutine(ShowMessage(www.downloadHandler.text));
             }
             else
             {
                 Debug.Log("Respuesta del servidor: " + www.downloadHandler.text);
                 PlayerPrefs.SetString("username", username);
-                gameManager.GetComponent<APIConnection>().GetUsersDeck();
-                gameManager.GetComponent<SceneChanger>().ChangeToMenuScene();
+                StartCoroutine(ShowMessage("Welcome. Login successful!"));
+                GameManager.Instance.GetComponent<APIConnection>().GetUsersDeck();
+                GameManager.Instance.GetComponent<SceneChanger>().ChangeToMenuScene();
                 
             }
         }
     }
-    private IEnumerator ShowErrorMessage(string message)
+    private IEnumerator ShowMessage(string message)
     {
         errorMessageText.text = message;
         errorMessage.SetActive(true);

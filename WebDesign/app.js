@@ -340,35 +340,6 @@ app.get("/enemy/wave/:waveID", async (request, response) => {
   }
 });
 
-app.get('/statistics/timePLayed', async (request, response)=>{
-    let connection = null
-
-    try{
-
-        connection = await connectToDB()
-
-        const [results, fields] = await connection.query('SELECT * FROM matchAveragePlayerTimePlayed LIMIT 5')
-    
-        console.log("Sending data correctly.")
-        response.status(200)
-        response.json(results)
-    }
-    catch(error)
-    {
-        response.status(500)
-        response.json(error)
-        console.log(error)
-    }
-    finally
-    {
-        if(connection!==null) 
-        {
-            connection.end()
-            console.log("Connection closed succesfully!")
-        }
-    }
-})
-
 
 app.get("/statistics/topScores", async (request, response) => {
     let connection = null;
@@ -376,6 +347,129 @@ app.get("/statistics/topScores", async (request, response) => {
     try {
         connection = await connectToDB();
         const [results, fields] = await connection.execute("SELECT * FROM top_5_scores");
+
+        console.log(`${results.length} rows returned`);
+        const result = {cards: results};
+        console.log(result);
+        response.status(200).json(result);
+    }
+    catch (error) {
+        console.log(error);
+        response.status(500).json(error);
+    }
+    finally {
+        if (connection !== null) {
+            connection.end();
+            console.log("Connection closed succesfully");
+        }
+    }
+});
+
+app.get("/statistics/lowestDamagePlayers", async (request, response) => {
+    let connection = null;
+
+    try {
+        connection = await connectToDB();
+        const [results, fields] = await connection.execute("SELECT * FROM LowestDamagePlayers");
+
+        console.log(`${results.length} rows returned`);
+        const result = {cards: results};
+        console.log(result);
+        response.status(200).json(result);
+    }
+    catch (error) {
+        console.log(error);
+        response.status(500).json(error);
+    }
+    finally {
+        if (connection !== null) {
+            connection.end();
+            console.log("Connection closed succesfully");
+        }
+    }
+});
+
+
+
+app.get("/statistics/TimePlayed", async (request, response) => {
+    let connection = null;
+
+    try {
+        connection = await connectToDB();
+        const [results, fields] = await connection.execute("SELECT * FROM TimePlayed");
+
+        console.log(`${results.length} rows returned`);
+        const result = {cards: results};
+        console.log(result);
+        response.status(200).json(result);
+    }
+    catch (error) {
+        console.log(error);
+        response.status(500).json(error);
+    }
+    finally {
+        if (connection !== null) {
+            connection.end();
+            console.log("Connection closed succesfully");
+        }
+    }
+});
+
+
+app.get("/statistics/card_count_by_category", async (request, response) => {
+    let connection = null;
+
+    try {
+        connection = await connectToDB();
+        const [results, fields] = await connection.execute("SELECT * FROM card_count_by_category");
+
+        console.log(`${results.length} rows returned`);
+        const result = {cards: results};
+        console.log(result);
+        response.status(200).json(result);
+    }
+    catch (error) {
+        console.log(error);
+        response.status(500).json(error);
+    }
+    finally {
+        if (connection !== null) {
+            connection.end();
+            console.log("Connection closed succesfully");
+        }
+    }
+});
+
+app.get("/statistics/average_damage", async (request, response) => {
+    let connection = null;
+
+    try {
+        connection = await connectToDB();
+        const [results, fields] = await connection.execute("SELECT * FROM average_damage_ratio");
+
+        console.log(`${results.length} rows returned`);
+        const result = {cards: results};
+        console.log(result);
+        response.status(200).json(result);
+    }
+    catch (error) {
+        console.log(error);
+        response.status(500).json(error);
+    }
+    finally {
+        if (connection !== null) {
+            connection.end();
+            console.log("Connection closed succesfully");
+        }
+    }
+});
+
+app.get("/statistics/player_registration_by_year", async (request, response) => {
+    let connection = null;
+
+    try {
+        connection = await connectToDB();
+        const [results, fields] = await connection.execute("SELECT * FROM player_registration_by_year");
 
         console.log(`${results.length} rows returned`);
         const result = {cards: results};

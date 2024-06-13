@@ -1933,11 +1933,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &1057912841 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3853033969441035890, guid: 3c2d2ef776d3a441aa7350091eadb102, type: 3}
-  m_PrefabInstance: {fileID: 1576699013}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1057912842 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4592507086929882218, guid: 3c2d2ef776d3a441aa7350091eadb102, type: 3}
@@ -3272,7 +3267,6 @@ MonoBehaviour:
   cards: []
   playersDeck: 
   playersHand: 
-  textDots: []
   playerHealth: 20
   playerDamage: 0
   gameScores: []
@@ -3283,6 +3277,13 @@ MonoBehaviour:
   sfxVolumeParameter: SFX
   maxDecibels: -5
   minDecibels: -30
+  cardSound1: {fileID: 8300000, guid: 03f6c20879b8648fb93c5eb41c5939bb, type: 3}
+  cardSound2: {fileID: 8300000, guid: aa8bdd1a1d9a54226ae2f805c0e92490, type: 3}
+  cardSound3: {fileID: 8300000, guid: 551da7349128b44faa07b74ec0416bf9, type: 3}
+  cardSound4: {fileID: 8300000, guid: 7362ed554fed64a95b53a2e6b5843808, type: 3}
+  cardSound5: {fileID: 8300000, guid: b7df01d8862104ee2ae7fe12f01fb314, type: 3}
+  cardSound6: {fileID: 8300000, guid: 83cf5399ff46d4686a1ad1333c458534, type: 3}
+  turnFinished: 0
 --- !u!4 &1945240715
 Transform:
   m_ObjectHideFlags: 0
@@ -3331,8 +3332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1edbcb5a255f2948be2ef56ddc4d3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  welcomeMessage: {fileID: 1057912841}
-  deckMessage: {fileID: 1951789772}
 --- !u!82 &1945240718
 AudioSource:
   m_ObjectHideFlags: 0

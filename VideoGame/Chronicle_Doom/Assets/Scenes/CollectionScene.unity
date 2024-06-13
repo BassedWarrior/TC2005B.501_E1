@@ -2553,32 +2553,24 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3265252364294297385, guid: 38831b859efd4488c8fc036073bab6d8, type: 3}
   m_PrefabInstance: {fileID: 1704309885}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &786101046
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!114 &770585712 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4756121872424251346, guid: 38831b859efd4488c8fc036073bab6d8, type: 3}
+  m_PrefabInstance: {fileID: 1704309885}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 786101047}
-  - component: {fileID: 786101050}
-  - component: {fileID: 786101049}
-  - component: {fileID: 786101048}
-  m_Layer: 6
-  m_Name: SettingsGrid
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &786101047
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 786101046}
+  m_GameObject: {fileID: 800249363}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
@@ -2599,7 +2591,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 786101046}
+  m_GameObject: {fileID: 800249363}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
@@ -2625,7 +2617,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 786101046}
+  m_GameObject: {fileID: 800249363}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -2655,8 +2647,27 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 786101046}
+  m_GameObject: {fileID: 800249363}
   m_CullTransparentMesh: 1
+--- !u!1 &800249363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 786101047}
+  - component: {fileID: 786101050}
+  - component: {fileID: 786101049}
+  - component: {fileID: 786101048}
+  m_Layer: 6
+  m_Name: SettingsGrid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1001 &802014711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4077,7 +4088,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a12b96f518fab417687f87086b417f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
   highscores: []
   textMeshPrefab: {fileID: 8485720040892147633, guid: f18d08ee68ede4df1bb3dd4cf6e74bfd, type: 3}
 --- !u!224 &1797030939 stripped
@@ -4242,6 +4252,9 @@ MonoBehaviour:
   collectionName: {fileID: 1160274007}
   deckError: {fileID: 4212608089133311136}
   displayCards: []
+  deckMessage: {fileID: 2033913109}
+  playButton: {fileID: 770585712}
+  exitButton: {fileID: 1842398600}
 --- !u!114 &1837483715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4254,8 +4267,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1edbcb5a255f2948be2ef56ddc4d3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  welcomeMessage: {fileID: 0}
-  deckMessage: {fileID: 2033913109}
 --- !u!114 &1837483716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4270,30 +4281,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSlider: {fileID: 1171815750}
   sfxSlider: {fileID: 1034752313}
---- !u!1 &1859585201
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!114 &1842398600 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7961058705801227908, guid: 704297a506cc042098faae3f5fc2f0de, type: 3}
+  m_PrefabInstance: {fileID: 125275293}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1859585202}
-  - component: {fileID: 1859585203}
-  m_Layer: 6
-  m_Name: MusicVolume
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1859585202
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1859585201}
+  m_GameObject: {fileID: 1896808991}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -4314,8 +4319,25 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1859585201}
+  m_GameObject: {fileID: 1896808991}
   m_CullTransparentMesh: 1
+--- !u!1 &1896808991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1859585202}
+  - component: {fileID: 1859585203}
+  m_Layer: 6
+  m_Name: MusicVolume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1001 &1918860432
 PrefabInstance:
   m_ObjectHideFlags: 0

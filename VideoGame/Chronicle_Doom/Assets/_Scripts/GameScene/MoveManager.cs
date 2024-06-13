@@ -24,12 +24,15 @@ public class MoveManager : MonoBehaviour
     private bool canClick = true;
     public bool isDragging;
     public bool isOnBoard;
+    public bool isParadoxCard;
     public  bool cardPlaced;
     private bool openInfo;
+    private AudioSource audioSource;
     private void Start()
     {
         mainCamera = Camera.main;
         handManager = GameObject.FindGameObjectWithTag("CardManager").GetComponent<HandManager>();
+        audioSource = this.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -53,9 +56,12 @@ public class MoveManager : MonoBehaviour
                 {
                     if(currentCard.isOnBoard ||  (handManager.khronos >= currentCard.card.cost && !currentCard.isOnBoard))
                     {
+                        //EFECTO DE SONIDO
+                        audioSource.PlayOneShot(GameManager.Instance.cardSound2);
                         isDragging = true;
                         currentCard.isDrag = isDragging;
                         isOnBoard= currentCard.isOnBoard;
+                        isParadoxCard = currentCard.isParadox;
                         ChangeSortingLayer(hitInfo.collider.transform, "ForegroundCanvas");
                     }
                 }
@@ -64,6 +70,7 @@ public class MoveManager : MonoBehaviour
         else if (Input.GetMouseButtonUp(0) && currentCard != null && currentCard.isDrag && !openInfo)
         {
             isDragging = false;
+            isParadoxCard = false;
             currentCard.isDrag = isDragging;
             ChangeSortingLayer(hitInfo.collider.transform, "GameObjects");
             CardMovement(currentCard);
@@ -134,6 +141,7 @@ public class MoveManager : MonoBehaviour
 
     private void CardMovement(CardPropertiesDrag card)
     {
+        // GameManager.Instance.DeleteDots();
         card.transform.SetParent(card.actualParent);
         if (card.actualParent == card.originalParent)
         {

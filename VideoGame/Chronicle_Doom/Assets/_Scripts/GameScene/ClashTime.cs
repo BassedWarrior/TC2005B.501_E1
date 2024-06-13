@@ -4,63 +4,61 @@ using UnityEngine.UI;
 
 public class ClashTime : MonoBehaviour
 {
-    public List<CardPropertiesDrag> timelineA = new List<CardPropertiesDrag>();
-    public List<CardPropertiesDrag> timelineB = new List<CardPropertiesDrag>();
-    public List<CardPropertiesDrag> timelineC = new List<CardPropertiesDrag>();
-    public List<CardPropertiesDrag> enemylineA = new List<CardPropertiesDrag>();
-    public List<CardPropertiesDrag> enemylineB = new List<CardPropertiesDrag>();
-    public List<CardPropertiesDrag> enemylineC = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> playerLineA = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> playerLineB = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> playerLineC = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> enemyLineA = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> enemyLineB = new List<CardPropertiesDrag>();
+    public List<CardPropertiesDrag> enemyLineC = new List<CardPropertiesDrag>();
     public List<CardPropertiesDrag> quantumTunnel = new List<CardPropertiesDrag>();
     [SerializeField] private Transform enemySpawner;
     [SerializeField] private Transform enemyAreaA;
     [SerializeField] private Transform enemyAreaB;
     [SerializeField] private Transform enemyAreaC;
-    [SerializeField] private GameManager gameManager;
+    [SerializeField] private Transform paradoxCollector;
     [SerializeField] private Canvas mainCanvas;
     [SerializeField] private Button endTurnButton;
-    public bool turnFinished = false;
+    public AudioSource audioSource;
 
     public void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        endTurnButton.onClick.AddListener(Clash);
+        audioSource = this.GetComponent<AudioSource>();
+        endTurnButton.onClick.AddListener(() => StartCoroutine(Clash()));
     }
 
-    private List<CardPropertiesDrag> GetListByName(string listName)
+    private List<CardPropertiesDrag> GetListByName(string name)
     {
-        switch (listName)
+        switch (name)
         {
-            case "TimeLineA":
-                return timelineA;
-            case "TimeLineB":
-                return timelineB;
-            case "TimeLineC":
-                return timelineC;
-            case "QuantumTunnel":
-                return quantumTunnel;
-            case "EnemyLineA":
-                return enemylineA;
-            case "EnemyLineB":
-                return enemylineB;
-            case "EnemyLineC":
-                return enemylineC;
-            default:
-                return null;
+            case "PlayerLineA": return playerLineA;
+            case "PlayerLineB": return playerLineB;
+            case "PlayerLineC": return playerLineC;
+            case "QuantumTunnel": return quantumTunnel;
+            case "EnemyLineA": return enemyLineA;
+            case "EnemyLineB": return enemyLineB;
+            case "EnemyLineC": return enemyLineC;
+            default: return null;
         }
     }
 
-    public void RelocateEnemies()
+   public void RelocateEnemies()
     {
         List<Transform> children = new List<Transform>();
         foreach (Transform child in enemySpawner)
         {
-            if (child != enemySpawner) 
+            if (child != enemySpawner)
             {
                 children.Add(child);
             }
         }
 
-        //Debug.Log($"Relocating {children.Count} enemies");
+        // Initialize enemy count for each line
+        int enemiesInA = enemyAreaA.childCount;
+        int enemiesInB = enemyAreaB.childCount;
+        int enemiesInC = enemyAreaC.childCount;
+
+        System.Random random = new System.Random();
+
         foreach (Transform child in children)
         {
             if (child.CompareTag("Enemy"))
@@ -68,18 +66,48 @@ public class ClashTime : MonoBehaviour
                 CardPropertiesDrag card = child.GetComponent<CardPropertiesDrag>();
                 if (card != null)
                 {
-                    int randomLine = Random.Range(0, 3);
-                    switch (randomLine)
+                    bool assigned = false;
+                    List<int> lines = new List<int> { 0, 1, 2 };
+
+                    while (lines.Count > 0 && !assigned)
                     {
-                        case 0:
-                            card.transform.SetParent(enemyAreaA);
-                            break;
-                        case 1:
-                            card.transform.SetParent(enemyAreaB);
-                            break;
-                        case 2:
-                            card.transform.SetParent(enemyAreaC);
-                            break;
+                        int index = random.Next(lines.Count);
+                        int randomLine = lines[index];
+                        lines.RemoveAt(index);
+
+                        switch (randomLine)
+                        {
+                            case 0:
+                                if (enemiesInA < 4)
+                                {
+                                    card.transform.SetParent(enemyAreaA);
+                                    enemiesInA++;
+                                    assigned = true;
+                                }
+                                break;
+                            case 1:
+                                if (enemiesInB < 4)
+                                {
+                                    card.transform.SetParent(enemyAreaB);
+                                    enemiesInB++;
+                                    assigned = true;
+                                }
+                                break;
+                            case 2:
+                                if (enemiesInC < 4)
+                                {
+                                    card.transform.SetParent(enemyAreaC);
+                                    enemiesInC++;
+                                    assigned = true;
+                                }
+                                break;
+                        }
+                    }
+
+                    // Destroy the card if it couldn't be assigned to a line, maybe you would die too xd
+                    if (!assigned)
+                    {
+                        Destroy(card.gameObject);
                     }
                 }
             }
@@ -89,12 +117,14 @@ public class ClashTime : MonoBehaviour
     private void CalculateLineDamage(List<CardPropertiesDrag> line,
                                      int totalDamage)
     {
-
         // Skip if line is empty
         if (line.Count == 0)
         {
             return;
         }
+
+        // Reset damage dealt to each card
+        ResetDamage(line);
 
         // Add damage dealt to each player card
         int damagePerCard = (int) Mathf.Floor(
@@ -105,35 +135,34 @@ public class ClashTime : MonoBehaviour
             {
                 line[i].card.AddDamage(1);
             }
+            foreach (CardPropertiesDrag card in line)
+            {
+                card.ShowDamageText(card.card.damage, true, true);
+            }
+            InfoUpdate(line);
             return;
         }
+
+        // Add extra damage to first card in case the damage per doesn't round nicely
+        int extraDamage = (int) Mathf.Ceil(
+                (float) totalDamage / line.Count) - damagePerCard;
+        line[0].card.AddDamage(extraDamage);
 
         // Add damage per card to each card
         foreach (CardPropertiesDrag card in line)
         {
             if (card.card.IsAlive())
             {
-                card.card.ResetDamage();
                 card.card.AddDamage(damagePerCard);
+                card.ShowDamageText(card.card.damage, true, true);
             }
-        }
-
-        // Add extra damage to first card in case the damage per
-        // doesn't round nicely
-        int extraDamage = (int) Mathf.Ceil(
-                (float) totalDamage / line.Count) - damagePerCard;
-        line[0].card.AddDamage(extraDamage);
-
-        foreach (CardPropertiesDrag card in line)
-        {
-            card.AssignInfo();
         }
     }
 
     private void CalculateLineClash(List<CardPropertiesDrag> playerLine,
                                     List<CardPropertiesDrag> enemyLine)
     {
-        gameManager.ResetPlayerDamage();
+        GameManager.Instance.ResetPlayerDamage();
 
         // Calculate total enemy attack
         int enemyAttack = 0;
@@ -146,7 +175,7 @@ public class ClashTime : MonoBehaviour
         // Deal damage to player if there are none.
         if (playerLine.Count == 0)
         {
-            gameManager.AddPlayerDamage(enemyAttack);
+            GameManager.Instance.AddPlayerDamage(enemyAttack);
         }
 
         // Calculate total player attack
@@ -175,7 +204,7 @@ public class ClashTime : MonoBehaviour
         if (playerLine.Count < enemyLine.Count && playerDefence < enemyAttack)
         {
             // Deal excess damage to the player directly
-            gameManager.AddPlayerDamage(enemyAttack - playerDefence);
+            GameManager.Instance.AddPlayerDamage(enemyAttack - playerDefence);
         }
         // The enemy is outnumbered in that line
         // and dealt more damage than its cards can defend
@@ -193,34 +222,31 @@ public class ClashTime : MonoBehaviour
     public void UpdateLists(List<CardPropertiesDrag> currentCards, string listName)
     {
         List<CardPropertiesDrag> targetList = GetListByName(listName);
-        Debug.Log("Updating list: " + listName);
 
         if (targetList == null)
         {
-            // Debug.Log("List not found");
             return;
         }
 
         // Limpiar la lista objetivo para eliminar cualquier carta que ya no esté presente
         targetList.Clear();
 
-        // Saltar si no hay cartas en la lista actual
-        if (currentCards.Count == 0)
-        {
-            // Debug.Log("No cards in list");
-            return;
-        }
         // Agregar las cartas actuales a la lista objetivo
         foreach (CardPropertiesDrag card in currentCards)
         {
             targetList.Add(card);
         }
 
-        GameManager.Instance.DeleteDots();
         // Realizar cálculos de clash después de actualizar las listas
-        CalculateLineClash(timelineA, enemylineA);
-        CalculateLineClash(timelineB, enemylineB);
-        CalculateLineClash(timelineC, enemylineC);
+        CalculateLineClash(playerLineA, enemyLineA);
+        CalculateLineClash(playerLineB, enemyLineB);
+        CalculateLineClash(playerLineC, enemyLineC);
+        ResetDamage(quantumTunnel);
+        foreach (CardPropertiesDrag card in quantumTunnel)
+        {
+            card.ShowDamageText(card.card.damage, true, true);
+        }
+        InfoUpdate(quantumTunnel);
     }
 
     private void DealLineDamage(List<CardPropertiesDrag> playerLine,
@@ -238,7 +264,7 @@ public class ClashTime : MonoBehaviour
         {
             if (card.card.IsAlive() && card != null)
             {
-                card.ShowFloatingText(card.transform.position, card.card.damage, true, false);
+                card.ShowDamageText(card.card.damage, true, false);
                 card.card.ApplyDamage();
             }
         }
@@ -248,7 +274,7 @@ public class ClashTime : MonoBehaviour
         {
             if (card.card.IsAlive() && card != null)
             {
-                card.ShowFloatingText(card.transform.position, card.card.damage, true, false);
+                card.ShowDamageText(card.card.damage, true, false);
                 card.card.ApplyDamage();
             }
         }
@@ -256,12 +282,12 @@ public class ClashTime : MonoBehaviour
 
     private void AfterClash()
     {
-        DestroyCardsWithZeroHealth(timelineA);
-        DestroyCardsWithZeroHealth(timelineB);
-        DestroyCardsWithZeroHealth(timelineC);
-        DestroyCardsWithZeroHealth(enemylineA);
-        DestroyCardsWithZeroHealth(enemylineB);
-        DestroyCardsWithZeroHealth(enemylineC);
+        DestroyCardsWithZeroHealth(playerLineA);
+        DestroyCardsWithZeroHealth(playerLineB);
+        DestroyCardsWithZeroHealth(playerLineC);
+        DestroyCardsWithZeroHealth(enemyLineA);
+        DestroyCardsWithZeroHealth(enemyLineB);
+        DestroyCardsWithZeroHealth(enemyLineC);
     }
 
     private void DestroyCardsWithZeroHealth(List<CardPropertiesDrag> cardList)
@@ -272,7 +298,7 @@ public class ClashTime : MonoBehaviour
         {
             if (card != null && !card.card.IsAlive())
             {
-                gameManager.AddKillScore(card.card.GetScoreValue());
+                GameManager.Instance.AddKillScore(card.card.GetScoreValue());
                 Debug.Log($"Added {card.card.GetScoreValue()} score for killing card {card.card.cardID}");
                 Destroy(card.gameObject);
                 cardsToRemove.Add(card);
@@ -282,48 +308,131 @@ public class ClashTime : MonoBehaviour
         foreach (CardPropertiesDrag card in cardsToRemove)
         {
             cardList.Remove(card);
+            Destroy(card.gameObject);
         }
     }
 
-
-    private void WaitForPlayerTurn()
+    private IEnumerator<object> Clash()
     {
-        StartCoroutine(WaitAndProceed());
-    }
+        audioSource.PlayOneShot(GameManager.Instance.cardSound6);
+        endTurnButton.interactable = false;
 
-    private IEnumerator<object> WaitAndProceed()
-    {
+        if (paradoxCollector.childCount > 0)
+        {
+            ResetDamage(playerLineA);
+            ResetDamage(playerLineB);
+            ResetDamage(playerLineC);
+            ResetDamage(enemyLineA);
+            ResetDamage(enemyLineB);
+            ResetDamage(enemyLineC);
+            foreach (Transform child in paradoxCollector)
+            {
+                if (child != null && child.CompareTag("Card"))
+                {
+                    CardPropertiesDrag card = child.GetComponent<CardPropertiesDrag>();
+                    if (card != null)
+                    {
+                        foreach (CardAbility ability in card.cardAbilities)
+                        {
+                            EvokeAbilities(ability);
+                        }
+                    }
+                }
+            }
+
+            DealLineDamage(playerLineA, enemyLineA);
+            DealLineDamage(playerLineB, enemyLineB);
+            DealLineDamage(playerLineC, enemyLineC);
+            InfoUpdateAll();
+            yield return new WaitForSeconds(3f);
+            AfterClash();
+            CalculateLineClash(playerLineA, enemyLineA);
+            CalculateLineClash(playerLineB, enemyLineB);
+            CalculateLineClash(playerLineC, enemyLineC);
+        }
+
+        DealLineDamage(playerLineA, enemyLineA);
+        DealLineDamage(playerLineB, enemyLineB);
+        DealLineDamage(playerLineC, enemyLineC);
+
+        GameManager.Instance.ApplyPlayerDamage();
+
+        InfoUpdateAll();
+
+        DestroyUsedCards(paradoxCollector);
         yield return new WaitForSeconds(3f);
         AfterClash();
         this.GetComponent<WaveManager>().NextWave();
         endTurnButton.interactable = true;
     }
-    
-    public void Clash()
+
+    private void InfoUpdateAll()
     {
-        endTurnButton.interactable = false;
-        DealLineDamage(timelineA, enemylineA);
-        DealLineDamage(timelineB, enemylineB);
-        DealLineDamage(timelineC, enemylineC);
+        InfoUpdate(playerLineA);
+        InfoUpdate(playerLineB);
+        InfoUpdate(playerLineC);
+        InfoUpdate(enemyLineA);
+        InfoUpdate(enemyLineB);
+        InfoUpdate(enemyLineC);
+    }
 
-        gameManager.ApplyPlayerDamage();
+    private void DestroyUsedCards(Transform cardCollector)
+    {
+        foreach (Transform child in cardCollector)
+        {
+            if (child.CompareTag("Card"))
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
 
-        foreach (CardPropertiesDrag card in timelineA)
+    public void InfoUpdate(List<CardPropertiesDrag> timeline)
+    {
+        foreach (CardPropertiesDrag card in timeline)
         {
             card.AssignInfo();
         }
+    }
 
-        foreach (CardPropertiesDrag card in timelineB)
+    public void EvokeAbilities(CardAbility ability)
+    {
+        foreach (string target in ability.targets)
         {
-            card.AssignInfo();
+            List<CardPropertiesDrag> targetList = GetListByName(target);
+            if (targetList != null)
+            {
+                foreach (CardPropertiesDrag card in targetList)
+                {
+                    if (ability.damage != 0)
+                    {
+                        Debug.Log($"Dealing {ability.damage} damage to {card.card.name} in row {target}");
+                        card.card.AddDamage(ability.damage);
+                    }
+                    if (ability.heal != 0)
+                    {
+                        Debug.Log($"Healing {ability.heal} health to {card.card.name} in row {target}");
+                        card.card.Heal(ability.heal);
+                    }
+                    if (ability.attack != 0)
+                    {
+                        Debug.Log($"Adding {ability.attack} attack to {card.card.name} in row {target}");
+                        card.card.AddAttack(ability.attack);
+                    }
+                }
+            }
+            else
+            {
+                //Debug.LogWarning($"No target list found for {target}");
+            }
         }
+    }
 
-        foreach (CardPropertiesDrag card in timelineC)
+    private void ResetDamage(List<CardPropertiesDrag> line)
+    {
+        foreach (CardPropertiesDrag card in line)
         {
-            card.AssignInfo();
+            card.card.ResetDamage();
         }
-
-        turnFinished = true;
-        WaitForPlayerTurn();
     }
 }

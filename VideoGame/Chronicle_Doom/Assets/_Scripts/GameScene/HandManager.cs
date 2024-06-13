@@ -6,7 +6,6 @@ using TMPro;
 
 public class HandManager : MonoBehaviour
 {
-    private GameManager gameManager;
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private Transform cardArea;
     [SerializeField] private GameObject selectiveCard;
@@ -19,13 +18,14 @@ public class HandManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI khronosQuantity;
     private int selectiveCards = 5;
     public int khronos;
+    public AudioSource audioSource;
 
     void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        cardsRemaining.text = gameManager.playersDeck.Count.ToString();
+        audioSource = this.GetComponent<AudioSource>();
+        cardsRemaining.text = GameManager.Instance.playersDeck.Count.ToString();
         khronosQuantity.text = khronos.ToString();
-        gameManager.ShuffleDeck();
+        GameManager.Instance.ShuffleDeck();
         ShowInitialHand();
     }
 
@@ -34,9 +34,9 @@ public class HandManager : MonoBehaviour
         initialScene.SetActive(true);
         for (int i = 0; i < selectiveCards; i++)
         {
-            if (i < gameManager.playersDeck.Count)
+            if (i < GameManager.Instance.playersDeck.Count)
             {
-                CardData card = gameManager.cards[gameManager.playersDeck[i]];
+                CardData card = GameManager.Instance.cards[GameManager.Instance.playersDeck[i]];
                 GameObject buttonObj= Instantiate(selectiveCard, selectiveArea);
                 buttonObj.GetComponent<SelectiveCards>().card= card;
                 buttonObj.GetComponent<SelectiveCards>().AssignInfo();
@@ -68,8 +68,8 @@ public class HandManager : MonoBehaviour
     {
         foreach (int decision in selectedCards)
         {
-            gameManager.playersHand.Add(decision);
-            gameManager.playersDeck.Remove(decision);
+            GameManager.Instance.playersHand.Add(decision);
+            GameManager.Instance.playersDeck.Remove(decision);
         }
         selectedCards.Clear();
         Destroy(initialScene);
@@ -79,31 +79,31 @@ public class HandManager : MonoBehaviour
 
     private void CreateHand()
     {
-        foreach (int index in gameManager.playersHand)
+        foreach (int index in GameManager.Instance.playersHand)
         {
             GameObject newCard = Instantiate(cardPrefab, cardArea);
             CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
-            cardProperties.card= gameManager.cards[index - 1].DeepCopy();
+            cardProperties.card= GameManager.Instance.cards[index - 1].DeepCopy();
             cardProperties.AssignInfo();
         }
-        if( gameManager.playersHand.Count < 5)
+        if( GameManager.Instance.playersHand.Count < 5)
         {
-            int faltantes= (5-gameManager.playersHand.Count);
+            int faltantes= (5-GameManager.Instance.playersHand.Count);
             for(int i=0;  i<faltantes; i++)
             {
                 GameObject newCard = Instantiate(cardPrefab, cardArea);
                 CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
                 if(cardProperties != null)
                 {
-                    int card= gameManager.playersDeck[i];
-                    cardProperties.card= gameManager.cards[card].DeepCopy();
+                    int card= GameManager.Instance.playersDeck[i];
+                    cardProperties.card= GameManager.Instance.cards[card].DeepCopy();
                     cardProperties.AssignInfo();
-                    gameManager.playersHand.Add(card);
-                    gameManager.playersDeck.Remove(card);
+                    GameManager.Instance.playersHand.Add(card);
+                    GameManager.Instance.playersDeck.Remove(card);
                 }
             }
         }
-        cardsRemaining.text = gameManager.playersDeck.Count.ToString();
+        cardsRemaining.text = GameManager.Instance.playersDeck.Count.ToString();
         MoveManager moveManager = GameObject.FindGameObjectWithTag("CardManager").GetComponent<MoveManager>();
         moveManager.cardPlaced =true;
     }
@@ -117,18 +117,19 @@ public class HandManager : MonoBehaviour
         //dos veces
         for(int i = 0; i < 2; i++)
         {
-            if(gameManager.playersDeck.Count > 0)
+            if(GameManager.Instance.playersDeck.Count > 0)
             {
-                int card= gameManager.playersDeck[0];
-                gameManager.playersHand.Add(card);
-                gameManager.playersDeck.Remove(card);
+                int card= GameManager.Instance.playersDeck[0];
+                GameManager.Instance.playersHand.Add(card);
+                GameManager.Instance.playersDeck.Remove(card);
                 GameObject newCard = Instantiate(cardPrefab, cardArea);
                 CardPropertiesDrag cardProperties = newCard.GetComponent<CardPropertiesDrag>();
-                cardProperties.card = gameManager.cards[card].DeepCopy();
+                cardProperties.card = GameManager.Instance.cards[card].DeepCopy();
                 cardProperties.AssignInfo();
-                cardsRemaining.text = gameManager.playersDeck.Count.ToString();
+                cardsRemaining.text = GameManager.Instance.playersDeck.Count.ToString();
             }
         }
+        audioSource.PlayOneShot(GameManager.Instance.cardSound5);
     }
 
     public void AddKhronos()

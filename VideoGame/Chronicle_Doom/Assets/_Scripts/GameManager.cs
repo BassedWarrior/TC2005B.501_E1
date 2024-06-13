@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     // Game information
     public List<int> playersDeck = new List<int>();
     public List<int> playersHand = new List<int>();
-    public List<GameObject> textDots = new List<GameObject>();
     // Player information
     public int playerHealth = 20;
     public int playerDamage = 0;
@@ -37,6 +36,14 @@ public class GameManager : MonoBehaviour
     public string sfxVolumeParameter;
     [SerializeField] private float maxDecibels;
     [SerializeField] private float minDecibels;
+    //EFECTO DE SONIDO
+    [SerializeField] public AudioClip cardSound1;
+    [SerializeField] public AudioClip cardSound2;
+    [SerializeField] public AudioClip cardSound3;
+    [SerializeField] public AudioClip cardSound4;
+    [SerializeField] public AudioClip cardSound5;
+    [SerializeField] public AudioClip cardSound6;
+    public bool turnFinished = false;
 
     public void Start()
     {
@@ -64,15 +71,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DeleteDots()
-    {
-        foreach (GameObject dot in textDots)
-        {
-            Destroy(dot);
-        }
-        textDots.Clear();
-    }
-   
     // Sort the player deck
     public void SortDeck()
     {
@@ -137,6 +135,7 @@ public class GameManager : MonoBehaviour
                      waveManager.GetWaveNumber(),
                      handManager.GetKronos(),
                      playersDeck.Count);
+        ResetGame();
     }
 
     public List<GameScore> GetTopHighscores()
@@ -178,4 +177,17 @@ public class GameManager : MonoBehaviour
 
     //FORMULA PARA CALCULAR EL VOLUMEN DE SONIDO
     // VOLUME = Mathf.Log10(volume) * 20
+    public void ResetGame()
+    {
+        this.score = 0;
+        this.playerHealth = 20;
+        this.playerDamage = 0;
+        this.turnFinished = false;
+        this.playersDeck.Clear();
+        this.playersHand.Clear();
+        this.gameScores.Clear();
+        api.GetTopHighscores();
+        api.GetCards();
+        api.GetUsersDeck();
+    }
 }
