@@ -32,10 +32,6 @@ public class CardPropertiesDrag : MonoBehaviour
             energyText.text = card.cost.ToString();
             attackText.text = card.attack.ToString();
             healthText.text = card.health.ToString();
-            if (card.IsAlive() && card != null)
-            {
-                ShowDamageText(card.damage, true, true);
-            }
         }
     }
 

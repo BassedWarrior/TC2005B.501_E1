@@ -135,8 +135,9 @@ public class ClashTime : MonoBehaviour
             }
             foreach (CardPropertiesDrag card in line)
             {
-                card.AssignInfo();
+                card.ShowDamageText(card.card.damage, true, true);
             }
+            InfoUpdate(line);
             return;
         }
 
@@ -238,10 +239,12 @@ public class ClashTime : MonoBehaviour
         CalculateLineClash(playerLineA, enemyLineA);
         CalculateLineClash(playerLineB, enemyLineB);
         CalculateLineClash(playerLineC, enemyLineC);
+        ResetDamage(quantumTunnel);
         foreach (CardPropertiesDrag card in quantumTunnel)
         {
-            card.AssignInfo();
+            card.ShowDamageText(card.card.damage, true, true);
         }
+        InfoUpdate(quantumTunnel);
     }
 
     private void DealLineDamage(List<CardPropertiesDrag> playerLine,
@@ -367,7 +370,7 @@ public class ClashTime : MonoBehaviour
         InfoUpdate(playerLineC);
         InfoUpdate(enemyLineA);
         InfoUpdate(enemyLineB);
-    InfoUpdate(enemyLineC);
+        InfoUpdate(enemyLineC);
     }
 
     private void DestroyUsedCards(Transform cardCollector)
