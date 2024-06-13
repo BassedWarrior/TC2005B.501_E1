@@ -37,10 +37,9 @@ header a:hover
 }
 
 
-header img
-{
-    width: 1000rem;
-}
+
+
+
 
 
 
@@ -48,8 +47,8 @@ header img
 
 /* Estilo para el pie de página con info extra */
 footer {
-    background-color: #2F2F2F;
-    color: white;
+    background-color: #000000;
+    color: rgb(75, 51, 96);
     text-align: center;
     padding-top: 2rem;
     font-size: 12px;
@@ -57,7 +56,7 @@ footer {
 
 footer hr {
     border: none;
-    border-top: 1px solid white;
+    border-top: 0.1rem solid rgb(148, 148, 148);
     margin: 2rem auto;
     width: 90%;
 }
@@ -67,12 +66,12 @@ footer hr {
 }
 
 .contact-us {
-    background-color: #2F2F2F;
+    background-color: #000000;
     display: flex;
     align-items: center;
     text-align: center;
     justify-content: space-evenly;
-    color: white;
+    color: rgb(55, 55, 55);
 }
 
 .media-access {
@@ -84,7 +83,7 @@ footer hr {
 
 .media-access h4 {
     margin-bottom: 10px;
-    color: white;
+    color: rgb(108, 82, 141);
     font-weight: bold;
 }
 
@@ -100,13 +99,13 @@ footer hr {
 }
 
 .media-content a {
-    color: white;
+    color: rgb(81, 62, 105);
     text-decoration: none;
 }
 
 .media-content a:hover {
     text-decoration: underline;
-    color: blue;
+    color: rgb(215, 186, 234);
 }
 
 .icon {

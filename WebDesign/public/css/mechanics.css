@@ -4,18 +4,70 @@
 }
 
 .content p {
-   color: white;
+   color: rgb(197, 194, 252);
    font-size: 1.5rem;
    text-align: center;
    margin-bottom: 0;
 }
 
-/* Estilos para la sección de ROADMAP */
+/* Estilos para el titulo*/
+
+.gameTitle {
+   background-image: url("../images/bg_space.jpg");
+   background-position: center;
+   height: 10rem;
+   text-align: center;
+   display: flex; 
+   justify-content: center; 
+   align-items: center; 
+}
+
+.gameTitle h1 {
+   color: rgb(197, 194, 252); 
+   font-size: 3rem; 
+   letter-spacing: 3rem; 
+   margin: 0; 
+}
+
+
+.rowContainer {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: auto; /* Ajuste automático para la altura del contenido */
+   padding: 2rem;
+   background-color: #1f1a29;
+}
+
+.section {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   flex: 1; /* Hace que cada sección ocupe la mitad del contenedor */
+   width: 50%; /* Cada sección ocupa el 50% del ancho del contenedor */
+   padding: 1rem;
+   box-sizing: border-box;
+   text-align: center;
+   color: rgb(197, 194, 252);
+}
+
+.section h2 {
+   font-size: 2rem;
+   margin-bottom: 1rem;
+}
+
+.section p {
+   font-size: 1.5rem;
+   line-height: 1.5;
+}
+
+
 
 .roadmap {
    padding: 2rem;
-   background-color: #2F2F1F;
-   color: white;
+   background-color: #282032;
+   color: rgb(197, 194, 252);
    position: relative;
    overflow: hidden;
 }
@@ -26,8 +78,8 @@
 }
 
 .roadmap-header h2 {
-   font-size: 2.5rem;
-   margin-bottom: 0.5rem;
+   font-size: 5rem;
+   letter-spacing: 2rem;
 }
 
 .roadmap-header h3 {
@@ -45,8 +97,8 @@
 .roadmap-box {
    margin: 1.5rem;
    padding: 0 0.5rem;
-   background-color: #2F2F2F;
-   color: white;
+   background-color: #5d5879;
+   color: rgb(15, 1, 69);
    border-radius: 10px;
    display: flex;
    flex-direction: column;
@@ -54,7 +106,7 @@
    align-items: center;
    text-align: center;
    position: relative;
-   border: 2px solid white;
+   border: 2px solid rgb(197, 194, 252);
    border-radius: 10px;
    max-width: 400px;
 }
@@ -63,7 +115,7 @@
    margin: 0;
    padding: 1rem 0;
    font-size: 1.75rem;
-   background: black;
+   background: rgb(119, 109, 154);
    width: 100%;
    clip-path: polygon(20% 100%, 80% 100%, 100% 0%, 0% 0%);
 }
@@ -84,7 +136,7 @@
 
 .tutorial {
    background-color: #2F2F2F;
-   color: white;
+   color: rgb(197, 194, 252);
    padding: 2rem;
 }
 
@@ -103,7 +155,7 @@
    text-align: center;
    padding: 10px;
    background-color: #2F2F1F;
-   border: solid 1px white;
+   border: solid 1px rgb(197, 194, 252);
    cursor: pointer;
 }
 
@@ -125,7 +177,7 @@
    text-align: center;
    padding: 10px;
    background-color: #000;
-   border: solid 1px white;
+   border: solid 1px rgb(197, 194, 252);
    font-size: 40px;
    color: #2F2F1F
 }
@@ -139,7 +191,7 @@
 }
 
 hr {
-   border-top: 1px solid white;
+   border-top: 1px solid rgb(197, 194, 252);
    margin: 4rem auto;
    width: 90%;
 }
