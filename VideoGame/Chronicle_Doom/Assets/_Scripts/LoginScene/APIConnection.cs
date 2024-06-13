@@ -48,6 +48,7 @@ public class APIConnection : MonoBehaviour
 
     IEnumerator RequestGet(string url)
     {
+        Debug.Log("llamando a cartas");
         // Prepare the request object
         using(UnityWebRequest www = UnityWebRequest.Get(url))
         {
