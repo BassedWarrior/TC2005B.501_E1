@@ -1,55 +1,47 @@
 /* Estilos generales para la página web */
-html, body {
+html, body 
+{
     font-family: "Sedan SC", serif;
+    font-size:16px;
     margin: 0;
     padding: 0;
-    background-color: white;
+    background-color: rgb(133, 133, 133);
 }
 
-/* Estilos para el barra principal fija de comandos */
-header {
-    background-color: #2F2F2F;
-    text-align: center;
-    position: fixed;
+
+/*Estilos para la toolbar*/
+header 
+{
+    background-color: #000000;
+    display: flex;  
     align-items: center;
-    padding: 2rem;
-    padding-left: 0;
+    justify-content: space-around; 
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     width: 100%;
-    z-index: 1000;
-    font-size: 20px;
+    font-size: 2rem;
 }
 
-header nav a {
-    color: white;
-    margin: 0 25px;
+
+header nav a 
+{
+    color: rgb(60, 46, 86);
     text-decoration: none;
     font-weight: bold;
+    padding: 2rem; 
 }
 
-header a:hover {
-    color: black;
+header a:hover 
+{
+    color: rgb(178, 136, 232);
 }
 
-header div {
-    flex: 1;
-    display: flex;
-    display: inline;
-    justify-content: flex-end;
-    padding-inline: 200px;
-}
 
-.logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-    top: 1px;
-}
 
 /* Estilo para el pie de página con info extra */
 footer {
-    background-color: #2F2F2F;
-    color: white;
+    background-color: #000000;
+    color: rgb(75, 51, 96);
     text-align: center;
     padding-top: 2rem;
     font-size: 12px;
@@ -57,9 +49,9 @@ footer {
 
 footer hr {
     border: none;
-    border-top: 1px solid white;
+    border-top: 0.1rem solid rgb(148, 148, 148);
     margin: 2rem auto;
-    width: 90%;
+    width: 100%;
 }
 
 #copyright {
@@ -67,46 +59,36 @@ footer hr {
 }
 
 .contact-us {
-    background-color: #2F2F2F;
+    background-color: #000000;
     display: flex;
     align-items: center;
     text-align: center;
     justify-content: space-evenly;
-    color: white;
+    color: rgb(55, 55, 55);
 }
 
 .media-access {
-    margin: 20px;
+    margin: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .media-access h4 {
-    margin-bottom: 10px;
-    color: white;
+    margin-bottom: 1rem;
+    color: rgb(108, 82, 141);
     font-weight: bold;
 }
 
-.media-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 5px 0;
-}
-
-.media-content img.icon {
-    margin-right: 10px;
-}
 
 .media-content a {
-    color: white;
+    color: rgb(81, 62, 105);
     text-decoration: none;
 }
 
 .media-content a:hover {
     text-decoration: underline;
-    color: blue;
+    color: rgb(215, 186, 234);
 }
 
 .icon {
