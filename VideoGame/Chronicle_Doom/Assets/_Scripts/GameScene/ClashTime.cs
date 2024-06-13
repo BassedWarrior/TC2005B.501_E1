@@ -102,6 +102,10 @@ public class ClashTime : MonoBehaviour
             {
                 line[i].card.AddDamage(1);
             }
+            foreach (CardPropertiesDrag card in line)
+            {
+                card.AssignInfo();
+            }
             return;
         }
 
@@ -201,12 +205,6 @@ public class ClashTime : MonoBehaviour
         // Limpiar la lista objetivo para eliminar cualquier carta que ya no esté presente
         targetList.Clear();
 
-        // Saltar si no hay cartas en la lista actual
-        if (currentCards.Count == 0)
-        {
-            // Debug.Log("No cards in list");
-            return;
-        }
         // Agregar las cartas actuales a la lista objetivo
         foreach (CardPropertiesDrag card in currentCards)
         {
@@ -217,6 +215,10 @@ public class ClashTime : MonoBehaviour
         CalculateLineClash(playerLineA, enemyLineA);
         CalculateLineClash(playerLineB, enemyLineB);
         CalculateLineClash(playerLineC, enemyLineC);
+        foreach (CardPropertiesDrag card in quantumTunnel)
+        {
+            card.AssignInfo();
+        }
     }
 
     private void DealLineDamage(List<CardPropertiesDrag> playerLine,
