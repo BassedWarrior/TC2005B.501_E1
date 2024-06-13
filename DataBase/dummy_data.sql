@@ -33,31 +33,6 @@ INSERT INTO player (username, password, creationDate, highscore_deck) VALUES
 ('user29', 'password29', '2023-12-12', 92),
 ('user30', 'password30', '2021-12-12', 35);
 
--- Insert data into card table
-INSERT INTO card (cost, name, description, category, attack, health) VALUES
-(1, "Caveman", "Gain +1|+0 for each enemy in the same timeline", "unit", 1, 3),
-(1, "Mongols", "Gain +1|+1 for every Mongols unit in play", "unit", 1, 1),
-(2, "Huns", "Gain +0|+1 every time it gets redeployed to another timeline", "unit", 2, 1),
-(2, "Natives", "Gain +0|+2 for each consecuttive turn spent on the same timeline.", "unit", 1, 1),
-(3, "Spartan", "When in a formation, grant allies in same timeline 0|+2", "unit", 2, 3),
-(3, "Vikings", "Gain +2|+0 when deployed from the quantum Tunnel", "unit", 1, 3),
-(4, "Templar", "Generate +1 Khronos and an Millenial Knowledge Card", "unit", 1, 4),
-(5, "Knights", "Gain +2|+2 for each ally in the quantum tunnel", "unit", 3, 3),
-(5, "Samurai", "Deal double damage to injured opponents", "unit", 3, 5),
-(6, "Ninjas", "Concuss one enemy in the same timeline before attacking", "unit", 7, 2),
-(7, "Pirates", "Generate a Jolly Roger Card", "unit", 6, 6),
-(7, "Cowboys", "Attack before receiving damage", "unit", 8, 4),
-(8, "Soldiers", "Generate an Tzar Bomba Card", "unit", 7, 5),
-(9, "Alien", "Generate an Abduction Card", "unit", 7, 9),
-(10, "Terminator", "Deal damage to all copies of the same enemy accross all timelines", "unit", 10, 10),
-(3, "Jolly Roger", "Deal 2 damage to an enemy to heal 2 to a unit.", "paradox", NULL, NULL),
-(4, "Blood Chalis", "Deal 3 damage to a unit to grant +3|+0 to a unit", "paradox", NULL, NULL),
-(6, "Black Plague", "Grant -3|+0 to all enemies", "paradox", NULL, NULL),
-(6, "Abduction", "Place an enemy unit in your hand. This unit can now be played as normal", "paradox", NULL, NULL),
-(6, "Millenial Knowledge", "Grant +5|+5 to an allied unit", "paradox", NULL, NULL),
-(7, "Dinosaur Meteor", "Deal 10 damage to all units in all timelines", "paradox", NULL, NULL),
-(8, "Tzar Bomba", "Deal 5 damage to all enemies", "paradox", NULL, NULL);
-
 -- Insert data into deck table
 INSERT INTO deck (name, creationDate, owner) VALUES
 ('Deck1', '2023-01-01', 'user1'),
@@ -134,74 +109,6 @@ INSERT INTO `match` (username, deck, datePlayed, timePlayed, score, turnsPlayed,
 ('user27', 1, '2022-01-05', '02:00:00', 250, 13, 5, 220, 60, 3, 2, 1, 30.7, 14, 1, 2);
 
 
--- insert values into the gameRound table
-INSERT INTO gameRound (roundID, cardID) VALUES
-(1,1),
-(1,2),
-(1,5),
-(1,6),
-(1,8),
-(1,10),
-(2,2),
-(2,11),
-(2,5),
-(2,8),
-(2,6),
-(3,1),
-(3,11),
-(3,16),
-(3,17),
-(3,18),
-(4,13),
-(4,10),
-(4,9),
-(4,8),
-(5,13),
-(5,1),
-(5,12),
-(6,9),
-(6,1),
-(7,6),
-(7,7),
-(7,2),
-(8,14), 
-(9,18);
-
-
--- Insert data into game table
-INSERT INTO game (username, score, gameRound, kronos, deckCards) VALUES
-('user1', 100, 5, 2, 5),
-('user2', 200, 8, 4, 6),
-('user3', 300, 5, 4, 4),
-('user4', 420, 6, 6, 4),
-('user6', 230, 7, 3, 6),
-('user6', 850, 3, 3, 7),
-('user6', 130, 5, 3, 3),
-('user7', 550, 4, 2, 5),
-('user7', 300, 4, 1, 3),
-('user14', 100, 2, 0, 2),
-('user14', 200, 1, 4, 5),
-('user14', 300, 7, 4, 7),
-('user19', 500, 7, 5, 5),
-('user19', 250, 4, 5, 5),
-('user19', 330, 5, 6, 9),
-('user20', 220, 7, 8, 9),
-('user20', 700, 8, 8, 3),
-('user22', 750, 3, 3, 4),
-('user22', 320, 3, 3, 7),
-('user22', 420, 3, 4, 3),
-('user22', 420, 2, 4, 9),
-('user22', 330, 9, 6, 6),
-('user23', 720, 8, 2, 4),
-('user23', 720, 6, 6, 3),
-('user23', 910, 5, 2, 2),
-('user24', 730, 5, 5, 2),
-('user26', 520, 4, 8, 6),
-('user26', 810, 5, 9, 6),
-('user26', 230, 3, 2, 7),
-('user27', 330, 4, 2, 5),
-('user27', 250, 5, 1, 3);
-
 -- Insert data intodeckCard table
 INSERT INTO deckCard (deckID, cardID) VALUES
 (1, 1),
@@ -234,33 +141,3 @@ INSERT INTO deckCard (deckID, cardID) VALUES
 (11, 10),
 (11, 12),
 (12, 13);
-
-INSERT INTO EnemyWave (roundID, cardID) VALUES
-(1,2),
-(1,3),
-(2,4),
-(2,2),
-(2,3),
-(3,1),
-(3,6),
-(3,5),
-(3,10),
-(4,7),
-(4,5),
-(4,12),
-(4,4),
-(5,13),
-(5,12),
-(5,11),
-(5,7),
-(5,6),
-(6,9),
-(6,11),
-(6,14),
-(6,4),
-(6,3),
-(7,10),
-(7,4),
-(7,3),
-(7,11),
-(7,15);
