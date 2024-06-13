@@ -46,5 +46,3 @@ FROM
     player
 GROUP BY 
     registration_year;
-
-
