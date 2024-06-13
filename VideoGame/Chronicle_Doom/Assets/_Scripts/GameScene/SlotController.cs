@@ -15,7 +15,7 @@ public class SlotController : MonoBehaviour
     [SerializeField] private bool isDeck;
     [SerializeField] private bool isParadoxCollector;
     [SerializeField] private bool isQuantumTunnel;
-    private List<CardPropertiesDrag> currentCards;
+    [SerializeField] private List<CardPropertiesDrag> currentCards;
 
     private void Start()
     {
