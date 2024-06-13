@@ -16,21 +16,12 @@
 }
 
 /* Estilos para la sección de NEWS */
-
 .game-news {
-    padding: 2rem;
-    background-color: #2F2F1F;
+    background-color: #282230;
     background-size: cover;
+    flex: 1; 
 }
 
-.news-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    background-color: #2F2F2F;
-    padding: 5 5rem;
-}
 .news-wrap {
     display: flex;
     justify-content: space-evenly;
@@ -39,31 +30,23 @@
 .news-content {
     padding: 1rem;
     margin: 1rem;
-    background-color: #2F2F2F;
-    color: white;
+    background-color: #120e36;
+    color: rgb(177, 170, 218);
     border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; 
 }
 
-/* Estilos para la descripción del juego */
-
-.summary {
-    padding: 1rem;
-    background-color: #2F2F2F;
-    color: white;
+.news-image {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
-.summary-text {
-    padding-left: 2rem;
-    width: 50rem;
-}
-
-.summary h2 {
-    font-size: 1rem;
-    letter-spacing: 1rem;
-    font-style: italic;
-    margin-bottom: 0;
-}
-
-.summary h3 {
-    color: yellow;
+.news-image img {
+    width: 15rem;
+    height: auto;
+    display: block; 
 }

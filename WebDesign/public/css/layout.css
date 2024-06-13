@@ -13,7 +13,7 @@ html, body
 header 
 {
     background-color: #000000;
-    display: flex;
+    display: flex;  
     align-items: center;
     justify-content: space-around; 
     padding-top: 2rem;
@@ -38,13 +38,6 @@ header a:hover
 
 
 
-
-
-
-
-
-
-
 /* Estilo para el pie de página con info extra */
 footer {
     background-color: #000000;
@@ -58,7 +51,7 @@ footer hr {
     border: none;
     border-top: 0.1rem solid rgb(148, 148, 148);
     margin: 2rem auto;
-    width: 90%;
+    width: 100%;
 }
 
 #copyright {
@@ -75,28 +68,18 @@ footer hr {
 }
 
 .media-access {
-    margin: 20px;
+    margin: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .media-access h4 {
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
     color: rgb(108, 82, 141);
     font-weight: bold;
 }
 
-.media-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 5px 0;
-}
-
-.media-content img.icon {
-    margin-right: 10px;
-}
 
 .media-content a {
     color: rgb(81, 62, 105);
