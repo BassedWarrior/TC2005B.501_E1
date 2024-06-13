@@ -1,135 +1,90 @@
-<!DOCTYPE html>
+
+<q<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chronicle_Doom GameMechanics</title>
+    <title>GameMechanics</title>
+
     <!--Referencias a las fuentes que estamos usando en la pagina. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Sedan+SC&display=swap" rel="stylesheet">
-    <!--Referencia al archivo css que estamos usando en la pagina. -->
+
+    <!-- Referencias a los estilos de css-->
     <link rel="stylesheet" type="text/css" href="/css/mechanics.css">
     <link rel="stylesheet" type="text/css" href="/css/layout.css">
 </head>
 
+
 <body>  
+
     <!--Espacio de la cabecera con los links de la pagina web.-->
     <header>
         <nav>
-            <div>
-                <a href="/mainPage">GAME</a>
-                <a style="color: darkslategray;">MECHANICS</a>
-            </div>
-            <div>
-                <a href="/statistics">STATISTICS</a>
-                <a href="https://github.com/BassedWarrior/TC2005B.501_E1.git">GITHUB</a>
-            </div>
+            <a style="color:rgb(178, 136, 232)" href="/html/mechanics.html" >MECHANICS</a>
+            <a href="/html/game.html" >GAME</a>
+            <a href="/html/statistics.html" >STATISTICS</a>
         </nav>
-        <img src="../images/gameLogo.png" alt="Chronicle_Doom" class="logo" width="250">
     </header>
 
-    <div class="content">
-        <p>ANTES DE EMPEZAR A JUGAR, ES IMPORTANTE QUE CONOZCAS EL JUEGO!</p>
-    </div>
-    <div class="tutorial">
-        <div class="gameplay">
-            <h2>GAMEPLAY</h2>
-            <div class="gameplay-content">
-                <h3>Strategic Card Game</h3>
-                <p>
-                    Chronicle Doom es un juego de cartas estratégico en el que los jugadores compiten contra la CPU para demostrar quién es el mejor estratega.
-                </p>
-                <h3>Game Mechanics</h3>
-                <p>
-                    Los jugadores deben construir un mazo de 18 cartas y enfrentarse en un duelo de cartas. Cada carta tiene un costo de maná y un efecto especial que puede cambiar el rumbo de la partida.
-                </p>
-                <h3>Winning Conditions</h3>
-                <p>
-                    El objetivo del juego es obtener el highscore mas alto al final de la partida. El jugador con el highscore más alto tendrá su lugar en el HighScore Scene.
-                </p>
-            </div>
-        </div>
 
-        <hr>
-        <h1>Tutorial del MENU PRINCIPAL</h1>
     
-        <div class="tabs">
-            <div class="tab active" data-tab="login">Crear Usuario / Iniciar Sesión</div>
-            <div class="tab" data-tab="collection">Collection Scene</div>
-            <div class="tab" data-tab="highscore">Highscores Scene</div>
-        </div>
 
-        <div id="login" class="tab-content active">
-            <h2>Crear Usuario / Iniciar Sesión</h2>
-            <ol>
-                <li>Inicia Chronicle Doom.</li>
-                <li>Si ya tienes una cuenta, introduce tu nombre de usuario y contraseña y haz clic en "Sign In".</li>
-                <li>Si no tienes una cuenta, haz clic en "Sign Up" para crear una cuenta con los datos previamente ingresados.</li>
-                <li>Si los datos son correctos, se te redirigirá a la pantalla principal del juego.</li>
-            </ol>
-        </div>
+    <!--Espacio de titulo de juego-->
+    <div class = "gameTitle">
+        <h1>CHRONICLE DOOM</h1>
+    </div>
 
-        <div id="collection" class="tab-content">
-            <h2>Collection Scene</h2>
-            <ol>
-                <li>Una vez dentro del juego, dirígete a la sección "Collection Scene".</li>
-                <li>A la derecha, encontrarás las cartas disponibles.</li>
-                <li>Selecciona las cartas para crear tu mazo de 18 cartas.</li>
-                <li>Cuando hayas terminado, haz clic en "Update Deck" para registrar y guardar tu mazo en la base de datos.</li>
-            </ol>
-            <div class="deck">
-                <div class="cards">
-                    <h3>Cartas Disponibles</h3>
-                    <p>Podríamos mostrar las cartas disponibles aquí ;)</p>
-                </div>
-            </div>
-        </div>
 
-        <div id="highscore" class="tab-content">
-            <h2>Highscores Scene</h2>
-            <ol>
-                <li>Acá se pueden observar todos los highscores de los jugadores.</li>
-                <li>Los highscores cuentan con la posición el nombre y el puntaje</li>
-                <li>Los highscores se actualizan en tiempo real.</li>
-                <li>Si deseas competir por el primer lugar, ¡juega y obtén el highscore más alto!</li>
-            </ol>
-            <div>
-                <h3>Highscores</h3>
-                <p>Podríamos mostrar los highscores de los usuarios aquí :)</p>
-            </div>
+    <!--Espacio donde va a estar la descripcion del juego. -->
+    <div class="rowContainer">
+        <div class="section">
+            <h2>DESCRIPTION</h2>
+            <p>
+                Attrition card game, where the player's main goal is to hold back the waves of endless enemies who are bound to destroy the space-time continuum, and the player must spend their khronos resource to play unit and paradox cards, and hold out as long as they can with a deck that gets thinner every turn, until they eventually run out, and the player must make their last stand.
+            </p>
+        </div>
+        <div class="section">
+            <h2>MINDSET</h2>
+            <p>
+                The player will feel overwhelmed by the attrition the constant waves imply for their limited amount of resources. 
+                They should be nervous and this will be achieved by making their units frail and outnumbered by the enemies, 
+                which will be a challenging experience for them to solve. We could consider adding different progression elements 
+                such as unlocking new cards or abilities to maintain long-term engagement and reward player progress.
+            </p>
         </div>
     </div>
 
     <div class="roadmap">
         <div class="roadmap-header">
-            <h2>CICLO DE JUEGO</h2>
-            <h3>Chronicle Doom</h3> 
-            <h3>El ciclo continuará hasta que tu vida baje a ZERO</h3>
+            <h2>how to play</h2>
+            <h3>Chronicle Doom.</h3> 
+            <h3>The cycle will continue until your life goes down to ZERO.</h3>
         </div>
         <div class="roadmap-container">
             <div class="roadmap-box">
-                <h4>RECURSOS</h4>
+                <h4>resources</h4>
                 <ul>
-                    <li>Jugador recibe dos cartas del mazo si es posible</li>
-                    <li>Jugador suma +4 de Khronos</li>
-                    <li>Enemigos son desplegados en el campo y asignados para siguientes rondas</li>
+                    <li>Player receives two cards from the deck if possible</li>
+                    <li>Player adds +4 of Khronos</li>
+                    <li>Enemies are deployed in the field and assigned for next rounds.</li>
                 </ul>
             </div>
             <div class="roadmap-box">
                 <h4>DRAG & DROP</h4>
                 <ul>
-                    <li>Jugador mueve cartas de unidad o paradox al mapa</li>
-                    <li>Jugador busca equilibrar su poder para defender las timelines</li>
-                    <li>Se muestran preview del daño que se hará si las cartas permanecen ahí</li>
+                    <li>Player moves unit or paradox cards to the map</li>
+                    <li>Player seeks to balance his power to defend timelines</li>
+                    <li>Previews are shown of the damage that will be done if the cards remain there.</li>
                 </ul>
             </div>
             <div class="roadmap-box">
                 <h4>CLASH TIME</h4>
                 <ul>
-                    <li>Se activan los efectos Paradox Cards asignando los atributos de las mismas</li>
-                    <li>Se calculan los daños recibidos por las cartas</li>
-                    <li>Las cartas sin vida son eliminadas</li>
+                    <li>The Paradox Cards effects are activated by assigning the attributes of the Paradox Cards</li>
+                    <li>The damage received by the cards is calculated</li>
+                    <li>The lifeless cards are eliminated</li>
                 </ul>
             </div>
         </div>
@@ -137,7 +92,7 @@
 
     <footer>
         <hr>
-        <p class="copyright">&copy; 2024 Mia PaginaWeb. Todos los derechos reservados.</p>
+        <p class="copyright">&copy; 2024 Mia PaginaWeb. All rights reserved.</p>
         <div class="contact-us">
             <div class="media-access">
                 <h4>Social Media</h4>
@@ -184,20 +139,5 @@
         </div>
     </footer>
 
-    <script>
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                const isActive = tab.classList.contains('active');
-                
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-
-                if (!isActive) {
-                    tab.classList.add('active');
-                    document.getElementById(tab.dataset.tab).classList.add('active');
-                }
-            });
-        });
-    </script>
+</div>    
 </body>
-</html>
