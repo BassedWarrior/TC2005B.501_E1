@@ -8,7 +8,7 @@ public class CardPropertiesDrag : MonoBehaviour
 {
     public CardData card;
     public List<CardAbility> cardAbilities;
-    [SerializeField] private GameObject floatingTextPrefab;
+    [SerializeField] private DamageText damageText;
     [SerializeField] private Canvas mainCanvas;
     public Transform originalParent;
     public Transform actualParent;
@@ -35,14 +35,11 @@ public class CardPropertiesDrag : MonoBehaviour
         }
     }
 
-    public void ShowFloatingText(Vector3 worldPosition, int text, bool isDamage, bool isPreview)
+    public void ShowDamageText(int text, bool isDamage, bool isPreview)
     {
-        GameObject floatingTextInstance = Instantiate(floatingTextPrefab, mainCanvas.transform);
-        CreateFloatingText floatingText = floatingTextInstance.GetComponent<CreateFloatingText>();
-
-        if (floatingText != null)
+        if (damageText != null)
         {
-            floatingText.Initialize(text, worldPosition, isDamage, isPreview);
+            damageText.Initialize(text, isDamage, isPreview);
         }
     }
 

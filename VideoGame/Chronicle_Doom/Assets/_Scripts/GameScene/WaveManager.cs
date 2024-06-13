@@ -8,6 +8,7 @@ using UnityEngine.Networking;
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private HandManager handManager;
+    [SerializeField] private MoveManager moveManager;
     [SerializeField] private ClashTime clashTime;
     private int waveNumber;
     [SerializeField] private GameObject wavePanel;
@@ -46,6 +47,7 @@ public class WaveManager : MonoBehaviour
         if (GameManager.Instance.playerHealth <= 0)
         {
             DisplayEndMessage("You Lose, GAMEOVER!");
+            moveManager.DisableClick(true);
             GameManager.Instance.PostGame();
             return;
         }
@@ -53,6 +55,7 @@ public class WaveManager : MonoBehaviour
         if (waveNumber > 10)
         {
             DisplayEndMessage("There is no more waves, you win!");
+            moveManager.DisableClick(true);
             GameManager.Instance.PostGame();
             return;
         }
