@@ -1019,6 +1019,7 @@ MonoBehaviour:
   spacing: 1.3
   isEnemy: 1
   isDeck: 0
+  isParadoxCollector: 0
   isQuantumTunnel: 0
   currentCards: []
 --- !u!61 &300977267
@@ -1402,6 +1403,7 @@ MonoBehaviour:
   cardHealth: {fileID: 2589814491929333272}
   isDragging: 0
   isOnBoard: 0
+  isParadoxCard: 0
   cardPlaced: 0
 --- !u!114 &392229387
 MonoBehaviour:
@@ -1435,21 +1437,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb4bc771fb70641c6b4109a69c3199cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timelineA: []
-  timelineB: []
-  timelineC: []
-  enemylineA: []
-  enemylineB: []
-  enemylineC: []
+  playerLineA: []
+  playerLineB: []
+  playerLineC: []
+  enemyLineA: []
+  enemyLineB: []
+  enemyLineC: []
   quantumTunnel: []
   enemySpawner: {fileID: 300977265}
   enemyAreaA: {fileID: 1962299162413004171}
   enemyAreaB: {fileID: 340119791}
   enemyAreaC: {fileID: 197605509}
-  gameManager: {fileID: 0}
+  paradoxCollector: {fileID: 1501535199}
   mainCanvas: {fileID: 335696503}
   endTurnButton: {fileID: 588175425}
-  turnFinished: 0
 --- !u!114 &392229389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1487,8 +1488,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1edbcb5a255f2948be2ef56ddc4d3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  welcomeMessage: {fileID: 0}
-  deckMessage: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2380,6 +2379,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 679925665}
   m_CullTransparentMesh: 1
+--- !u!1 &691088839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 691088840}
+  m_Layer: 6
+  m_Name: Paradoxes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &691088840
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691088839}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1501535199}
+  m_Father: {fileID: 1205772128}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &694104805
 GameObject:
   m_ObjectHideFlags: 0
@@ -3054,6 +3085,7 @@ RectTransform:
   - {fileID: 1064916353}
   - {fileID: 300977265}
   - {fileID: 155695561}
+  - {fileID: 691088840}
   - {fileID: 822182437}
   - {fileID: 1392738259}
   m_Father: {fileID: 0}
@@ -3232,6 +3264,7 @@ MonoBehaviour:
   spacing: 1.65
   isEnemy: 0
   isDeck: 1
+  isParadoxCollector: 0
   isQuantumTunnel: 0
   currentCards: []
 --- !u!61 &1392738261
@@ -3564,6 +3597,133 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc87db8e2799f4ef69d090e493724d78, type: 3}
+--- !u!1 &1501535198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1501535199}
+  - component: {fileID: 1501535202}
+  - component: {fileID: 1501535201}
+  - component: {fileID: 1501535200}
+  m_Layer: 6
+  m_Name: ParadoxLine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1501535199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501535198}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 691088840}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1501535200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501535198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f29348939ca4543648056e532224bf78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveManager: {fileID: 392229386}
+  clashTime: {fileID: 392229388}
+  maxElements: 3
+  spacing: 1.5
+  isEnemy: 0
+  isDeck: 0
+  isParadoxCollector: 1
+  isQuantumTunnel: 0
+  currentCards: []
+--- !u!50 &1501535201
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501535198}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &1501535202
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501535198}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 20, y: 5}
+  m_EdgeRadius: 0
 --- !u!1001 &1515206964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4480,8 +4640,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1edbcb5a255f2948be2ef56ddc4d3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  welcomeMessage: {fileID: 0}
-  deckMessage: {fileID: 0}
 --- !u!114 &2122162069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4524,12 +4682,12 @@ MonoBehaviour:
   cards: []
   playersDeck: 
   playersHand: 
-  textDots: []
   playerHealth: 20
   playerDamage: 0
   gameScores: []
   score: 0
   scoreText: {fileID: 0}
+  turnFinished: 0
 --- !u!4 &2122162071
 Transform:
   m_ObjectHideFlags: 0

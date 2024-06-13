@@ -2975,6 +2975,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3265252364294297385, guid: 38831b859efd4488c8fc036073bab6d8, type: 3}
   m_PrefabInstance: {fileID: 1704309885}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &770585712 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4756121872424251346, guid: 38831b859efd4488c8fc036073bab6d8, type: 3}
+  m_PrefabInstance: {fileID: 1704309885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &800249363
 GameObject:
   m_ObjectHideFlags: 0
@@ -4654,6 +4665,9 @@ MonoBehaviour:
   collectionName: {fileID: 1160274007}
   deckError: {fileID: 4212608089133311136}
   displayCards: []
+  deckMessage: {fileID: 2033913109}
+  playButton: {fileID: 770585712}
+  exitButton: {fileID: 1842398600}
 --- !u!114 &1837483715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4666,8 +4680,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1edbcb5a255f2948be2ef56ddc4d3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  welcomeMessage: {fileID: 0}
-  deckMessage: {fileID: 2033913109}
+--- !u!114 &1842398600 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7961058705801227908, guid: 704297a506cc042098faae3f5fc2f0de, type: 3}
+  m_PrefabInstance: {fileID: 125275293}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1896808991
 GameObject:
   m_ObjectHideFlags: 0

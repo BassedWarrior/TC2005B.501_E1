@@ -38,7 +38,9 @@ public class MenuManager : MonoBehaviour
     private float transitionTimer = 0.0f;
     private float targetXPosition;
     public List<GameObject> displayCards = new List<GameObject>();
-
+    public GameObject deckMessage;
+    public Button playButton;
+    public Button exitButton;
     private void Start()
     {
         mainCamera = Camera.main;
@@ -55,6 +57,9 @@ public class MenuManager : MonoBehaviour
         collectionName.text = PlayerPrefs.GetString("username")
                 + "'s Collection";
         deckErrorPanel.SetActive(false);
+        deckMessage.SetActive(false);
+        playButton.onClick.AddListener(() => LetsPlay());
+        exitButton.onClick.AddListener(() => GameManager.Instance.GetComponent<SceneChanger>().ChangeToLoginScene());
     }
 
     private void Update()
@@ -274,5 +279,17 @@ public class MenuManager : MonoBehaviour
         deckErrorPanel.SetActive(true);
         yield return new WaitForSeconds(2f);
         deckErrorPanel.SetActive(false);
+    }
+
+    private void LetsPlay()
+    {
+        if (GameManager.Instance.playersDeck.Count == 18)
+        {
+            GameManager.Instance.GetComponent<SceneChanger>().ChangeToGameScene();
+        }
+        else
+        {
+            deckMessage.SetActive(true);
+        }
     }
 }
