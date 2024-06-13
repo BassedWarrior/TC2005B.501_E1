@@ -160,7 +160,13 @@ public class ClashTime : MonoBehaviour
     private void CalculateLineClash(List<CardPropertiesDrag> playerLine,
                                     List<CardPropertiesDrag> enemyLine)
     {
-        GameManager.Instance.ResetPlayerDamage();
+        // Check if there are enemy cards.
+        // Reset player damage and stop calculating.
+        if (enemyLine.Count == 0)
+        {
+            CalculateLineDamage(playerLine, 0);
+            return;
+        }
 
         // Calculate total enemy attack
         int enemyAttack = 0;
@@ -174,6 +180,8 @@ public class ClashTime : MonoBehaviour
         if (playerLine.Count == 0)
         {
             GameManager.Instance.AddPlayerDamage(enemyAttack);
+            CalculateLineDamage(enemyLine, 0);
+            return;
         }
 
         // Calculate total player attack
@@ -236,6 +244,7 @@ public class ClashTime : MonoBehaviour
         }
 
         // Realizar cálculos de clash después de actualizar las listas
+        GameManager.Instance.ResetPlayerDamage();
         CalculateLineClash(playerLineA, enemyLineA);
         CalculateLineClash(playerLineB, enemyLineB);
         CalculateLineClash(playerLineC, enemyLineC);
@@ -343,6 +352,7 @@ public class ClashTime : MonoBehaviour
             InfoUpdateAll();
             yield return new WaitForSeconds(3f);
             AfterClash();
+            GameManager.Instance.ResetPlayerDamage();
             CalculateLineClash(playerLineA, enemyLineA);
             CalculateLineClash(playerLineB, enemyLineB);
             CalculateLineClash(playerLineC, enemyLineC);
@@ -384,9 +394,9 @@ public class ClashTime : MonoBehaviour
         }
     }
 
-    public void InfoUpdate(List<CardPropertiesDrag> timeline)
+    public void InfoUpdate(List<CardPropertiesDrag> timeLine)
     {
-        foreach (CardPropertiesDrag card in timeline)
+        foreach (CardPropertiesDrag card in timeLine)
         {
             card.AssignInfo();
         }
