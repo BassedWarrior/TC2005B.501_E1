@@ -33,16 +33,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] public TextMeshProUGUI scoreText;
     // AUDIO MANAGER
     public AudioMixer audioMixer;
-    public string masterVolumeParameter;
     public string musicVolumeParameter;
     public string sfxVolumeParameter;
+    [SerializeField] private float maxDecibels;
+    [SerializeField] private float minDecibels;
 
     public void Start()
     {
         api = GetComponent<APIConnection>();
-        SetMasterVolume(PlayerPrefs.GetFloat("MasterVolume", 0.5f));
-        SetMusicVolume(PlayerPrefs.GetFloat("MusicVolume", 0.5f));
-        SetSFXVolume(PlayerPrefs.GetFloat("SFXVolume", 0.5f));
+        //OBTENER LOS ULTIMOS VALORES DE VOLUMEN DE MUSICA Y SFX
+        //SetMusicVolume(PlayerPrefs.GetFloat("MusicVolume", 0.0f));
+        //SetSFXVolume(PlayerPrefs.GetFloat("SFXVolume", 0.0f));
+        
+        //REINICIAR EL VOLUMEN DE MUSICA Y SFX AL INICIAR PARTIDA
+        PlayerPrefs.SetFloat("MusicVolume", maxDecibels);
+        PlayerPrefs.SetFloat("SFXVolume", maxDecibels);
     }
 
     // Generate an instance of self that persists throughout scene changes
@@ -140,28 +145,37 @@ public class GameManager : MonoBehaviour
     }
 
     // AUDIO MANAGER FUNCTIONS
-    public void SetMasterVolume(float volume)
+    public void SetMusicVolume(float normalizedVolume)
     {
-        audioMixer.SetFloat(masterVolumeParameter, Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("MasterVolume", volume);
+        float decibelVolume = ConvertToDecibels(normalizedVolume);
+        audioMixer.SetFloat(musicVolumeParameter, decibelVolume);
+        PlayerPrefs.SetFloat("MusicVolume", normalizedVolume);
     }
 
-    public void SetMusicVolume(float volume)
+    public void SetSFXVolume(float normalizedVolume)
     {
-        audioMixer.SetFloat(musicVolumeParameter, Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("MusicVolume", volume);
-    }
-
-    public void SetSFXVolume(float volume)
-    {
-        audioMixer.SetFloat(sfxVolumeParameter, Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("SFXVolume", volume);
+        float decibelVolume = ConvertToDecibels(normalizedVolume);
+        audioMixer.SetFloat(sfxVolumeParameter, decibelVolume);
+        PlayerPrefs.SetFloat("SFXVolume", normalizedVolume);
     }
 
     public float GetVolume(string parameter)
     {
-        float value;
-        audioMixer.GetFloat(parameter, out value);
-        return Mathf.Pow(10, value / 20);
+        float decibelValue;
+        audioMixer.GetFloat(parameter, out decibelValue);
+        return ConvertToNormalized(decibelValue);
     }
+
+    private float ConvertToDecibels(float normalizedValue)
+    {
+        return minDecibels + (maxDecibels - minDecibels) * normalizedValue;
+    }
+
+    private float ConvertToNormalized(float decibelValue)
+    {
+        return (decibelValue - minDecibels) / (maxDecibels - minDecibels);
+    }
+
+    //FORMULA PARA CALCULAR EL VOLUMEN DE SONIDO
+    // VOLUME = Mathf.Log10(volume) * 20
 }
