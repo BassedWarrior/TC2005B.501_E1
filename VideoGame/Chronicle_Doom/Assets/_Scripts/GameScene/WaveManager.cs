@@ -74,7 +74,6 @@ public class WaveManager : MonoBehaviour
         MakeWaveAppear();
         handManager.DrawCard();
         handManager.AddKhronos();
-        GameManager.Instance.AddWaveScore(waveNumber);
         GameManager.Instance.turnFinished = true;
     }
 
