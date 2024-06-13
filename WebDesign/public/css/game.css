@@ -1,20 +1,15 @@
 /* Ventana de la jugabilidad del CHRONICAL_DOOM */
 
-#game-build {
-    padding-top: 10rem;
-    padding-bottom: 4rem;
-    width: 10rem;
-    background-color: black;
+.game-Container {
+    display: flex;
+    border-radius: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem auto;  /* Ajustar márgenes para centrar */
+    width: 100%;  /* Ajustar el ancho del contenedor */
+    font-size: 1rem;  /* Asegúrate de que el tamaño de fuente sea razonable */
 }
-
-#game-deploy {
-    padding: 18rem;
-    margin-inline: 8rem;
-    background-color: #2F2F2F;
-    border: 2rem solid white;
-    border-radius: 1rem;
-}
-
 /* Estilos para la sección de NEWS */
 .game-news {
     background-color: #282230;

@@ -171,7 +171,7 @@ MonoBehaviour:
   passwordInput: {fileID: 1432257505}
   signInButton: {fileID: 1910746489}
   signUpButton: {fileID: 1274427358}
-  url: localhost:3000
+  url: http://localhost:3000
   signInEndpoint: /users/signin
   signUpEndpoint: /users/signup
   errorMessage: {fileID: 1951789772}
@@ -1137,11 +1137,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &1057912841 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3853033969441035890, guid: 3c2d2ef776d3a441aa7350091eadb102, type: 3}
-  m_PrefabInstance: {fileID: 1576699013}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1057912842 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4592507086929882218, guid: 3c2d2ef776d3a441aa7350091eadb102, type: 3}
@@ -1834,12 +1829,12 @@ MonoBehaviour:
   cards: []
   playersDeck: 
   playersHand: 
-  textDots: []
   playerHealth: 20
   playerDamage: 0
   gameScores: []
   score: 0
   scoreText: {fileID: 0}
+  turnFinished: 0
 --- !u!4 &1945240715
 Transform:
   m_ObjectHideFlags: 0
@@ -1888,8 +1883,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1edbcb5a255f2948be2ef56ddc4d3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  welcomeMessage: {fileID: 1057912841}
-  deckMessage: {fileID: 1951789772}
 --- !u!1 &1951789772 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3853033969441035890, guid: 3c2d2ef776d3a441aa7350091eadb102, type: 3}
