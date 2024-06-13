@@ -1243,7 +1243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6882107529248577034, guid: 8949c80ba70894ed48a5e426625cf133, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.65
+      value: 0.675
       objectReference: {fileID: 0}
     - target: {fileID: 6882107529248577034, guid: 8949c80ba70894ed48a5e426625cf133, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1251,7 +1251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6882107529248577034, guid: 8949c80ba70894ed48a5e426625cf133, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.65
+      value: 0.675
       objectReference: {fileID: 0}
     - target: {fileID: 6882107529248577034, guid: 8949c80ba70894ed48a5e426625cf133, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2395,14 +2395,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &691088840
-Transform:
+--- !u!224 &691088840
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691088839}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -2411,6 +2410,11 @@ Transform:
   - {fileID: 1501535199}
   m_Father: {fileID: 1205772128}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.44}
+  m_AnchorMax: {x: 0.5, y: 0.44}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100.00001}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &694104805
 GameObject:
   m_ObjectHideFlags: 0
@@ -2515,8 +2519,8 @@ RectTransform:
   - {fileID: 266867064}
   m_Father: {fileID: 1205772128}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.325}
-  m_AnchorMax: {x: 0.5, y: 0.325}
+  m_AnchorMin: {x: 0.5, y: 0.3}
+  m_AnchorMax: {x: 0.5, y: 0.3}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 420, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3626,8 +3630,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 691088840}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
