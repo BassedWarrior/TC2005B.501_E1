@@ -59,6 +59,7 @@ async function fetchDataAndPlot() {
             });
         }
 
+        /*
         const TimePlayedResponse = await fetch(`http://localhost:3000/statistics/TimePlayed`, { method: 'GET' });
         if (TimePlayedResponse.ok) {
 
@@ -93,7 +94,7 @@ async function fetchDataAndPlot() {
         }
 
 
-
+*/
         const cardCountByCategoryResponse = await fetch(`http://localhost:3000/statistics/card_count_by_category`, { method: 'GET' });
         if (cardCountByCategoryResponse.ok) {
             let cardCountByCategoryResults = await cardCountByCategoryResponse.json();
